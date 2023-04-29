@@ -32,6 +32,7 @@ body{
     background-color:#e5e4e2;
     border:2px solid #d1d0ce;
     border-radius:5px;
+    overflow:hidden;
 }
 #Ti{
     display: inline-block;
@@ -39,6 +40,7 @@ body{
     background-color:#e0ffff;
     border:2px solid #00ffff;
     border-radius:5px;
+    overflow:hidden;
 }
 #DownLoad{
     display: inline-block;
@@ -46,6 +48,7 @@ body{
     background-color:#C3FDB8;
     border:2px solid #55fb17;
     border-radius:5px;
+    overflow:hidden;
 }
 #jt{
     height:27px;
