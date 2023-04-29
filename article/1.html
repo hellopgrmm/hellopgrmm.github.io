@@ -1,0 +1,88 @@
+<html><head><meta charset='utf-8'><title>不同的编程语言输出Hello World｜HelloPgrmm,一个分享编程经验的网站</title><meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type='text/css' rel='stylesheet' href='https://hellopgrmm.github.io/pulicstyle.css'/><img src='https://hellopgrmm.github.io/imgs/logo.jpg' alt='图片显示错误了,可以刷新一下哟' style='height:100px;width:200px;'><img id='en' src='https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg' style='height:60px;width:500px;'><br><a href='https://hellopgrmm.github.io/' id='home' ><b>&nbsp;&nbsp;首页&nbsp;&nbsp;</b><!--以下内容是先预设好的,到后面再加上去--><a href='https://hellopgrmm.github.io/tools.html' id='tool' ><b>&nbsp;&nbsp;工具&nbsp;&nbsp;</b><a href='https://hellopgrmm.github.io/about.html' id='tool' ><b>&nbsp;&nbsp;关于&nbsp;&nbsp;</b><a href='https://hellopgrmm.github.io/others.html' id='home' ><b>&nbsp;&nbsp;更多&nbsp;&nbsp;</b></a><br><div id='line' style='position: relative;top:5.5px;'></div><body><!--Main--> <script type="text/javascript" src="https://hellopgrmm.github.io/codes/shCore.js"></script>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/codes/shCoreDefault.css"/>
+<script type="text/javascript" src="https://hellopgrmm.github.io/codes/shBrushPython.js"></script>
+<script type="text/javascript" src="https://hellopgrmm.github.io/codes/shBrushCpp.js"></script>
+<script type="text/javascript" src="https://hellopgrmm.github.io/codes/shBrushBash.js"></script>
+<script type="text/javascript" src="https://hellopgrmm.github.io/codes/shBrushRuby.js"></script>
+<script type="text/javascript" src="https://hellopgrmm.github.io/codes/shBrushPhp.js"></script>
+<script type="text/javascript" src="https://hellopgrmm.github.io/codes/shBrushPerl.js"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<h1>不同的编程语言输出Hello World</h1>
+<a>1.Python</a>
+<pre class='brush:python;'>
+print("Hello World!")
+</pre>
+<br>
+<a>2.C语言</a>
+<pre class='brush:cpp;'>
+#include&lt;stdio.h&gt;
+void main()
+{
+    printf("Hello World!");
+    return 0;
+}
+</pre>
+<br>
+<a>3.C++</a>
+<pre class='brush:cpp;'>
+#include&lt;iostream&gt;
+using namespace std;
+int main()
+{
+    cout<<"Hello World!";
+    return 0;
+}
+</pre>
+<br>
+<a>4.Bash</a>
+<pre class='brush:bash;'>
+#!usr/bin/sh 
+echo "Hello World!";
+</pre>
+<br>
+<a>5.Ruby</a>
+<pre class='brush:ruby'>
+puts "Hello World";
+</pre>
+<br>
+<a>6.PHP</a>
+<pre class='brush:php'>
+&lt;?php
+    echo "Hello World!";
+?&gt;
+</pre>
+<br>
+<a>7.Perl</a>
+<pre class='brush:perl'>
+#!usr/bin/perl
+print("Hello World!");
+</pre>
+<br>
+<a>8.汇编语言</a>
+<pre class='brush:perl'>
+;以下代码来源于百度百科
+DATA   SEGMENT                            
+PRINT  DB "Hello World!", 0AH, 0DH, '$'  
+DATA   ENDS                  
+  
+STACK  SEGMENT   STACK           
+       DW  20  DUP(0)                       
+STACK  ENDS                  
+  
+ASSUME CS:CODE, DS:DATA, SS:STACK            
+  
+CODE   SEGMENT                               
+START:                                       
+        MOV AX, DATA                         
+        MOV DS, AX                           
+        MOV DX, OFFSET  PRINT                
+        MOV AH, 09H
+        INT 21H                              
+        MOV AH, 4CH                          
+        INT 21H
+CODE   ENDS                                  
+END    START                                 
+</pre>
+<br>
+<a>你觉得，哪个比较简单?</a>
+<!--end--><hr><center><spam>Copyright © Hello-Programming 2023｜</span><span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</center>
