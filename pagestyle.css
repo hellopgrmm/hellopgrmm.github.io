@@ -10,8 +10,12 @@
 #tool:hover{    
     background-color:#ccff99;
 }
+@font-face{
+    font-family:MC;
+    src: url(font/Minecraft.ttf);
+}
 body{
-    font-family:Comic Sans MS,helvetica,宋体;
+    font-family:MC;
     width:100%;
     height:100%;
 }
