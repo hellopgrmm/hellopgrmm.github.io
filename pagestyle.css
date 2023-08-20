@@ -12,7 +12,7 @@
 }
 @font-face{
     font-family:MC;
-    src: url(font/Minecraft.ttf);
+    src: url(font/minecraft_font.ttf);
 }
 body{
     font-family:MC;
