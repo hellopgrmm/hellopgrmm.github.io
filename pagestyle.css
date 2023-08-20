@@ -12,8 +12,7 @@
 }
 @font-face{
     font-family:MC;
-    /*src: url(font/Minecraft.ttf);*/
-    src:url('https://i-81.lanzouk.com:446/08200800132393558bb/2023/08/19/64563e6acd8a78c5a26c99715470724a.ttf?st=CF3Ta0oX4_0cPDDktd_uPg&e=1692494029&b=Uk0AaQlnVDRTZVJ2UGEHZQUkDhMEQFB4ByABeFY3&fi=132393558&pid=14-119-193-212&up=2&mp=0&co=0');
+    src: url(font/Minecraft.ttf);
 }
 body{
     font-family:MC;
