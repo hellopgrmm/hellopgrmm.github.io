@@ -11,11 +11,11 @@
     background-color:#ccff99;
 }
 @font-face{
-    font-family:MC;
-    src: url(font/Minecraft.ttf);
+    font-family:黑体;
+    src: url(font/FZHTJW.TTF);
 }
 body{
-    font-family:MC;
+    font-family:黑体;
     width:100%;
     height:100%;
 }
