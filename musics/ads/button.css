@@ -1,0 +1,9 @@
+.dd{
+height:30px;
+width:80px;
+font-size:15px;
+text-align:center;
+color:black;
+background:linear-gradient(to bottom, #66b3ff,#c4e1ff);
+border:1px solid black;
+}
