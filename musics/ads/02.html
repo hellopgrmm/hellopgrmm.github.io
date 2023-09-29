@@ -1,0 +1,71 @@
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <title>音乐播放器|Hellopgrmm 一个分享编程经验的网站</title>
+<a style='font-size:35px;'>BEYOND-逝去日子</a><br><img src='sqrz.PNG' style='height:100px;width:100px'/><br><a>音乐简介：</a><br><font color='#ccc'>《逝去日子》是中国香港摇滚乐队Beyond的一首粤语歌曲，由刘卓辉作词，黄家驹作曲，黄贯中演唱，收录在Beyond在1989年7月由环球唱片发行的粤语专辑《Beyond IV》中<br>
+该歌曲进入电台排行榜5周，最高排位第1位，并被作为电视剧《淘气双子星》主题曲。(百度百科)</font>
+<audio src='逝去日子-BEYOND.mp3' id='player'></audio><br><a id='curtime' >0</a><a>秒</a><a>/</a><a id='duration'>0</a><a>秒</a>
+<input type='range' style='width:736px;' id='xx'><br><button id='cc' class='dd'>播放</button>
+<button style='height:30px;width:70px;background-color:#00caca;color:black;border-radius:114514px;' onclick="player.loop='';">停止循环</button>
+<button style='height:30px;width:70px;background-color:#00caca;color:black;border-radius:114514px;' onclick="player.loop='true';">洗脑循环</button><button style='height:30px;width:70px;background-color:#00caca;color:black;border-radius:114514px;' onclick="player.loop='';">取消循环</button>
+<link rel="stylesheet" type="text/css" href="button.css">
+<button style='height:30px;width:50px;background-color:#00caca;color:black;border-radius:114514px;' onclick="bs.style.display='';">倍速</button>
+<button id='mtes' style='height:30px;width:75px;background-color:#00caca;color:black;border-radius:114514px;' onclick="player.muted='true'">静音</button>
+<button id='mtes' style='height:30px;width:75px;background-color:#00caca;color:black;border-radius:114514px;' onclick="player.muted=''">取消静音</button>
+<input id='times' style='font-family:ht;' placeholder='跳转到…秒(输入数字)' type='text'/><a>秒</a>
+<button style='height:30px;width:75px;background-color:#00caca;color:black;border-radius:114514px;' onclick="document.querySelector('audio').currentTime=times.value">跳转</button>
+<div id='bs'>
+<button onclick='player.playbackRate = 10'>10x(鬼畜模式)</button>
+<button onclick='player.playbackRate = 2.0'>2x</button>
+<button onclick='player.playbackRate = 1.75'>1.75x</button>
+<button onclick='player.playbackRate = 1.5'>1.5x</button>
+<button onclick='player.playbackRate = 1.0'>1x</button>
+<button onclick='player.playbackRate = 0.75'>0.75x</button>
+<button onclick='player.playbackRate = 0.5'>0.5</button>
+<button onclick='bs.style.display="none";'>关闭</button>
+</div>
+<script>
+window.onload=function(){
+  var player = document.getElementById("player"),
+  oBtn = document.getElementById("cc"), 
+  mteu = document.getElementById("mtes"), 
+  dn = document.getElementById("xx"),
+  curtime = document.getElementById("curtime"),
+  duration = document.getElementById("duration");
+  duration.innerHTML = player.duration.toFixed(0);
+  xx.max=player.duration
+  oBtn.onclick = function(){
+    if (player.paused){
+      player.play();
+      oBtn.innerHTML = "播放中";
+    } 
+    else {
+      player.pause();
+      oBtn.innerHTML = "已暂停";
+    }
+  }
+
+  setInterval(function(){
+      xx.value = player.currentTime;
+      curtime.innerHTML = player.currentTime.toFixed(0);},250);
+}
+</script>
+<script>
+document.getElementById('bs').style.display="none";
+</script>
+<!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
