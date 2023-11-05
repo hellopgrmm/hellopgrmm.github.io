@@ -1,0 +1,137 @@
+<html><head><meta charset="utf-8">
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <title>音乐播放器|Hellopgrmm 一个分享编程经验的网站</title>
+  <a href="https://hellopgrmm.github.io/musics/">返回</a><br>
+<a style="font-size:35px;">SHAUN-Way back home</a><br><!--<img src='' style='height:100px;width:100px'/--><a>----<br>暂无简介图片<br>----</a><br><a>音乐简介：</a><br><font color="#ccc">《Way Back Home》由이지혜和제이큐填词，SHAUN（숀）作曲并演唱的歌曲，发行时间在2018年6月27日。</font>
+<audio src="way_back_home.mp3" id="player"></audio><br><a id="curtime">0</a><a>秒</a><a>/</a><a id="duration">0</a><a>秒</a>
+<input type="range" style="width:736px;" id="xx"><br><button id="cc" class="dd">播放</button>
+<button style="height:30px;width:80px;background-color:#00caca;color:black;border-radius:114514px;" onclick="player.loop='';">停止循环</button>
+<button style="height:30px;width:80px;background-color:#00caca;color:black;border-radius:114514px;" onclick="player.loop='true';">洗脑循环</button><button style="height:30px;width:80px;background-color:#00caca;color:black;border-radius:114514px;" onclick="player.loop='';">取消循环</button>
+<link rel="stylesheet" type="text/css" href="button.css">
+<button style="height:30px;width:50px;background-color:#00caca;color:black;border-radius:114514px;" onclick="bs.style.display='';">倍速</button>
+<button id="mtes" style="height:30px;width:75px;background-color:#00caca;color:black;border-radius:114514px;" onclick="player.muted='true'">静音</button>
+<button id="mtes" style="height:30px;width:80px;background-color:#00caca;color:black;border-radius:114514px;" onclick="player.muted=''">取消静音</button>
+<input id="times" style="font-family:ht;" placeholder="跳转到…秒(输入数字)" type="text"><a>秒</a>
+<button style="height:30px;width:75px;background-color:#00caca;color:black;border-radius:114514px;" onclick="document.querySelector('audio').currentTime=times.value">跳转</button>
+<div id="bs" style="display: none;">
+<button onclick="player.playbackRate = 10">10x(鬼畜模式)</button>
+<button onclick="player.playbackRate = 2.0">2x</button>
+<button onclick="player.playbackRate = 1.75">1.75x</button>
+<button onclick="player.playbackRate = 1.5">1.5x</button>
+<button onclick="player.playbackRate = 1.0">1x</button>
+<button onclick="player.playbackRate = 0.75">0.75x</button>
+<button onclick="player.playbackRate = 0.5">0.5</button>
+<button onclick="bs.style.display=&quot;none&quot;;">关闭</button>
+</div><br>
+<a>本歌歌词：</a><br>-----------<br>
+멈춘 시간 속<br>
+잠든 너를 찾아가<br>
+아무리 막아도<br>
+결국 너의 곁인 걸<br>
+길고 긴 여행을 끝내<br>
+이젠 돌아가<br>
+너라는 집으로<br>
+지금 다시<br>
+way back home<br>
+아무리 힘껏 닫아도<br>
+다시 열린 서랍 같아<br>
+하늘로 높이 날린 넌<br>
+자꾸 내게 되돌아와<br>
+힘들게 삼킨 이별도<br>
+다 그대로인 걸<br>
+oh oh oh<br>
+수없이 떠난 길 위에서<br>
+난 너를 발견하고<br>
+비우려 했던 맘은 또<br>
+이렇게 너로 차올라<br>
+발걸음의 끝에<br>
+늘 니가 부딪혀<br>
+그만<br>
+그만<br>
+멈춘 시간 속<br>
+잠든 너를 찾아가<br>
+아무리 막아도<br>
+결국 너의 곁인 걸<br>
+길고 긴 여행을 끝내<br>
+이젠 돌아가<br>
+너라는 집으로<br>
+지금 다시<br>
+way back home<br>
+조용히 잠든 방을 열어<br>
+기억을 꺼내 들어<br>
+부서진 시간 위에서<br>
+선명히 너는 떠올라<br>
+길 잃은 맘 속에<br>
+널 가둔 채 살아<br>
+그만<br>
+그만<br>
+멈춘 시간 속<br>
+잠든 너를 찾아가<br>
+아무리 막아도<br>
+결국 너의 곁인 걸<br>
+길고 긴 여행을 끝내<br>
+이젠 돌아가<br>
+너라는 집으로<br>
+지금 다시<br>
+way back home<br>
+세상을 뒤집어<br>
+찾으려 해<br>
+오직 너로 완결된<br>
+이야기를<br>
+모든 걸 잃어도<br>
+난 너 하나면 돼<br>
+빛이 다 꺼진 여기<br>
+나를 안아줘<br>
+눈을 감으면<br>
+소리 없이 밀려와<br>
+이 마음 그 위로<br>
+넌 또 한 겹 쌓여가<br>
+내겐 그 누구도 아닌<br>
+니가 필요해<br>
+돌아와 내 곁에<br>
+그날까지<br>
+I’m not done<br>
+(歌词来源于百度百科)<br>
+</a>
+<script>
+window.onload=function(){
+  var player = document.getElementById("player"),
+  oBtn = document.getElementById("cc"), 
+  mteu = document.getElementById("mtes"), 
+  dn = document.getElementById("xx"),
+  curtime = document.getElementById("curtime"),
+  duration = document.getElementById("duration");
+  duration.innerHTML = player.duration.toFixed(0);
+  xx.max=player.duration
+  oBtn.onclick = function(){
+    if (player.paused){
+      player.play();
+      oBtn.innerHTML = "播放中";
+    } 
+    else {
+      player.pause();
+      oBtn.innerHTML = "已暂停";
+    }
+  }
+
+  setInterval(function(){
+      xx.value = player.currentTime;
+      curtime.innerHTML = player.currentTime.toFixed(0);},250);
+}
+</script>
+<script>
+document.getElementById('bs').style.display="none";
+</script>
+<!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html>
