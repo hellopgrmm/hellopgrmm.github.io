@@ -1,0 +1,64 @@
+ <meta charset="utf-8">
+ <meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <title>二维码生成器_Hellopgrmm的随便开发的"小工具"</title>
+<!--Jquery万能辅助器走起-->
+<script src="jquery-3.6.3.min.js"></script>
+<script src="qrcode.min.js"></script>
+<script src="jquery.qrcode.min.js"></script>
+<script src="char.js"></script>
+<!--转编码的代码是CSDN和JB51提供的，不会写，CSDN忘了，JB51的utf16toutf8的函数的原网址在这：https://www.jb51.net/article/64928.htm-->
+<a style='font-size:30px'>二维码生成器</a><br>
+<textarea id='con' style='display:inline-block;font-family:ht;height:200px;width:80%;font-size:20px;' placeholder='输入二维码内容'></textarea>
+<table border='0px'>
+<tr>
+<td><a>二维码高度:</a><input id='height' type='text' style='font-family:ht;height:30px;width:100px;font-size:20px;'/></td>
+</tr>
+<tr>
+<td><a>二维码宽度:</a><input id='wid' type='text' style='font-family:ht;height:30px;width:100px;font-size:20px;'/></td>
+</tr>
+<tr>
+<td><a>二维码颜色:</a><input id='fg' type='text' style='font-family:ht;height:30px;width:350px;font-size:20px;' placeholder='请输入对应颜色的英文，例如:green' value='black'/></td>
+</tr>
+<tr>
+<td><a>背景的颜色:</a><input id='backg' type='text' style='font-family:ht;height:30px;width:350px;font-size:20px;' placeholder='请输入对应颜色的英文，例如:white' value='white'/></td>
+</tr>
+</table>
+<input onclick='gen()' type='button' style='height:50px;font-family:ht;font-color:white;font-size:100%;border:5px;width:50%;color:white;background:#6698ff' value='生成二维码'></input>
+<br>
+<br>
+<div class="gen"></div>
+<script>
+function gen(){
+var contents = document.getElementById('con').value;
+var backg = document.getElementById('backg').value;
+var he = document.getElementById('height').value;
+var wi = document.getElementById('wid').value;
+var dor = document.getElementById('fg').value;
+ $('.gen').qrcode({
+  text: utf16to8(contents),//转编码，到时候乱码就完了
+  width: wi,
+  height: he,
+  background: backg,
+  foreground: dor,
+  //correctLevel : QRCode.CorrectLevel.H
+ });
+}
+</script>
+<!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
+
