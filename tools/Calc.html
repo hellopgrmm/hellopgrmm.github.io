@@ -1,0 +1,102 @@
+<html><head><meta charset="utf-8">
+ <meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <title>计算器_Hellopgrmm的随便开发的"小工具"</title>
+<!--Jquery万能辅助器走起-->
+<script src="jquery-3.6.3.min.js"></script>
+<script src="qrcode.min.js"></script>
+  <script src="char.js"></script>
+<a style='font-size:30'>计算器</a>
+<div style='height:430px;width:350;border:1px solid black;'>
+<h1 id='text'>0</h1>
+<button style='font-size:30px' onclick='seven()'>7</button><button style='font-size:30px' onclick='eight()'>8</button><button style='font-size:30px' onclick='nine()'>9</button><button style='font-size:30px' onclick='qingchu()'>C</button><br>
+<button style='font-size:30px' onclick='four()'>4</button><button style='font-size:30px' onclick='five()'>5</button><button style='font-size:30px' onclick='six()'>6</button><button style='font-size:30px' onclick='jiashangqu()'>+</button><br>
+<button style='font-size:30px' onclick='one()'>&nbsp;1</button><button style='font-size:30px' onclick='two()'>2</button><button style='font-size:30px' onclick='three()'>3</button><button style='font-size:30px' onclick='jian()'>&nbsp;-</button><br>
+<button style='font-size:30px' onclick='zero()'>0</button><button style='font-size:30px' onclick='zzero()'>00</button><button style='font-size:30px' onclick='d()'>.</button><button style='font-size:30px' onclick='cheng()'>*</button><button style='font-size:30px' onclick='dengyu()'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button><button style='font-size:30px' onclick='chu()'>/</button>
+</div>
+<script>
+var result = '';
+function one(){
+    result = result+'1';
+    text.innerHTML = result;
+}
+function two(){
+    result = result+'2';
+    text.innerHTML = result;
+}
+function three(){
+    result = result+'3';
+    text.innerHTML = result;
+}
+function four(){
+    result = result+'4';
+    text.innerHTML = result;
+}
+function five(){
+    result = result+'5';text.innerHTML = result;
+}
+function six(){
+    result = result+'6';text.innerHTML = result;
+}
+function seven(){
+    result = result+'7';text.innerHTML = result;
+}
+function eight(){
+    result = result+'8';text.innerHTML = result;
+}
+function nine(){
+    result = result+'9';text.innerHTML = result;
+}
+function zero(){
+    result = result+'0';text.innerHTML = result;
+}
+function zzero(){
+    result = result+'00';text.innerHTML = result;
+}
+function d(){
+    result = result+'.';text.innerHTML = result;
+}
+function jiashangqu(){
+    result = result+'+';text.innerHTML = result;
+}
+function jian(){
+    result = result+'-';text.innerHTML = result;
+}
+function cheng(){
+    result = result+'*';text.innerHTML = result;
+}
+function chu(){
+    result = result+'/';text.innerHTML = result;
+}
+function dengyu(){
+    text.innerHTML = eval(result);
+    if(result == '1+1')
+    {
+        text.innerHTML='1+1都不会了是吧?诶我就不计算，就是玩～'
+    }
+    result = '';
+}
+function qingchu()
+{
+    text.innerHTML = '0';
+    result = '';
+}
+</script>
+<!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+
+
+</body></html>
