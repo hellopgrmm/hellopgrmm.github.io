@@ -12,7 +12,7 @@
 <button style='font-size:30px' onclick='seven()'>7</button><button style='font-size:30px' onclick='eight()'>8</button><button style='font-size:30px' onclick='nine()'>9</button><button style='font-size:30px' onclick='qingchu()'>C</button><br>
 <button style='font-size:30px' onclick='four()'>4</button><button style='font-size:30px' onclick='five()'>5</button><button style='font-size:30px' onclick='six()'>6</button><button style='font-size:30px' onclick='jiashangqu()'>+</button><br>
 <button style='font-size:30px' onclick='one()'>&nbsp;1</button><button style='font-size:30px' onclick='two()'>2</button><button style='font-size:30px' onclick='three()'>3</button><button style='font-size:30px' onclick='jian()'>&nbsp;-</button><br>
-<button style='font-size:30px' onclick='zero()'>0</button><button style='font-size:30px' onclick='zzero()'>00</button><button style='font-size:30px' onclick='d()'>.</button><button style='font-size:30px' onclick='cheng()'>*</button><button style='font-size:30px' onclick='dengyu()'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button><button style='font-size:30px' onclick='chu()'>/</button>
+<button style='font-size:30px' onclick='zero()'>0</button><button style='font-size:30px' onclick='zzero()'>00</button><button style='font-size:30px' onclick='d()'>.</button><button style='font-size:30px' onclick='cheng()'>*</button><button style='font-size:30px' onclick='dengyu()'>&nbsp;&nbsp;=&nbsp;&nbsp;</button><button style='font-size:30px' onclick='chu()'>/</button><button style='font-size:30px' onclick='zk()'>(</button><button style='font-size:30px' onclick='yk()'>)</button>
 </div>
 <script>
 var result = '';
@@ -67,6 +67,14 @@ function cheng(){
 }
 function chu(){
     result = result+'/';text.innerHTML = result;
+}
+function zk()
+{
+    result = result+'(';text.innerHTML = result;
+}
+function yk()
+{
+    result = result+')';text.innerHTML = result;
 }
 function dengyu(){
     text.innerHTML = eval(result);
