@@ -1,0 +1,241 @@
+<meta charset="UTF-8">
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+<title>别踩白块_HelloPgrmm小游戏</title>
+<h3>请注意:本游戏源代码来源于JB51,并非本人原创!</h3>
+<div class="bigbox">
+    <!-- 显示游戏的区域 -->
+    <div class="gamequyu">
+      <!-- 上面显示一个游戏开始的按钮 -->
+      <div class="start">点击这里开始游戏</div>
+      <!-- 再显示一个游戏的主体部分 -->
+      <div class="zhuti"></div>
+      <div class="zhezhaoceng"></div>
+
+    </div>
+    <!-- 下面再显示一个计分的盒子 -->
+    <div class="jifen">分数:0</div>
+  </div>
+<script>
+    // 先找到主体内容的盒子,添加到这个盒子中去
+    var zhuti = document.getElementsByClassName('zhuti')[0];
+    //找到计分 , 每点击一次, 就让分数++;
+    var jifen = document.getElementsByClassName('jifen')[0];
+    // 找到游戏开始按钮, 点击让它影藏,结束时显示并把里面的文字改变为'游戏结束'
+    var start = document.getElementsByClassName('start')[0];
+    // 找到遮罩层, 结束游戏的时候显示
+    var zhezhaoceng = document.getElementsByClassName('zhezhaoceng')[0];
+    // addbox('row')
+    //动态创建盒子的函数
+    function addbox(classname) {
+      // 思路: 
+      // 1: 先封装一个函数动态的创建盒子;
+      // 2: 一个盒子里装了四个小盒子;
+      // 3: 随机一个数,让这四个小盒子的某一个的颜色改为黑色 ;
+      // 4: 给这个小盒子添加类名,设置样式;
+      // 5: 随机数作为下标, 给这个随机数的下标的小盒子添加一个类名;
+      // 6: 添加到'zhuti'里面去,显示在页面上(如果zhuti里面有内容了,就要添加到所有内容的最前面,如果没有,接直接添加)
+      // 生成随机数作为四个盒子的下标
+      var index = Math.floor(Math.random() * 4)
+      // console.log(index);
+      //创建一个盒子; 
+      var bigdiv = document.createElement('div');
+      bigdiv.className = classname;
+      // 再依次创建四个小盒子;添加到刚刚创建的大盒子中;
+      for (var i = 0; i < 4; i++) {
+        var smallbox = document.createElement('div')
+        bigdiv.appendChild(smallbox)
+      }
+      // 判断主体里面有没有盒子 ; 
+      // 如果已经存在盒子,就要添加到它们的最前面
+      // 如果没有,就可以直接添加到页面上
+      if (zhuti.children.length == 0) {
+        zhuti.appendChild(bigdiv)
+      } else {
+        zhuti.insertBefore(bigdiv, zhuti.children[0])
+      }
+      // 给随机下标的盒子添加样式的背景色为黑色;
+      bigdiv.children[index].style.backgroundColor = 'black';
+      // 再给这个随机的盒子添加一点东西,可以用来做判断
+      bigdiv.children[index].className = 'random_box';
+    }
+    //计分与控制速度的函数
+    function move(obj) {
+      // 封装一个计时器移动的方法, 让主体内的内容动起来;
+      // 思路: 
+      //   1: 先获取元素的最终样式,距离顶部的top值;
+      //   2: 声明两个变量; 一个用来改变元素距离顶部的top值; 一个用来计分数; 
+      var num = 0;
+      var sudu = 5;
+      // 创建一个计时器让它缓动显示到页面
+      //在样式里面就设置了top值为-150px；
+      //通过计时器让它的top值缓动到页面， 当它的top值等于0的时候，又让它的top值变为-150px；
+      //就调用创建元素的方法再创建一个盒子，让它插在这个显示在页面上的盒子的前面
+      obj.timeID = setInterval(function () {
+        var nowtop = parseInt(getComputedStyle(obj)['top']) + sudu;
+        // console.log(nowtop);
+        obj.style.top = nowtop + 'px';
+        if (parseInt(getComputedStyle(obj)['top']) >= 0) {
+          addbox('row')
+          obj.style.top = -150 + 'px'
+        }
+        // 判断条件：在移动的时候，如果用户没有点击到带有颜色的盒子，让盒子超过了界限；就结束游戏；
+        if (obj.children.length == 6) {
+          for (var i = 0; i < 4; i++) {
+            if (obj.children[obj.children.length - 1].children[i].className == 'random_box') {
+
+              jifen.innerHTML = '最高得分:' + num;
+              start.style.display = 'block'
+              start.innerHTML = '游戏结束，单击这里再来一局吧';
+              start.style.display = 'block';
+              start.style.backgroundColor = 'green';
+              start.style.height = 60 + 'px';
+              start.style.fontSize = 30 + 'px';
+              zhezhaoceng.style.display = 'block';
+              clearInterval(obj.timeID)
+
+            }
+          }
+          // 让主体的内容的长度永远等于6,如果不等于6,就会出现按下第一个带'random_box'类名的小盒子,之后就不会再回到以上的判断里面了;
+          obj.removeChild(obj.children[obj.children.length - 1])
+        }
+        // console.log(obj.children.length);
+
+        // 判断用户点击的时候:条件:如果没有点中指定的盒子(类名为'random_box')的盒子,就结束游戏;不然就计分num++;
+        obj.onmousedown = function (event) {
+          // 根据事件对象里面的事件源来进行判断;
+          //当它的事件源的名字等于'random_box'的时候;
+          if (event.target.className == 'random_box') {
+            // 让这个事件源的的背景色变为红色;
+            event.target.style.backgroundColor = 'C0C0C0';
+            //当用户点击了事件源时,把他的类名清空, 不然只变了颜色,到了第6个,判断类名还是'random_box'时, 就会结束游戏;
+            event.target.className = '';
+            // 计分
+            num++;
+            // 显示在当前得分的盒子里
+            jifen.innerHTML = '当前得分' + num;
+          } else {
+            // 结束游戏
+            clearInterval(obj.timeID)
+            start.style.display = 'block';
+            start.style.backgroundColor = 'green';
+            start.style.height = 60 + 'px';
+            start.style.fontSize = 30 + 'px';
+            start.innerHTML = '游戏结束!单击这里再来一局！';
+            jifen.innerHTML = '最终得分' + num;
+            // 让遮罩层显示
+            zhezhaoceng.style.display = 'block';
+          }
+          // 加速(判断分数到了多少时,让主体下降的top值变大)
+          if (num % 5 == 0) {
+            sudu++;
+          }
+        }
+
+      }, 20)
+    }
+    // 当它点击开始按钮的时候,再调用函数;运行起来;
+    start.onclick = function () {
+      //如果事重新来一局,那就先把页面上已经创建的盒子先清除;
+      if (zhuti.children.length != 0) {
+        zhuti.innerHTML = ''
+      }
+      // 让遮罩层隐藏
+      zhezhaoceng.style.display = 'none';
+      // 让开始的按钮影藏 
+      this.style.display = 'none';
+      jifen.innerHTML = '得分:0'
+      move(zhuti)
+    }
+  </script>
+<style>
+    .bigbox {
+      width: 400px;
+      height: auto;
+      border: 1px solid #2d2d2d;
+      margin: 100px auto 0 auto;
+    }
+
+    .gamequyu {
+      width: 100%;
+      height: 600px;
+      position: relative;
+      overflow: hidden;
+      background-color: #fefefe;
+      /* background: url("./dog.png") no-repeat; */
+      background-size: 100%;
+    }
+
+    .start {
+      position: absolute;
+      width: 400px;
+      height: 50px;
+      color: white;
+      text-align: center;
+      line-height: 50px;
+      background-color: brown;
+      font-size: 30px;
+      cursor: pointer;
+      z-index: 9999;
+    }
+
+    .zhuti {
+      width: 100%;
+      height: 600px;
+      position: absolute;
+      top: -150px;
+    }
+
+    .jifen {
+      width: 400px;
+      height: 50px;
+      font-size: 30px;
+      text-align: center;
+      line-height: 50px;
+      color: white;
+      margin: 0 auto;
+      background-color: brown;
+    }
+
+    .row {
+      width: 400px;
+      height: 150px;
+
+    }
+
+    .row div {
+      width: 100px;
+      height: 150px;
+      border: 1px solid #343434;
+      border-top-width: 0;
+      border-left-width: 0;
+      float: left;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    .zhezhaoceng {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 999;
+      display: none;
+    }
+  </style>
+ <!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
