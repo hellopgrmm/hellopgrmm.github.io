@@ -1,0 +1,589 @@
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+  <title> 2048小游戏_HelloPgrmm小游戏 </title>
+  <h3>请注意：此游戏源代码来源于tayutec，并非本人原创！</h3>
+  <style media="screen">
+    #game {
+      display: none;
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      background-color: #9DA5C3;
+      opacity: 0.5;
+      z-index: 1;
+    }
+
+    .clear:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .left {
+      float: left;
+    }
+
+    .right {
+      float: right;
+    }
+
+    .scoreShow {
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+    }
+
+    .model {
+      text-decoration: none;
+      color: white;
+      background-color: #bbada0;
+      font-size: 15px;
+      border-radius: 5px;
+    }
+
+    .head {
+      width: 300px;
+      height: 50px;
+      margin: 0 auto;
+      font-size: 25px;
+    }
+
+    #gridPanel {
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      background-color: #bbada0;
+      border-radius: 10px;
+      position: relative;
+      z-index: 1;
+    }
+  
+      #buttons{
+          width: 300px;
+          height: 40px;
+          margin: 0 auto;
+      }
+      button.styles{
+          width:70px;
+          height:40px;
+      }
+
+    .grid,
+    .cell {
+      width: 62.5px;
+      height: 62.5px;
+      border-radius: 6px;
+    }
+
+    .grid {
+      background-color: #ccc0b3;
+      float: left;
+      margin: 16px 0 0 16px;
+    }
+
+    .cell {
+      position: absolute;
+      font-size: 60px;
+      text-align: center;
+      line-height: 100px;
+      color: #fff;
+    }
+
+    .n2 {
+      background-color: #eee3da
+    }
+
+    .n4 {
+      background-color: #ede0c8
+    }
+
+    .n8 {
+      background-color: #f2b179
+    }
+
+    .n16 {
+      background-color: #f59563
+    }
+
+    .n32 {
+      background-color: #f67c5f
+    }
+
+    .n64 {
+      background-color: #f65e3b
+    }
+
+    .n128 {
+      background-color: #edcf72
+    }
+
+    .n256 {
+      background-color: #edcc61
+    }
+
+    .n512 {
+      background-color: #9c0
+    }
+
+    .n1024 {
+      background-color: #33b5e5
+    }
+
+    .n2048 {
+      background-color: #09c
+    }
+
+    .n4096 {
+      background-color: #a6c
+    }
+
+    .n8192 {
+      background-color: #93c
+    }
+
+    .n2,
+    .n4 {
+      color: #776e65
+    }
+
+    #gameover {
+      width: 100%;
+      display: none;
+      position: fixed;
+      left: 50%;
+      right: 50%;
+      top: 100px;
+      width: 200px;
+      height: 150px;
+      border-radius: 10px;
+      background-color: white;
+      margin-left: -100px;
+      text-align: center;
+      z-index: 5;
+    }
+
+    #gameover>a {
+      display: inline-block;
+      width: 150px;
+      height: 50px;
+      border-radius: 10px;
+      text-decoration: none;
+      background-color: #9F8D77;
+      color: white;
+      font-size: 25px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="game">
+  </div>
+  <div class="head clear">
+    <div class="scoreShow left">
+      <span>分数:</span>
+      <span id="score"></span>
+    </div>
+    <div class="selction right" onclick="getModel(event)">
+      <a href="#" class="model" value="3">3X3</a>
+      <a href="#" class="model" value="4">4X4</a>
+      <a href="#" class="model" type="button">5X5</a>
+      <a href="#" class="model" type="button">6X6</a>
+    </div>
+  </div>
+  <div id="gridPanel">
+  </div>
+  <div id="gameover">
+    <h1 id="Score2"></h1>
+    <a href="#" id="again" onclick="obj.gameStart()">再试一次！</a>
+  </div>
+  <div id="buttons" width="300" height="40">
+      <button class="styles" id="up"> 上 </button>
+      <button class="styles" id="down">下</button>
+      <button class="styles" id="left">左</button>
+      <button class="styles" id="right">右</button>
+  </div>
+  <script type="text/javascript">
+    var arr = [];
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function C(cls) {
+      return document.getElementsByClassName(cls);
+    }
+    var obj = {
+      ROW: 4,
+      CELL: 4,
+      r: 0,
+      c: 0,
+      f: 0, //r行  c列  f查找的下一位置
+      keyCd: 0,
+      score: 0,
+      createEle: 0, //是否需要创建元素
+      eleFragment: "", //文档片段变量
+      //游戏开始
+      gameStart: function() {
+        obj.init();
+        document.getElementById("up").onclick = function(){
+            obj.keyCd = 2;
+            obj.moveUp();
+        }
+        document.getElementById("down").onclick = function(){
+            obj.keyCd = 2;
+            obj.moveDown();
+        }
+        document.getElementById("right").onclick = function(){
+            obj.keyCd = 1;
+            obj.moveRight();
+        }
+        document.getElementById("left").onclick = function(){
+            obj.keyCd = 1;
+            obj.moveLeft();
+        }
+        document.onkeydown = function(e) { //自动获得事件对象
+          switch (e.keyCode) { //判断按键号
+            case 37:
+              obj.keyCd = 1;
+              obj.moveLeft();
+              break;
+            case 38:
+              obj.keyCd = 2;
+              obj.moveUp();
+              break;
+            case 39:
+              obj.keyCd = 1;
+              obj.moveRight();
+              break;
+            case 40:
+              obj.keyCd = 2;
+              obj.moveDown();
+              break;
+          }
+          $("score").innerHTML = obj.score; //更新分数
+        }
+
+      },
+
+      //初始化
+      init: function() {
+        obj.eleFragment = document.createDocumentFragment();
+        for (r = 0; r < obj.ROW; r++) {
+          arr.push([]);
+          for (c = 0; c < obj.CELL; c++) {
+            arr[r][c] = 0;
+            if (obj.createEle == 1) {
+              obj.create(r, c);
+            }
+          }
+        }
+        if (obj.createEle == 1) {
+          obj.createEle = 0;
+          $("gridPanel").innerHTML = ""; //清空原有的元素
+          $("gridPanel").appendChild(obj.eleFragment); //添加元素
+        }
+        obj.score = 0;
+        $("score").innerHTML = obj.score;
+        $("game").style.display = "none";
+        $("gameover").style.display = "none";
+        obj.random(); //开始游戏随机生成两个数
+        obj.random();
+        obj.updateView();
+      },
+      //创建div元素，添加到gridPanel中
+      create: function(r, c) {
+        var grid, cell;
+        var increment = 10,
+          grWidth, grHeight, grMarginTop, grMarginLeft, ceWidth, ceHight;
+        grid = document.createElement("div");
+        cell = document.createElement("div");
+        grid.id = "g" + r + c;
+        grid.className = "grid";
+        cell.id = "c" + r + c;
+        cell.className = "cell";
+
+        if (obj.ROW == 3) {
+          grWidth = grHeight = ceWidth = ceHight = 80;
+        } else if (obj.ROW == 4) {
+          grWidth = grHeight = ceWidth = ceHight = 60;
+        }else if (obj.ROW == 5) {
+            grWidth = grHeight = ceWidth = ceHight = 50;
+        }else if (obj.ROW == 6) {
+            grWidth = grHeight = ceWidth = ceHight = 40;
+        }
+        
+        grMarginTop = grMarginLeft = (300 - grWidth * obj.ROW) / (obj.ROW + 1);
+        grid.style.width = grWidth + "px";
+        grid.style.height = grHeight + "px";
+        grid.style.marginTop = grMarginTop + "px";
+        grid.style.marginLeft = grMarginLeft + "px";
+        cell.style.width = ceWidth + "px";
+        cell.style.height = ceHight + "px";
+        cell.style.top = grMarginTop + r * (grMarginTop + ceWidth) + "px";
+        cell.style.left = grMarginLeft + c * (grMarginLeft + ceHight) + "px";
+        cell.style.lineHeight = ceHight + "px";
+        cell.style.fontSize = 15 + (6 - obj.ROW) * 10 + "px";
+        obj.eleFragment.appendChild(grid);
+        obj.eleFragment.appendChild(cell);
+      },
+      //随机产生一个新的数
+      random: function() {
+        while (1) {
+          var row = Math.floor(Math.random() * obj.ROW);
+          var cell = Math.floor(Math.random() * obj.CELL);
+          if (arr[row][cell] == 0) { //判断生成的随机数位置为0才随机生成2或4
+            arr[row][cell] = (Math.random() > 0.5) ? 4 : 2;
+            break;
+          }
+        }
+      },
+      //更新页面
+      updateView: function() {
+        var win = 0;
+        for (r = 0; r < obj.ROW; r++) {
+          for (c = 0; c < obj.CELL; c++) {
+            if (arr[r][c] == 0) { //值为0的不显示
+              $("c" + r + c).innerHTML = ""; //0不显示
+              $("c" + r + c).className = "cell" //清除样式
+            } else {
+              $("c" + r + c).innerHTML = arr[r][c];
+              $("c" + r + c).className = "cell n" + arr[r][c]; //添加不同数字的颜色
+              if (obj.ROW == 3 && arr[r][c] == 1024) {
+                win = 1;
+              } else if (obj.ROW == 4 && arr[r][c] == 2048) {
+                win = 1;
+              } else if (obj.ROW == 5 && arr[r][c] == 4096) {
+                win = 1;
+              } else if (obj.ROW == 6 && arr[r][c] == 8192) {
+                win = 1;
+              }
+            }
+          }
+        }
+        if (win == 1) { //通关
+          $("game").style.display = "block";
+          $("gameover").style.display = "block";
+          $("Score2").innerHTML = "你赢了!<br>分数:" + obj.score;
+        }
+        if (obj.isGameOver()) { //游戏失败
+          $("game").style.display = "block";
+          $("gameover").style.display = "block";
+          $("Score2").innerHTML = "游戏结束!<br>分数:" + obj.score;
+          console.log("gameover");
+        }
+      },
+      //游戏失败
+      isGameOver: function() {
+        for (r = 0; r < obj.ROW; r++) {
+          for (c = 0; c < obj.CELL; c++) {
+            if (arr[r][c] == 0) { //有0还不是gameover
+              return false;
+            } else if (c != obj.CELL - 1 && arr[r][c] == arr[r][c + 1]) { //左往右  前一个和下一个不相等
+              return false;
+            } else if (r != obj.ROW - 1 && arr[r][c] == arr[r + 1][c]) { //上往下 上一个和下一个不相等
+              return false;
+            }
+          }
+        }
+        return true;
+      },
+      //查找下一个不为0的数值的位置
+      find: function(r, c, start, condition, direction) {
+        if (obj.keyCd == 2) { //上下按键
+          if (direction == 1) { //向上按键  f++
+            for (var f = start; f < condition; f += direction) {
+              if (arr[f][c] != 0) {
+                return f;
+              }
+            }
+          } else { //向下按键 f--
+            for (var f = start; f >= condition; f += direction) {
+              if (arr[f][c] != 0) {
+                return f;
+              }
+            }
+          }
+
+        } else { //左右按键
+          if (direction == 1) { //左按键   f++
+            for (var f = start; f < condition; f += direction) {
+              if (arr[r][f] != 0) {
+                return f;
+              }
+            }
+          } else { //右按键  f--
+            for (var f = start; f >= condition; f += direction) {
+              if (arr[r][f] != 0) {
+                return f;
+              }
+            }
+          }
+        }
+        return null; //循环结束仍然没有找到！=0的数值，返回null
+      },
+      //左按键的处理
+      dealToLeft: function(r) {
+        var next;
+        for (c = 0; c < obj.ROW; c++) {
+          next = obj.find(r, c, c + 1, obj.CELL, 1); //找出第一个不为0的位置
+          if (next == null) break; //没有找到就返回
+          //如果当前位置为0
+          if (arr[r][c] == 0) {
+            arr[r][c] = arr[r][next]; //把找到的不为0的数值替换为当前位置的值
+            arr[r][next] = 0; //找到的位置清0
+            c--; //再次循环多一次，查看后面否有值与替换后的值相同，
+          } else if (arr[r][c] == arr[r][next]) { //如果当前位置与找到的位置数值相等，则相加
+            arr[r][c] *= 2;
+            arr[r][next] = 0;
+            obj.score += arr[r][c];
+          }
+        }
+      },
+      move: function(itertor) {
+        var before, //没处理前
+          after; //after处理后
+        before = arr.toString();
+        itertor(); //执行for函数
+        after = arr.toString();
+        if (before != after) { //前后对比，如果不同就update
+          obj.random();
+          obj.updateView();
+        }
+      },
+      moveLeft: function() {
+        obj.move(function() {
+          for (r = 0; r < obj.ROW; r++) {
+            obj.dealToLeft(r);
+          }
+        })
+        // if 当前位置 不为零
+        // 从当前位置，下一个成员开始，遍历，
+        // 如果找到，与当前位置相等的数，
+        // 两者相加，并把不为零的成员，设置为零
+        // 如果 当前位置是 零
+        // 从当前位置下一个成员开始遍历
+        // 如果找到 第一个不为零的成员
+        // 当前位置数值设置为这个不为零的成员的值 ，并且把那个不为零的成员设置为 0
+      },
+      //右按键处理
+      dealToRight: function(r) {
+        var next;
+        for (c = obj.CELL - 1; c >= 0; c--) {
+          next = obj.find(r, c, c - 1, 0, -1); //找出第一个不为0的位置
+          if (next == null) break; //没有找到就返回
+          //如果当前位置为0
+          if (arr[r][c] == 0) {
+            arr[r][c] = arr[r][next]; //把找到的不为0的数值替换为当前位置的值
+            arr[r][next] = 0; //找到的位置清0
+            c++; //再次循环多一次，查看后面否有值与替换后的值相同，
+          } else if (arr[r][c] == arr[r][next]) { //如果当前位置与找到的位置数值相等，则相加
+            arr[r][c] *= 2;
+            arr[r][next] = 0;
+            obj.score += arr[r][c];
+          }
+        }
+      },
+      moveRight: function() {
+        obj.move(function() {
+          for (r = 0; r < obj.ROW; r++) {
+            obj.dealToRight(r);
+          }
+        })
+      },
+      //上按键处理
+      dealToUp: function(c) {
+        var next;
+        for (r = 0; r < obj.ROW; r++) {
+          next = obj.find(r, c, r + 1, obj.ROW, 1); //找出第一个不为0的位置
+          if (next == null) break;
+          //如果当前位置为0
+          if (arr[r][c] == 0) {
+            arr[r][c] = arr[next][c]; //把找到的不为0的数值替换为当前位置的值
+            arr[next][c] = 0; //找到的位置清0
+            r--; //再次循环多一次，查看后面否有值与替换后的值相同
+          } else if (arr[r][c] == arr[next][c]) { //如果当前位置与找到的位置数值相等，则相加
+            arr[r][c] *= 2;
+            arr[next][c] = 0;
+            obj.score += arr[r][c];
+          }
+        }
+      },
+      moveUp: function() {
+        obj.move(function() {
+          for (c = 0; c < obj.CELL; c++) {
+            obj.dealToUp(c);
+          }
+        })
+      },
+      //下按键处理
+      dealToDown: function(c) {
+        var next;
+        for (r = obj.ROW - 1; r >= 0; r--) {
+          next = obj.find(r, c, r - 1, 0, -1); //找出第一个不为0的位置
+          if (next == null) {
+            break;
+          }
+          //如果当前位置为0
+          if (arr[r][c] == 0) {
+            arr[r][c] = arr[next][c]; //把找到的不为0的数值替换为当前位置的值
+            arr[next][c] = 0; //找到的位置清0
+            r++; //再次循环多一次，查看后面否有值与替换后的值相同
+          } else if (arr[r][c] == arr[next][c]) { //如果当前位置与找到的位置数值相等，则相加
+            arr[r][c] *= 2;
+            arr[next][c] = 0;
+            obj.score += arr[r][c];
+          }
+        }
+      },
+      moveDown: function() {
+        obj.move(function() {
+          for (c = 0; c < obj.CELL; c++) {
+            obj.dealToDown(c);
+          }
+        })
+      }
+    }
+    window.onload = function() {
+      obj.createEle = 1;
+      obj.gameStart();
+    }
+    //切换模式
+    function getModel(e) { //事件冒泡获取a元素
+      var a = e.target,
+        modelValue = 4;
+      if (a.nodeName == "A") {
+        if (a.innerHTML == "3X3") {
+          modelValue = 3;
+        } else if (a.innerHTML == "4X4") {
+          modelValue = 4;
+        } else if (a.innerHTML == "5X5") {
+          modelValue = 5;
+        } else if (a.innerHTML == "6X6") {
+          modelValue = 6;
+        }
+        obj.ROW = obj.CELL = modelValue;
+        obj.createEle = 1; //需要创建格子div元素的标志
+        obj.gameStart();
+      }
+    }
+  </script>
+<!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
+
