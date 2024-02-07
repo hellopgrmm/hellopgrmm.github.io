@@ -46,7 +46,7 @@
             var title = link.getAttribute('title').toLowerCase();
             var url = link.getAttribute('href').toLowerCase();
 
-            if (title.includes(searchKeyword) || url.includes(searchKeyword)) {
+            if (title.includes(searchKeyword)) {
                 link.parentNode.style.display = 'block';
             } else {
                 link.parentNode.style.display = 'none';
