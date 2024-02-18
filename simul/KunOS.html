@@ -1,0 +1,185 @@
+<meta charset='utf-8'>
+<body class='bg' style='background-size:cover' background='kunpics/black.png'>
+<style>
+div{
+    display:inline-block;
+}
+@font-face{
+    font-family:mc;
+    src: url(https://hellopgrmm.github.io/font/mc.otf);
+}
+body{
+    font-family:mc;
+}
+.StartUp {
+    justify-content: center;
+    align-items: center;
+    height:100%;
+    color:white;
+}
+#Menu{
+    border:1px solid black; background:white;height:100%;color:black;width:50px;
+}
+#Menu:hover{
+    background:black;
+    color:white;
+}
+#Computer{
+    position: relative;
+    top:25%;
+    left:25%;
+}
+iframe{
+    overflow: hidden;
+}
+#foverlay {
+    position: fixed; /* 使用fixed定位 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 设置透明度为0.5的黑色作为遮罩层背景色 */
+    z-index: 9999; /* 确保遮罩层在其他元素之上显示 */
+}
+        
+#fcontent {
+    position: absolute;
+    text-align: center;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+</style>
+<div id='StartUp'>
+<h1 style='color:white;'>正在启动KunOS</h1>
+<a style='color:white;'><img style='height:20px;width:20px' src='kunpics/onload.gif'/>坤坤马上来到，请稍后……</a>
+</div>
+<div id='KunMain' style='height:100%;width:100%'>
+<!--TaskBar-->
+<div id='TaskBar' style='height:25px;width:100%;border:1px solid black;background:white;'><button onclick='cnm();' id='Menu'>菜单</button><a id='dt'>NoDateOfThisText404</a></div>
+<!--KunOS Main--><br><div id='Main'><br>
+<div onclick='Computer.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/KunOSComputer.png'/><br><a>我的小脑</a></div>&nbsp;<br><div onclick='mine.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/mine.png'/><br><a>扫雷.exe</a></div>
+</div>
+<div onclick='Language.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a>语言设置.exe</a></div>
+<div onclick='window.location.href="https://hellopgrmm.github.io/nifs/blueScreen.html?info=undefblue";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/NET.png'/><br><a>蓝屏盖.exe</a></div>
+<div onclick='VIRTUAL.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/TXT.png'/><br><a>KunOS虚拟坤</a></div>
+<br>
+<div onclick='In.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BROS.png'/><br><a>KunOS Internet</a></div><br>
+<div onclick='MC.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BROS.png'/><br><a>Minecraft网页版</a></div><br>
+<div onclick='About.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/TXT.png'/><br><a>关于KunOS.txt</a></div><br>
+<div draggable="true" style='height:50%;width:50%;position:absolute;border:1px solid black;background:white;cursor:move;' id='Computer'><button onclick="Computer.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="Computer.style.height='95%';Computer.style.width='100%';Computer.style.left='0%';Computer.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="Computer.style.height='50%';Computer.style.width='30%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><a>&nbsp;我的小脑</a><hr><!--Main-->
+    <iframe src="filesystem.html" width="100%" height="90%" scrolling="no" frameborder="0"></iframe>
+</div>
+<div draggable="true" style='height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='mine'><button onclick="mine.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="mine.style.height='95%';mine.style.width='100%';mine.style.left='0%';mine.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="mine.style.height='50%';mine.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><a>&nbsp;KunOS扫雷游戏</a><hr><!--Main-->
+    <iframe src="https://hellopgrmm.github.io/nifs/mines.html" width="100%" height="90%" scrolling="no" frameborder="0"></iframe>
+</div>
+<div draggable="true" style='height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='VIRTUAL'><button onclick="VIRTUAL.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="VIRTUAL.style.height='95%';VIRTUAL.style.width='100%';VIRTUAL.style.left='0%';VIRTUAL.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="VIRTUAL.style.height='50%';VIRTUAL.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="VIRTUAL.style.height='80%';VIRTUAL.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;KunOS虚拟机</a><br><!--Main-->
+    <iframe src="KunOS.html" width="100%" height="100%" scroll="no" frameborder="0"></iframe>
+</div>
+<div draggable="true" style='height:15%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='Language'><button onclick="Language.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><a>&nbsp;语言设置</a><hr><!--Main-->
+    <div id="translate"><a>选择语言：</a ></div><br><script src='https://res.zvo.cn/translate/translate.js'></script><script>translate.language.setLocal('chinese_simplified');translate.ignore.tag.push('pre');translate.execute();</script><br><a>选择完一些语言后，系统可能需要重启才能生效。</a>
+</div>
+<div draggable="true" style='height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='MC'><button onclick="MC.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="MC.style.height='95%';MC.style.width='100%';MC.style.left='0%';MC.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="MC.style.height='50%';MC.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="MC.style.height='80%';MC.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;Minecraft网页版</a><!--Main-->
+    <iframe src="https://goro.top/WebMC" width="100%" height="95%" scrolling="no" frameborder="0"></iframe>
+</div>
+<div draggable="true" style='overflow: auto;height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='About'><button onclick="About.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="About.style.height='95%';About.style.width='100%';About.style.left='0%';About.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="About.style.height='50%';About.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="About.style.height='80%';About.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;关于KunOS.txt</a><!--Main--><br>
+    <a>========关于KunOS的一些信息==========</a>
+    <br><a>灵感来源：Windows93.net</a>
+    <a>这是一个网页版的“系统”，目前还不能进行创建文件等操作，敬请原谅</a><br>
+    <a>（在本系统中，窗口是可以拖动的，只要将鼠标放在标题栏那边，按住鼠标就可以拖动了，不过有些窗口是不能拖动的，那些有输入框或选项框的窗口它就不可以，因为只要给这些窗口设置了拖动属性，那么它们的输入框就用不了）</a>
+    <br><a>网页版本：1.0.5</a><br><a>基于HTML/CSS/JavaScript内核</a><br>
+    <a>以下软件是引用了一些别的网站，这里列举出来了：</a>
+    <a>网页版Minecraft：https://goro.top/WebMC/</a><br>
+    <a>扫雷游戏：https://hellopgrmm.github.io/nifs/mines.html</a>
+    <br><a>注意！本系统的使用者如果是父母，请立即离开此系统！！因为本系统可能会引起你们的不适！！！</a>
+</div>
+<div draggable="true" style='height:50%;width:75%;position:absolute;border:1px solid black;background:white;cursor:move;' id='In'><button onclick="In.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="In.style.height='95%';In.style.width='100%';In.style.left='0%';In.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="In.style.height='50%';In.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="In.style.height='80%';In.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;KunOS Internet</a><hr><!--Main-->
+    <input id="web" style="outline:none;font-size: 17px;height:50px;width:90%;color:black;font-family:ht;" placeholder="输入网址，请以http或者https开头。"/><button onclick="Goto();" style="height:50px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">跳转！</button>
+    <a id='the'></a>
+</div>
+<div style='display:none;' id='foverlay'>
+    <div style='display:none;position: relative;left:45%' id='fcontent'>
+    <center>
+    <h1>你想要......</h1>
+    <button style="font-family:mc;height:50px;width:100%;position:relative;" onclick='window.location.href="KunOS.html"' id='Menu'>重新启动KunOS</button><br>
+    <button style="height:50px;width:100%;" onclick='fcontent.style.display="none";foverlay.style.display="none";' id='Menu'>关闭</button>
+</center>
+</div>
+</div>
+</div>
+<script>
+function Goto(){
+    var web1 = "<iframe src='";
+    var web2 = "' width='100%' height='95%' frameborder='0'></iframe>"
+    //alert(web1 + web.value + web2);
+    the.innerHTML = web1 + web.value + web2;
+}
+function KunDate(){
+    var currentDate = new Date();
+    var year = currentDate.getFullYear();
+    var month = currentDate.getMonth() + 1;
+    var date = currentDate.getDate();
+    var hour = currentDate.getHours();
+    var mine = currentDate.getMinutes();
+    var sec = currentDate.getSeconds();
+    dt.innerHTML = '&nbsp;'+year+'/'+month+'/'+date+'   '+hour+':'+mine+':'+sec;
+}
+setInterval('KunDate()',1000);
+var vari=document.querySelector(".bg");
+var start = document.getElementById('StartUp');
+start.style.display='';
+KunMain.style.display='none';
+VIRTUAL.style.display='none';
+mine.style.display='none';
+Computer.style.display='none';
+Language.style.display="none";
+MC.style.display='none';
+About.style.display="none";
+In.style.display="none";
+function openKunOS()
+{
+    vari.style.backgroundImage='url("kunpics/KunOS.png")';
+    start.style.display = 'none';
+    KunMain.style.display='';
+}
+setTimeout('openKunOS()',3000);
+</script>
+<script>
+function drager(dragdivname){
+var dragDiv = document.getElementById(dragdivname); // 获取需要拖动的div元素
+        
+        function handleMouseDown(event) {
+            event.preventDefault(); // 防止选中文本时也会开始拖动
+            
+            var offsetX = event.clientX - dragDiv.offsetLeft; // 计算鼠标点击位置与div左边界之间的水平偏移量
+            var offsetY = event.clientY - dragDiv.offsetTop; // 计算鼠标点击位置与div上边界之间的垂直偏移量
+            
+            function handleMouseMove(event) {
+                dragDiv.style.left = (event.clientX - offsetX) + "px"; // 更新div的left值
+                dragDiv.style.top = (event.clientY - offsetY) + "px"; // 更新div的top值
+            }
+            
+            function handleMouseUp() {
+                window.removeEventListener('mousemove', handleMouseMove); // 松开鼠标按钮时停止移动
+                window.removeEventListener('mouseup', handleMouseUp); // 松开鼠标按钮时停止移动
+            }
+            
+            window.addEventListener('mousemove', handleMouseMove); // 当鼠标移动时调用handleMouseMove函数
+            window.addEventListener('mouseup', handleMouseUp); // 当释放鼠标按钮时调用handleMouseUp函数
+        }
+        
+        dragDiv.addEventListener('mousedown', handleMouseDown); // 当鼠标按下时调用handleMouseDown函数
+}
+function cnm() {
+    foverlay.style.display="";
+    fcontent.style.display="";
+}
+drager("Computer");
+drager("mine");
+drager("VIRTUAL");
+//drager("Language");
+drager("MC");
+drager("About");
+//drager("In");
+</script>
