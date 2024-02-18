@@ -11,7 +11,7 @@ body{
 </style>
 <h1 style='font-size:100px;color:white'>:(<h1>
 <a id='gie' style='color:white'>你的电脑出了点“小小”的问题，无法修复</a><br>
-<a id='ma'></a>
+<a id='ma' style="color:white"></a>
 <script>
 // 获取当前网址
 var url = window.location.href;
@@ -30,6 +30,9 @@ if (queryString) {
         if (paramNameValuePair.length == 2) {
             if(decodeURIComponent(paramNameValuePair[0]) == 'info'){
                 ma.innerHTML='错误代码:'+decodeURIComponent(paramNameValuePair[1]);
+                if(decodeURIComponent(paramNameValuePair[1] == 'undefblue'){
+                    gie.innerHTML = '你充Q币吗？';
+                }
             }
             // 输出参数名和参数值
             //alert("参数名：" + decodeURIComponent(paramNameValuePair[0]));
