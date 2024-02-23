@@ -66,6 +66,7 @@ input{
 <div onclick='Computer.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/KunOSComputer.png'/><br><a>我的小脑</a></div>&nbsp;<br><div onclick='mine.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/mine.png'/><br><a>扫雷.exe</a></div>
 </div>
 <div onclick='Language.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a>语言设置.exe</a></div>
+<div onclick='cmd.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a>命令提示符.exe</a></div>
 <div onclick='window.location.href="https://hellopgrmm.github.io/nifs/blueScreen.html?info=undefblue";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/NET.png'/><br><a>蓝屏盖.exe</a></div>
 <div onclick='VIRTUAL.style.display="";frameWindow.location.reload()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/TXT.png'/><br><a>KunOS虚拟坤</a></div>
 <br>
@@ -97,6 +98,9 @@ input{
     <a>网页版Minecraft：https://goro.top/WebMC/</a><br>
     <a>扫雷游戏：https://hellopgrmm.github.io/nifs/mines.html</a>
     <br><a>注意！本系统的使用者如果是父母，请立即离开此系统！！因为本系统可能会引起你们的不适！！！</a>
+</div>
+<div draggable="true" style='height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='cmd'><button onclick="cmd.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="cmd.style.height='95%';cmd.style.width='100%';cmd.style.left='0%';cmd.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="cmd.style.height='50%';cmd.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="cmd.style.height='80%';cmd.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;KunOS Terminal</a><!--Main-->
+    <iframe src="cmd.html" width="100%" height="95%" scrolling="no" frameborder="0"></iframe>
 </div>
 <div draggable="true" style='height:50%;width:75%;position:absolute;border:1px solid black;background:white;cursor:move;' id='In'><button onclick="In.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="In.style.height='95%';In.style.width='100%';In.style.left='0%';In.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="In.style.height='50%';In.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="In.style.height='80%';In.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;KunOS Internet</a><hr><!--Main-->
     <input id="web" style="outline:none;font-size: 17px;height:50px;width:90%;color:black;font-family:mc;" placeholder="输入网址，请以http或者https开头。"/><button onclick="Goto();" style="height:50px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">跳转！</button>
@@ -141,6 +145,7 @@ Language.style.display="none";
 MC.style.display='none';
 About.style.display="none";
 In.style.display="none";
+cmd.style.display='none';
 function openKunOS()
 {
     vari.style.backgroundImage='url("https://pic.rmb.bdstatic.com/66a63382e18a09d3642dd996d1904f62.jpeg")';
@@ -187,4 +192,5 @@ drager("VIRTUAL");
 drager("MC");
 drager("About");
 //drager("In");
+drager("cmd");
 </script>
