@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal</title>
+    <style>
+    @font-face{
+    font-family:mc;
+    src: url(https://hellopgrmm.github.io/font/mc.otf);
+}
+body{
+    font-family:mc;
+}
+        #terminal {
+            width: 100%;
+            height: 90%;
+            /*border: 1px solid #ccc;*/
+            color:yellow;
+            /*padding: 10px;*/
+            font-family: mc;
+            white-space: pre-wrap;
+            /*overflow-y: scroll;*/
+        }
+
+        #input {
+            border:0px solid black;
+            width: 80%;
+            font-size:16px;
+            padding: 5px;
+            outline:none;
+            background:black;
+            font-family: mc;
+            color:yellow;
+        }
+    </style>
+</head>
+<body style='background:black'>
+    <a id='1' style='color:yellow;font-size:15px;'>KunOS Terminal Oinbomm typer version 0.0.3</a><br><a id='2' style='color:yellow;font-size:15px;'>Type the command and click the 'Execute' button.Type 'help' to get some help of KunOS</a><br>
+    <div id="terminal"></div>
+    <a id='3' style='color:yellow;font-size:16px;'>C:/KunKun></a>
+    <input type="text" id="input">
+    <button style='background:black;color:white;font-family:mc;border:1px solid white;' onclick="executeCommand()">Execute</button>
+
+    <script>
+        function executeCommand() {
+            const input = document.getElementById('input').value.trim();
+            const terminal = document.getElementById('terminal');
+                    if (input.toLowerCase() === 'dir') {
+                        const dirContent = simulateDirContent();
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        terminal.innerHTML += `${dirContent}\n`;
+                    } 
+                    else if (input.toLowerCase() === 'abt') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        terminal.innerHTML += `KunOS terminal version 0.0.3\nDo not Copy.\n`;
+                    }
+                    else if (input.toLowerCase() === 'time -a') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        KunDate();
+                    }
+                    else if (input.toLowerCase() === 'time') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        terminal.innerHTML += `Type 'time -h' to get the args of this command.\n`;
+                    }
+                    else if (input.toLowerCase() === 'time -h') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        terminal.innerHTML += `Args of time:
+  -a show the current format time
+  -y show the current year
+  -s show the current seconds\n`;
+                    }
+                    else if (input.toLowerCase() === 'time -y') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        var currentDate = new Date();
+                        var year = currentDate.getFullYear();
+                        terminal.innerHTML += year+'\n';
+                    }
+                    else if (input.toLowerCase() === 'time -s') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        var currentDate = new Date();
+                        var year = currentDate.getSeconds();
+                        terminal.innerHTML += year+'\n';
+                    }
+                    else if (input.toLowerCase() === 'help') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        terminal.innerHTML += `Here is some help of KunOS Terminal:
+    help:get some help of KunOS;
+    time:get the current time.
+    dir:list the current file of current dictionary.
+    abt:the information of the Terminal.
+    reset:clean the screen.
+    clor -<ColorName>:Set The font color.
+Updating more command.Please wait for a time...\n`;
+                    }
+                    else if (input.toLowerCase() === 'reset') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        window.location.href='cmd.html';
+                    }
+                    else if (input.toLowerCase() === 'clor') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        terminal.innerHTML += `You can type these color name:
+    -yellow
+    -blue
+    -black
+    -pink
+    -orange
+    -white
+    -green\n`;
+                    }
+                    else if (input.toLowerCase() === 'clor -green') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        terminal.style.color = 'green';
+                        document.getElementById('1').style.color = 'green';
+                        document.getElementById('2').style.color = 'green';
+                        document.getElementById('3').style.color = 'green';
+                    }
+                    else if (input.toLowerCase() === 'clor -blue') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        terminal.style.color = 'blue';
+                        document.getElementById('1').style.color = 'blue';
+                        document.getElementById('2').style.color = 'blue';
+                        document.getElementById('3').style.color = 'blue';
+                    }
+                    else if (input.toLowerCase() === 'clor -yellow') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        terminal.style.color = 'yellow';
+                        document.getElementById('1').style.color = 'yellow';
+                        document.getElementById('2').style.color = 'yellow';
+                        document.getElementById('3').style.color = 'yellow';
+                    }
+                    else if (input.toLowerCase() === 'clor -pink') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        terminal.style.color = 'pink';
+                        document.getElementById('1').style.color = 'pink';
+                        document.getElementById('2').style.color = 'pink';
+                        document.getElementById('3').style.color = 'pink';
+                    }
+                    else if (input.toLowerCase() === 'clor -orange') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        terminal.style.color = 'orange';
+                        document.getElementById('1').style.color = 'orange';
+                        document.getElementById('2').style.color = 'orange';
+                        document.getElementById('3').style.color = 'orange';
+                    }
+                    else if (input.toLowerCase() === 'clor -white') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        terminal.style.color = 'white';
+                        document.getElementById('1').style.color = 'white';
+                        document.getElementById('2').style.color = 'white';
+                        document.getElementById('3').style.color = 'white';
+                    }
+                    else if (input.toLowerCase() === 'clor -black') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        terminal.style.color = 'black';
+                        document.getElementById('1').style.color = 'black';
+                        document.getElementById('2').style.color = 'black';
+                        document.getElementById('3').style.color = 'black';
+                    }
+                    else if (input.toLowerCase() === '') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                    }
+                    else {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        terminal.innerHTML += `Bad command or a KunOS file:${input}.\n`;
+                    }
+                    
+            document.getElementById('input').value = '';
+        }
+
+        function simulateDirContent() {
+            return `The Files in current directory:
+Kunpics/
+    KunOS.png
+    Black.png
+    ONLOAD.gif
+30KB in this`;
+        }
+function KunDate(){
+    var currentDate = new Date();
+    var year = currentDate.getFullYear();
+    var month = currentDate.getMonth() + 1;
+    var date = currentDate.getDate();
+    var hour = currentDate.getHours();
+    var mine = currentDate.getMinutes();
+    var sec = currentDate.getSeconds();
+    terminal.innerHTML += '&nbsp;'+year+'/'+month+'/'+date+'   '+hour+':'+mine+':'+sec+'\n';
+}
+    </script>
+</body>
+</html>
