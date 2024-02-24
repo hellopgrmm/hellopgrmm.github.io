@@ -91,6 +91,7 @@ body{
     abt:the information of the Terminal.
     reset:clean the screen.
     clor -<ColorName>:Set The font color.
+    outp &lt;Text&gt;:Put Some texts on the terminal.
 Updating more command.Please wait for a time...\n`;
                     }
                     else if (input.toLowerCase() === 'reset') {
@@ -160,6 +161,19 @@ Updating more command.Please wait for a time...\n`;
                     else if (input.toLowerCase() === 'kunos01') {
                         terminal.innerHTML += `C:/KunKun>${input}\n`;
                         window.location.href='KunOS.html';
+                    }
+                    else if (input.startsWith('outp')) {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        const echoContent = input.split(' ')[1] || '';
+                        if(echoContent == '#SYSVALUE#'){
+                            terminal.innerHTML += `SYS = 'KunOS_TEM';VER = '3'\n`;
+                        }
+                        else if(echoContent == '#BASE#'){
+                            terminal.innerHTML += `KEY = 'n1I6n8f0_OPTK1893D201K'\n`;
+                        }
+                        else{
+                            terminal.innerHTML += `${echoContent}\n`;
+                        }
                     }
                     else if (input.toLowerCase() === '') {
                         terminal.innerHTML += `C:/KunKun>${input}\n`;
