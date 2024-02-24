@@ -157,6 +157,10 @@ Updating more command.Please wait for a time...\n`;
                         document.getElementById('2').style.color = 'black';
                         document.getElementById('3').style.color = 'black';
                     }
+                    else if (input.toLowerCase() === 'kunos01') {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        window.location.href='KunOS.html';
+                    }
                     else if (input.toLowerCase() === '') {
                         terminal.innerHTML += `C:/KunKun>${input}\n`;
                     }
