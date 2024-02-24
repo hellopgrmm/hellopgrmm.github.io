@@ -163,7 +163,7 @@ Updating more command.Please wait for a time...\n`;
                         window.location.href='KunOS.html';
                     }
                     else if (input.startsWith('outp')) {
-                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        /*terminal.innerHTML += `C:/KunKun>${input}\n`;
                         const echoContent = input.split(' ')[1] || '';
                         if(echoContent == '#SYSVALUE#'){
                             terminal.innerHTML += `SYS = 'KunOS_TEM';VER = '3'\n`;
@@ -173,6 +173,22 @@ Updating more command.Please wait for a time...\n`;
                         }
                         else{
                             terminal.innerHTML += `${echoContent}\n`;
+                        }*/
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        const echoContent = input.split(' ') || '';
+                        if(echoContent[1] == '#SYSVALUE#'){
+                            terminal.innerHTML += `SYS = 'KunOS_TEM';VER = '3'\n`;
+                        }
+                        else if(echoContent[1] == '#BASE#'){
+                            terminal.innerHTML += `KEY = 'n1I6n8f0_OPTK1893D201K'\n`;
+                        }
+                        else{
+                            var echo = '';
+                            for(var i = 1;i < echoContent.length;i++){
+                                echo += echoContent[i]+' ';
+                            }
+                            //terminal.innerHTML += `${echoContent}\n`;
+                            terminal.innerHTML += `${echo}\n`;
                         }
                     }
                     else if (input.toLowerCase() === '') {
