@@ -36,11 +36,11 @@ body{
     </style>
 </head>
 <body style='background:black'>
-    <a id='1' style='color:yellow;font-size:15px;'>KunOS Terminal Oinbomm typer version 0.0.3</a><br><a id='2' style='color:yellow;font-size:15px;'>Type the command and click the 'Execute' button.Type 'help' to get some help of KunOS</a><br>
+    <a id='1' style='color:yellow;font-size:15px;'>KunOS Terminal Oinbomm typer version 0.0.3</a><br><a id='2' style='color:yellow;font-size:15px;'>Type the command and press ENTER.Type 'help' to get some help of KunOS</a><br>
     <div id="terminal"></div>
     <a id='3' style='color:yellow;font-size:16px;'>C:/KunKun></a>
     <input type="text" id="input">
-    <button style='background:black;color:white;font-family:mc;border:1px solid white;' onclick="executeCommand()">Execute</button>
+   <!-- <button style='background:black;color:white;font-family:mc;border:1px solid white;' onclick="executeCommand()">Execute</button>-->
 
     <script>
         function executeCommand() {
@@ -193,6 +193,12 @@ window.scrollTo(0,ph);
     window.onload = function() {
         document.body.scrollTop = document.body.offsetHeight; // 或者使用 document.body.scrollTop = document.body.offsetHeight;
     };
+        function handleKeyPress(event) {
+            if (event.keyCode === 13 || event.which === 13) { // Enter键对应的keyCode为13
+                executeCommand();
+            }
+        }
+        document.addEventListener('keydown', handleKeyPress);
 </script>
 </body>
 </html>
