@@ -3,12 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-    window.onload = function() {
-        document.body.scrollTop = document.body.offsetHeight; // 或者使用 document.body.scrollTop = document.body.offsetHeight;
-    };
-    </script>
-
     <title>Terminal</title>
     <style>
     @font-face{
@@ -195,5 +189,10 @@ function KunDate(){
 const ph=document.documentElement.scrollHeight;
 window.scrollTo(0,ph);
     </script>
+<script>
+    window.onload = function() {
+        document.body.scrollTop = document.body.offsetHeight; // 或者使用 document.body.scrollTop = document.body.offsetHeight;
+    };
+</script>
 </body>
 </html>
