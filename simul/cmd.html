@@ -224,9 +224,10 @@ const ph=document.documentElement.scrollHeight;
 window.scrollTo(0,ph);
     </script>
 <script>
-    window.onload = function() {
-        document.body.scrollTop = document.body.offsetHeight; // 或者使用 document.body.scrollTop = document.body.offsetHeight;
-    };
+var gie = 1;
+while(gie == 1){
+    window.scrollTo(0, document.body.scrollHeight);
+}
         function handleKeyPress(event) {
             if (event.keyCode === 13 || event.which === 13) { // Enter键对应的keyCode为13
                 executeCommand();
