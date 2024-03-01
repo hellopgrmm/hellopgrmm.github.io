@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+@font-face{
+    font-family:mc;
+    src: url(https://hellopgrmm.github.io/font/mc.otf);
+}
+body{
+    font-family:mc;
+}
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频播放器</title>
+</head>
+<body>
+<h1>KunOS Player</h1><a>支持avi,mp4,mov，请上传文件:</a><br>
+<input type="file" id="fileInput"/>
+<br>
+<video id="videoPlayer" controls></video>
+
+<script>
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        var videoPlayer = document.getElementById('videoPlayer');
+
+        //if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                videoPlayer.src = e.target.result;
+                videoPlayer.load();
+            };
+
+            reader.readAsDataURL(file);
+            videoPlayer.style.height='200px';
+        //} else {
+            //videoPlayer.src = '';
+        //}
+    });
+</script>
+
+</body>
+</html>
