@@ -78,6 +78,7 @@ input{
 <br>
 <div onclick='In.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BROS.png'/><br><a>KunOS Internet</a></div><br>
 <div onclick='MC.style.display="";frameWindow.location.reload()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BROS.png'/><br><a>Minecraft网页版</a></div><br>
+<div onclick='pl.style.display="";frameWindow.location.reload()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BROS.png'/><br><a>KunOS Player</a></div><br>
 <div onclick='About.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/TXT.png'/><br><a>关于KunOS.txt</a></div><br>
 <div draggable="true" style='height:50%;width:50%;position:absolute;border:1px solid black;background:white;cursor:move;' id='Computer'><button onclick="Computer.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="Computer.style.height='95%';Computer.style.width='100%';Computer.style.left='0%';Computer.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="Computer.style.height='50%';Computer.style.width='30%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><a>&nbsp;我的小脑</a><hr><!--Main-->
     <iframe src="filesystem.html" width="100%" height="90%" scrolling="no" frameborder="0"></iframe>
@@ -111,6 +112,9 @@ input{
 <div draggable="true" style='height:50%;width:75%;position:absolute;border:1px solid black;background:white;cursor:move;' id='In'><button onclick="In.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="In.style.height='95%';In.style.width='100%';In.style.left='0%';In.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="In.style.height='50%';In.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="In.style.height='80%';In.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;KunOS Internet</a><hr><!--Main-->
     <input id="web" style="outline:none;font-size: 17px;height:50px;width:90%;color:black;font-family:mc;" placeholder="输入网址，请以http或者https开头。"/><button onclick="Goto();" style="height:50px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">跳转！</button>
     <a id='the'></a>
+</div>
+<div draggable="true" style='height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='pl'><button onclick="pl.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="pl.style.height='95%';pl.style.width='100%';pl.style.left='0%';pl.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="pl.style.height='50%';pl.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="pl.style.height='80%';pl.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;KunOS Player</a><!--Main-->
+    <iframe src="PLAY.html" width="100%" height="95%" scrolling="no" frameborder="0"></iframe>
 </div>
 <div style='display:none;' id='foverlay'>
     <div style='display:none;position: relative;left:45%' id='fcontent'>
@@ -200,6 +204,7 @@ drager("MC");
 drager("About");
 //drager("In");
 drager("cmd");
+drager("pl");
 </script>
 <script>
 var blue = 0;
