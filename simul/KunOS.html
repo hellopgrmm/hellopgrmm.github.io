@@ -1,5 +1,10 @@
-<meta charset='utf-8'><audio id='start' src='Startup.mp3'></audio>
+<meta charset='utf-8'><audio id='start' src='Startup.mp3'></audio><audio id='vir' src='http://keygenmusic.leenwork.com/music_files/147.mp3'></audio>
 <body class='bg' style='background-size:cover' background='kunpics/black.png'>
+<style>
+    .popup{
+        width:20%;position:absolute;border:1px solid black;background:white;cursor:move;
+    }
+</style>
 <style>
 div{
     display:inline-block;
@@ -67,6 +72,7 @@ input{
 </div>
 <div onclick='Language.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a>语言设置.exe</a></div>
 <div onclick='cmd.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a>命令提示符.exe</a></div>
+<div onclick='virus();vir.play()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a>好玩的.exe</a></div>
 <div onclick='window.location.href="https://hellopgrmm.github.io/nifs/blueScreen.html?info=undefblue";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/NET.png'/><br><a>蓝屏盖.exe</a></div>
 <div onclick='VIRTUAL.style.display="";frameWindow.location.reload()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/TXT.png'/><br><a>KunOS虚拟坤</a></div>
 <br>
@@ -194,4 +200,81 @@ drager("MC");
 drager("About");
 //drager("In");
 drager("cmd");
+</script>
+<script>
+var blue = 0;
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+function com()
+{
+    Computer.style.display='';
+}
+function computerz(){
+    Computer.style.height='95%';Computer.style.width='100%';Computer.style.left='0%';Computer.style.top='5%'
+}
+function computers(){
+    Computer.style.height='50%';Computer.style.width='30%'
+}
+async function popp()
+{
+    computerz();
+    await sleep(500);
+    computers();
+    await sleep(500);
+    blue= blue+1;
+    if(blue == 50){
+        window.location.href='https://hellopgrmm.github.io/nifs/blueScreen.html?info=UNDEF_KUNVIR_114514';
+    }
+}
+async function randpop()
+{
+    cmd.style.display='';
+    cmd.style.top='10%';
+    cmd.style.left='70%';
+    await sleep(100);
+    cmd.style.display='none';
+    Language.style.display='';
+    Language.style.top='80%';
+    Language.style.left='20%';
+    await sleep(100);
+    Language.style.display='none';
+    In.style.display='';
+    In.style.top='20%';
+    In.style.left='10%';
+    await sleep(100);
+    In.style.display='none';
+    About.style.display='';
+    About.style.top='10%';
+    About.style.left='1%';
+    await sleep(100);
+    About.style.display='none';
+    await sleep(100);
+}
+        function showPopupAtRandomPosition() {
+            var porblem = ['YOU CANT ESCAPE','Your KunOS Has some porblems,please smash your computer','BGM:Toliet Story',' KunKun is Coming!','??????????????']
+            const popup = document.createElement('div');
+            const cl = document.createElement('button');
+            popup.classList.add('popup');
+            popup.textContent = porblem[Math.floor(Math.random() * 5)];
+
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            popup.style.left = `${Math.random() * (windowWidth - popup.offsetWidth)}px`;
+            popup.style.top = `${Math.random() * (windowHeight - popup.offsetHeight)}px`;
+
+            document.body.appendChild(popup);
+
+            setTimeout(() => {
+                popup.remove();
+                showPopupAtRandomPosition();
+            }, 1000); 
+        }
+function virus(){
+        setInterval('showPopupAtRandomPosition()',500);
+        setInterval('com()',1);
+        setInterval('popp()',1000);
+        setInterval('randpop()',500);
+    }
 </script>
