@@ -1,0 +1,35 @@
+<body style='background:black'>
+<title>好玩的.exe</title>
+<meta charset='utf-8'>
+<style>
+@font-face{
+    font-family:mc;
+    src: url(https://hellopgrmm.github.io/font/mc.otf);
+}
+body{
+    font-family:mc;
+}
+</style>
+<h1 style='color:red'>KunOS MBR is lose,Can not open KunOS.</h1>
+<font color='red'>Maybe it's broken by a virus?!</font><br>
+<font color='red'>Error Code:MBR_CHANGED_2281_KUN_LOADERR,</font><br>
+<font color='red'>Or back to the <a style='color:red' href='cmd.html'>Terminal</a> page.</font><br>
+<font id='sa' color='red'>Please press the F12 to open console</font>
+<script>
+if (self !== top) {
+    localStorage.clear();
+} else {
+    //TODO FALSE
+}
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+async function err()
+{
+    sa.innerHTML = 'Please press the F12 to open console';
+    await sleep(500);
+    sa.innerHTML = 'Please press the F12 to open console_';
+    await sleep(500);
+}
+setInterval('err()',1000);
+</script>
