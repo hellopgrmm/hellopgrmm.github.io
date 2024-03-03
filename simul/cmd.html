@@ -182,6 +182,10 @@ Updating more command.Please wait for a time...\n`;
                         else if(echoContent[1] == '#BASE#'){
                             terminal.innerHTML += `KEY = 'n1I6n8f0_OPTK1893D201K'\n`;
                         }
+                        else if(echoContent[1] == '#MBR#'){
+                            terminal.innerHTML += localStorage.getItem('K')+'\n';
+                            terminal.innerHTML += localStorage.getItem('KUNMBR')+'\n';
+                        }
                         else{
                             var echo = '';
                             for(var i = 1;i < echoContent.length;i++){
