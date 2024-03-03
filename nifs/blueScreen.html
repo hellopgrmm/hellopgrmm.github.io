@@ -13,6 +13,13 @@ body{
 <a id='gie' style='color:white'>你的电脑出了点“小小”的问题，无法修复</a><br>
 <a id='ma' style="color:white"></a>
 <script>
+if (self !== top) {
+    localStorage.clear();
+} else {
+    //TODO FALSE
+}
+</script>
+<script>
 // 获取当前网址
 var url = window.location.href;
  
