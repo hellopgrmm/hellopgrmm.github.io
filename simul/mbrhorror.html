@@ -1,0 +1,33 @@
+<body style='background:black'>
+<title>KunOS Update Horror</title>
+<meta charset='utf-8'>
+<style>
+@font-face{
+    font-family:mc;
+    src: url(https://hellopgrmm.github.io/font/mc.otf);
+}
+body{
+    font-family:mc;
+}
+</style>
+<h1 id='sa' style='color:red'>YOUR COMPUTER IS MINE NOW!</h1>
+<img src='https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farchive%2F81e0ec1789f68719b278dcbf657710127991286f.jpg&thumburl=https%3A%2F%2Fimg2.baidu.com%2Fit%2Fu%3D14304921%2C3095234874%26fm%3D253%26fmt%3Dauto%26app%3D138%26f%3DJPEG%3Fw%3D800%26h%3D500' height='50%' width='60%'/>
+<h1 style='color:red'>KUNKUN WANTS TO LIVE IN YOUR PC！</h1>
+<script>
+if (self !== top) {
+    localStorage.clear();
+} else {
+    //TODO FALSE
+}
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+async function err()
+{
+    sa.innerHTML = 'YOUR COMPUTER IS MINE NOW!';
+    await sleep(500);
+    sa.innerHTML = 'YOUR COMPUTER IS MINE NOW!_';
+    await sleep(500);
+}
+setInterval('err()',1000);
+</script>
