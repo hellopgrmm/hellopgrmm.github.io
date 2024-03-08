@@ -22,8 +22,27 @@ body{
 <div id="giegie32" style="display: none;">
 <button onclick="giegie32.style.display='none';path.innerHTML='Index';giegie.style.display='';">上一页</button><br>
 <a onclick="giegie32.style.display='none';path.innerHTML='C:/Kunpics';giegie2.style.display='';"><img src="https://hellopgrmm.github.io/simul/kunpics/KunICON/fl.gif">Kunpics</a><br>
+<a onclick="giegie32.style.display='none';path.innerHTML='C:/MyFiles';giegie0.style.display='';"><img src="https://hellopgrmm.github.io/simul/kunpics/KunICON/fl.gif">MyFiles</a><br> 
+</div>
+<div id='giegie0'>
+<button onclick="giegie0.style.display='none';path.innerHTML='C:/';giegie32.style.display='';">上一页</button><br> 
+<a id='samu'></a>
+</div>
+<div id='la'>
+<button onclick="la.style.display='none';path.innerHTML='C:/MyFiles';giegie0.style.display='';">上一页</button><br> 
+<a id='ken'></a>
 </div>
 <script>
-giegie2.style.display='none';
+giegie2.style.display='none'; 
+giegie0.style.display='none';
+la.style.display='none';
+</script> 
+<script>
+var sa = document.getElementById('samu');
+for(var i =0; i<localStorage.length;i++){
+        var dis = localStorage.getItem(localStorage.key(i));
+        var nose = localStorage.key(i);
+        sa.innerHTML+=`<a onclick="path.innerHTML='C:/MyFiles/${nose}';giegie0.style.display='none';la.style.display='';ken.innerHTML='${dis}';"><img src="https://hellopgrmm.github.io/simul/kunpics/KunICON/TXT.png">${nose}</a><br>`;
+}
 </script>
 </body></html>
