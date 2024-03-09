@@ -204,7 +204,7 @@ Updating more command.Please wait for a time...\n`;
                     else if (input.startsWith('remo')) {
                         terminal.innerHTML += `C:/KunKun>${input}\n`;
                         const diu = input.split(' ') || '';
-                        localStorage.removeItem(`${diu}`);
+                        localStorage.removeItem(diu[1]);
                         terminal.innerHTML += `removed this file -${diu}\n`;
                     }
                     else if (input.toLowerCase() === '') {
