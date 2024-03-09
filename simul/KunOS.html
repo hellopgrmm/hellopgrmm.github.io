@@ -80,6 +80,7 @@ input{
 <br>
 <div onclick='In.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BROS.png'/><br><a>KunOS Internet</a></div><br>
 <div onclick='MC.style.display="";frameWindow.location.reload()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BROS.png'/><br><a>Minecraft网页版</a></div><br>
+<div onclick='bl.style.display="";frameWindow.location.reload()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BROS.png'/><br><a>BLOCKS</a></div><br>
 <div onclick='pl.style.display="";frameWindow.location.reload()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BROS.png'/><br><a>KunOS Player</a></div><br>
 <div onclick='About.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/TXT.png'/><br><a>关于KunOS.txt</a></div><br>
 <div onclick='for(var n=0;n <= 999;n++){localStorage.setItem(`${n}.txt`,"grass and green grass!");};'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/TXT.png'/><br><a>Dont afraid me<br>I am a snail</a></div><br>
@@ -97,6 +98,9 @@ input{
 </div>
 <div draggable="true" style='height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='MC'><button onclick="MC.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="MC.style.height='95%';MC.style.width='100%';MC.style.left='0%';MC.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="MC.style.height='50%';MC.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="MC.style.height='80%';MC.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;Minecraft网页版</a><!--Main-->
     <iframe src="https://goro.top/WebMC" width="100%" height="95%" scrolling="no" frameborder="0"></iframe>
+</div>
+<div draggable="true" style='height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='bl'><button onclick="bl.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="bl.style.height='95%';bl.style.width='100%';bl.style.left='0%';bl.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="bl.style.height='50%';bl.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="bl.style.height='80%';bl.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;Minecraft网页版</a><!--Main-->
+    <iframe src="blocks.html" width="100%" height="95%" scrolling="no" frameborder="0"></iframe>
 </div>
 <div draggable="true" style='overflow: auto;height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='About'><button onclick="About.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="About.style.height='95%';About.style.width='100%';About.style.left='0%';About.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="About.style.height='50%';About.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="About.style.height='80%';About.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;关于KunOS.txt</a><!--Main--><br>
     <a>========关于KunOS的一些信息==========</a>
@@ -166,6 +170,7 @@ In.style.display="none";
 cmd.style.display='none';
 pl.style.display='none';
 ok.style.display='none';
+bl.style.display='none'
 function openKunOS()
 {
     if(localStorage.getItem('KUNMBR')==1){
@@ -235,6 +240,7 @@ drager("About");
 //drager("In");
 drager("cmd");
 drager("pl");
+drager("bl");
 function inpt()
 {
     ok.style.display='';
