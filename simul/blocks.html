@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOCK GAMES</title>
+    <style>
+    @font-face{
+    font-family:mc;
+    src: url(https://hellopgrmm.github.io/font/mc.otf);
+}
+body{
+    font-family:mc;
+}
+        #box {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #0080ff;
+            left: 50%;
+            top: 50%;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<h1 id='ga'>Score:0</h1>
+<a>说明:移动蓝色方块，如果碰到绿色方块，蓝色块变大并且加分。</a ><br>
+<a>使用WSAD移动。如果你不是电脑端用户，请点击这里打开键盘-></a >
+<input style='width:50px' placeholder='键盘打开'/>
+    <div id="box"></div>
+<div id='food' style='position:relative;height:25px;width:25px;background:#9aff02'></div>
+    <script>
+    var c = document.getElementById('food');
+                const of = window.innerWidth;
+                const h = window.innerHeight;
+                c.style.left = `${Math.random() * (of - c.offsetWidth)}px`;
+                c.style.top = `${Math.random() * (h - c.offsetHeight)}px`;
+function detectDivCollision(div1, div2) {
+  const rect1 = div1.getBoundingClientRect();
+  const rect2 = div2.getBoundingClientRect();
+  return !(rect1.left + rect1.width < rect2.left ||
+           rect1.left > rect2.left + rect2.width ||
+           rect1.top + rect1.height < rect2.top ||
+           rect1.top > rect2.top + rect2.height);
+}
+        var box = document.getElementById('box');
+        var x = 100;
+        var y = 100;
+        var kob = 50;
+        var score = 0;
+        document.addEventListener('keydown', function(event) {
+            var step = 20;
+
+            switch (event.key) {
+                case 'w':
+                case 'W':
+                    y -= step;
+                    break;
+                case 's':
+                case 'S':
+                    y += step;
+                    break;
+                case 'a':
+                case 'A':
+                    x -= step;
+                    break;
+                case 'd':
+                case 'D':
+                    x += step;
+                    break;
+            }
+            var e = document.getElementById('food');
+            if (detectDivCollision(document.getElementById('box'), document.getElementById('food'))) {
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+                e.style.left = `${Math.random() * (windowWidth - e.offsetWidth)}px`;
+                e.style.top = `${Math.random() * (windowHeight - e.offsetHeight)}px`;
+                kob += 15;
+                box.style.height = kob + 'px';
+                box.style.width = kob + 'px';
+                score+=1;
+                ga.innerHTML = 'Score:'+score;
+            } else {
+              //NOTHING TO DO...
+            }
+            box.style.left = x + 'px';
+            box.style.top = y + 'px';
+        });
+    </script>
+</body>
+</html>
