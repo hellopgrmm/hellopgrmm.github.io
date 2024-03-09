@@ -93,6 +93,7 @@ body{
     clor -<ColorName>:Set The font color.
     outp &lt;Text&gt;:Put Some texts on the terminal.
     remo:delete some files on KunOS Path.
+    reads:read any files on KunOS File system.
 Updating more command.Please wait for a time...\n`;
                     }
                     else if (input.toLowerCase() === 'reset') {
@@ -206,6 +207,19 @@ Updating more command.Please wait for a time...\n`;
                         const diu = input.split(' ') || '';
                         localStorage.removeItem(diu[1]);
                         terminal.innerHTML += `removed this file -${diu}\n`;
+                    }
+                    else if (input.toLowerCase() === `dir -myfiles`) {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        terminal.innerHTML += `The Files in the MyFiles\n`;
+                        for(var i =0; i<localStorage.length;i++){
+                            terminal.innerHTML += localStorage.key(i)+'\n';
+                        }
+                        terminal.innerHTML += localStorage.length+' Files,'+localStorage.length*15+'MB on this\n';
+                    }
+                    else if (input.startsWith('reads')) {
+                        terminal.innerHTML += `C:/KunKun>${input}\n`;
+                        const ai = input.split(' ') || '';
+                        terminal.innerHTML += localStorage.getItem(ai[1]);
                     }
                     else if (input.toLowerCase() === '') {
                         terminal.innerHTML += `C:/KunKun>${input}\n`;
