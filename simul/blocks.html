@@ -58,18 +58,22 @@ function detectDivCollision(div1, div2) {
             switch (event.key) {
                 case 'w':
                 case 'W':
+                case 'ArrowUp':
                     y -= step;
                     break;
                 case 's':
                 case 'S':
+                case 'ArrowDown':
                     y += step;
                     break;
                 case 'a':
                 case 'A':
+                case 'ArrowLeft':
                     x -= step;
                     break;
                 case 'd':
                 case 'D':
+                case 'ArrowRight':
                     x += step;
                     break;
             }
