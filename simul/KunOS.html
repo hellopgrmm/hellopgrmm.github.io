@@ -111,7 +111,7 @@ input{
 </div>
 <div id='KunMain' style='height:100%;width:100%'>
 <!--TaskBar-->
-<div id='TaskBar' style='height:25px;width:100%;border:1px solid black;background:white;'><button onclick='cnm();' id='Menu'>菜单</button><button onclick='vir.pause();' id='Menu'>SftM</button><button onclick='inpt();' id='Menu'>新建</button><a id='dt'>NoDateOfThisText404</a></div>
+<div id='TaskBar' style='height:25px;width:100%;border:1px solid black;background:white;'><button onclick='cnm();' id='Menu'>菜单</button><button onclick='vir.pause();' id='Menu'>SftM</button><button onclick='inpt();' id='Menu'>新建</button><button onclick='psw();' id='Menu'>密码</button><a id='dt'>NoDateOfThisText404</a></div>
 <!--KunOS Main--><br><div id='Main'><br>
 <div onclick='Computer.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/KunOSComputer.png'/><br><a>我的小脑</a></div>&nbsp;<br><div onclick='mine.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/mine.png'/><br><a>扫雷.exe</a></div>
 </div>
@@ -172,6 +172,11 @@ input{
   <a>文件名：</a><input id='fln' style='outline:none;font-family:mc;'/><button style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;' onclick='ev();'>保存</button><button style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;' onclick='red();'>读取</button>
   <textarea id='co' style='font-family:mc;height:80%;width:100%;outline:none;' placeholder='输入文件内容…'></textarea>
 </div>
+<div draggable="true" style='height:15%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='psw'><button onclick="document.getElementById('psw').style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><a>&nbsp;语言设置</a><hr><!--Main-->
+    <a>设置/修改您的安全密码（留空代表取消密码）</a>
+    <br><input type="password" id="comment"/><br>
+    <button onclick="if(document.getElementById('comment').value){localStorage.setItem('ActiveForPassword.kunos',document.getElementById('comment').value);alert('设置完毕，请重启。');}else{localStorage.removeItem('ActiveForPassword.kunos');}">确认修改</button>
+</div>
 <div style='display:none;' id='foverlay'>
     <div style='display:none;position: relative;left:45%' id='fcontent'>
     <center>
@@ -215,7 +220,20 @@ In.style.display="none";
 cmd.style.display='none';
 pl.style.display='none';
 ok.style.display='none';
-bl.style.display='none'
+bl.style.display='none';
+psw.style.display='none';
+function pasver()
+{
+    var pswd = prompt("输入用户口令(要输两次)：");
+    if(pswd == localStorage.getItem('ActiveForPassword.kunos'))
+    {
+        //nothing
+    }
+    else{
+        alert("口令不对。");
+        pasver();
+    }
+}
 function openKunOS()
 {
     if(localStorage.getItem('KUNMBR')==1){
@@ -238,6 +256,10 @@ function openKunOS()
     cmd.style.display='';
     }
     else{
+        if(localStorage.getItem('ActiveForPassword.kunos'))
+        {
+            pasver();
+        }
     vari.style.backgroundImage='url("https://pic.rmb.bdstatic.com/66a63382e18a09d3642dd996d1904f62.jpeg")';
     start.style.display = 'none';
     KunMain.style.display='';
@@ -298,6 +320,10 @@ function ev()
 }
 function red(){
     document.getElementById('co').value=localStorage.getItem(document.getElementById('fln').value);
+}
+function psw()
+{
+    document.getElementById("psw").style.display='';
 }
 </script>
 <script>
