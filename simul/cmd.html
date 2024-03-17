@@ -212,6 +212,9 @@ Updating more command.Please wait for a time...\n`;
                         terminal.innerHTML += `C:/KunKun>${input}\n`;
                         terminal.innerHTML += `The Files in the MyFiles\n`;
                         for(var i =0; i<localStorage.length;i++){
+                            if(localStorage.key(i) == 'ActiveForPassword.kunos'){
+                                continue;
+                            }
                             terminal.innerHTML += localStorage.key(i)+'\n';
                         }
                         terminal.innerHTML += localStorage.length+' Files,'+localStorage.length*15+'MB on this\n';
