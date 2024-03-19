@@ -74,6 +74,11 @@ body{
     top:25%;
     left:25%;
 }
+#neka{
+    position: relative;
+    top:25%;
+    left:25%;
+}
 #bl{
     position: relative;
     top:25%;
@@ -111,7 +116,7 @@ input{
 </div>
 <div id='KunMain' style='height:100%;width:100%'>
 <!--TaskBar-->
-<div id='TaskBar' style='height:25px;width:100%;border:1px solid black;background:white;'><button onclick='cnm();' id='Menu'>菜单</button><button onclick='vir.pause();' id='Menu'>SftM</button><button onclick='inpt();' id='Menu'>新建</button><button onclick='psw();' id='Menu'>密码</button><a id='dt'>NoDateOfThisText404</a></div>
+<div id='TaskBar' style='height:25px;width:100%;border:1px solid black;background:white;'><button onclick='cnm();' id='Menu'>菜单</button><button onclick='vir.pause();' id='Menu'>SftM</button><button onclick='inpt();' id='Menu'>新建</button><button onclick='neka.style.display="";' id='Menu'>我的</button><a id='dt'>NoDateOfThisText404</a></div>
 <!--KunOS Main--><br><div id='Main'><br>
 <div onclick='Computer.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/KunOSComputer.png'/><br><a>我的小脑</a></div>&nbsp;<br><div onclick='mine.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/mine.png'/><br><a>扫雷.exe</a></div>
 </div>
@@ -176,6 +181,12 @@ input{
     <a>设置/修改您的安全密码（留空代表取消密码）</a>
     <br><input type="password" id="comment"/><br>
     <button onclick="if(document.getElementById('comment').value){localStorage.setItem('ActiveForPassword.kunos',document.getElementById('comment').value);alert('设置完毕，请重启。');}else{localStorage.removeItem('ActiveForPassword.kunos');}">确认修改</button>
+</div>
+<div draggable="true" style='overflow: auto;height:50%;width:50%;position:absolute;border:1px solid black;background:white;cursor:move;' id='neka'><button onclick="neka.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="neka.style.height='95%';neka.style.width='100%';neka.style.left='0%';neka.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="neka.style.height='50%';neka.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="neka.style.height='80%';neka.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;帐户设置</a><!--Main--><br>
+<h3 style='color:#7d7dff'>个人信息</h3><hr><table border='0px'><tr>
+<td><img src='https://b0.bdstatic.com/019ddaa4e70b8598d9912456079ee79b.jpg@h_1280' style='height:50px;width:50px'/></td><td><a style='font-family:mc;font-size:30px' id='users'>KunOS_User</a></td></tr></table><a onclick='aid = prompt("请输入新的用户名:");localStorage.setItem("ActiveForUserName.kunos",aid);alert("设置成功，重启后即可生效。");'>设置新的用户名>></a><a onclick='localStorage.removeItem("ActiveForUserName.kunos");alert("恢复成功，重启后即可生效。");'>&nbsp;恢复原来的用户名>></a>
+<h3 style='color:#7d7dff'>安全</h3><hr>
+<a>设置您的密码</a><br><a style='color:#ccc'>好的密码可以保护您的电脑，防止信息泄露，设置一个记得住的密码。</a><br><a id='nones'>密码:未设定</a><br><button onclick='document.getElementById("psw").style.display="";' style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;'>设置密码</button>
 </div>
 <div style='display:none;' id='foverlay'>
     <div style='display:none;position: relative;left:45%' id='fcontent'>
@@ -308,6 +319,19 @@ drager("About");
 drager("cmd");
 drager("pl");
 drager("bl");
+drager('neka');
+if(localStorage.getItem("ActiveForUserName.kunos")){
+    users.innerHTML = localStorage.getItem("ActiveForUserName.kunos");
+}
+else{
+    users.innerHTML = 'KunOS_User';
+}
+if(localStorage.getItem("ActiveForPassword.kunos")){
+    nones.innerHTML = '密码:已设定';
+}
+else{
+    nones.innerHTML = '密码:未设定';
+}
 function inpt()
 {
     ok.style.display='';
