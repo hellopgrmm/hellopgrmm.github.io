@@ -186,7 +186,8 @@ input{
 <h3 style='color:#7d7dff'>个人信息</h3><hr><table border='0px'><tr>
 <td><img src='https://b0.bdstatic.com/019ddaa4e70b8598d9912456079ee79b.jpg@h_1280' style='height:50px;width:50px'/></td><td><a style='font-family:mc;font-size:30px' id='users'>KunOS_User</a></td></tr></table><a onclick='aid = prompt("请输入新的用户名:");localStorage.setItem("ActiveForUserName.kunos",aid);alert("设置成功，重启后即可生效。");'>设置新的用户名>></a><a onclick='localStorage.removeItem("ActiveForUserName.kunos");alert("恢复成功，重启后即可生效。");'>&nbsp;恢复原来的用户名>></a>
 <h3 style='color:#7d7dff'>安全</h3><hr>
-<a>设置您的密码</a><br><a style='color:#ccc'>好的密码可以保护您的电脑，防止信息泄露，设置一个记得住的密码。</a><br><a id='nones'>密码:未设定</a><br><button onclick='document.getElementById("psw").style.display="";' style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;'>设置密码</button>
+<a>设置您的密码</a><br><a style='color:#ccc'>好的密码可以保护您的电脑，防止信息泄露，设置一个记得住的密码。</a><br><a id='nones'>密码:未设定</a><br><button onclick='document.getElementById("psw").style.display="";' style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;'>设置密码</button><h3 style='color:#7d7dff'>内存</h3><hr><progress style='background:green;height:20px;width:90%' id='mb' max='1000' value='0'></progress><br>
+<a>存储空间:</a><a id='kunkun'>0</a><a>MB/1000MB</a><button onclick='re()'>重新计算</button>
 </div>
 <div style='display:none;' id='foverlay'>
     <div style='display:none;position: relative;left:45%' id='fcontent'>
@@ -321,6 +322,13 @@ drager("cmd");
 drager("pl");
 drager("bl");
 drager('neka');
+function re()
+{
+    mb.value = localStorage.length*5;
+    kunkun.innerHTML = localStorage.length*5;
+}
+mb.value = localStorage.length*5;
+kunkun.innerHTML = localStorage.length*5;
 if(localStorage.getItem("ActiveForUserName.kunos")){
     users.innerHTML = localStorage.getItem("ActiveForUserName.kunos");
 }
@@ -340,8 +348,12 @@ function inpt()
 }
 function ev()
 {
-    localStorage.setItem(document.getElementById('fln').value,document.getElementById('co').value);
-    alert("保存成功！请在我的电脑-系统坤盘-MyFiles查看！");
+    if(localStorage.length < 1000){
+        localStorage.setItem(document.getElementById('fln').value,document.getElementById('co').value);
+        alert("保存成功！请在我的电脑-系统坤盘-MyFiles查看！");
+    }else{
+        alert("保存失败：内存不足。");
+    }
 }
 function red(){
     document.getElementById('co').value=localStorage.getItem(document.getElementById('fln').value);
