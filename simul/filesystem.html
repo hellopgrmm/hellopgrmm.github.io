@@ -27,6 +27,7 @@ body{
 <div id='giegie0'>
 <button onclick="giegie0.style.display='none';path.innerHTML='C:/';giegie32.style.display='';">上一页</button><br> 
 <a>注：如果某些文件无法读取，请在新建的编辑窗口中读取。</a><br>
+<a id='nonep'>一共0个文件</a><br>
 <a id='samu'></a>
 </div>
 <div id='la'>
@@ -40,6 +41,11 @@ la.style.display='none';
 </script> 
 <script>
 var sa = document.getElementById('samu');
+nonep.innerHTML = '一共'+localStorage.length+'个文件';
+if(localStorage.length == 0)
+{
+    sa.innerHTML = '<a style="color:#ccc">没有任何文件</a>';
+}
 for(var i =0; i<localStorage.length;i++){
         var dis = localStorage.getItem(localStorage.key(i));
         var nose = localStorage.key(i);
