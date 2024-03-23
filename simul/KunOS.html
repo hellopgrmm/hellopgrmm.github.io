@@ -205,6 +205,9 @@ input{
 </div>
 </div>
 </div>
+<div draggable="true" style='height:25%;width:50%;position:absolute;border:1px solid black;background:white;cursor:move;' id='verify'>
+<h2>该KunOS设置了用户口令。</h2><a>请输入用户口令:</a><input style='font-size:20;outline:none;border-radius:0px;height:30px;width:50%;' type='password' id='your'/><br><button style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;' onclick='pasver();'>确定口令</button><br><a id='info' style='color:red'></a>
+</div>
 <script>
 function Goto(){
     var web1 = "<iframe src='";
@@ -243,14 +246,16 @@ neka.style.display='none';
 u.style.display='none';
 function pasver()
 {
-    var pswd = prompt("输入用户口令(要输两次)：");
-    if(pswd == localStorage.getItem('ActiveForPassword.kunos'))
+    if(document.getElementById('your').value == localStorage.getItem('ActiveForPassword.kunos'))
     {
-        //nothing
+        verify.style.display='none';
+        vari.style.backgroundImage='url("https://pic.rmb.bdstatic.com/66a63382e18a09d3642dd996d1904f62.jpeg")';
+        start.style.display = 'none';
+        KunMain.style.display='';
+        document.getElementById('start').play();
     }
     else{
-        alert("口令不对,请再次输入。");
-        pasver();
+        info.innerHTML='口令不对,请再次输入。';
     }
 }
 function openKunOS()
@@ -277,12 +282,14 @@ function openKunOS()
     else{
         if(localStorage.getItem('ActiveForPassword.kunos'))
         {
-            pasver();
-        }
+            KunMain.style.display='none';
+            verify.style.display='';
+        }else{
     vari.style.backgroundImage='url("https://pic.rmb.bdstatic.com/66a63382e18a09d3642dd996d1904f62.jpeg")';
     start.style.display = 'none';
     KunMain.style.display='';
     document.getElementById('start').play();
+    }
     }
 }
 setTimeout('openKunOS()',3000);
