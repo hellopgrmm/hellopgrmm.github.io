@@ -177,17 +177,22 @@ input{
   <a>文件名：</a><input id='fln' style='outline:none;font-family:mc;'/><button style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;' onclick='ev();'>保存</button><button style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;' onclick='red();'>读取</button>
   <textarea id='co' style='font-family:mc;height:80%;width:100%;outline:none;' placeholder='输入文件内容…'></textarea>
 </div>
-<div draggable="true" style='height:15%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='psw'><button onclick="document.getElementById('psw').style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><a>&nbsp;语言设置</a><hr><!--Main-->
+<div draggable="true" style='height:15%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='psw'><button onclick="document.getElementById('psw').style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><a>&nbsp;密码设置</a><hr><!--Main-->
     <a>设置/修改您的安全密码（留空代表取消密码）</a>
     <br><input type="password" id="comment"/><br>
     <button onclick="if(document.getElementById('comment').value){localStorage.setItem('ActiveForPassword.kunos',document.getElementById('comment').value);alert('设置完毕，请重启。');}else{localStorage.removeItem('ActiveForPassword.kunos');}">确认修改</button>
 </div>
 <div draggable="true" style='overflow: auto;height:50%;width:50%;position:absolute;border:1px solid black;background:white;cursor:move;' id='neka'><button onclick="neka.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="neka.style.height='95%';neka.style.width='100%';neka.style.left='0%';neka.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="neka.style.height='50%';neka.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="neka.style.height='80%';neka.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;帐户设置</a><!--Main--><br>
 <h3 style='color:#7d7dff'>个人信息</h3><hr><table border='0px'><tr>
-<td><img src='https://b0.bdstatic.com/019ddaa4e70b8598d9912456079ee79b.jpg@h_1280' style='height:50px;width:50px'/></td><td><a style='font-family:mc;font-size:30px' id='users'>KunOS_User</a></td></tr></table><a onclick='aid = prompt("请输入新的用户名:");localStorage.setItem("ActiveForUserName.kunos",aid);alert("设置成功，重启后即可生效。");'>设置新的用户名>></a><a onclick='localStorage.removeItem("ActiveForUserName.kunos");alert("恢复成功，重启后即可生效。");'>&nbsp;恢复原来的用户名>></a>
+<td><img src='https://b0.bdstatic.com/019ddaa4e70b8598d9912456079ee79b.jpg@h_1280' style='height:50px;width:50px'/></td><td><a style='font-family:mc;font-size:30px' id='users'>KunOS_User</a></td></tr></table><a onclick='u.style.display="";'>设置新的用户名>></a><a onclick='localStorage.removeItem("ActiveForUserName.kunos");alert("恢复成功，重启后即可生效。");'>&nbsp;恢复原来的用户名>></a>
 <h3 style='color:#7d7dff'>安全</h3><hr>
 <a>设置您的密码</a><br><a style='color:#ccc'>好的密码可以保护您的电脑，防止信息泄露，设置一个记得住的密码。</a><br><a id='nones'>密码:未设定</a><br><button onclick='document.getElementById("psw").style.display="";' style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;'>设置密码</button><h3 style='color:#7d7dff'>内存</h3><hr><progress style='background:green;height:20px;width:90%' id='mb' max='1000' value='0'></progress><br>
 <a>存储空间:</a><a id='kunkun'>0</a><a>MB/1000MB</a><button onclick='re()'>重新计算</button>
+</div>
+<div draggable="true" style="height: 20%; width: 20%; position: absolute; top:25%;border: 1px solid black; background-color: white; cursor: move; display: none;" id="u"><button onclick="document.getElementById('u').style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><a>&nbsp;修改用户名</a><hr><!--Main-->
+    <a>设置/修改您的用户名</a>
+    <br><input type="text" id="commentu"><br>
+    <button onclick="localStorage.setItem('ActiveForUserName.kunos',document.getElementById('commentu').value);alert('已修改，重启后生效。');">确认修改</button>
 </div>
 <div style='display:none;' id='foverlay'>
     <div style='display:none;position: relative;left:45%' id='fcontent'>
@@ -235,6 +240,7 @@ ok.style.display='none';
 bl.style.display='none';
 psw.style.display='none';
 neka.style.display='none';
+u.style.display='none';
 function pasver()
 {
     var pswd = prompt("输入用户口令(要输两次)：");
