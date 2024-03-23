@@ -64,7 +64,7 @@ input{
     font-family:mc;
 }
 </style>
-<title>KunOS系统_HelloPgrmm</title>
+<title>KunPE_HelloPgrmm</title>
 <div id='StartUp'>
 <h1 style='color:white;'>正在启动KunPE系统</h1>
 <a style='color:white;'><img style='height:20px;width:20px' src='kunpics/onload.gif'/>请等待一段时间...</a>
@@ -84,7 +84,7 @@ input{
 <div draggable="true" style='overflow: auto;height:80%;width:82%;position:absolute;border:1px solid black;background:white;cursor:move;' id='JIU'><button onclick="JIU.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="JIU.style.height='95%';JIU.style.width='100%';JIU.style.left='0%';JIU.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="JIU.style.height='50%';JIU.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="JIU.style.height='80%';JIU.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;KunOS账户管理</a><!--Main--><hr>
 <a style='font-size:20px'>您的账户信息</a>
 <br><a>用户名:</a><a id='users'>KunOS_User</a>
-<br><a>存储空间:</a><br><progress id='mb' style='width:80%' max='1000'></progress><br><a id='kunkun'>Undefined MB可用，一共1000MB可用，剩余不知道MB可用</a><hr><a style='font-size:20px'>您的安全</a><br><a>找回密码</a><br><table border='1px'><tr><td>用户名</td><td>在PASSWORD里的文件值</td></tr><tr><td><a id='user'></a></td><td><a id='psv'></a></td></tr></table><a>选项:<br>-------</a><br><a onclick='logs.innerHTML+="申请KUNOS注入权限中。<br>";psv.innerHTML = localStorage.getItem("ActiveForPassword.kunos");logs.innerHTML+="获取完成。<br>";'>[获取在PASSWORD里的文件值]</a><br><a onclick='localStorage.removeItem("ActiveForPassword.kunos");psv.innerHTML = "没有任何的值";'>[删除PASSWORD的值文件]</a><br>
+<br><a>存储空间:</a><br><progress id='mb' style='width:80%' max='1000'></progress><br><a id='kunkun'>Undefined MB可用，一共1000MB可用，剩余不知道MB可用</a><hr><a style='font-size:20px'>您的安全</a><br><a>找回密码</a><br><table border='1px'><tr><td>用户名</td><td>在PASSWORD里的文件值</td></tr><tr><td><a id='user'></a></td><td><a id='psv'></a></td></tr></table><a>选项:<br>-------</a><br><a onclick='logs.innerHTML+="申请KUNOS注入权限中。<br>";psv.innerHTML = localStorage.getItem("ActiveForPassword.kunos");logs.innerHTML+="获取完成。<br>";'>[获取在PASSWORD里的文件值]</a><br><a onclick='localStorage.removeItem("ActiveForPassword.kunos");psv.innerHTML = "没有任何的值";'>[删除PASSWORD的值文件]</a><br><a onclick='for(var i = 0;i <= 101;i++){if(localStorage.getItem(`${i}.txt`)=="grass and green grass!"){localStorage.removeItem(`${i}.txt`);logs.innerHTML+=`<br>正在删除${i}.txt...`;}else{continue;}}logs.innerHTML+=`<br>完成。`;'>[垃圾文件清理]</a><br><a style='color:#ccc'>*此操作将自动审查并清理那些无意义的“垃圾文件”</a><br>
 <a>输出日志:</a><hr>
 <a id='logs'></a>
 </div>
