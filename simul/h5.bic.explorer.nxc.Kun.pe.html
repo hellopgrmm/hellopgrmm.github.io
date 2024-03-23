@@ -1,0 +1,207 @@
+<meta charset='utf-8'><audio id='start' src='Startup.mp3'></audio>
+<body id='naf' class='bg' style='background-size:cover' background='https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fa%2F57ddf2b6e8c99.jpg&thumburl=https%3A%2F%2Fimg2.baidu.com%2Fit%2Fu%3D2956805492%2C2882898%26fm%3D253%26fmt%3Dauto%3Fw%3D1280%26h%3D800'>
+<style>
+    .popup{
+        width:20%;position:absolute;border:1px solid black;background:white;cursor:move;
+    }
+</style>
+<style>
+div{
+    display:inline-block;
+}
+@font-face{
+    font-family:mc;
+    src: url(https://hellopgrmm.github.io/font/mc.otf);
+}
+body{
+    font-family:mc;
+}
+.StartUp {
+    justify-content: center;
+    align-items: center;
+    height:100%;
+    color:white;
+}
+#Menu{
+    border:1px solid black; background:white;height:100%;color:black;width:50px;
+}
+#Menu:hover{
+    background:black;
+    color:white;
+}
+#JIU{
+    position: relative;
+    top:10%;
+    left:10%;
+}
+#About{
+    position: relative;
+    top:25%;
+    left:25%;
+}
+iframe{
+    overflow: hidden;
+}
+#foverlay {
+    position: fixed; /* 使用fixed定位 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 设置透明度为0.5的黑色作为遮罩层背景色 */
+    z-index: 9999; /* 确保遮罩层在其他元素之上显示 */
+}
+        
+#fcontent {
+    position: absolute;
+    text-align: center;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+input{
+    font-family:mc;
+}
+</style>
+<title>KunOS系统_HelloPgrmm</title>
+<div id='StartUp'>
+<h1 style='color:white;'>正在启动KunPE系统</h1>
+<a style='color:white;'><img style='height:20px;width:20px' src='kunpics/onload.gif'/>请等待一段时间...</a>
+</div>
+<div id='KunMain' style='height:100%;width:100%'>
+<!--TaskBar-->
+<div id='TaskBar' style='height:25px;width:100%;border:1px solid black;background:white;'><button onclick='cnm();' id='Menu'>菜单</button><a id='dt'>NoDateOfThisText404</a></div>
+<!--KunOS Main--><br><div id='Main'><br>
+<div onclick='About.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a style='color:white'>KunOS MBR Manager</a></div>&nbsp;<br><br>
+<div onclick='JIU.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a style='color:white'>KunOS账户管理</a></div>&nbsp;<br><br>
+<a style='position:absolute;text-align:right;align:right;color:blue'>版本3.23.0;<br>网络访问限制:完全<br>Build 3236<br>token:N1Fv19381xn184nad81<br>无法访问任何可疑文件<br>持续更新</a>
+<div draggable="true" style='overflow: auto;height:50%;width:50%;position:absolute;border:1px solid black;background:white;cursor:move;' id='About'><button onclick="About.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="About.style.height='95%';About.style.width='100%';About.style.left='0%';About.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="About.style.height='50%';About.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="About.style.height='80%';About.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;KunOS MBR管理器</a><!--Main--><br>
+<h2>MBR管理</h2><hr><a>MBR状态:</a><br><a id='mbr'>开机时指向:/KunOS.html</a><button onclick=
+'rere()'>再次检测</button><hr>
+<a>选项:<br>------</a><br><a onclick='localStorage.removeItem("K");cai.innerHTML+="正在寻找文件";localStorage.removeItem("KUNMBR");cai.innerHTML+="<br>正在重新指向KunOS文件<br>完成。";cai.innerHTML+="<br>"+localStorage.getItem("K")+"<br>"+localStorage.getItem("KUNMBR");'>[修复引导指向界面]</a><br><a onclick='localStorage.clear();cai.innerHTML+="<br>重建KunOS文件;<br>完成。";'>[重新再建引导文件]</a><br><a style='color:#ccc'>*需要注意的是，重新再建引导，将会使所有数据丢失，KunOS将恢复最初的设置，此操作一般用于过多垃圾文件以及无法修复的病毒，效果最佳。</a><hr><a>输出日志信息:</a><br><a id='cai'></a>
+</div>
+<div draggable="true" style='overflow: auto;height:80%;width:82%;position:absolute;border:1px solid black;background:white;cursor:move;' id='JIU'><button onclick="JIU.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="JIU.style.height='95%';JIU.style.width='100%';JIU.style.left='0%';JIU.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="JIU.style.height='50%';JIU.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="JIU.style.height='80%';JIU.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;KunOS账户管理</a><!--Main--><hr>
+<a style='font-size:20px'>您的账户信息</a>
+<br><a>用户名:</a><a id='users'>KunOS_User</a>
+<br><a>存储空间:</a><br><progress id='mb' style='width:80%' max='1000'></progress><br><a id='kunkun'>Undefined MB可用，一共1000MB可用，剩余不知道MB可用</a><hr><a style='font-size:20px'>您的安全</a><br><a>找回密码</a><br><table border='1px'><tr><td>用户名</td><td>在PASSWORD里的文件值</td></tr><tr><td><a id='user'></a></td><td><a id='psv'></a></td></tr></table><a>选项:<br>-------</a><br><a onclick='logs.innerHTML+="申请KUNOS注入权限中。<br>";psv.innerHTML = localStorage.getItem("ActiveForPassword.kunos");logs.innerHTML+="获取完成。<br>";'>[获取在PASSWORD里的文件值]</a><br><a onclick='localStorage.removeItem("ActiveForPassword.kunos");psv.innerHTML = "没有任何的值";'>[删除PASSWORD的值文件]</a><br>
+<a>输出日志:</a><hr>
+<a id='logs'></a>
+</div>
+<div style='display:none;' id='foverlay'>
+    <div style='display:none;position: relative;left:45%' id='fcontent'>
+    <center>
+    <h1>你想要......</h1>
+    <button style="font-family:mc;height:50px;width:100%;position:relative;" onclick='window.location.href="https://hellopgrmm.github.io/simul/KunOS.html"' id='Menu'>关闭PE并重进KunOS</button><br>
+    <button style="font-family:mc;height:50px;width:100%;position:relative;" onclick='window.location.href="https://hellopgrmm.github.io/simul/cmd.html"' id='Menu'>进入KunOS Terminal</button><br>
+    <button style="height:50px;width:100%;" onclick='fcontent.style.display="none";foverlay.style.display="none";' id='Menu'>关闭</button>
+</center>
+</div>
+</div>
+</div>
+<script>
+function Goto(){
+    var web1 = "<iframe src='";
+    var web2 = "' width='100%' height='95%' frameborder='0'></iframe>"
+    //alert(web1 + web.value + web2);
+    the.innerHTML = web1 + web.value + web2;
+}
+function KunDate(){
+    var currentDate = new Date();
+    var year = currentDate.getFullYear();
+    var month = currentDate.getMonth() + 1;
+    var date = currentDate.getDate();
+    var hour = currentDate.getHours();
+    var mine = currentDate.getMinutes();
+    var sec = currentDate.getSeconds();
+    dt.innerHTML = '&nbsp;'+year+'/'+month+'/'+date+'   '+hour+':'+mine+':'+sec;
+}
+setInterval('KunDate()',1000);
+var vari=document.querySelector(".bg");
+var start = document.getElementById('StartUp');
+start.style.display='';
+KunMain.style.display='none';
+About.style.display='none';
+JIU.style.display='none';
+function rere()
+{
+    if(localStorage.getItem('K')){
+    mbr.innerHTML='开机时指向:/broken.html';
+}
+else if(localStorage.getItem('KUNMBR')){
+    mbr.innerHTML='开机时指向:/undefined';
+}
+else{
+    mbr.innerHTML='开机时指向:/KunOS.html';
+}
+}
+if(localStorage.getItem('K')){
+    mbr.innerHTML='开机时指向:/broken.html';
+}
+else if(localStorage.getItem('KUNMBR')){
+    mbr.innerHTML='开机时指向:/undefined';
+}
+else{
+    mbr.innerHTML='开机时指向:/KunOS.html';
+}
+function openKunOS()
+{
+    //alert(localStorage.getItem('MBR'));
+    vari.style.backgroundImage='url("https://img0.baidu.com/it/u=1804614197,1505702523&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800")';
+    start.style.display = 'none';
+    KunMain.style.display='';
+    document.getElementById('start').play();
+    
+}
+setTimeout('openKunOS()',4000);
+</script>
+<script>
+function drager(dragdivname){
+var dragDiv = document.getElementById(dragdivname); // 获取需要拖动的div元素
+        
+        function handleMouseDown(event) {
+            event.preventDefault(); // 防止选中文本时也会开始拖动
+            
+            var offsetX = event.clientX - dragDiv.offsetLeft; // 计算鼠标点击位置与div左边界之间的水平偏移量
+            var offsetY = event.clientY - dragDiv.offsetTop; // 计算鼠标点击位置与div上边界之间的垂直偏移量
+            
+            function handleMouseMove(event) {
+                dragDiv.style.left = (event.clientX - offsetX) + "px"; // 更新div的left值
+                dragDiv.style.top = (event.clientY - offsetY) + "px"; // 更新div的top值
+            }
+            
+            function handleMouseUp() {
+                window.removeEventListener('mousemove', handleMouseMove); // 松开鼠标按钮时停止移动
+                window.removeEventListener('mouseup', handleMouseUp); // 松开鼠标按钮时停止移动
+            }
+            
+            window.addEventListener('mousemove', handleMouseMove); // 当鼠标移动时调用handleMouseMove函数
+            window.addEventListener('mouseup', handleMouseUp); // 当释放鼠标按钮时调用handleMouseUp函数
+        }
+        
+        dragDiv.addEventListener('mousedown', handleMouseDown); // 当鼠标按下时调用handleMouseDown函数
+}
+function cnm() {
+    foverlay.style.display="";
+    fcontent.style.display="";
+}
+drager("About");
+drager("JIU");
+var dd = 1000-localStorage.length*5;
+function re()
+{
+    mb.value = localStorage.length*5;
+    var dd = 1000-localStorage.length*5;
+    kunkun.innerHTML = '已用去'+localStorage.length*5+`MB,一共1000MB,剩余${dd}MB可用。`;
+}
+mb.value = localStorage.length*5;
+kunkun.innerHTML = '已用去'+localStorage.length*5+`MB,一共1000MB,剩余${dd}MB可用。`;
+if(localStorage.getItem("ActiveForUserName.kunos")){
+    users.innerHTML = localStorage.getItem("ActiveForUserName.kunos");
+    user.innerHTML = localStorage.getItem("ActiveForUserName.kunos");
+}
+else{
+    users.innerHTML = 'KunOS_User';
+    user.innerHTML = 'KunOS_User';
+}
+</script>
