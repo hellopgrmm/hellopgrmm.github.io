@@ -60,6 +60,18 @@ for(var i =0; i<localStorage.length;i++){
         {
             continue;
         }
+	else if(nose == 'speedDetectionControl_lasttime')
+        {
+            continue;
+        }
+        else if(nose == 'speedDetectionControl_hostQueueIndex')
+        {
+            continue;
+        }
+        else if(nose == 'speedDetectionControl_hostQueue')
+        {
+            continue;
+        }
         sa.innerHTML+=`<a onclick="path.innerHTML='C:/MyFiles/${nose}';giegie0.style.display='none';la.style.display='';ken.value=localStorage.getItem('${nose}');"><img src="https://hellopgrmm.github.io/simul/kunpics/KunICON/TXT.png">${nose}</a><br>`;
 }
 </script>
