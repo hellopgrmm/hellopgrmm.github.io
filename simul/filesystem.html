@@ -52,6 +52,14 @@ for(var i =0; i<localStorage.length;i++){
 	if(nose == 'ActiveForPassword.kunos'){
             continue;
         }
+	else if(nose == 'ActiveForUserName.kunos')
+        {
+            continue;
+        }
+        else if(nose == 'ActiveForKunOSBack.kunos')
+        {
+            continue;
+        }
         sa.innerHTML+=`<a onclick="path.innerHTML='C:/MyFiles/${nose}';giegie0.style.display='none';la.style.display='';ken.value=localStorage.getItem('${nose}');"><img src="https://hellopgrmm.github.io/simul/kunpics/KunICON/TXT.png">${nose}</a><br>`;
 }
 </script>
