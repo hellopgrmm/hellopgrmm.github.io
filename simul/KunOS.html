@@ -260,7 +260,12 @@ function pasver()
     if(document.getElementById('your').value == localStorage.getItem('ActiveForPassword.kunos'))
     {
         verify.style.display='none';
-        vari.style.backgroundImage='url("https://pic.rmb.bdstatic.com/66a63382e18a09d3642dd996d1904f62.jpeg")';
+        if(localStorage.getItem("ActiveForKunOSBack.kunos")){
+    vari.style.backgroundImage='url("'+localStorage.getItem("ActiveForKunOSBack.kunos")+'")';
+}
+else{
+    vari.style.backgroundImage='url("https://pic.rmb.bdstatic.com/66a63382e18a09d3642dd996d1904f62.jpeg")';
+}
         start.style.display = 'none';
         KunMain.style.display='';
         document.getElementById('start').play();
@@ -296,7 +301,12 @@ function openKunOS()
             KunMain.style.display='none';
             verify.style.display='';
         }else{
+    if(localStorage.getItem("ActiveForKunOSBack.kunos")){
+    vari.style.backgroundImage='url("'+localStorage.getItem("ActiveForKunOSBack.kunos")+'")';
+}
+else{
     vari.style.backgroundImage='url("https://pic.rmb.bdstatic.com/66a63382e18a09d3642dd996d1904f62.jpeg")';
+}
     start.style.display = 'none';
     KunMain.style.display='';
     document.getElementById('start').play();
