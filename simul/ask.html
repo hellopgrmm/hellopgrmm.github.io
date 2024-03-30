@@ -1,0 +1,70 @@
+<meta charset="UTF-8"><body>
+<style>
+@font-face{
+    font-family:mc;
+    src: url(https://hellopgrmm.github.io/font/mc.otf);
+}
+body{
+    font-family:mc;
+}
+</style><input placeholder='输入您的问题...' style='font-family:mc;width:92%;outline:none;font-size:15px;height:25px;border-radius:0px;' id='comment'/><button style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;' onclick="baset(document.getElementById('comment').value);">提问</button>
+<br>
+<a style='color:green' id='q'></a><br>
+<a id='oj'></a>
+<a id='ans'></a>
+<script>
+    function an(elementId, text,sec) {
+        var element = document.getElementById(elementId);
+        var i = 0;
+        var interval = setInterval(function() {
+            if (i < text.length) {
+                element.innerText += text.charAt(i);
+                i++;
+            } else {
+                clearInterval(interval);
+            }
+        }, sec);
+    }
+function baset(damn){
+    document.getElementById('ans').innerHTML='';
+    document.getElementById('oj').innerHTML='<font color="blue">KunOS智能助手[回答]:</font>';
+    document.getElementById('q').innerHTML='你:'+document.getElementById('comment').value;
+    if(damn.includes('多') && damn.includes('文件'))
+    {
+        an('ans','KunOS的文件系统“MyFiles“文件列表中没有任何文件显示，但您会看到文件总数的统计量却会显示例如“一共3个文件”这种现象。这并不是KunOS系统BUG，而是一些隐藏文件，这些都属于系统文件，为了让这些文件不干扰到使用者的视角，KunOS会自动将这些文件过滤掉，但是它们仍可以读取。\n所以，当您看到KunOS在没有任何文件的情况下，莫名其妙地多出几个“隐藏文件”，只是系统过滤掉了而已。\n回答完毕。',50);
+    }
+    else if(damn.includes('好玩的')||damn.includes('伤害')||damn.includes('电脑')||damn.includes('计算机')||damn.includes('设备')||damn.includes('机'))
+    {
+        an('ans','KunOS中“好玩的.exe”是一个假病毒，它并不会对真正的计算机造成伤害，它的运行范围只在浏览器内，并不会波及到真实的计算机中，从而造成伤害。\n此假病毒的运行效果为:不停的打开/关闭窗口，不停的弹窗，持续一段时间后，KunOS便会蓝屏。\n回答完毕。',100);
+    }
+    else if(damn == '')
+    {
+        an('ans','很抱歉，您没有输入任何问题，我无法回答一个空白的消息，请发送您在KunOS使用过程中，遇到的问题。',30)
+    }
+    else if(damn.toLowerCase().includes('bug'))
+    {
+        an('ans','您好，如果您在使用KunOS中发现了任何的BUG,请发送邮箱至qwqexplorer@163.com。栓Q！',50);
+    }
+    else if(damn.toLowerCase().includes('pe'))
+    {
+        an('ans','KunOS有配套的PE系统。\n其网址为:https://hellopgrmm.github.io/simul/h5.bic.explorer.nxc.Kun.pe。\n该系统支持修复MBR，找回忘记的密码，清理垃圾文件等。\n回答完毕。',55);
+    }
+    else if(damn.toLowerCase().includes('snail'))
+    {
+        an('ans','KunOS中有一个文件，叫做“Dont_afraid_me_I_am_a_snail”（不要怕我我是蜗牛），这是一个假病毒，它会在KunOS的MyFiles文件夹创建100个垃圾文件，文件内容都是“grass_and_green_grass!”（草和绿色的草！），很难删除，极大可能卡死KunOS。亦是让KunOS变慢，而蜗牛的行走速度也很慢，正好与假病毒的特性相配。\n您可以通过使用配套的PE系统，来清理它们。',50);
+    }
+    else if(damn.toLowerCase().includes('拖') && damn.includes('窗口')||damn.includes('无法')||damn.includes('不能')||damn.includes('不可以')||damn.includes('没有')||damn.includes('不了'))
+    {
+        an('ans','在KunOS中，窗口是可以拖动的，而有一些窗口却拖不动，下面是如何判断KunOS窗口是否可以拖动的方法：\n1.检查窗口是否有输入框：如果有，则不可拖动。\n2.是否有下拉选择框：如果有，则不能拖动。\n那些不能拖动的窗口，本来是可以设置为可拖动状态，但是由于设置了拖动之后，就无法正常使用输入框或选项框，故设置为不可拖动。但是，账户设置的窗口是可以拖动的。\n回答完毕。',80);
+    }
+    else if(damn.toLowerCase().includes('sb')||damn.toLowerCase().includes('nm')||damn.toLowerCase().includes('操')||damn.toLowerCase().includes('死')||damn.toLowerCase().includes('傻')||damn.toLowerCase().includes('滚')||damn.toLowerCase().includes('妈')||damn.toLowerCase().includes('垃圾')||damn.toLowerCase().includes('拉坤')||damn.toLowerCase().includes('jb')||damn.toLowerCase().includes('鸡'))
+    {
+        an('ans','很抱歉，我无法接受这种粗鲁低俗的语言，请您文明用语。我只是一个智能助手，回答有关KunOS使用的一些问题，不能回答您的脏话。',30);
+    }
+    else{
+        an('ans','很抱歉，您输入的问题，我还暂时回答不上来，我还需要继续学习，以及查看KunOS的更新情况才能回答。您可以问以下问题：\n1.“我怎么无法拖动一些窗口？”\n2.“你们有PE系统吗？网址是啥？”\n......\n我需要更详细的问题，请您不要用比较模糊的语言进行提问。谢谢。',30);
+    }
+}
+</script>
+</body>
+</html>
