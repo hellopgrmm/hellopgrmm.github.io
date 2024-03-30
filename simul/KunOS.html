@@ -202,6 +202,9 @@ input{
 <h3 style='color:#7d7dff'>设置</h3><hr>
 <a>1.阻止任何大音量干扰&nbsp;&nbsp;</a>(<a onclick='dong();' id='nb'>Undef</a>)
 </div>
+<div draggable="true" style='height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='ASK'><button onclick="ASK.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="ASK.style.height='95%';ASK.style.width='100%';ASK.style.left='0%';ASK.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="ASK.style.height='50%';ASK.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="ASK.style.height='80%';ASK.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;智能回答小助手</a><!--Main-->
+    <iframe style='overflow:auto;' src="ask.html" width="100%" height="80%" frameborder="1"></iframe>
+</div>
 <div draggable="true" style="height: 20%; width: 20%; position: absolute; top:25%;border: 1px solid black; background-color: white; cursor: move; display: none;" id="u"><button onclick="document.getElementById('u').style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><a>&nbsp;修改用户名</a><hr><!--Main-->
     <a>设置/修改您的用户名</a>
     <br><input type="text" id="commentu"><br>
