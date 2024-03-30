@@ -139,6 +139,7 @@ input{
 <div onclick='pl.style.display="";frameWindow.location.reload()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BROS.png'/><br><a>KunOS Player</a></div><br>
 <div onclick='About.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/TXT.png'/><br><a>关于KunOS.txt</a></div><br>
 <div onclick='for(var n=0;n <= 100;n++){localStorage.setItem(`${n}.txt`,"grass and green grass!");};'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/TXT.png'/><br><a>Dont afraid me<br>I am a snail</a></div><br>
+<div onclick='ASK.style.display="";frameWindow.location.reload()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/TXT.png'/><br><a>&nbsp;KunOS智能回答小助手</a></div>
 <div draggable="true" style='height:50%;width:50%;position:absolute;border:1px solid black;background:white;cursor:move;' id='Computer'><button onclick="Computer.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="Computer.style.height='95%';Computer.style.width='100%';Computer.style.left='0%';Computer.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="Computer.style.height='50%';Computer.style.width='30%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><a>&nbsp;我的小脑</a><hr><!--Main-->
     <iframe style='overflow:auto;' src="filesystem.html" width="100%" height="87%" scrolling="" frameborder="0"></iframe>
 </div>
@@ -261,6 +262,7 @@ psw.style.display='none';
 neka.style.display='none';
 u.style.display='none';
 verify.style.display='none';
+ASK.style.display='none'
 function pasver()
 {
     if(document.getElementById('your').value == localStorage.getItem('ActiveForPassword.kunos'))
@@ -374,6 +376,7 @@ drager("cmd");
 drager("pl");
 drager("bl");
 drager('neka');
+drager('ASK');
 if(localStorage.getItem('SettingsForSt.kunos')=='True')
     {
         nb.innerHTML='--||开启'
