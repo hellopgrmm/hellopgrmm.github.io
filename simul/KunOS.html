@@ -377,6 +377,15 @@ drager("pl");
 drager("bl");
 drager('neka');
 drager('ASK');
+if(localStorage.getItem('Kunbi')){
+    //not todo something
+}else{
+    localStorage.setItem('Kunbi','0');
+}
+function kunbo(){
+    kunbi.innerHTML = localStorage.getItem('Kunbi');
+}
+setInterval('kunbo()',10);
 if(localStorage.getItem('SettingsForSt.kunos')=='True')
     {
         nb.innerHTML='--||开启'
@@ -521,4 +530,13 @@ function virus(){
         setInterval('popp()',1000);
         setInterval('randpop()',500);
     }
+var bi = localStorage.getItem('Kunbi');
+async function getbi()
+{
+    alert('请静等15秒。');
+    await sleep(15000);
+    bi++;bi++;bi++;
+    localStorage.setItem('Kunbi',bi);
+    alert('恭喜！获得3枚Kun币。');
+}
 </script>
