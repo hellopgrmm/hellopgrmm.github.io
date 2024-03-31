@@ -23,7 +23,7 @@ body{
     100%{opacity:1.0;}
 }
 </style><input placeholder='输入您的问题...' style='font-family:mc;width:92%;outline:none;font-size:15px;height:25px;border-radius:0px;' id='comment'/><button style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;' onclick="baset(document.getElementById('comment').value);">提问</button>
-<br><a>推荐问-></a><a onclick='baset("你这背景太假了。");'>[怎么设置自定义背景？]</a>&nbsp;<a onclick='baset("文件系统怎么多出几个“隐形文件”？");'>[文件系统怎么多出几个“隐形文件”？]</a>&nbsp;<a onclick='baset("pe。");'>[求pe系统网址😊]</a>
+<br><a>推荐问-></a><a onclick='baset("你这背景太假了。");'>[怎么设置自定义背景？]</a>&nbsp;<a onclick='baset("文件系统怎么多出几个“隐形文件”？");'>[文件系统怎么多出几个“隐形文件”？]</a>&nbsp;<a onclick='baset("pe。");'>[求pe系统网址😊]</a><br>注意：此操作需要消耗1个Kun币哦！
 <br>
 <a style='color:green' id='q'></a><br>
 <a id='oj'></a>
@@ -42,6 +42,13 @@ body{
         }, sec);
     }
 function baset(damn){
+    var kun = localStorage.getItem('Kunbi');
+    kun = kun - 1;
+    localStorage.setItem('Kunbi',kun);
+    if(kun <= 0)
+    {
+        alert('Kun币不足，请充值Kun币！');
+    }else{
     document.getElementById('ans').innerHTML='';
     document.getElementById('oj').innerHTML='<font color="blue">KunOS智能助手[回答]:</font>';
     document.getElementById('q').innerHTML='你:'+document.getElementById('comment').value;
@@ -83,6 +90,7 @@ function baset(damn){
     }
     else{
         an('ans','很抱歉，您输入的问题，我还暂时回答不上来，我还需要继续学习，以及查看KunOS的更新情况才能回答。您可以问以下问题：\n1.“我怎么无法拖动一些窗口？”\n2.“你们有PE系统吗？网址是啥？”\n......\n我需要更详细的问题，请您不要用比较模糊的语言进行提问。谢谢。',30);
+    }
     }
 }
 </script>
