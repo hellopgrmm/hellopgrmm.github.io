@@ -23,6 +23,7 @@ body{
     100%{opacity:1.0;}
 }
 </style><input placeholder='输入您的问题...' style='font-family:mc;width:92%;outline:none;font-size:15px;height:25px;border-radius:0px;' id='comment'/><button style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;' onclick="baset(document.getElementById('comment').value);">提问</button>
+<br><a>推荐问-></a><a onclick='baset("你这背景太假了。");'>[怎么设置自定义背景？]</a>&nbsp;<a onclick='baset("文件系统怎么多出几个“隐形文件”？");'>[文件系统怎么多出几个“隐形文件”？]</a>&nbsp;<a onclick='baset("pe。");'>[求pe系统网址😊]</a>
 <br>
 <a style='color:green' id='q'></a><br>
 <a id='oj'></a>
@@ -71,6 +72,10 @@ function baset(damn){
     else if(damn.toLowerCase().includes('拖') && damn.includes('窗口')||damn.includes('无法')||damn.includes('不能')||damn.includes('不可以')||damn.includes('没有')||damn.includes('不了'))
     {
         an('ans','在KunOS中，窗口是可以拖动的，而有一些窗口却拖不动，下面是如何判断KunOS窗口是否可以拖动的方法：\n1.检查窗口是否有输入框：如果有，则不可拖动。\n2.是否有下拉选择框：如果有，则不能拖动。\n那些不能拖动的窗口，本来是可以设置为可拖动状态，但是由于设置了拖动之后，就无法正常使用输入框或选项框，故设置为不可拖动。但是，账户设置的窗口是可以拖动的。\n回答完毕。',80);
+    }
+    else if(damn.includes('背景'))
+    {
+        an('ans','KunOS如何设置自定义背景的方法如下\n1.点击桌面上的“新建”\n2.在文件名里输入“ActiveForKunOSBack.kunos”\n3.在文件内容里输入图片对应的地址，保存即可\n回答完毕。',100);
     }
     else if(damn.toLowerCase().includes('sb')||damn.toLowerCase().includes('nm')||damn.toLowerCase().includes('操')||damn.toLowerCase().includes('死')||damn.toLowerCase().includes('傻')||damn.toLowerCase().includes('滚')||damn.toLowerCase().includes('妈')||damn.toLowerCase().includes('垃圾')||damn.toLowerCase().includes('拉坤')||damn.toLowerCase().includes('jb')||damn.toLowerCase().includes('鸡'))
     {
