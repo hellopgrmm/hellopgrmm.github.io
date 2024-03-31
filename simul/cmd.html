@@ -215,6 +215,9 @@ Updating more command.Please wait for a time...\n`;
                             if(localStorage.key(i) == 'ActiveForPassword.kunos'){
                                 continue;
                             }
+                            else if(localStorage.key(i) == 'Kunbi'){
+                                continue;
+                            }
                             terminal.innerHTML += localStorage.key(i)+'\n';
                         }
                         terminal.innerHTML += localStorage.length+' Files,'+localStorage.length*15+'MB on this\n';
