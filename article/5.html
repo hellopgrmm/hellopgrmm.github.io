@@ -1,0 +1,68 @@
+<html><head><meta charset="utf-8"><title>制作网页版系统不再是困难事-kunsystool.js插件｜HelloPgrmm,一个分享编程经验的网站</title><meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--> <script type="text/javascript" src="https://hellopgrmm.github.io/codes/shCore.js"></script>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/codes/shCoreDefault.css">
+<script type="text/javascript" src="https://hellopgrmm.github.io/codes/shBrushPython.js"></script>
+<script type="text/javascript" src="https://hellopgrmm.github.io/codes/shBrushCpp.js"></script>
+<script type="text/javascript" src="https://hellopgrmm.github.io/codes/shBrushBash.js"></script>
+<script type="text/javascript" src="https://hellopgrmm.github.io/codes/shBrushRuby.js"></script>
+<script type="text/javascript" src="https://hellopgrmm.github.io/codes/shBrushPhp.js"></script>
+<script type="text/javascript" src="https://hellopgrmm.github.io/codes/shBrushPerl.js"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script><br>
+<a style="font-size:33px">制作网页版系统不再是困难事-kunsystool.js插件</a><br>
+就是说吧，像windows93.net这样的网站，都是比较优秀的网页版系统。我们HelloPgrmm也有KunOS系统(在“更多”里面有)。对于不太熟悉html和js的同学，制作网页版系统无疑是一件难度很大的事，毕竟，代码几百行，都得把人写死。因此我们为了让新手更容易地去搭建属于自己的“网页版操作系统”。我们HelloPgrmm耗费一周时间，推出了kunsystool.js插件，用更少的代码，去做更好的网页版系统。<br><br>使用教程:<br><b style='color:blue'>1.安装</b><br>直接引入即可。<xmp>
+<script src='https://hellopgrmm.github.io/simul/JS/kunsystool.js'></script></xmp>
+<b style='color:blue'>2.布置自己的系统桌面</b><br>你可以使用newApp()函数来在桌面上添加程序。接受参数:软件名，软件图标(输入完整图片地址)。如果没有自己的图标，请在软件图标参数里面填上'default'，该内容将默认调用hellopgrmm提供的默认图标。<br>但是我们需要一个容器，来放置这些程序。<xmp><div id='AppMain'></div></xmp>emm...然后接下来就可以使用newApp函数了。代码示例:<xmp><script>
+newApp('我的电脑','../pic/1.png');
+</script></xmp>
+<b style='color:blue'>3.布置自己的程序窗口</b><br>在桌面上布置完程序后，我们就需要为对应的程序添加对应的程序活动窗口。您可以使用newFwindow函数(参数:窗口标题和网页网址,注意:窗口标题要和程序名称一致，不能出现以下符号: .\|/&lt;&gt;  可用中文符号代替。)或newTxt(参数:标题和文本内容,规则一样)来创建程序活动窗口。newFwindow是Iframe程序窗口，而newTxt则是纯文字窗口。示例代码:<xmp>
+newFwindow('我的电脑','filesystem.html');
+newTxt('我的电脑','这是一段文本…');
+drager('我的电脑');//drager函数可以使有特定id的窗口为可拖动状态。</xmp>
+<b style='color:blue'>4.密码系统</b>
+我们可以为自己的系统，为用户设计一个密码系统，您可以使用PasswordVerify(参数:标题+正确密码)来建造一个密码系统，便于用户可以设置在您的网页版系统里自己的密码，然后开机的时候就要输入密码。示例代码:
+<xmp>
+//html代码
+<div id='PassWord-Container'></div>
+//需要一个容器来放置输密码的界面
+PasswordVerify('该用户设置了密码，请输入本机密码再进入系统。','ABC123');
+//或者使用localStorage本地存储方式
+PasswordVerify('输入密码',localStorage.getItem('存储密码的文件'))
+</xmp>
+<b style='color:blue'>5.文件系统</b>
+<br>此文件系统用了localStorage的方式来“存储”文件。文件是Key，内容是Value。我们可以使用savefile(参数:文件名和文件内容)来“保存文件”，这些文件直到清空浏览记录才会删除。还可以用listall()函数来列出所有文件，文件列表中，点击任意文件名即可读取，但我们还需要几个容器来放置文件列表和文件内容，当然，还得有上一页按钮。您可以将这些div先暂时隐藏起来。示例代码:<xmp>
+<a id='file-container'></a>//放置文件列表的容器，方便点击读取。
+<button id='lastpage' onclick='lastpage()'>上一页</button>//必须要有上一页按钮和onclick事件，可个性化调整
+<textarea readonly='' id='cont'></textarea>//用于读取文件的容器，容器名必须为cont
+</xmp>
+<b style='color:blue'>6.积分系统</b>
+<br>您可以在您的系统里添加积分系统。我们有defnewCoin(参数:新的积分系统的名字)定义新的积分系统函数,LessCoin(参数:积分名字和数量)扣除积分函数,AddCoin(参数:积分名字和数量)增加积分函数,getCoin(参数:积分名字)获取当前积分函数和setCoin(参数:积分名字和初始数量)设置积分数量函数。就像KunOS系统中的Kun币一样。示例代码:<xmp>
+defnewCoin('Kun币')//定义一个新的积分系统:Kun币系统
+AddCoin('Kun币',200)//增加200Kun币
+LessCoin('Kun币',100)//扣除100Kun币
+alert(getCoin('Kun币'));//获取当前Kun币数。
+</xmp>
+<b style='color:red'>附:sleep延迟函数和背景切换chback(参数:图片地址)函数</b><br>
+示例代码:<xmp>
+<script>
+async function fun()
+{
+    alert('1');
+    await sleep(1000);//毫秒为单位，在这里1000毫秒=1秒。
+    alert('2');
+}
+fun();
+chback('../pic/tree.jpeg');
+</script>
+</xmp>
+<!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style='text-decoration:none;color:blue;' href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a ><a>|</a >
+<a style='text-decoration:none;color:blue;' href='javascript:translate.changeLanguage("english")'>English</a ><a>|</a >
+<a style='text-decoration:none;color:blue;' href='javascript:translate.changeLanguage("russian")'>Русский</a >
+<a>|</a >
+<a style='text-decoration:none;color:blue;' href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a ><a>|</a >
+<a style='text-decoration:none;color:blue;' href='javascript:translate.changeLanguage("korean")'>한국어</a >
+<a>|</a >
+<a style='text-decoration:none;color:blue;' href='javascript:translate.changeLanguage("german")'>Deutsch</a >
+<a>|</a >
+<a style='text-decoration:none;color:blue;' href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a ><br>
+<div id="translate"><a>更多语言在这里选择</a ></div><br><script src='https://res.zvo.cn/translate/translate.js'></script><script>translate.language.setLocal('chinese_simplified');translate.ignore.tag.push('pre');translate.execute();</script></center>
+</body></html>
