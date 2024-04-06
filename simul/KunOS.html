@@ -191,15 +191,14 @@ input{
 <div draggable="true" style='overflow: auto;height:50%;width:50%;position:absolute;border:1px solid black;background:white;cursor:move;' id='neka'><button onclick="neka.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="neka.style.height='95%';neka.style.width='100%';neka.style.left='0%';neka.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="neka.style.height='50%';neka.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="neka.style.height='80%';neka.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;帐户设置</a><!--Main--><br>
 <h3 style='color:#7d7dff'>个人信息</h3><hr><table border='0px'><tr>
 <td><img src='https://b0.bdstatic.com/019ddaa4e70b8598d9912456079ee79b.jpg@h_1280' style='height:50px;width:50px'/></td><td><a style='font-family:mc;font-size:30px' id='users'>KunOS_User</a></td></tr></table><a onclick='u.style.display="";'>设置新的用户名>></a><a onclick='localStorage.removeItem("ActiveForUserName.kunos");alert("恢复成功，重启后即可生效。");'>&nbsp;恢复原来的用户名>></a><br><a>Kun币个数:</a><a style='color:red' id='kunbi'>0</a><a>个</a><br><a onclick='getbi();'>[通过等待来获取3枚Kun币]</a><br><a onclick='alert("Kun币是KunOS的虚拟币，您可以使用Kun币来完成KunOS的一些需要Kun币的操作！");'>[什么是Kun币]</a>
-<br>您的KunOS<a id='id'>激活了吗？我不知道啊！</a>
-    <h3 style='color:#7d7dff'>安全</h3><hr>
+<h3 style='color:#7d7dff'>安全</h3><hr>
 <a>设置您的密码</a><br><a style='color:#ccc'>好的密码可以保护您的电脑，防止信息泄露，设置一个记得住的密码。</a><br><a id='nones'>密码:未设定</a><br><button onclick='document.getElementById("psw").style.display="";' style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;'>设置密码</button><h3 style='color:#7d7dff'>内存</h3><hr><progress style='background:green;height:20px;width:90%' id='mb' max='1000' value='0'></progress><br>
 <a>存储空间:</a><a id='kunkun'>0</a><a>MB/1000MB</a><button onclick='re()'>重新计算</button>
 <h3 style='color:#7d7dff'>个性化</h3><hr>
 <a>设置背景图片</a><br>
-<img onclick='if(localStorage.getItem("KunOS_keys")=="K-1R438J-K514FJQ1830112"){localStorage.setItem("ActiveForKunOSBack.kunos","https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fc%2F5806de3321e3d.jpg&thumburl=https%3A%2F%2Fimg0.baidu.com%2Fit%2Fu%3D1804614197%2C1505702523%26fm%3D253%26fmt%3Dauto%26app%3D120%26f%3DJPEG%3Fw%3D1280%26h%3D800");alert("设置成功，重启生效。");}else{alert("你还没有激活KunOS,无法使用个性化功能。");}' src='https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fc%2F5806de3321e3d.jpg&thumburl=https%3A%2F%2Fimg0.baidu.com%2Fit%2Fu%3D1804614197%2C1505702523%26fm%3D253%26fmt%3Dauto%26app%3D120%26f%3DJPEG%3Fw%3D1280%26h%3D800' style='height:50px;width:75px'/>
-<img onclick='if(localStorage.getItem("KunOS_keys")=="K-1R438J-K514FJQ1830112"){localStorage.setItem("ActiveForKunOSBack.kunos","https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Fpic.rmb.bdstatic.com%2F66a63382e18a09d3642dd996d1904f62.jpeg&thumburl=https%3A%2F%2Fimg2.baidu.com%2Fit%2Fu%3D1522504876%2C1012267171%26fm%3D253%26fmt%3Dauto%26app%3D120%26f%3DJPEG%3Fw%3D1235%26h%3D693");alert("设置成功，重启生效。");}else{alert("你还没有激活KunOS,无法使用个性化功能。");}' src='https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Fpic.rmb.bdstatic.com%2F66a63382e18a09d3642dd996d1904f62.jpeg&thumburl=https%3A%2F%2Fimg2.baidu.com%2Fit%2Fu%3D1522504876%2C1012267171%26fm%3D253%26fmt%3Dauto%26app%3D120%26f%3DJPEG%3Fw%3D1235%26h%3D693' style='height:50px;width:75px'/>
-<img onclick='if(localStorage.getItem("KunOS_keys")=="K-1R438J-K514FJQ1830112"){localStorage.setItem("ActiveForKunOSBack.kunos","https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F6%2F5954625bcd3df.jpg&thumburl=https%3A%2F%2Fimg0.baidu.com%2Fit%2Fu%3D3241204692%2C1257162084%26fm%3D253%26fmt%3Dauto%26app%3D138%26f%3DJPEG%3Fw%3D800%26h%3D500");alert("设置成功，重启生效。");}else{alert("你还没有激活KunOS,无法使用个性化功能。");}' src='https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F6%2F5954625bcd3df.jpg&thumburl=https%3A%2F%2Fimg0.baidu.com%2Fit%2Fu%3D3241204692%2C1257162084%26fm%3D253%26fmt%3Dauto%26app%3D138%26f%3DJPEG%3Fw%3D800%26h%3D500' style='height:50px;width:75px'/>
+<img onclick='localStorage.setItem("ActiveForKunOSBack.kunos","https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fc%2F5806de3321e3d.jpg&thumburl=https%3A%2F%2Fimg0.baidu.com%2Fit%2Fu%3D1804614197%2C1505702523%26fm%3D253%26fmt%3Dauto%26app%3D120%26f%3DJPEG%3Fw%3D1280%26h%3D800");alert("设置成功，重启生效。");' src='https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fc%2F5806de3321e3d.jpg&thumburl=https%3A%2F%2Fimg0.baidu.com%2Fit%2Fu%3D1804614197%2C1505702523%26fm%3D253%26fmt%3Dauto%26app%3D120%26f%3DJPEG%3Fw%3D1280%26h%3D800' style='height:50px;width:75px'/>
+<img onclick='localStorage.setItem("ActiveForKunOSBack.kunos","https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Fpic.rmb.bdstatic.com%2F66a63382e18a09d3642dd996d1904f62.jpeg&thumburl=https%3A%2F%2Fimg2.baidu.com%2Fit%2Fu%3D1522504876%2C1012267171%26fm%3D253%26fmt%3Dauto%26app%3D120%26f%3DJPEG%3Fw%3D1235%26h%3D693");alert("设置成功，重启生效。");' src='https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Fpic.rmb.bdstatic.com%2F66a63382e18a09d3642dd996d1904f62.jpeg&thumburl=https%3A%2F%2Fimg2.baidu.com%2Fit%2Fu%3D1522504876%2C1012267171%26fm%3D253%26fmt%3Dauto%26app%3D120%26f%3DJPEG%3Fw%3D1235%26h%3D693' style='height:50px;width:75px'/>
+<img onclick='localStorage.setItem("ActiveForKunOSBack.kunos","https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F6%2F5954625bcd3df.jpg&thumburl=https%3A%2F%2Fimg0.baidu.com%2Fit%2Fu%3D3241204692%2C1257162084%26fm%3D253%26fmt%3Dauto%26app%3D138%26f%3DJPEG%3Fw%3D800%26h%3D500");alert("设置成功，重启生效。");' src='https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F6%2F5954625bcd3df.jpg&thumburl=https%3A%2F%2Fimg0.baidu.com%2Fit%2Fu%3D3241204692%2C1257162084%26fm%3D253%26fmt%3Dauto%26app%3D138%26f%3DJPEG%3Fw%3D800%26h%3D500' style='height:50px;width:75px'/>
 <br><a>或者输入图片网址以作为背景：</a><input id= 'wowo'/><button onclick="localStorage.setItem('ActiveForKunOSBack.kunos', document.getElementById('wowo').value);alert('更换背景完成，重启即可生笑。');">更换背景</button>
 <h3 style='color:#7d7dff'>设置</h3><hr>
 <a>1.阻止任何大音量干扰&nbsp;&nbsp;</a>(<a onclick='dong();' id='nb'>Undef</a>)
@@ -211,11 +210,6 @@ input{
     <a>设置/修改您的用户名</a>
     <br><input type="text" id="commentu"><br>
     <button onclick="localStorage.setItem('ActiveForUserName.kunos',document.getElementById('commentu').value);alert('已修改，重启后生效。');">确认修改</button>
-</div>
-    <div draggable="true" style="height: 30%; width: 30%; position: absolute; top:25%;border: 1px solid black; background-color: white; cursor: move; display: none;" id="jihuo"><button onclick="document.getElementById('jihuo').style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><a>&nbsp;激活您的KunOS。</a><hr><!--Main-->
-    <a>请输入您的KunOS激活码。(注意激活码全部大写)</a>
-    <br><input style='border-radius:0px;outline:none;width:100%;height:25px;font-family:mc;' placeholder='激活码格式K-XXXXXX-XXXXXXXXXXXXXX' type="text" id="damn"><br>
-    <button style='border-radius:5px;height:30px;width:75px;border:1px solid black;background:green;color:white;font-family:ht;' onclick="if(document.getElementById('damn').value=='K-1R438J-K514FJQ1830112'){localStorage.setItem('KunOS_keys',document.getElementById('damn').value);alert('激活成功！');}else{alert('你干嘛哈哈～激活码不对，请重新输入。');}">确认激活</button>
 </div>
 <div style='display:none;' id='foverlay'>
     <div style='display:none;position: relative;left:45%' id='fcontent'>
@@ -269,7 +263,7 @@ neka.style.display='none';
 u.style.display='none';
 verify.style.display='none';
 ASK.style.display='none';
-jihuo.style.display="none";
+//jihuo.style.display="none";
 function pasver()
 {
     if(document.getElementById('your').value == localStorage.getItem('ActiveForPassword.kunos'))
@@ -384,14 +378,14 @@ drager("pl");
 drager("bl");
 drager('neka');
 drager('ASK');
-function jihuo(){
-if(localStorage.getItem("KunOS_keys")=="K-1R438J-K514FJQ1830112"){
-    id.innerHTML='已经激活(喜)。';
-}else{
-    id.innerHTML=`还未激活，请<a onclick="document.getElementById('jihuo').style.display='';">[点击此处]</a>激活。`;
-}
-}
-setInterval('jihuo()',10);
+//function jihuo(){
+//if(localStorage.getItem("KunOS_keys")=="K-1R438J-K514FJQ1830112"){
+//    id.innerHTML='已经激活(喜)。';
+//}else{
+//    id.innerHTML=`还未激活，请<a onclick="document.getElementById('jihuo').style.display='';">[点击此处]</a>激活。`;
+//}
+//}
+//setInterval('jihuo()',10);
 if(localStorage.getItem('Kunbi')){
     //not todo something
 }else{
