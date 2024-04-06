@@ -268,7 +268,8 @@ psw.style.display='none';
 neka.style.display='none';
 u.style.display='none';
 verify.style.display='none';
-ASK.style.display='none'
+ASK.style.display='none';
+jihuo.style.display="none";
 function pasver()
 {
     if(document.getElementById('your').value == localStorage.getItem('ActiveForPassword.kunos'))
@@ -383,6 +384,14 @@ drager("pl");
 drager("bl");
 drager('neka');
 drager('ASK');
+function jihuo(){
+if(localStorage.getItem("KunOS_keys")=="K-1R438J-K514FJQ1830112"){
+    id.innerHTML='已经激活(喜)。';
+}else{
+    id.innerHTML=`还未激活，请<a onclick="document.getElementById('jihuo').style.display='';">[点击此处]</a>激活。`;
+}
+}
+setInterval('jihuo()',10);
 if(localStorage.getItem('Kunbi')){
     //not todo something
 }else{
