@@ -1,0 +1,122 @@
+<meta charset='utf-8'><title>低 配 版 我 的 世 界</title>
+<style>
+@font-face{ 
+    font-family:mc; 
+    src: url(https://hellopgrmm.github.io/font/mc.otf); 
+} 
+body{ 
+    font-family: mc; 
+} 
+.mcb{
+    color:white;
+    font-family:mc;
+    font-size:15px;
+    border-radius:0px;
+    border:2px solid black;
+    background:gray;
+    width:50%;
+    height:50px;
+}
+.mcb:hover{
+    background:#9393ff;
+}
+#sb{
+    color:yellow;
+    font-size:30px;
+    text-shadow:2px 1px 0px gray;
+    position:absolute;
+    transform: rotate(-25deg); 
+    left:65%;
+    animation:jumping;
+    animation-duration:0.5s;
+    animation-iteration-count:infinite;
+}
+@keyframes jumping{
+    0%{font-size:30px;}
+    50%{font-size:40px;}
+    100%{font-size:30px;}
+}
+span{
+    color:white;
+}
+.block:hover{
+    border:1px solid black;
+}
+.block{
+    height:50px;
+    width:50px;
+    display:inline-block;
+}
+</style>
+<!--dirtfrom:https://hellopgrmm.github.io/article/dirt2.jpg-->
+<body>
+<div style='background:url(https://i1.hdslb.com/bfs/archive/7e066bfd28d1bf9ab8fe8f32e8e2a7b2fa3786d9.jpg);height:100%;width:100%;' id='home'>
+<center>
+<a style='color:white;font-size:100px'>Minecraft</a>
+<a id='sb'><br>超級低配版</a>
+<br><button onclick='home.style.display="none";gen.style.display="";ge()' class='mcb'>生成新的Level</button><br><br>
+<button onclick='home.style.display="none";about.style.display="";' class='mcb'>關於這個網頁</button><br><br>
+<button onclick='window.location.href="https://hellopgrmm.github.io/others.html?from=MC_closed"' class='mcb'>退出Minecraft</button>
+</center>
+<span style='position: absolute;bottom: 15px;'>&nbsp;Low and Bad Minecraft version:0.114514.1<br>&nbsp;By Hellopgrmm<br>&nbsp;Original Aunthor:Mojang studios</span>
+</div>
+<div id='about' style='background:url(https://hellopgrmm.github.io/article/dirt2.jpg);height:100%;width:100%;display: flex;justify-content: center;align-items: center;'>
+<span><h2>&nbsp;關於「滿級低配版我的世界」</h2>
+<center><button onclick='home.style.display="";about.style.display="none";' class='mcb'>返回主頁</button></center>
+</div>
+<div id='gen' style='background:url(https://hellopgrmm.github.io/article/dirt2.jpg);height:100%;width:100%;'>
+<span style='font-size:20px;position: absolute;left:50%;top: 30%;transform: translateY(-50%);transform: translateX(-50%);'>布列世界方塊佈局中⋯</span>
+<br><span 'loader' style='font-size:20px;position: absolute;left:50%;top: 40%;transform: translateY(-50%);transform: translateX(-50%);'>59%</span>
+<br><div style='width:175;height:15px;background:gray;display:inline-block;position: absolute;left:50%;top: 50%;transform: translateY(-50%);transform: translateX(-50%);'><div style='height:100%;width:50%;background:#79ff79' id='progress'></div></div>
+</div>
+<div id='mc' style='background:#ccc;height:100%;width:100%;'>
+<div id='items' style='height:50px;width:98%;background:black;z-index:10001;position: absolute;bottom: 15px;'><table><tr><td><span>物品欄:</span></td><td><img onclick='block("grass");' src='texture/grass.png'/><span>草方塊</span></td><td><img onclick='block("cao");' src='texture/cao.png'/><span>草</span></td><td><img onclick='block("brick");' src='texture/brick.png'/><span>磚頭</span></td><td><img onclick='block("wood");' src='texture/wood.png'/><span>橡木木板</span></td><td><img onclick='block("tch");' src='texture/tch.png'/><span>火把</span></td><td><img onclick='block("log");' src='texture/log.png'/><span>橡木原木</span></td><td><img onclick='block("crafting");' src='texture/crafting.png'/><span>工作台</span></td><td><span>Mode:</span><span onclick='lala("n")'>破壞模式</span><span>&nbsp;||&nbsp;</span><span onclick='lala("y")'>創建模式</span></td></tr></table></div>
+</div>
+<script>
+var m=0;
+about.style.display='none';
+gen.style.display='none';
+mc.style.display='none';
+function ge(){
+    progress.style.width='0'+'%';
+    var width = innerWidth/50;
+    var height = innerHeight/50;
+    var h = 0;
+    for(var k = 0;k < height.toFixed(0)-1;k++){
+    for(var i = 0;i < width.toFixed(0)-1;i++)
+    {
+        m++;
+        if(h>=height/2)
+        {
+            mc.innerHTML+=`<div id='${m}' onclick='create("${m}")' class='block'><img style='height:100%;width:100%' src='texture/grass.png'/></div>`;
+        }else{
+        mc.innerHTML+=`<div id='${m}' onclick='create("${m}")' class='block'></div>`;
+        }
+    }
+    h++;
+    }
+    gen.style.display='none';
+    mc.style.display='';
+}
+var setter='';
+var cont = '';
+function block(cont){
+    setter = cont;
+    //alert(setter);
+}
+var ids = '';
+var cnm = '';
+var sign = 'y';
+function lala(cnm)
+{
+    sign = cnm;
+}
+function create(ids){
+    if(sign == 'y'){
+        document.getElementById(`${ids}`).innerHTML=`<div id='${ids}' onclick='create("${ids}")' class='block'><img style='height:100%;width:100%' src='texture/${setter}.png'/></div>`;
+    }
+    else{
+        document.getElementById(`${ids}`).innerHTML=`<div id='${ids}' onclick='create("${ids}")' class='block'></div>`;
+    }
+}
+</script>
