@@ -71,7 +71,7 @@ span{
 <br><div style='width:175;height:15px;background:gray;display:inline-block;position: absolute;left:50%;top: 50%;transform: translateY(-50%);transform: translateX(-50%);'><div style='height:100%;width:50%;background:#79ff79' id='progress'></div></div>
 </div>
 <div id='mc' style='background:#ccc;height:100%;width:100%;'>
-<div id='items' style='height:50px;width:98%;background:black;z-index:10001;position: absolute;bottom: 15px;'><table><tr><td><span>物品欄:</span></td><td><img onclick='block("grass");' src='texture/grass.png'/><span>草方塊</span></td><td><img onclick='block("cao");' src='texture/cao.png'/><span>草</span></td><td><img onclick='block("brick");' src='texture/brick.png'/><span>磚頭</span></td><td><img onclick='block("wood");' src='texture/wood.png'/><span>橡木木板</span></td><td><img onclick='block("tch");' src='texture/tch.png'/><span>火把</span></td><td><img onclick='block("log");' src='texture/log.png'/><span>橡木原木</span></td><td><img onclick='block("crafting");' src='texture/crafting.png'/><span>工作台</span></td><td><span>Mode:</span><span onclick='lala("n")'>破壞模式</span><span>&nbsp;||&nbsp;</span><span onclick='lala("y")'>創建模式</span></td></tr></table></div>
+<div id='items' style='height:50px;width:98%;background:black;z-index:10001;position: absolute;bottom: 15px;'><table><tr><td><span>物品欄:</span></td><td><img onclick='block("grass");' src='texture/grass.png'/><span>草方塊</span></td><td><img onclick='block("cao");' src='texture/cao.png'/><span>草</span></td><td><img onclick='block("brick");' src='texture/brick.png'/><span>磚頭</span></td><td><img onclick='block("wood");' src='texture/wood.png'/><span>橡木木板</span></td><td><img onclick='block("tch");' src='texture/tch.png'/><span>火把</span></td><td><img onclick='block("log");' src='texture/log.png'/><span>橡木原木</span></td><td><img onclick='block("crafting");' src='texture/crafting.png'/><span>工作台</span></td><td><img onclick='block("bed");' src='texture/bed.png'/><span>床</span></td><td><span>Mode:</span><span onclick='lala("n")'>破壞模式</span><span>&nbsp;||&nbsp;</span><span onclick='lala("y")'>創建模式</span></td></tr></table></div>
 </div>
 <script>
 var m=0;
@@ -114,7 +114,18 @@ function lala(cnm)
 }
 function create(ids){
     if(sign == 'y'){
+        if(setter == 'bed')
+        {
+            var bds = ids++;
+            document.getElementById(`${ids}`).innerHTML=`<div id='${ids}' onclick='create("${ids}")' class='block'><img style='height:100%;width:100%' src='texture/bedr.png'/></div>`;
+            //alert(`<div id='${ids}' onclick='create("${ids}")' class='block'><img style='height:100%;width:100%' src='texture/bedr.png'/></div>`);
+            document.getElementById(`${bds}`).innerHTML=`<div id='${bds}' onclick='create("${bds}")' class='block'><img style='height:100%;width:100%' src='texture/bedl.png'/></div>`;
+            //alert(`<div id='${bds}' onclick='create("${bds}")' class='block'><img style='height:100%;width:100%' src='texture/bedr.png'/></div>`);
+        }
+        else{
         document.getElementById(`${ids}`).innerHTML=`<div id='${ids}' onclick='create("${ids}")' class='block'><img style='height:100%;width:100%' src='texture/${setter}.png'/></div>`;
+        }
+        //document.getElementById(`${ids}`).innerHTML=`<div id='${ids}' onclick='create("${ids}")' class='block'><img style='height:100%;width:100%' src='texture/${setter}.png'/></div>`;
     }
     else{
         document.getElementById(`${ids}`).innerHTML=`<div id='${ids}' onclick='create("${ids}")' class='block'></div>`;
