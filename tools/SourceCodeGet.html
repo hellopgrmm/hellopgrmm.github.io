@@ -34,11 +34,15 @@ function gen(){
         }, sec);
     }
         document.getElementById('getSource').addEventListener('click', async function() {
+         try{
             document.getElementById('sourceCode').innerHTML='';
             const response = await fetch(document.getElementById('comment').value);
             const html = await response.text();
             //document.getElementById('sourceCode').textContent = html;            
             an('sourceCode','源代码如下:'+html+'回答完毕。',spd.value);
+         }catch(error){
+          alert(error)
+         }
         });
     </script>
 <!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
