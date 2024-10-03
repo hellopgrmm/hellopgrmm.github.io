@@ -4,12 +4,15 @@
  <title>Markdown在线编辑_Hellopgrmm工具</title>
  <a style='font-size:30px'>Markdown在线编辑工具</a><br><a>Markdown内容</a><br>
  <a>快速添加元素:</a><button onclick='mk.value+="# 请输入文字...\n"'>大标题</button><button onclick='mk.value+="### 请输入文字...\n"'>中标题</button><button onclick='mk.value+="[百度](https://www.baidu.com/)\n"'>链接</button><button onclick='mk.value+="*普通斜体字*\n"'>普通斜体字</button><button onclick='mk.value+="**粗体字**\n"'>粗体字</button><button onclick='mk.value+="~划掉的文字~\n"'>删除线</button><button onclick='mk.value+="##### 请输入文字...\n"'>小标题</button><button onclick='mk.value+="- 列表项目\n"'>列表项目</button><button onclick='mk.value+="- 项\n  - 子项"'>内嵌式列表项</button><button onclick='mk.value+="![图片加载不出来的替代文字](图片网址)\n"'>图片</button><button onclick='mk.value+="```Python\n#你的代码\n```\n"'>代码区域</button><button onclick='mk.value+="- [ ] 未选中\n- [x] 选中\n"'>选择框</button><button onclick='mk.value+=`---
-`'>分割线</button><br>
+`'>分割线</button>
+<button onclick='mk.value+=`<audio src="https://www.joy127.com/url/113752.mp3" controls=""></audio>
+`'>[HTML]声音播放器</button><br>
 <script src="marked.min.js"></script>
-<textarea id='mk' style='font-family:ht;font-size:15px' id="markdown" placeholder='在此编写Markdown标记代码...' rows="20" cols="50">
-</textarea><hr>MarkDown预览效果(左侧),HTML代码(右侧)。<div style='height:100%;width:100%'>
-<mp style='display:inline-block;width:48%;font-family:微软雅黑' id="result"></mp>
-<textarea style='display:inline-block;width:48%;height:100%;border-radius:0px;font-family:ht;' id="codes"></textarea></div>
+<textarea id='mk' style='font-family:ht;font-size:15px' id="markdown" placeholder='在此编写Markdown标记代码...' rows="10" cols="50">
+</textarea><hr>MarkDown预览效果。<br>切换：
+<button onclick="result.style.display = '';codes.style.display = 'none';">Markdown预览效果</button><button onclick="result.style.display = 'none';codes.style.display = '';">HTML代码</button><br>
+<mp style='display:inline-block;width:48%;font-family:微软雅黑;' id="result"></mp>
+<textarea style='display:inline-block;display:none;width:100%;height:50%;border-radius:0px;font-family:ht;font-size:17px;' id="codes"></textarea>
 <script>
 function cm() {
     document.getElementById('result').innerHTML = marked.parse(mk.value);
