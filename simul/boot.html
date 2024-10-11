@@ -1,0 +1,73 @@
+<meta charset='utf-8'><title>Boot Loader</title>
+    <style>
+    @font-face{
+    font-family:mc;
+    src: url(https://hellopgrmm.github.io/font/MorePerfectDOSVGA.ttf);
+}
+body{
+    background:black;
+    color:#ccc;
+    font-family:mc;
+    font-size:22px;
+}</style>
+<body>
+<a id='ox'>MonoBiench Operating System Loader 1.2</a>
+<script>
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+async function ac()
+{
+    await sleep(500);
+    ox.innerHTML += `<br>Loading Files:Kun01\\boot\\CN\\FileSystemReader.pok<br>`;
+    await sleep(281);
+    ox.innerHTML += `Loading Files:Kun01\\ZH-CN\\HTML\\filesystem.HTML<br>`;
+    await sleep(103);
+    ox.innerHTML += `Access Disabled.4X19EB102hx<br>`;
+    await sleep(596);
+    ox.innerHTML += `Loading Files:Kun01\\ZH-CN\\HTML\\ask.HTML<br>`;
+    await sleep(300);
+    ox.innerHTML += `Loading Files:Kun01\\ZH-CN\\HTML\\blocks.HTML<br>`;
+    await sleep(281);
+    ox.innerHTML += `Loading Files:Kun01\\ZH-CN\\HTML\\sl.HTML<br>`;
+    await sleep(281);
+    if(localStorage.getItem('KUNMBR')==1){
+        ox.innerHTML += `3?X10Mc81kd91lk~=05591jc10C\\36{}?`;
+    }
+    else if(localStorage.getItem('K')=='y'){
+        ox.innerHTML += `Not Found!:XB19C10M_1<br>`;
+    }else{
+    ox.innerHTML += `Loading Files:Kun01\\ZH-CN\\HTML\\A1_P.HTML<br>`;
+    }
+    await sleep(281);
+    ox.innerHTML += `Loading Files:Kun01\\ZH-CN\\HTML\\zMp3.HTML<br>`;
+    await sleep(700);
+    ox.innerHTML += `Loading Files:Kun01\\ZH-CN\\PAGE\\GLOBAL.HTML<br>`;
+    await sleep(1000);
+    ox.innerHTML += `Loading Files:Kun01\\g1Ow3\\ASM\\Assemnly.pok<br>`;
+    await sleep(789);
+    ox.innerHTML += `Loading Files:Kun01\\g1Ow6\\PXE\\Pixels.pok<br>`;
+    await sleep(100);
+    ox.innerHTML += `Checking HardDisk1,Keyboard1,CPU0,Fans1,MOUSE1<br>`;
+    await sleep(1000);
+    ox.innerHTML += `Keyboard:Virtual KunOS KEYBoard<br>Mouse:CuteMouse 1.2 [For ???]<br>`;
+    await sleep(1568);
+    ox.innerHTML += `Volume in Drive A:<br>`;
+    await sleep(10);
+    ox.innerHTML += `Is Empty,Retry(R),Ignore(I),Fail(F)?<br>`;
+    await sleep(5);
+    ox.innerHTML += `Auto-Selected:F,Muti-use:False,EXADESK.<br>Disk-Format:Normal<br>PE:EXIST;<br>`;
+    await sleep(3);
+    ox.innerHTML += `XScript:\\SC0Ow1\\Kunsystools.js Supported<br>PSW:SET<br>`;
+    await sleep(4);
+    ox.innerHTML += `Press any key to skip disk-checking.<br>`;
+    await sleep(5);
+    ox.innerHTML += `Loaded all files successfully.<br>`;
+    await sleep(1000);
+    ox.innerHTML += `KBOOT:Now BOOT LOADER will try to guide to 'KunOS_1AX'.<br>`;
+    await sleep(500);
+    ox.innerHTML += `O10XBM:Finish all bootstarp works.BootLoader will not check mbr.R:10nX1019md:AD1;<br>`;
+    window.location.href = 'KunOS.html';
+}
+ac()
+</script>
