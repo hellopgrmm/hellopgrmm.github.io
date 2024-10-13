@@ -63,10 +63,20 @@ async function ac()
     ox.innerHTML += `Press any key to skip disk-checking.<br>`;
     await sleep(5);
     ox.innerHTML += `Loaded all files successfully.<br>`;
+    ox.innerHTML += localStorage.length+' Files,'+localStorage.length*15+'MB on KunOS SYSTEM -MyFiles_A_P1 Folder.<br>Files List:<br>';
+    await sleep(1000);
+    for(var i =0; i<localStorage.length;i++){ 
+        var ben = localStorage.key(i); 
+        await sleep(10);
+        ox.innerHTML += 'Loading Files in MyFiles_A_P1 Folder:'+ben+'<br>';
+        window.scrollTo(0, document.body.scrollHeight);
+    }
     await sleep(1000);
     ox.innerHTML += `KBOOT:Now BOOT LOADER will try to guide to 'KunOS_1AX'.<br>`;
+    window.scrollTo(0, document.body.scrollHeight);
     await sleep(500);
     ox.innerHTML += `O10XBM:Finish all bootstarp works.BootLoader will not check mbr.R:10nX1019md:AD1;<br>`;
+    window.scrollTo(0, document.body.scrollHeight);
     window.location.href = 'KunOS.html';
 }
 ac()
