@@ -126,7 +126,7 @@ input{
 <div onclick='Computer.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/KunOSComputer.png'/><br><a>我的小脑</a></div>&nbsp;<br><div onclick='mine.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/mine.png'/><br><a>扫雷.exe</a></div>
 </div>
 <div onclick='Language.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a>语言设置.exe</a></div>
-<div onclick='cmd.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a>命令提示符.exe</a></div>
+<div onclick='if(localStorage.getItem("KUNMBR") == 1 || localStorage.getItem("K") == "y"){alert("该文件可能被禁用，请再试一次或联系管理员。\nC:exec:FileNotFoundError-403F.");}else{cmd.style.display="";}'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a>命令提示符.exe</a></div>
 <div onclick='virus();vir.play()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a>好玩的.exe</a></div><br>
 <div onclick='var bre = prompt("请输入KunOS密钥再进行此操作:");if(bre == "n1I6n8f0_OPTK1893D201K"){virus();vir.play();localStorage.setItem("KUNMBR","1");}else{alert("密钥错误！请重试，无法运行。");}'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a>好玩的(有害版).exe</a></div>
 <div onclick='window.location.href="https://hellopgrmm.github.io/nifs/blueScreen.html?info=undefblue";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/NET.png'/><br><a>蓝屏盖.exe</a></div>
@@ -216,7 +216,7 @@ input{
     <center>
     <h1>你想要......</h1>
     <button style="font-family:mc;height:50px;width:100%;position:relative;" onclick='window.location.href="https://hellopgrmm.github.io/simul/boot.html"' id='Menu'>重新启动KunOS</button><br>
-    <button style="font-family:mc;height:50px;width:100%;position:relative;" onclick='window.location.href="https://hellopgrmm.github.io/simul/cmd.html"' id='Menu'>进入KunOS Terminal</button><br>
+    <button style="font-family:mc;height:50px;width:100%;position:relative;" onclick='if(localStorage.getItem("KUNMBR") == 1 || localStorage.getItem("K") == "y"){alert("该选项可能被管理员禁用，请再试一次或联系管理员。\nE:N/A.");}else{window.location.href="https://hellopgrmm.github.io/simul/cmd.html"}' id='Menu'>进入KunOS Terminal</button><br>
     <button style="height:50px;width:100%;" onclick='fcontent.style.display="none";foverlay.style.display="none";' id='Menu'>关闭</button>
 </center>
 </div>
