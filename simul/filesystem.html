@@ -22,7 +22,7 @@ body{
 <div id="giegie32" style="display: none;">
 <button onclick="giegie32.style.display='none';path.innerHTML='Index';giegie.style.display='';">上一页</button><br>
 <a onclick="giegie32.style.display='none';path.innerHTML='C:/Kunpics';giegie2.style.display='';"><img src="https://hellopgrmm.github.io/simul/kunpics/KunICON/fl.gif">Kunpics</a><br>
-<a onclick="giegie32.style.display='none';path.innerHTML='C:/MyFiles';giegie0.style.display='';"><img src="https://hellopgrmm.github.io/simul/kunpics/KunICON/fl.gif">MyFiles</a><br> 
+<a onclick="if(localStorage.getItem('KUNMBR') == 1 || localStorage.getItem('K') == 'y'){alert('请插入驱动器A:\n没有找到源:MyFiles 。');}else{giegie32.style.display='none';path.innerHTML='C:/MyFiles';giegie0.style.display='';}"><img src="https://hellopgrmm.github.io/simul/kunpics/KunICON/fl.gif">MyFiles</a><br> 
 </div>
 <div id='giegie0'>
 <button onclick="giegie0.style.display='none';path.innerHTML='C:/';giegie32.style.display='';">上一页</button><br> 
