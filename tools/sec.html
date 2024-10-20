@@ -1,0 +1,71 @@
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <title>HelloPgrmm消息加密器(加密通话)|Hellopgrmm 一个分享编程经验的网站</title>
+ <a style='font-size:30px'>加密通话生成器(支持中文)。</a><br>
+ <br>
+ <a>输入要加密/解密的文字:</a><textarea style='border-radius:0px;border:1px solid black;font-size:20px;font-family:ht;width:90%;height:30%;' placeholder='输入...' id='secr'></textarea><br><br>
+ <button style='border-radius:0px;border:1px solid black;font-size:15px;color:black;font-family:ht;width:75px;height:25px;' onclick='jiami();'>加密</button><button style='border-radius:0px;border:1px solid black;font-size:15px;color:black;font-family:ht;width:75px;height:25px;' onclick='jiemi();'>解密</button>
+ <br><a>结果:</a><br><a id='ba'></a>
+<script>
+var letters = '';
+var res = '';
+var le = '';
+var resb = '';
+function reversea(str) {
+    return str.split('').reverse().join('');
+}
+function secret(letters){
+    for(var i = 0;i < letters.length;i++){
+        let char = letters[i];
+        let ac = char.charCodeAt(0);
+        let asc = ac+3;
+        let ch = String.fromCharCode(asc);
+        res+=ch;
+    }
+    var n = reversea(res);
+    return n;
+}
+function unsec(le){
+    for(var i = 0;i < le.length;i++){
+        let char = le[i];
+        let ac = char.charCodeAt(0);
+        let asc = ac-3;
+        let ch = String.fromCharCode(asc);
+        resb+=ch;
+    }
+    var j = reversea(resb);
+    return j;
+}
+function jiami(){
+    document.getElementById('ba').innerHTML = secret(secr.value);
+    letters = '';
+    res = '';
+    le = '';
+    resb = '';
+}
+function jiemi()
+{
+    document.getElementById('ba').innerHTML = unsec(secr.value);
+    letters = '';
+    res = '';
+    le = '';
+    resb = '';
+}
+</script>
+<!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
