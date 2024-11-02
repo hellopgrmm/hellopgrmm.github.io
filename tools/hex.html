@@ -1,0 +1,60 @@
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <title>Online Binary Editor|Hellopgrmm 一个分享编程经验的网站</title>
+<script src='hexstr.js'></script>
+<a style='font-size:30px'>Binary Editor(16进制编辑器)</a><br><a>注意:本编辑器为纯HTML在线版，可能和BZ专业进制编辑软件的功能略有差异。<br>输入16进制时，如果是手机端，请切换英文输入法输入效果更佳。</a><br>
+<textarea placeholder='16进制区域' style='width:48%;height:300px;border-radius:0;border:1px solid black;outline:none;font-size:18px;font-family:ht;' oninput='convert();' id='binary'></textarea>
+<textarea placeholder='ABCDEFG123456789' style='width:50%;height:300px;border-radius:0;border:1px solid black;outline:none;font-size:18px;font-family:ht;' oninput='convert();' id='hex'></textarea><br>
+<form>
+  <a>输入方式:</a>
+  <input type="radio" checked='' id="bin" name="g" value="bin">
+  <label for="bin">锁定十六进制(Hex to Str)</label>
+  <input type="radio" id="str" name="g" value="str">
+  <label for="str">锁定字符串(Str to Hex)</label>
+</form>
+<input id='spl' checked='' type='checkbox'>自动分割</input><br>
+<a id='cols'></a>
+<script>
+var ndc = 0;
+function pos(){
+    var gat = getCPos(binary);
+    cols.innerHTML='Cursor Position:'+gat+'(Characters).';
+}
+function convert()
+{
+    if(document.getElementById('bin').checked){
+        hex.value = hxStr(binary.value);
+        if(spl.checked){
+            if(ndc==3){
+                binary.value+=' ';
+                ndc=0;
+            }else{
+                ndc++;
+            }
+        }else{
+            //nothing.0
+        }
+    }else{
+        binary.value = strHx(hex.value);
+    }
+}
+setInterval('pos()',10);
+</script>
+<!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
+
