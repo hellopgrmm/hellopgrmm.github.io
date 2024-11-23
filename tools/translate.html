@@ -1,0 +1,91 @@
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <title>翻译|Hellopgrmm 一个分享编程经验的网站</title>
+ <a style='font-size:30px'>翻译</a><br>
+ <form>
+  <a>翻译至</a>
+  <input type="radio" checked='' id="en" name="g" value="en">
+  <label for="en">英语</label>
+  <input type="radio" id="zh" name="g" value="zh">
+  <label for="zh">简体中文</label>
+  <input type="radio" id="kr" name="g" value="kr">
+  <label for="kr">韩语</label>
+  <input type="radio" id="fr" name="g" value="fr">
+  <label for="fr">法语</label>
+  <input type="radio" id="ru" name="g" value="ru">
+  <label for="ru">俄语</label>
+  <input type="radio" id="wy" name="g" value="wy">
+  <label for="wy">文言文</label>
+  <input type="radio" id="jp" name="g" value="jp">
+  <label for="jp">日语</label>
+</form>
+ <button onclick='translatecon()' style='color:white;family:ht;font-size:20px;height:50px;width:100px;border-radius:5px;border:1px solid black;box-shadow:#ccc 5px 5px 5px;background:green;'>翻译</button>API提供：百度。本网页免费翻译，翻译接口的有限制。如果您发现翻译结果没有显示任何的内容，则可能是已经达到使用限制。<br>
+<textarea placeholder='请键入需要翻译的内容。' style='font-family:ht;font-size:20px;height:50%;width:40%;border-radius:5px;outline:none;border:1px solid black;box-shadow:#ccc 5px 5px 5px;' id='ogt'></textarea>
+<textarea placeholder='翻译结果。' style='display:inline-block;font-family:ht;font-size:20px;height:50%;width:50%;border-radius:5px;outline:none;border:1px solid black;box-shadow:#ccc 5px 5px 5px;' id='trr'></textarea>
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://hellopgrmm.github.io/tools/md5.js"></script>
+<script type="text/javascript">
+
+    function Htrans(query,elem,lg) {
+        var q = query;
+        var appid = "20231104001869848"; // 请自行获取
+        var key = "wQDZZ7LQoYo3UiepNjj4"; // 请自行获取
+        var salt = (new Date).getTime();
+        var str1 = appid + q + salt + key;
+        var sign = MD5(str1);
+        $.ajax({
+            url: 'http://api.fanyi.baidu.com/api/trans/vip/translate',
+            type: 'post',
+            dataType: 'jsonp',
+            data: {
+                q: q,
+                from: 'auto',
+                to: lg,
+                appid: appid,
+                salt: salt,
+                sign: sign
+            },
+            success: function (msg) {
+                console.log(msg);
+                document.getElementById(elem).value = msg.trans_result[0].dst;
+            }
+        });
+    }
+    function translatecon(){
+        if(document.getElementById('en').checked){
+            Htrans(ogt.value,'trr','en');     
+        }else if(document.getElementById('zh').checked){
+            Htrans(ogt.value,'trr','zh');   
+        }else if(document.getElementById('ru').checked){
+            Htrans(ogt.value,'trr','ru');   
+        }else if(document.getElementById('kr').checked){
+            Htrans(ogt.value,'trr','kor');   
+        }else if(document.getElementById('fr').checked){
+            Htrans(ogt.value,'trr','fra');   
+        }else if(document.getElementById('wy').checked){
+            Htrans(ogt.value,'trr','wyw');   
+        }else if(document.getElementById('jp').checked){
+            Htrans(ogt.value,'trr','jp');   
+        }else{
+            Htrans(ogt.value,'trr','en');
+        }
+    }
+
+</script>
+<!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
