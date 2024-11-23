@@ -47,8 +47,11 @@
                 sign: sign
             },
             success: function (msg) {
+                alert(str1);
+                alert(sign);
                 console.log(msg);
                 document.getElementById(elem).value = msg.trans_result[0].dst;
+                alert('successfully');
             }
         });
     }
