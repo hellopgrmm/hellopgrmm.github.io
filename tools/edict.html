@@ -1,0 +1,109 @@
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <title>英汉词典|Hellopgrmm 一个分享编程经验的网站</title>
+ <a style='font-size:30px'>英汉词典</a><br><a>注意:本词典对大小写有敏感，除非特殊名词，其它单词查询时请全部小写输入。</a><br>
+  <style>
+ button{
+    color:white;
+    font-size:15px;
+    height:35px;
+    width:70px;
+    border-radius:5px;
+    border:1px solid black;
+    box-shadow:#ccc 5px 5px 5px;
+    background:green;
+}
+input{
+    font-size:15px;
+    height:35px;
+    width:200px;
+    border-radius:5px;
+    outline:none;
+    border:1px solid black;
+    box-shadow:#ccc 5px 5px 5px;
+    background:white;
+    font-family:ht;
+}
+</style>
+<div style='display:none' id='man'>
+<input id='AX' oninput='queryWord()' placeholder='输入需要查询的词。'></input>
+<button onclick='queryWord()'>查词</button>
+<div style='display:none' id='bbx'>
+<h1 id='ent' style='color:green'></h1>
+<a style='color:#ccc'>释义</a><br><a id='mean'>暂无释义，等待查询......</a><br>
+<a style='color:#ccc'>例句</a><br><a id='usage'>暂无相应的例句。您可以将例句投稿至邮箱qwqexplorer@163.com(注意要标注是投稿例句)。</a>
+</div>
+</div>
+<div id='Loading'>
+<center>
+<h3>正在加载词典......</h3>
+<a>请稍后。</a>
+</div>
+<br>
+<a id='bet'></a><br>
+<a>PS:感谢Github项目“webextension_english_chinese_dictionary”提供了词典资源。</a>
+<script>
+var ee = Date.now();
+var endict = {};
+var res = 0;
+function H_fetchJson(path){
+fetch(path)
+  .then(response => response.json())
+  .then(data => {
+      man.style.display = 'none';
+      Loading.style.display = '';
+      for(var a in data){
+          var vhy = Date.now() - ee;
+          bet.innerHTML = '成功加载'+res+'个单词资源，使用时间:'+vhy/1000+' Second(s)。';
+          endict[a] = data[a];
+          res++;
+      }
+      man.style.display = '';
+      Loading.style.display = 'none';
+  })
+  .catch(error => console.error(error));
+}
+H_fetchJson('词典数据/词典1.json');
+H_fetchJson('词典数据/词典2.json');
+H_fetchJson('词典数据/词典3.json');
+H_fetchJson('词典数据/词典4.json');
+H_fetchJson('词典数据/词典5.json');
+H_fetchJson('词典数据/词典6.json');
+H_fetchJson('词典数据/词典7.json');
+H_fetchJson('词典数据/词典8.json');
+H_fetchJson('词典数据/词典9.json');
+H_fetchJson('词典数据/词典10.json');
+H_fetchJson('词典数据/词典11.json');
+H_fetchJson('词典数据/词典12.json');
+H_fetchJson('词典数据/词典13.json');
+H_fetchJson('词典数据/词典14.json');
+H_fetchJson('词典数据/词典15.json');
+function queryWord(){
+    bbx.style.display = '';
+    var x = document.getElementById('AX').value;
+    ent.innerHTML = x;
+    var e = x.toLowerCase();
+    if(document.getElementById('AX').value in endict){
+        mean.innerHTML = endict[ent.innerHTML].replace('\\n','<br>');
+    }else if(!x){bbx.style.display = 'none';}else{
+        mean.innerHTML = '暂无'+x+'的相关释义。';
+    }
+}
+</script>
+ <!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
