@@ -54,11 +54,11 @@ fetch(path)
       man.style.display = 'none';
       Loading.style.display = '';
       for(var a in data){
-          var vhy = Date.now() - ee;
-          bet.innerHTML = '成功加载'+res+'个单词资源，使用时间:'+vhy/1000+' Second(s)。';
           endict[a] = data[a];
           res++;
       }
+      var vhy = Date.now() - ee;
+      bet.innerHTML = '成功加载'+res+'个单词资源，使用时间:'+vhy/1000+' Second(s)。';
       man.style.display = '';
       Loading.style.display = 'none';
   })
