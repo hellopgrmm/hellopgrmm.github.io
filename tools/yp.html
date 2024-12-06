@@ -1,0 +1,80 @@
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <title>粤语拼音转换|Hellopgrmm 一个分享编程经验的网站</title>
+ <a style='font-size:30px'>粤语拼音转换</a><br>
+  <style>
+ button{
+    color:white;
+    font-size:15px;
+    height:35px;
+    width:150px;
+    border-radius:5px;
+    border:1px solid black;
+    box-shadow:#ccc 5px 5px 5px;
+    background:green;
+}
+textarea{
+    font-size:15px;
+    height:35px;
+    width:200px;
+    border-radius:5px;
+    outline:none;
+    border:1px solid black;
+    box-shadow:#ccc 5px 5px 5px;
+    background:white;
+    font-family:ht;
+}
+</style>
+<script src='tools2.js'></script>
+<textarea style='height:30%;width:50%;' id='AX' value='' placeholder='输入文字。'></textarea><br>
+<button onclick='yuepin()'>转换成粤语拼音</button><br><br>
+<div style='height:30%;width:80%;border:1px solid black;'>
+<a id='op'></a><br>
+<a id='yp'></a>
+</div>
+<div style='height:30%;width:80%;border:1px solid black;'>
+<a id='ap'></a><br>
+<a id='bp'></a>
+</div>
+<script>
+function pinyin(characters){
+    const {pinyin}=window.pinyinPro;
+    const hans=characters;
+    const plainPinyin=pinyin(hans);
+    return plainPinyin;
+}
+function yuepin(){
+fetch('dic_trad.json')
+  .then(response => response.json())
+  .then(data => {
+      yp.innerHTML = '粤语拼音:';
+      bp.innerHTML = '拼音对比:';
+      var b = document.getElementById('AX').value;
+      b = b.replace('，','').replace('。','').replace('？','').replace('！','').replace('、','').replace('（','').replace('）','').replace('“','').replace('”','').replace('；','').replace('：','')
+      for(var u = 0;u < b.length;u++){
+          yp.innerHTML += data[b[u]].pinyin + ' ';
+          bp.innerHTML += b[u]+'('+data[b[u]].pinyin+')';
+      }
+      op.innerHTML = '原拼音:'+pinyin(b);
+      ap.innerHTML = yp.innerHTML;
+  })
+  .catch(error => console.error(error));
+}
+</script>
+ <!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
