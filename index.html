@@ -46,7 +46,11 @@
 <a>|</a >
 <a style='text-decoration:none;color:blue;' href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a ><br>
 <div id="translate"><a>更多语言在这里选择</a ></div><br><script src='https://res.zvo.cn/translate/translate.js'></script><script>translate.language.setLocal('chinese_simplified');translate.ignore.tag.push('pre');translate.execute();</script></center>
-<script>
+<!--<script>
 var sentences = ['永远不要相信苦难是值得的，是值得赞扬和歌颂的。苦难就是苦难，苦难不会带来成功。苦难不值得追求，磨炼意志是因为苦难无法躲开。<br><a style="position:relative;left:80%">——余华《活着》</a>','永远不要多管那些路上的乌鸦，它们的叫声不会改变你所要走的路。你越看它们，它们只会叫得更大声。','谁道人生无再少？门前流水尚能西！休将白发唱黄鸡。<a style="position:relative;left:50%">——李白</a>','天生我材必有用，千金散尽还复来。<a style="position:relative;left:50%">——李白《将进酒•君不见》</a>','其实地上本没有路，走的人多了，也便成了路。<a style="position:relative;left:50%">——鲁迅</a>','真的猛士,敢于面对惨淡的人生,敢于面对淋漓的鲜血。<a style="position:relative;left:50%">——鲁迅</a>','无聊者自厌,寂寞者自怜,孤独者自足。','当你登上山顶时，你的头顶上，还有星空。',';(如果一个坎坷怎么都无法过去，不妨尝试绕过它，走别的路。'];
 yan.innerHTML = sentences[Math.floor(Math.random() * sentences.length)];
+</script>-->
+  <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$.ajax({type:"GET",url:"https://www.iamwawa.cn/home/lizhi/ajax",dataType:"json",success:function(e){yan.innerHTML = e.data;}})//感谢蛙蛙工具站提供资源。
 </script>
