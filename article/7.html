@@ -1,0 +1,66 @@
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <script src="https://hellopgrmm.github.io/tools/prism.js"></script>
+   <link href="https://hellopgrmm.github.io/tools/prism.css" rel="stylesheet" />
+ <title>让您的前端博客也有一个真正的评论区|Hellopgrmm 一个分享编程经验的网站</title>
+ <a style='font-size:30px'>让您的前端博客也有一个真正的评论区-Twikoo评论系统</a><br>
+ 官网：<a href='https://twikoo.js.org' style='text-decoration:none'>twikoo.js.org</a><br>Twikoo是一个适用于各种类型的网站(静态、动态)的评论区系统。安全且免费，支持邮件提醒、回复点赞、Markdown语法、评论审核、管理员登陆、评论高级管理等多元化的评论系统。<br>此处以MongoDB数据库系统和Netlify、Github网页托管为例。<br><br>进入<a href='https://mongodb.com' style='text-decoration:none'>MongoDB</a>官网，申请一个MongoDB账号。<br>在此同时，申请一个<a href='https://netlify.com' style='text-decoration:none'>Netlify</a>账号。<br>回到MongoDB，新建一个Cluser（数据库），如果您的网站不是大众化的网站，最好的选择就是选择Free。(如图6.1所示)点击Create之后还需要配置一些信息。选择AWS服务，地区选择America。<br><br>图6.1 数据库容量选择<br>
+ <img style='width:70%;height:50%' src='https://s2.loli.net/2024/12/28/Nswo8UTE1rAu7FY.png'/>
+ <br><br>图6.2 数据库配置<br><img style='width:40%;height:90%' src='https://s2.loli.net/2024/12/28/kjL7EC65fTMtKdn.png'/><br>配置完成基本信息之后，即可进入到Overview界面，查看数据库信息。目前数据库已经初始化完成，但是并没有链接到Twikoo评论区，所以暂时还无法使用。所以点击数据库的Connect（连接）选项。填写好用户名信息和设定好密码。用户名自定义，密码也可以自定义。用户名不要含非法字符，这里用root作为用户名。如图6.3所示。<br><br>图6.3 Connect to Twikoo Comment System and get the Enviroment ID.<br><img style='width:79%;height:90%' src='https://s2.loli.net/2024/12/28/SxGtD4Pkd6hOBgQ.png'/><br>在此之后，点击下一步。驱动器选择Driver，nodejs选择“5.5 or later”（5.5之后的版本）。如图6.4所示，链接字符串就在图示位置。复制即可。然后将字符串中的&lt;db_username&gt;或类似字眼替换成你的数据库用户名，&lt;db_password&gt;或类似字眼替换为您的数据库密码。（即刚开始您所设置的数据库用户名和密码）<br><br>图6.4 Get the connection string<br>
+ <img style='width:70%;height:90%' src='https://s2.loli.net/2024/12/28/bu4lGeR9pJKOqdV.jpg'/><br>按照MongoDB要求复制您的Connection Code/String<br>然后进入到github，搜索twikoo（一定要官方的），fork到自己的仓库。进入到Netlify界面，新建好Team后，从Github导入仓库（Import from Git或类似字眼内选择Github）找到您刚刚fork的仓库Twikoo。然后在配置页面往下划动到最底部，添加环境变量，Key为“MONGODB_URI”，Value为您刚刚获取到的MongoDB Connection Code（一定要替换&lt;db_username&gt;为您的数据库用户名。）等待部署好之后，进入Netlify部署好的域名，（一般为https://xxxxx.netlify.app或类似域名）您应该可以看到Code为100，提示信息为“Twikoo 云函数运行正常”的信息。在此之后，复制好您刚刚部署的netlify域名，作为Twikoo评论区初始化的必要环境id，添加进去。如以下图片所示。<br>1.导入fork好的Twikoo仓库。<br>
+ <img style='width:70%;height:70%' src='https://s2.loli.net/2024/12/28/gRXuxIoPKSN6rkb.jpg'/><br>2.选择Twikoo。<br><img style='width:70%;height:90%' src='https://s2.loli.net/2024/12/28/B87MtwgOjEeJ65V.jpg'/><br>3.设置MongoDB连接字符串<br><img style='width:70%;height:90%' src='https://s2.loli.net/2024/12/28/gJrmubcHl6B2kyF.jpg'/><br>4.部署成功。<br>
+  <img style='width:70%;height:70%' src='https://s2.loli.net/2024/12/28/6UVBSsdOfiGu2jZ.jpg'/><br>在此，您应该获取到了属于您的环境ID。接着，添加这段代码，作为引用Twikoo评论区插件的代码。<br><br>
+  HTML
+  <pre style='width:82%'>
+  <code class='language-HTML'>&lt;script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.40/dist/twikoo.min.js">&lt;/script>
+  &lt;!--设置一个容器-->
+  &lt;div id="comment">&lt;div>
+  </code>
+  </pre><br>然后，添加如下js代码：<br>
+  JavaScript
+  <pre style='width:82%'>
+  <code class='language-javascript'>
+twikoo.init({
+  envId: 'https://xxxxxxxx.netlify.app/.netlify/functions/twikoo', //环境ID。
+  el: '#comment', //存放评论区的元素。 The Element of Twikoo Comment Container.
+  path: location.pathname, //评论区指向的网页。 The Path to your page.
+  lang: 'zh-CN',  //评论区的语言 Language of comment system.
+})
+  </code>
+  </pre><br>将这些代码添加进去后，预览的效果，您应该会看到这样的一个评论界面。测试一下，如果没有什么其它的错误提示信息。那么，恭喜您，您成功拥有了您的博客评论区系统。<br><img style='width:60%;height:30%' src='https://s2.loli.net/2024/12/28/LAtqodngsMmQzO8.jpg'/><br>----------<br>
+  <style>
+.tk-submit-action-icon{
+    height:20px;
+}
+#twikoo{
+    width:95%;
+}
+</style>
+<div id="comment"></div>
+<script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.40/dist/twikoo.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/twikoo@1.6.40/dist/twikoo.min.css">
+<script>
+twikoo.init({
+  envId: 'https://cheerful-moonbeam-4f1337.netlify.app/.netlify/functions/twikoo',
+  el: '#comment', 
+  path: location.pathname, 
+  lang: 'zh-CN', 
+})
+</script>
+ <!--end--><hr><center><spam>Copyright (C) Hello-Programming 2024｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
