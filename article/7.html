@@ -4,7 +4,7 @@
  <script src="https://hellopgrmm.github.io/tools/prism.js"></script>
    <link href="https://hellopgrmm.github.io/tools/prism.css" rel="stylesheet" />
  <title>让您的前端博客也有一个真正的评论区|Hellopgrmm 一个分享编程经验的网站</title>
- <a style='font-size:30px'>让您的前端博客也有一个真正的评论区-Twikoo评论系统</a><br>
+ <a style='font-size:30px'>让您的前端博客也有一个真正的评论区-Twikoo评论系统</a><br>2024-12-28 更新，<span id="twikoo_visitors">0</span>观看。<br>
  官网：<a href='https://twikoo.js.org' style='text-decoration:none'>twikoo.js.org</a><br>Twikoo是一个适用于各种类型的网站(静态、动态)的评论区系统。安全且免费，支持邮件提醒、回复点赞、Markdown语法、评论审核、管理员登陆、评论高级管理等多元化的评论系统。<br>此处以MongoDB数据库系统和Netlify、Github网页托管为例。<br><br>进入<a href='https://mongodb.com' style='text-decoration:none'>MongoDB</a>官网，申请一个MongoDB账号。<br>在此同时，申请一个<a href='https://netlify.com' style='text-decoration:none'>Netlify</a>账号。<br>回到MongoDB，新建一个Cluser（数据库），如果您的网站不是大众化的网站，最好的选择就是选择Free。(如图6.1所示)点击Create之后还需要配置一些信息。选择AWS服务，地区选择America。<br><br>图6.1 数据库容量选择<br>
  <img style='width:70%;height:50%' src='https://s2.loli.net/2024/12/28/Nswo8UTE1rAu7FY.png'/>
  <br><br>图6.2 数据库配置<br><img style='width:40%;height:90%' src='https://s2.loli.net/2024/12/28/kjL7EC65fTMtKdn.png'/><br>配置完成基本信息之后，即可进入到Overview界面，查看数据库信息。目前数据库已经初始化完成，但是并没有链接到Twikoo评论区，所以暂时还无法使用。所以点击数据库的Connect（连接）选项。填写好用户名信息和设定好密码。用户名自定义，密码也可以自定义。用户名不要含非法字符，这里用root作为用户名。如图6.3所示。<br><br>图6.3 Connect to Twikoo Comment System and get the Enviroment ID.<br><img style='width:79%;height:90%' src='https://s2.loli.net/2024/12/28/SxGtD4Pkd6hOBgQ.png'/><br>在此之后，点击下一步。驱动器选择Driver，nodejs选择“5.5 or later”（5.5之后的版本）。如图6.4所示，链接字符串就在图示位置。复制即可。然后将字符串中的&lt;db_username&gt;或类似字眼替换成你的数据库用户名，&lt;db_password&gt;或类似字眼替换为您的数据库密码。（即刚开始您所设置的数据库用户名和密码）<br><br>图6.4 Get the connection string<br>
