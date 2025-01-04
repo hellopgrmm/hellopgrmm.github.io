@@ -1,0 +1,167 @@
+<meta charset='utf-8'>
+<title>HTML高级编辑器|HTML Professional Editor</title>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/theme/lesser-dark.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/hint/show-hint.css">
+  <script src='https://hellopgrmm.github.io/codes/jquery-3.6.3.min.js'></script>
+<body id='mainbody'>
+ <style>
+ .CodeMirror {
+  font-size: 16px; 
+  font-family:ht;
+}
+button{
+    height:50px;
+    width:20%;
+    font-size:20px;
+    color:white;
+    border-radius:1px;
+    border:1px solid white;
+    background:black;
+    font-family:ht;
+}
+body{
+    background:black;
+    color:white;
+}
+#mainbody
+{
+    display:none;
+}
+.hwindow{
+    border-radius:20px;
+    background:#3f3f3f;
+    height:30%;
+    width:30%;
+    position:relative;
+    top:30%;
+    left:35%;
+    color:white;
+}
+input{
+    border-radius:5px;
+    outline:none;
+    background:gray;
+    height:35px;
+    width:70%;
+    font-size:15px;
+    font-family:ht;
+    color:white;
+}
+.hbutton{
+    border-radius:5px;
+    background:gray;
+    height:35px;
+    width:30%;
+    font-size:15px;
+    font-family:ht;
+    border:0px solid gray;
+}
+.opac{
+    background:black;
+    z-index:9999;
+    opacity:0.7;
+    position:fixed;
+    top:0px;
+    left:0px;
+    right:0px;
+    height:100%;
+    width:100%;
+}
+.CodeMirror-hint{
+    font-size:17px;
+    font-family:ht;
+}
+</style>
+<a style='color:white;font-size:30px'>HTML Professional Editor&nbsp;</a><button onclick='preview();'>Preview</button><button onclick='back()'>Back</button><button onclick='location.href="https://hellopgrmm.github.io/";'>HomePage</button><button onclick='vs()'>View Source</button><button onclick='down()'>Download</button>
+<textarea id="codemirror-editor" rows="10" cols="40"/>
+</textarea>
+<div id='v' style='color:black;display:none;background:white;height:100vh;width:auto'></div>
+<div style='display:none' id='mm' class='opac'>
+<div id='url' class='hwindow'><center><br><a style='font-size:20px'>Input your URL</a><br><br><input id='url2' placeholder='https:// or http://' id='val'/><br><br><button onclick='getso()' class='hbutton'>OK</button>&nbsp;<button onclick='$("#mm").fadeOut();' class='hbutton'>Cancel</button></center></div></div>
+<script src='https://hellopgrmm.github.io/codes/jquery-3.6.3.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/edit/matchbrackets.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/javascript/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/clike/clike.min.js"></script>
+<script src="https://cdn.staticfile.org/codemirror/6.65.7/mode/xml/xml.min.js"></script>
+<script src="https://cdn.staticfile.org/codemirror/6.65.7/mode/css/css.min.js"></script>
+<script src="https://cdn.staticfile.org/codemirror/6.65.7/mode/htmlmixed/htmlmixed.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/hint/show-hint.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/hint/show-hint.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/hint/css-hint.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/hint/javascript-hint.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/hint/html-hint.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/hint/xml-hint.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/hint/anyword-hint.min.js"></script>
+<script>
+$('#mainbody').fadeIn(1000);
+  var editor = CodeMirror.fromTextArea(document.getElementById('codemirror-editor') ,{
+    mode: 'htmlmixed',
+    lineNumbers: true,
+    matchBrackets: true,
+    theme: 'lesser-dark',
+    lineWrapping: true,
+    //javascriptLanguage.data.of({autocomplete:scopeCompletionSource(globalThis)})
+   hintOptions:{ 
+        completeSingle:false,
+    },
+   onBlur: function(){editor.save()}         
+  });
+editor.on("keypress",function () {
+    editor.showHint();
+});
+editor.setSize('auto','100vh');
+editor.setOption("fontSize", "20px");
+editor.setOption("fontFamily", "menlo");
+function exJSc(text) {
+  const jsRegex = /<script[^>]*>([\s\S]*?)<\/script>/gi;
+  let match;
+  const jsCode = [];
+ 
+  while ((match = jsRegex.exec(text))) {
+    jsCode.push(match[1]);
+  }
+  return jsCode;
+}
+function preview(){
+    v.innerHTML = editor.getValue();
+    $('.CodeMirror').fadeOut();    
+    $('#v').fadeIn(1000);
+    var listjs = exJSc(editor.getValue());
+    for(var t = 0;t < listjs.length;t++){
+        eval(listjs[t]);
+    }
+}
+function back(){
+    $('#v').fadeOut();
+    $('.CodeMirror').fadeIn(1000);
+}
+function vs(){
+    $('#mm').fadeIn();
+}
+async function getso(){
+    $('#mm').fadeOut();
+    editor.setValue('Loading...');
+    try{
+        const response = await fetch(document.getElementById('url2').value);
+        const html = await response.text();
+        editor.setValue(html);
+    }catch(exec){
+            editor.setValue(exec);
+    }
+}
+function down() {
+            const text = editor.getValue();
+            const blob = new Blob([text], { type: 'html' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.href = url;
+            link.download = Date.now()+'.html';
+            document.body.appendChild(link);
+            link.click();
+            URL.revokeObjectURL(url);
+            document.body.removeChild(link);
+        }
+</script>
