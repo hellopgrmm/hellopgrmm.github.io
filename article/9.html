@@ -1,0 +1,48 @@
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <script src="https://hellopgrmm.github.io/tools/prism.js"></script>
+   <link href="https://hellopgrmm.github.io/tools/prism.css" rel="stylesheet" />
+ <title>你的第一个网页-大标题和<a>标签|Hellopgrmm 一个分享编程经验的网站</title>
+ <a style='font-size:30px'>你的第一个网页-大标题和&lt;a&gt;标签</a><br>
+ <h2>大标题的使用</h2>
+我们可以开始了！我们先从最简单的下手。那么，一个文章最基础的是什么？没错，是标题、正文。在HTML中，我们可以使用标签(tag)来创建标题这一元素。在一个网页上添加一个大标题，只需要动动手，使用&lt;h1&gt;标签就可以了。当然，大标题标签还有很多。先看一段代码。
+<pre style='width:80%'><code class='language-HTML'>&lt;h1&gt;Hello World!This is my first page!&lt;/h1&gt;</code></pre>
+*提示：HTML并不是编程语言，而是“标记语言”。所以，不要混淆了，虽然都是代码，但是😅。<br>
+这是什么意思呢？这里的&lt;h1&gt;就是一级大标题，每个HTML标签都是由符号“&lt;”和“&gt;”嵌套起来的，这就是一个标签。比如&lt;legend&gt;、&lt;pre&gt;、&lt;script&gt;等等，当然，这是后面再学习的内容。<br>
+这个&lt;h1&gt;一级大标题的效果就是：<h1>HTML Big Title</h1>是不是非常大？再回到刚刚看的那段代码，开头的&lt;h1&gt;我们知道了，这是引入大标题的一个标签，那么&lt;/h1&gt;比&lt;h1&gt;多出了一个斜杠“/”。这又是什么意思呢？这其实就是对标签&lt;h1&gt;的一个结束的引入标签，代表着结束这一段标签的使用。如果你使用&lt;h1&gt;大标题忘记加&lt;/h1&gt;，那你接下来的文字和代码都是以大标题的形式呈现了，那样字号也会很大的，这会很奇怪的。<br>简单来说，&lt;h1&gt;标签就好像是告诉浏览器：“哥们儿，接下来的内容，都要给我以大标题的形式呈现！”，而&lt;/h1&gt;就好像在告诉浏览器：“嘿，哥们。接下来的内容，就不要再用大标题了。结束用大标题吧！”。这样子记忆，你可能会更加容易记住。一般的，html都是以“标签+内容+/标签”的形式来呈现代码的。而且，HTML还有很多大标题标签。比如&lt;h2&gt;、&lt;h3&gt;、&lt;h4&gt;、&lt;h5&gt;。html的大标题只有h1到h5，当然，HTML代码没有大小写限制，你用大写字母还是小写字母，浏览器都能识别出来。当然，为了规范，我们这里还是用回小写字母吧。来看看h1到h5的效果。<h1>h1</h1><h2>h2</h2><h3>h3</h3><h4>h4</h4><h5>h5</h5>都是从大到小来排列的。当你想在网页中做到换行的时候，是Enter键吗？Aha！当然不是。。你只需要在想加的地方加入一个&lt;br&gt;就可以了，完全不用加入别的东西，也不用按Enter键来换行。<h2>&lt;a&gt;标签</h2>&lt;a&gt;标签就很简单了。你只需要这样子写：<pre style='width:80%'><code class='language-HTML'>&lt;a&gt;Your Comments&lt;/a&gt;</code></pre><br>效果:<br><a>Your Comments</a><br>这个标签就是用来显示普通文字的。所以非常简单，和h1是一个概念。你可以在“a”标签里嵌套你想要的内容，甚至可以放入别的HTML代码在里面，这都是可以的。<br><br>
+  <style>
+.tk-submit-action-icon{
+    height:20px;
+}
+#twikoo{
+    width:95%;
+}
+</style>
+<div id="comment"></div>
+<script src="https://hellopgrmm.github.io/tools/twikoo.min.js"></script>
+<link rel="stylesheet" href="https://hellopgrmm.github.io/tools/twikoo.min.css">
+<script>
+twikoo.init({
+  envId: 'https://cheerful-moonbeam-4f1337.netlify.app/.netlify/functions/twikoo',
+  el: '#comment', 
+  path: location.pathname, 
+  lang: 'zh-CN', 
+})
+</script>
+ <!--end--><hr><center><spam>Copyright (C) Hello-Programming 2024｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
