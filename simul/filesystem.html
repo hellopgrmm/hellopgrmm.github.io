@@ -75,7 +75,7 @@ for(var i =0; i<localStorage.length;i++){
 	else if(nose == 'Kunbi'){
 	    continue;
 	}
-        sa.innerHTML+=`<a onclick="path.innerHTML='C:/MyFiles/${nose}';giegie0.style.display='none';la.style.display='';ken.value=localStorage.getItem('${nose}');"><img src="https://hellopgrmm.github.io/simul/kunpics/KunICON/TXT.png">${nose}</a><br>`;
+        sa.innerHTML+=`<a onclick="path.innerHTML='C:/MyFiles/${nose}';giegie0.style.display='none';la.style.display='';ken.value=localStorage.getItem('${nose}');"><img src="https://hellopgrmm.github.io/simul/kunpics/KunICON/TXT.png">${nose}</a>&nbsp;&nbsp;<button onclick='localStorage.removeItem(${nose});alert('已删除，请刷新界面。')'>删除</button><br>`;
 }
 </script>
 </body></html>
