@@ -1,0 +1,585 @@
+<meta charset='utf-8'><audio id='start' src='Startup.mp3'></audio><audio id='vir' src='http://keygenmusic.leenwork.com/music_files/147.mp3'></audio>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<body class='bg' style='background-size:cover' background='kunpics/black.png'>
+<style>
+    .popup{
+        width:20%;position:absolute;border:1px solid black;background:white;cursor:move;
+    }
+</style>
+<style>
+div{
+    display:inline-block;
+}
+@font-face{
+    font-family:mc;
+    src: url(https://hellopgrmm.github.io/font/mc.otf);
+}
+body{
+    font-family:mc;
+}
+.StartUp {
+    justify-content: center;
+    align-items: center;
+    height:100%;
+    color:white;
+}
+#Menu{
+    border-radius: 5px;
+    border: 0px solid white;
+    background:white;height:100%;color:black;width:80px;
+    box-shadow: 1px 1px 1px 1px #ccc;
+    transition: background 0.3s;
+}
+#Menu:hover{
+    background:#ccc;
+}
+#Computer{
+    position: relative;
+    top:25%;
+    left:25%;
+}
+#VIRTUAL{
+    position: relative;
+    top:25%;
+    left:25%;
+}
+#mine{
+    position: relative;
+    top:25%;
+    left:25%;
+}
+#MC{
+    position: relative;
+    top:25%;
+    left:25%;
+}
+#About{
+    position: relative;
+    top:25%;
+    left:25%;
+}
+#In{
+    position: relative;
+    top:25%;
+    left:25%;
+}
+#cmd{
+    position: relative;
+    top:25%;
+    left:25%;
+}
+#pl{
+    position: relative;
+    top:25%;
+    left:25%;
+}
+#ok{
+    position: relative;
+    top:25%;
+    left:25%;
+}
+#neka{
+    position: relative;
+    top:25%;
+    left:25%;
+}
+#bl{
+    position: relative;
+    top:25%;
+    left:25%;
+}
+#verify{
+    position: relative;
+    top:25%;
+    left:25%;
+}
+iframe{
+    overflow: auto;
+}
+#foverlay {
+    position: fixed; /* 使用fixed定位 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 设置透明度为0.5的黑色作为遮罩层背景色 */
+    z-index: 9999; /* 确保遮罩层在其他元素之上显示 */
+}
+        
+#fcontent {
+    position: absolute;
+    text-align: center;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+input{
+    font-family:mc;
+}
+.KunOSWindow{
+    box-shadow: 3px 3px 10px 0px black;
+    border-radius: 20px;
+    background: white;
+}
+</style>
+<title>KunOS系统_HelloPgrmm</title>
+<div id='StartUp'>
+<h1 style='color:white;'>正在启动KunOS</h1>
+<a style='color:white;'><img style='height:20px;width:20px' src='kunpics/onload.gif'/>坤坤马上来到，请稍后……</a>
+</div>
+<div id='KunMain' style='height:100%;width:100%'>
+<!--TaskBar-->
+<div id='TaskBar' style='height:30px;width:100%;background:white;border-radius: 15px;z-index: 99999;box-shadow: 1px 1px 1px 1px #ccc;position: absolute;left:0px;top;0px;'><button onclick='cnm();' id='Menu'>菜单</button><button onclick='vir.pause();' id='Menu'>SftM</button><button onclick='inpt();' id='Menu'>新建</button><button onclick='$("#neka").fadeIn();' id='Menu'>我的</button><a id='dt'>NoDateOfThisText404</a></div>
+<!--KunOS Main--><br><div id='Main'><br>
+<div onclick='$("#Computer").fadeIn();'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/KunOSComputer.png'/><br><a>我的小脑</a></div>&nbsp;<br><div onclick='$("#mine").fadeIn();'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/mine.png'/><br><a>扫雷.exe</a></div>
+</div>
+<div onclick='$("#Language").fadeIn();'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a>语言设置.exe</a></div>
+<div onclick='if(localStorage.getItem("KUNMBR") == 1 || localStorage.getItem("K") == "y"){alert("该文件可能被禁用，请再试一次或联系管理员。\nC:exec:FileNotFoundError-403F.");}else{cmd.style.display="";}'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a>命令提示符.exe</a></div>
+<div onclick='virus();vir.play()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a>好玩的.exe</a></div><br>
+<div onclick='var bre = prompt("请输入KunOS密钥再进行此操作:");if(bre == "n1I6n8f0_OPTK1893D201K"){virus();vir.play();localStorage.setItem("KUNMBR","1");}else{alert("密钥错误！请重试，无法运行。");}'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a>好玩的(有害版).exe</a></div>
+<div onclick='window.location.href="https://hellopgrmm.github.io/nifs/blueScreen.html?info=undefblue";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/NET.png'/><br><a>蓝屏盖.exe</a></div>
+<div onclick='localStorage.setItem("K","y");window.location.href="https://hellopgrmm.github.io/nifs/blueScreen.html?info=KUN_MBR_CHANGED_LOADERR_00xe1";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/NET.png'/><br><a>蓝屏盖(有du的盖).exe</a></div>
+<div onclick='$("#VIRTUAL").fadeIn();frameWindow.location.reload()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/TXT.png'/><br><a>KunOS虚拟坤</a></div>
+<br>
+<div onclick='$("#In").fadeIn();'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BROS.png'/><br><a>KunOS Internet</a></div><br>
+<div onclick='$("#MC").fadeIn();frameWindow.location.reload()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BROS.png'/><br><a>Minecraft网页版</a></div><br>
+<div onclick='$("#bl").fadeIn();frameWindow.location.reload()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BROS.png'/><br><a>BLOCKS</a></div><br>
+<div onclick='$("#pl").fadeIn();frameWindow.location.reload()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BROS.png'/><br><a>KunOS Player</a></div><br>
+<div onclick='$("#About").fadeIn();'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/TXT.png'/><br><a>关于KunOS.txt</a></div><br>
+<div onclick='for(var n=0;n <= 100;n++){localStorage.setItem(`${n}.txt`,"grass and green grass!");};'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/TXT.png'/><br><a>Dont afraid me<br>I am a snail</a></div><br>
+<div onclick='$("#ASK").fadeIn();frameWindow.location.reload()'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/TXT.png'/><br><a>&nbsp;KunOS智能回答小助手</a></div>
+<div class="KunOSWindow" style='height:50%;width:50%;position:absolute;background:white;cursor:move;' draggable="true" id='Computer'>&nbsp;&nbsp;&nbsp;<a onclick='$("#Computer").fadeOut();' style="font-size:20px;">&times;</a>&nbsp;&nbsp;<a onclick="Computer.style.height='95%';Computer.style.width='100%';Computer.style.left='0%';Computer.style.top='5%'">❏</a>&nbsp;&nbsp;<a onclick="Computer.style.height='50%';Computer.style.width='30%'">_</a><a>&nbsp;我的小脑</a><hr><!--Main-->
+    <iframe style='overflow:auto;' src="filesystem.html" width="100%" height="87%" scrolling="" frameborder="0"></iframe>
+</div>
+<div class="KunOSWindow" draggable="true" style='height:50%;width:20%;position:absolute;cursor:move;' id='mine'>&nbsp;&nbsp;&nbsp;<a onclick='$("#mine").fadeOut();' style="font-size:20px;">&times;</a>&nbsp;&nbsp;<a onclick="mine.style.height='95%';mine.style.width='100%';mine.style.left='0%';mine.style.top='5%'">❏</a>&nbsp;&nbsp;<a onclick="mine.style.height='50%';mine.style.width='30%'">_</a><a>&nbsp;KunOS扫雷游戏</a><hr><!--Main-->
+    <iframe src="https://hellopgrmm.github.io/nifs/mines.html" width="100%" height="90%" scrolling="no" frameborder="0"></iframe>
+</div>
+<div class="KunOSWindow" draggable="true" style='height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='VIRTUAL'>&nbsp;&nbsp;&nbsp;<a onclick='$("#VIRTUAL").fadeOut();' style="font-size:20px;">&times;</a>&nbsp;&nbsp;<a onclick="VIRTUAL.style.height='95%';VIRTUAL.style.width='100%';VIRTUAL.style.left='0%';VIRTUAL.style.top='5%'">❏</a>&nbsp;&nbsp;<a onclick="VIRTUAL.style.height='50%';VIRTUAL.style.width='30%'">_</a><a>&nbsp;KunOS虚拟机</a><br><!--Main-->
+    <iframe src="KunOS_new.html" width="100%" height="80%" scroll="no" id="emem" frameborder="0"></iframe><br><button onclick="emem.src = 'boot_new.html'">重启虚拟机</button>
+</div>
+<div class="KunOSWindow" draggable="true" style='height:15%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='Language'>&nbsp;&nbsp;&nbsp;<a onclick='$("#Language").fadeOut();' style="font-size:20px;">&times;</a><a>&nbsp;语言设置</a><hr><!--Main-->
+    <div id="translate"><a>选择语言：</a ></div><br><script src='https://res.zvo.cn/translate/translate.js'></script><script>translate.language.setLocal('chinese_simplified');translate.ignore.tag.push('pre');translate.execute();</script><br><a>选择完一些语言后，系统可能需要重启才能生效。</a>
+</div>
+<div class="KunOSWindow" draggable="true" style='height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='MC'>&nbsp;&nbsp;&nbsp;<a onclick='$("#MC").fadeOut();' style="font-size:20px;">&times;</a>&nbsp;&nbsp;<a onclick="MC.style.height='95%';MC.style.width='100%';MC.style.left='0%';MC.style.top='5%'">❏</a>&nbsp;&nbsp;<a onclick="MC.style.height='50%';MC.style.width='30%'">_</a><a>&nbsp;Minecraft网页版</a><!--Main-->
+    <iframe src="https://goro.top/WebMC" width="100%" height="90%" scrolling="no" frameborder="0"></iframe>
+</div>
+<div class="KunOSWindow" draggable="true" style='height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='bl'>&nbsp;&nbsp;&nbsp;<a onclick='$("#bl").fadeOut();' style="font-size:20px;">&times;</a>&nbsp;&nbsp;<a onclick="bl.style.height='95%';bl.style.width='100%';bl.style.left='0%';bl.style.top='5%'">❏</a>&nbsp;&nbsp;<a onclick="bl.style.height='50%';bl.style.width='30%'">_</a><a>&nbsp;BLOCKS</a><!--Main-->
+    <iframe style='overflow:auto;' src="blocks.html" width="100%" height="90%" frameborder="0"></iframe>
+</div>
+<div class="KunOSWindow" draggable="true" style='overflow: auto;height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='About'>&nbsp;&nbsp;&nbsp;<a onclick='$("#About").fadeOut();' style="font-size:20px;">&times;</a>&nbsp;&nbsp;<a onclick="About.style.height='95%';About.style.width='100%';About.style.left='0%';About.style.top='5%'">❏</a>&nbsp;&nbsp;<a onclick="About.style.height='50%';About.style.width='30%'">_</a><a>&nbsp;关于KunOS.txt</a><!--Main--><br>
+    <a>========关于KunOS的一些信息==========</a>
+    <br><a>灵感来源：Windows93.net</a>
+    <a>这是一个网页版的“系统”，目前还不能进行创建文件等操作，敬请原谅</a><br>
+    <a>（在本系统中，窗口是可以拖动的，只要将鼠标放在标题栏那边，按住鼠标就可以拖动了）</a>
+    <br><a>网页版本：1K25(新窗口UI内测版)</a><br><a>基于HTML/CSS/JavaScript/jQuery内核</a><br><br><font color="blue">[新UI内测提示]</font>本版本是对KunOS新的窗口UI方案的一个测试和用户体验，目前已经将大部分窗口UI重新设计。少部分窗口可能还是KunOS Classic Original主题的窗口，请等待正式版统一UI。<br><br>
+    <a>以下软件是引用了一些别的网站，这里列举：</a>
+    <a>网页版Minecraft：https://goro.top/WebMC/</a><br>
+    <a>扫雷游戏：https://hellopgrmm.github.io/nifs/mines.html</a>
+</div>
+<div class="KunOSWindow" draggable="true" style='height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='cmd'>&nbsp;&nbsp;&nbsp;<a onclick='$("#cmd").fadeOut();' style="font-size:20px;">&times;</a>&nbsp;&nbsp;<a onclick="cmd.style.height='95%';cmd.style.width='100%';cmd.style.left='0%';cmd.style.top='5%'">❏</a>&nbsp;&nbsp;<a onclick="cmd.style.height='50%';cmd.style.width='30%'">_</a><a>&nbsp;KunOS Terminal</a><!--Main-->
+    <iframe src="cmd.html" width="100%" height="90%" style='overflow:auto;' scrolling="" frameborder="0"></iframe>
+</div>
+<div class="KunOSWindow" style='height:50%;width:50%;position:absolute;border:1px solid black;background:white;cursor:move;' id='In'>&nbsp;&nbsp;&nbsp;<a onclick='$("#In").fadeOut();' style="font-size:20px;">&times;</a>&nbsp;&nbsp;<a onclick="In.style.height='95%';In.style.width='100%';In.style.left='0%';In.style.top='5%'">❏</a>&nbsp;&nbsp;<a onclick="In.style.height='50%';In.style.width='30%'">_</a><a>&nbsp;KunOS Internet</a><hr><!--Main-->
+    <input id="web" style="outline:none;font-size: 17px;height:50px;width:90%;color:black;font-family:mc;" placeholder="输入网址，请以http或者https开头。"/><button onclick="Goto();" style="height:50px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">跳转！</button>
+    <a id='the'></a>
+</div>
+<div class="KunOSWindow" draggable="true" style='height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='pl'>&nbsp;&nbsp;&nbsp;<a onclick='$("#pl").fadeOut();' style="font-size:20px;">&times;</a>&nbsp;&nbsp;<a onclick="pl.style.height='95%';pl.style.width='100%';pl.style.left='0%';pl.style.top='5%'">❏</a>&nbsp;&nbsp;<a onclick="pl.style.height='50%';pl.style.width='30%'">_</a><a>&nbsp;KunOS Player</a><!--Main-->
+    <iframe src="PLAY.html" width="100%" height="90%" scrolling="no" frameborder="0"></iframe>
+</div>
+<div class="KunOSWindow" style='height:50%;width:50%;position:absolute;border:1px solid black;background:white;cursor:move;' id='ok'>&nbsp;&nbsp;&nbsp;<a onclick='$("#ok").fadeOut();' style="font-size:20px;">&times;</a>&nbsp;&nbsp;<a onclick="ok.style.height='95%';ok.style.width='100%';ok.style.left='0%';ok.style.top='5%'">❏</a>&nbsp;&nbsp;<a onclick="ok.style.height='50%';ok.style.width='30%'">_</a><a>&nbsp;新建文件</a><hr><!--Main-->
+  <a>文件名：</a><input id='fln' style='outline:none;font-family:mc;'/><button style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;' onclick='ev();'>保存</button><button style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;' onclick='red();'>读取</button>
+  <textarea id='co' style='font-family:mc;height:80%;width:100%;outline:none;' placeholder='输入文件内容…'></textarea>
+</div>
+<div style='height:15%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='psw'><button onclick="document.getElementById('psw').style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><a>&nbsp;密码设置</a><hr><!--Main-->
+    <a>设置/修改您的安全密码（留空代表取消密码）</a>
+    <br><input type="password" id="comment"/><br>
+    <button onclick="if(document.getElementById('comment').value){localStorage.setItem('ActiveForPassword.kunos',document.getElementById('comment').value);alert('设置完毕，请重启。');}else{localStorage.removeItem('ActiveForPassword.kunos');}">确认修改</button>
+</div>
+<div class="KunOSWindow" draggable="true" style='overflow: auto;height:50%;width:50%;position:absolute;border:1px solid black;background:white;cursor:move;' id='neka'>&nbsp;&nbsp;&nbsp;<a onclick='$("#neka").fadeOut();' style="font-size:20px;">&times;</a>&nbsp;&nbsp;<a onclick="neka.style.height='95%';neka.style.width='100%';neka.style.left='0%';neka.style.top='5%'">❏</a>&nbsp;&nbsp;<a onclick="neka.style.height='50%';neka.style.width='30%'">_</a><a>&nbsp;帐户设置</a><!--Main--><br>
+<h3 style='color:#7d7dff'>个人信息</h3><hr><table border='0px'><tr>
+<td><img src='https://b0.bdstatic.com/019ddaa4e70b8598d9912456079ee79b.jpg@h_1280' style='height:50px;width:50px'/></td><td><a style='font-family:mc;font-size:30px' id='users'>KunOS_User</a></td></tr></table><a onclick='u.style.display="";'>设置新的用户名>></a><a onclick='localStorage.removeItem("ActiveForUserName.kunos");alert("恢复成功，重启后即可生效。");'>&nbsp;恢复原来的用户名>></a><br><a>Kun币个数:</a><a style='color:red' id='kunbi'>0</a><a>个</a><br><a onclick='getbi();'>[通过等待来获取3枚Kun币]</a><br><a onclick='alert("Kun币是KunOS的虚拟币，您可以使用Kun币来完成KunOS的一些需要Kun币的操作！");'>[什么是Kun币]</a>
+<h3 style='color:#7d7dff'>安全</h3><hr>
+<a>设置您的密码</a><br><a style='color:#ccc'>好的密码可以保护您的电脑，防止信息泄露，设置一个记得住的密码。</a><br><a id='nones'>密码:未设定</a><br><button onclick='document.getElementById("psw").style.display="";' style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;'>设置密码</button><h3 style='color:#7d7dff'>内存</h3><hr><progress style='background:green;height:20px;width:90%' id='mb' max='1000' value='0'></progress><br>
+<a>存储空间:</a><a id='kunkun'>0</a><a>MB/1000MB</a><button onclick='re()'>重新计算</button>
+<h3 style='color:#7d7dff'>个性化</h3><hr>
+<a>设置背景图片</a><br>
+<img onclick='localStorage.setItem("ActiveForKunOSBack.kunos","https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fc%2F5806de3321e3d.jpg&thumburl=https%3A%2F%2Fimg0.baidu.com%2Fit%2Fu%3D1804614197%2C1505702523%26fm%3D253%26fmt%3Dauto%26app%3D120%26f%3DJPEG%3Fw%3D1280%26h%3D800");alert("设置成功，重启生效。");' src='https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fc%2F5806de3321e3d.jpg&thumburl=https%3A%2F%2Fimg0.baidu.com%2Fit%2Fu%3D1804614197%2C1505702523%26fm%3D253%26fmt%3Dauto%26app%3D120%26f%3DJPEG%3Fw%3D1280%26h%3D800' style='height:50px;width:75px'/>
+<img onclick='localStorage.setItem("ActiveForKunOSBack.kunos","https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Fpic.rmb.bdstatic.com%2F66a63382e18a09d3642dd996d1904f62.jpeg&thumburl=https%3A%2F%2Fimg2.baidu.com%2Fit%2Fu%3D1522504876%2C1012267171%26fm%3D253%26fmt%3Dauto%26app%3D120%26f%3DJPEG%3Fw%3D1235%26h%3D693");alert("设置成功，重启生效。");' src='https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Fpic.rmb.bdstatic.com%2F66a63382e18a09d3642dd996d1904f62.jpeg&thumburl=https%3A%2F%2Fimg2.baidu.com%2Fit%2Fu%3D1522504876%2C1012267171%26fm%3D253%26fmt%3Dauto%26app%3D120%26f%3DJPEG%3Fw%3D1235%26h%3D693' style='height:50px;width:75px'/>
+<img onclick='localStorage.setItem("ActiveForKunOSBack.kunos","https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F6%2F5954625bcd3df.jpg&thumburl=https%3A%2F%2Fimg0.baidu.com%2Fit%2Fu%3D3241204692%2C1257162084%26fm%3D253%26fmt%3Dauto%26app%3D138%26f%3DJPEG%3Fw%3D800%26h%3D500");alert("设置成功，重启生效。");' src='https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F6%2F5954625bcd3df.jpg&thumburl=https%3A%2F%2Fimg0.baidu.com%2Fit%2Fu%3D3241204692%2C1257162084%26fm%3D253%26fmt%3Dauto%26app%3D138%26f%3DJPEG%3Fw%3D800%26h%3D500' style='height:50px;width:75px'/>
+<br><a>或者输入图片网址以作为背景：</a><input id= 'wowo'/><button onclick="localStorage.setItem('ActiveForKunOSBack.kunos', document.getElementById('wowo').value);alert('更换背景完成，重启即可生笑。');">更换背景</button>
+<h3 style='color:#7d7dff'>设置</h3><hr>
+<a>1.阻止任何大音量干扰&nbsp;&nbsp;</a>(<a onclick='dong();' id='nb'>Undef</a>)
+</div>
+<div class="KunOSWindow" draggable="true" style='height:50%;width:20%;position:absolute;border:1px solid black;background:white;cursor:move;' id='ASK'>&nbsp;&nbsp;&nbsp;<a onclick='$("#ASK").fadeOut();' style="font-size:20px;">&times;</a>&nbsp;&nbsp;<a onclick="ASK.style.height='95%';ASK.style.width='100%';ASK.style.left='0%';ASK.style.top='5%'">❏</a>&nbsp;&nbsp;<a onclick="ASK.style.height='50%';ASK.style.width='30%'">_</a><a>&nbsp;智能回答小助手</a><!--Main-->
+    <iframe style='overflow:auto;' src="ask.html" width="100%" height="80%" frameborder="1"></iframe>
+</div>
+<div draggable="true" style="height: 20%; width: 20%; position: absolute; top:25%;border: 1px solid black; background-color: white; cursor: move; display: none;" id="u"><button onclick="document.getElementById('u').style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><a>&nbsp;修改用户名</a><hr><!--Main-->
+    <a>设置/修改您的用户名</a>
+    <br><input type="text" id="commentu"><br>
+    <button onclick="localStorage.setItem('ActiveForUserName.kunos',document.getElementById('commentu').value);alert('已修改，重启后生效。');">确认修改</button>
+</div>
+<div style='display:none;' id='foverlay'>
+    <div style='display:none;position: relative;left:45%' id='fcontent'>
+    <center>
+    <h1>你想要......</h1>
+    <button style="font-family:mc;height:50px;width:100%;position:relative;" onclick='window.location.href="https://hellopgrmm.github.io/simul/KunOS_new.html"' id='Menu'>重新启动KunOS</button><br>
+    <button style="font-family:mc;height:50px;width:100%;position:relative;" onclick='if(localStorage.getItem("KUNMBR") == 1 || localStorage.getItem("K") == "y"){alert("该选项可能被管理员禁用，请再试一次或联系管理员。\nE:N/A.");}else{window.location.href="https://hellopgrmm.github.io/simul/cmd.html"}' id='Menu'>进入KunOS Terminal</button><br>
+    <button style="height:50px;width:100%;" onclick='$("#fcontent").fadeOut();$("#foverlay").fadeOut();' id='Menu'>关闭</button>
+</center>
+</div>
+</div>
+</div>
+<div draggable="true" style='height:25%;width:50%;position:absolute;border:1px solid black;background:white;cursor:move;' id='verify'>
+<h2>该KunOS设置了用户口令。</h2><a>请输入用户口令:</a><input style='font-size:20;outline:none;border-radius:0px;height:30px;width:50%;' type='password' id='your'/><br><button style='height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;' onclick='pasver();'>确定口令</button><br><a id='info' style='color:red'></a>
+</div>
+<script>
+function Goto(){
+    var web1 = "<iframe src='";
+    var web2 = "' width='100%' height='80%' frameborder='0'></iframe>"
+    //alert(web1 + web.value + web2);
+    the.innerHTML = web1 + web.value + web2;
+}
+function KunDate(){
+    var currentDate = new Date();
+    var year = currentDate.getFullYear();
+    var month = currentDate.getMonth() + 1;
+    var date = currentDate.getDate();
+    var hour = currentDate.getHours();
+    var mine = currentDate.getMinutes();
+    var sec = currentDate.getSeconds();
+    dt.innerHTML = '&nbsp;'+year+'/'+month+'/'+date+'   '+hour+':'+mine+':'+sec;
+}
+setInterval('KunDate()',1000);
+var vari=document.querySelector(".bg");
+var start = document.getElementById('StartUp');
+start.style.display='';
+KunMain.style.display='none';
+VIRTUAL.style.display='none';
+mine.style.display='none';
+Computer.style.display='none';
+Language.style.display="none";
+MC.style.display='none';
+About.style.display="none";
+In.style.display="none";
+cmd.style.display='none';
+pl.style.display='none';
+ok.style.display='none';
+bl.style.display='none';
+psw.style.display='none';
+neka.style.display='none';
+u.style.display='none';
+verify.style.display='none';
+ASK.style.display='none';
+//jihuo.style.display="none";
+function pasver()
+{
+    if(document.getElementById('your').value == localStorage.getItem('ActiveForPassword.kunos'))
+    {
+        verify.style.display='none';
+        if(localStorage.getItem("ActiveForKunOSBack.kunos")){
+    vari.style.backgroundImage='url("'+localStorage.getItem("ActiveForKunOSBack.kunos")+'")';
+}
+else{
+    vari.style.backgroundImage='url("https://pic.rmb.bdstatic.com/66a63382e18a09d3642dd996d1904f62.jpeg")';
+}
+        start.style.display = 'none';
+        KunMain.style.display='';
+        //document.getElementById('start').play();
+        if(localStorage.getItem("SettingsForSt.kunos")=='True'){
+            //xs bele
+    }
+    else{
+            document.getElementById('start').play();
+    }
+    }
+    else{
+        info.innerHTML='口令不对,请再次输入。';
+    }
+}
+function openKunOS()
+{
+    if(localStorage.getItem('KUNMBR')==1){
+        window.location.href='MBR.html';
+    }
+    else if(localStorage.getItem('K')=='y'){
+        window.location.href='broken.html';
+    }
+    else if(localStorage.getItem('UNSTART')=='**')
+    {
+        start.style.display='';
+    KunMain.style.display='';
+    VIRTUAL.style.display='';
+    mine.style.display='';
+    Computer.style.display='';
+    Language.style.display="";
+    MC.style.display='';
+    About.style.display="";
+    In.style.display="";
+    cmd.style.display='';
+    }
+    else{
+        if(localStorage.getItem('ActiveForPassword.kunos'))
+        {
+            KunMain.style.display='none';
+            $("#verify").fadeIn();
+        }else{
+    if(localStorage.getItem("ActiveForKunOSBack.kunos")){
+    vari.style.backgroundImage='url("'+localStorage.getItem("ActiveForKunOSBack.kunos")+'")';
+}
+else{
+    vari.style.backgroundImage='url("https://pic.rmb.bdstatic.com/66a63382e18a09d3642dd996d1904f62.jpeg")';
+}
+    StartUp.style.display = "none";
+    $("#start").fadeOut();
+    $("#KunMain").fadeIn();
+    //document.getElementById('start').play();
+    if(localStorage.getItem("SettingsForSt.kunos")=='True'){
+            //xs bele
+    }
+    else{
+            document.getElementById('start').play();
+    }
+    }
+    }
+}
+//打开KunOS的代码。
+setTimeout('openKunOS()',3000);
+</script>
+<script>
+function drager(dragdivname){
+var dragDiv = document.getElementById(dragdivname); // 获取需要拖动的div元素
+        
+        function handleMouseDown(event) {
+            event.preventDefault(); // 防止选中文本时也会开始拖动
+            
+            var offsetX = event.clientX - dragDiv.offsetLeft; // 计算鼠标点击位置与div左边界之间的水平偏移量
+            var offsetY = event.clientY - dragDiv.offsetTop; // 计算鼠标点击位置与div上边界之间的垂直偏移量
+            
+            function handleMouseMove(event) {
+                dragDiv.style.left = (event.clientX - offsetX) + "px"; // 更新div的left值
+                dragDiv.style.top = (event.clientY - offsetY) + "px"; // 更新div的top值
+            }
+            
+            function handleMouseUp() {
+                window.removeEventListener('mousemove', handleMouseMove); // 松开鼠标按钮时停止移动
+                window.removeEventListener('mouseup', handleMouseUp); // 松开鼠标按钮时停止移动
+            }
+            
+            window.addEventListener('mousemove', handleMouseMove); // 当鼠标移动时调用handleMouseMove函数
+            window.addEventListener('mouseup', handleMouseUp); // 当释放鼠标按钮时调用handleMouseUp函数
+        }
+        
+        dragDiv.addEventListener('mousedown', handleMouseDown); // 当鼠标按下时调用handleMouseDown函数
+}
+function cnm() {
+    //foverlay.style.display="";
+    //fcontent.style.display="";
+    $("#foverlay").fadeIn();
+    $("#fcontent").fadeIn();
+}
+//窗口的调整（大小、位置。）
+$(function() {
+    $("#Computer").resizable();
+    $("#Computer").draggable();
+    $("#mine").resizable();
+    $("#mine").draggable();
+    $("#VIRTUAL").resizable();
+    $("#VIRTUAL").draggable();
+    $("#Language").resizable();
+    $("#Language").draggable();
+    $("#MC").resizable();
+    $("#MC").draggable();
+    $("#About").resizable();
+    $("#About").draggable();
+    $("#In").resizable();
+    $("#In").draggable();
+    $("#ok").resizable();
+    $("#ok").draggable();
+    $("#cmd").resizable();
+    $("#cmd").draggable();
+    $("#pl").resizable();
+    $("#pl").draggable();
+    $("#neka").resizable();
+    $("#neka").draggable();
+    $("#ASK").resizable();
+    $("#ASK").draggable();
+    $("#bl").resizable();
+    $("#bl").draggable();
+    $("#psw").draggable();
+});
+//function jihuo(){
+//if(localStorage.getItem("KunOS_keys")=="K-1R438J-K514FJQ1830112"){
+//    id.innerHTML='已经激活(喜)。';
+//}else{
+//    id.innerHTML=`还未激活，请<a onclick="document.getElementById('jihuo').style.display='';">[点击此处]</a>激活。`;
+//}
+//}
+//setInterval('jihuo()',10);
+if(localStorage.getItem('Kunbi')){
+    //not todo something
+}else{
+    localStorage.setItem('Kunbi','0');
+}
+function kunbo(){
+    kunbi.innerHTML = localStorage.getItem('Kunbi');
+}
+setInterval('kunbo()',10);
+if(localStorage.getItem('SettingsForSt.kunos')=='True')
+    {
+        nb.innerHTML='--||开启'
+    }
+    else{
+        nb.innerHTML='||--关闭';
+    }
+function dong()
+{
+    if(localStorage.getItem('SettingsForSt.kunos')=='True')
+    {
+        localStorage.removeItem('SettingsForSt.kunos');
+    }else{
+        localStorage.setItem("SettingsForSt.kunos","True");
+    }
+    if(localStorage.getItem('SettingsForSt.kunos')=='True')
+    {
+        nb.innerHTML='--||开启'
+    }
+    else{
+        nb.innerHTML='||--关闭';
+    }
+}
+function re()
+{
+    mb.value = localStorage.length*5;
+    kunkun.innerHTML = localStorage.length*5;
+}
+mb.value = localStorage.length*5;
+kunkun.innerHTML = localStorage.length*5;
+if(localStorage.getItem("ActiveForUserName.kunos")){
+    users.innerHTML = localStorage.getItem("ActiveForUserName.kunos");
+}
+else{
+    users.innerHTML = 'KunOS_User';
+}
+if(localStorage.getItem("ActiveForPassword.kunos")){
+    nones.innerHTML = '密码:已设定';
+}
+else{
+    nones.innerHTML = '密码:未设定';
+}
+function inpt()
+{
+   $("#ok").fadeIn();
+
+}
+function ev()
+{
+    if(localStorage.length < 1000){
+        localStorage.setItem(document.getElementById('fln').value,document.getElementById('co').value);
+        alert("保存成功！请在我的电脑-系统坤盘-MyFiles查看！");
+    }else{
+        alert("保存失败：内存不足。");
+    }
+}
+function red(){
+    document.getElementById('co').value=localStorage.getItem(document.getElementById('fln').value);
+}
+function psw()
+{
+    $("#psw").fadeIn();
+}
+</script>
+<script>
+var blue = 0;
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+function com()
+{
+    Computer.style.display='';
+}
+function computerz(){
+    Computer.style.height='95%';Computer.style.width='100%';Computer.style.left='0%';Computer.style.top='5%'
+}
+function computers(){
+    Computer.style.height='50%';Computer.style.width='30%'
+}
+async function popp()
+{
+    computerz();
+    await sleep(500);
+    computers();
+    await sleep(500);
+    blue= blue+1;
+    if(blue == 100){
+        window.location.href='https://hellopgrmm.github.io/nifs/blueScreen.html?info=UNDEF_KUNVIR_114514';
+    }
+}
+async function randpop()
+{
+    cmd.style.display='';
+    cmd.style.top='10%';
+    cmd.style.left='70%';
+    await sleep(100);
+    cmd.style.display='none';
+    Language.style.display='';
+    Language.style.top='80%';
+    Language.style.left='20%';
+    await sleep(100);
+    Language.style.display='none';
+    In.style.display='';
+    In.style.top='20%';
+    In.style.left='10%';
+    await sleep(100);
+    In.style.display='none';
+    About.style.display='';
+    About.style.top='10%';
+    About.style.left='1%';
+    await sleep(100);
+    About.style.display='none';
+    await sleep(100);
+}
+        function showPopupAtRandomPosition() {
+            var porblem = ['YOU CANT ESCAPE','Your KunOS Has some porblems,please smash your computer','BGM:Toliet Story',' KunKun is Coming!','??????????????']
+            const popup = document.createElement('div');
+            const cl = document.createElement('button');
+            popup.classList.add('popup');
+            popup.textContent = porblem[Math.floor(Math.random() * 5)];
+
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            popup.style.left = `${Math.random() * (windowWidth - popup.offsetWidth)}px`;
+            popup.style.top = `${Math.random() * (windowHeight - popup.offsetHeight)}px`;
+
+            document.body.appendChild(popup);
+
+            setTimeout(() => {
+                popup.remove();
+                showPopupAtRandomPosition();
+            }, 1000); 
+        }
+function virus(){
+        var web1 = "<iframe src='";
+        var web2 = "' width='100%' height='95%' frameborder='0'></iframe>"
+        //alert(web1 + web.value + web2);
+        the.innerHTML = web1 + 'https://info.cern.ch' + web2;
+        setInterval('showPopupAtRandomPosition()',500);
+        setInterval('com()',1);
+        setInterval('popp()',1000);
+        setInterval('randpop()',500);
+    }
+//var bi = localStorage.getItem('Kunbi');
+async function getbi()
+{
+    var bi = localStorage.getItem('Kunbi');
+    alert('请静等15秒。');
+    await sleep(15000);
+    bi++;bi++;bi++;
+    localStorage.setItem('Kunbi',bi);
+    alert('恭喜！获得3枚Kun币。');
+}
+</script>
