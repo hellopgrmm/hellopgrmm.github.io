@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+@font-face{
+    font-family:mc;
+    src: url(https://hellopgrmm.github.io/font/mc.otf);
+}
+body{
+    font-family:mc;
+}
+.HellopgrmmBox{
+    height:100%;
+    width:80%;
+    box-shadow:0px 0px 25px 0px #ccc;
+    border-radius:15px;
+}
+.HellopgrmmButton{
+    height:50px;
+    width:70px;
+    font-size:15px;
+    background:white;
+    box-shadow:0px 0px 5px 0px #ccc;
+    color:black;
+    font-family:mc;
+    border-radius:5px;
+    border:1px solid #fcfcfc;
+    transition: background 0.3s;
+}
+.HellopgrmmButton:hover{
+    background:#f0f0f0;
+}
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频播放器</title>
+</head>
+<body>
+<div class='HellopgrmmBox'>
+<center>
+<h1>KunOS Player</h1><a>支持MP4等音视频文件。</a><br>
+<video id="videoPlayer"></video><br>
+<input type="file" id="fileInput"/><br><br>Controls<br><br><marquee id='mex'></marquee><br><br><button onclick='mex.innerHTML="Now playing "+videoPlayer.src;videoPlayer.play()' class='HellopgrmmButton'>VID PLAY</button><button onclick='videoPlayer.pause()' class='HellopgrmmButton'>VID PUSE.</button><button onclick='videoPlayer.playbackRate = "0.5";' class='HellopgrmmButton'>RT 0.5</button><button onclick='videoPlayer.playbackRate = "1.0";' class='HellopgrmmButton'>RT 1.0</button><button onclick='videoPlayer.playbackRate = "1.5";' class='HellopgrmmButton'>RT 1.5</button><button onclick='videoPlayer.playbackRate = "2.0";' class='HellopgrmmButton'>RT 2.0</button>
+</center>
+<br>
+</div>
+<script>
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        var videoPlayer = document.getElementById('videoPlayer');
+
+        //if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                videoPlayer.src = e.target.result;
+                videoPlayer.load();
+            };
+
+            reader.readAsDataURL(file);
+            videoPlayer.style.height='200px';
+        //} else {
+            //videoPlayer.src = '';
+        //}
+    });
+</script>
