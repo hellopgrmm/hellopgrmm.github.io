@@ -1,0 +1,173 @@
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <title>音乐播放器|Hellopgrmm 一个分享编程经验的网站</title>
+  <a href="https://hellopgrmm.github.io/musics/">返回</a><br>
+<a style='font-size:35px;'>M2M-The Day You Went Away(高品质音质)</a><br><!--<img src='' style='height:100px;width:100px'/--><a>----<br>暂无简介图片<br>----</a><br><a>音乐简介：</a><br><font color='#ccc'>《The Day You Went Away》是挪威组合M2M演唱的歌曲，由玛丽安·雷文、玛丽特·拉森、Matt Rowe作词、作曲，M2M编曲，收录在M2M于2000年3月7日发行的专辑《Shades Of Purple》中。(百度百科)</font>
+<audio src='https://www.joy127.com/url/120648.mp3' id='player'></audio><br><a id='curtime' >0</a><a>秒</a><a>/</a><a id='duration'>0</a><a>秒</a>
+<input type='range' style='width:736px;' id='xx'><br><button id='cc' class='dd'>播放</button>
+<button style='height:30px;width:80px;background-color:#00caca;color:black;border-radius:114514px;' onclick="player.loop='';">停止循环</button>
+<button style='height:30px;width:80px;background-color:#00caca;color:black;border-radius:114514px;' onclick="player.loop='true';">洗脑循环</button><button style='height:30px;width:80px;background-color:#00caca;color:black;border-radius:114514px;' onclick="player.loop='';">取消循环</button>
+<link rel="stylesheet" type="text/css" href="button.css">
+<button style='height:30px;width:50px;background-color:#00caca;color:black;border-radius:114514px;' onclick="bs.style.display='';">倍速</button>
+<button id='mtes' style='height:30px;width:75px;background-color:#00caca;color:black;border-radius:114514px;' onclick="player.muted='true'">静音</button>
+<button id='mtes' style='height:30px;width:80px;background-color:#00caca;color:black;border-radius:114514px;' onclick="player.muted=''">取消静音</button>
+<input id='times' style='font-family:ht;' placeholder='跳转到…秒(输入数字)' type='text'/><a>秒</a>
+<button style='height:30px;width:75px;background-color:#00caca;color:black;border-radius:114514px;' onclick="document.querySelector('audio').currentTime=times.value">跳转</button>
+<div id='bs'>
+<button onclick='player.playbackRate = 10'>10x(鬼畜模式)</button>
+<button onclick='player.playbackRate = 2.0'>2x</button>
+<button onclick='player.playbackRate = 1.75'>1.75x</button>
+<button onclick='player.playbackRate = 1.5'>1.5x</button>
+<button onclick='player.playbackRate = 1.0'>1x</button>
+<button onclick='player.playbackRate = 0.75'>0.75x</button>
+<button onclick='player.playbackRate = 0.5'>0.5</button>
+<button onclick='bs.style.display="none";'>关闭</button>
+</div><br>
+<a style='font-size:20px' id='lrc'>The Day You Went Away-M2M</a>
+<script>
+window.onload=function(){
+  var player = document.getElementById("player"),
+  oBtn = document.getElementById("cc"), 
+  mteu = document.getElementById("mtes"), 
+  dn = document.getElementById("xx"),
+  curtime = document.getElementById("curtime"),
+  duration = document.getElementById("duration");
+  duration.innerHTML = player.duration.toFixed(0);
+  xx.max=player.duration
+  oBtn.onclick = function(){
+    if (player.paused){
+      player.play();
+      oBtn.innerHTML = "播放中";
+    } 
+    else {
+      player.pause();
+      oBtn.innerHTML = "已暂停";
+    }
+  }
+
+  setInterval(function(){
+      xx.value = player.currentTime;
+      var ac = player.currentTime.toFixed(0);
+      curtime.innerHTML = player.currentTime.toFixed(0);
+      if (ac == 20){
+          lrc.innerHTML = "Well I wonder could it be~~~";
+      }
+      else if(ac == 24){
+          lrc.innerHTML = "When I was dreaming about you baby You were dreaming of me";
+      }
+      else if(ac == 29){
+          lrc.innerHTML = "Call me crazy,Call me blind.";
+      }
+      else if(ac == 35){
+          lrc.innerHTML = "To still be suffering is stupid after all of this time";
+      }
+      else if(ac == 40){
+          lrc.innerHTML = "Did I lose my love to someone better";
+      }
+      else if(ac == 44){
+          lrc.innerHTML = "And does she love you like I do";
+      }
+      else if(ac == 47){
+          lrc.innerHTML = "I do' you know I really really do";
+      }
+      else if(ac == 51){
+          lrc.innerHTML = "Well hey~So much I need to say";
+      }
+      else if(ac == 55){
+          lrc.innerHTML = "Been lonely since that day.The day you went away~";
+      }
+      else if(ac == 60){
+          lrc.innerHTML = "So sad but true For me there is only you";
+      }
+      else if(ac == 65){
+          lrc.innerHTML = "Been crying since the day The day you went away";
+      }
+      else if(ac == 81){
+          lrc.innerHTML = "I remember Date&Time";
+      }
+      else if(ac == 86){
+          lrc.innerHTML = "September twenty second Sunday twenty five after nine";
+      }
+      else if(ac == 92){
+          lrc.innerHTML = "In the doorway with your case";
+      }
+      else if(ac == 97){
+          lrc.innerHTML = "No longer shouting at each other There were tears on our faces";
+      }
+      else if(ac == 102){
+          lrc.innerHTML = "Some we were letting go of something special";
+      }
+      else if(ac == 106){
+          lrc.innerHTML = "Something we'll never have again";
+      }
+      else if(ac == 109){
+          lrc.innerHTML = "I know' I guess I really really know";
+      }
+      else if(ac == 113){
+          lrc.innerHTML = "Well Hey~";
+      }
+      else if(ac == 115){
+          lrc.innerHTML = "So much I need to say Been lonely since that day The day you went away";
+      }
+      else if(ac == 123){
+          lrc.innerHTML = "So sad but true For me there is only you.";
+      }
+      else if(ac == 128){
+          lrc.innerHTML = "Been crying since that day The day you went away";
+      }
+      else if(ac == 133){
+          lrc.innerHTML = "The Day You Went Away...";
+      }
+      else if(ac == 149){
+          lrc.innerHTML = "Did I lose my love to someone better And does she love you like I do";
+      }
+      else if(ac == 155){
+          lrc.innerHTML = "I do' you know I really really do";
+      }
+      else if(ac == 159){
+          lrc.innerHTML = "Well hey";
+      }
+      else if(ac == 161){
+          lrc.innerHTML = "So much I need to say Been lonly since that day The day you went away";
+      }
+      else if(ac == 168){
+          lrc.innerHTML = "So sad but true For me there's only you Been crying since the day The day you went away";
+      }
+      else if(ac == 179){
+          lrc.innerHTML = "Why do we never know what we've got till it's gone";
+      }
+      else if(ac == 183){
+          lrc.innerHTML = "How could I carry on The day you went away";
+      }
+      else if(ac == 186){
+          lrc.innerHTML = "Cause I've been missing you so much I have to say";
+      }
+      else if(ac == 193){
+          lrc.innerHTML = "Been crying since the day";
+      }
+      else if(ac == 196){
+          lrc.innerHTML = "The Day You Went Away";
+      }
+  },250);
+}
+</script>
+<script>
+document.getElementById('bs').style.display="none";
+</script>
+<!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
