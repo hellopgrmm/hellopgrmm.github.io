@@ -36,11 +36,11 @@ body{
         var interval = setInterval(function() {
             if (i < text.length) {
                 element.innerText += text.charAt(i);
-                element.innerHTML = marked.parse(element.innerHTML);
                 i++;
             } else {
                 clearInterval(interval);
             }
+            element.innerHTML = marked.parse(element.innerHTML);
         }, sec);
     }
 function baset(damn){
