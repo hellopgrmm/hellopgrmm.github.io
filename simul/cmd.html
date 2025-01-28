@@ -43,6 +43,7 @@ body{
    <!-- <button style='background:black;color:white;font-family:mc;border:1px solid white;' onclick="executeCommand()">Execute</button>-->
 
     <script>
+        var jsmode = 0;
         function executeCommand() {
             const input = document.getElementById('input').value.trim();
             const terminal = document.getElementById('terminal');
@@ -201,6 +202,10 @@ Updating more command.Please wait for a time...\n`;
                         terminal.innerHTML += `C:/KunKun>${input}\n`;
                         localStorage.clear();
                         terminal.innerHTML += 'Successful to fix mbr.\n';
+                    }else if (input.toLowerCase() === 'jsmode') {
+                        jsmode = 1;
+                    }else if (input.toLowerCase() === 'jsmodeclose') {
+                        jsmode = 0;
                     }
                     else if (input.startsWith('remo')) {
                         terminal.innerHTML += `C:/KunKun>${input}\n`;
