@@ -1,0 +1,65 @@
+<meta charset='utf-8'>
+<title>Editor</title>
+<style type="text/css">
+@font-face{
+    font-family:mc;
+    src: url(https://hellopgrmm.github.io/font/mc.otf);
+}
+.CodeMirror{
+    font-size: 18px;
+    font-family:mc !important;
+}
+body{
+    font-family:mc;
+}
+.HellopgrmmButton
+{
+    height: 35px;
+    width: 70px;
+    border: 0px solid white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 2px #ccc;
+    transition: background 0.3s;
+}
+.HellopgrmmButton:hover
+{
+    background: #ccc;
+}
+.Hellopgrmminput
+{
+    border-radius: 5px;
+    outline: none;
+    font-size: 15px;
+    font-family: mc;
+    height: 35px;
+    width: 200px;
+    background: white;
+    border: 0.5px solid #ccc;
+    transition: background 0.3s;
+}
+.Hellopgrmminput:hover
+{
+    background: rgb(230, 230, 230);
+    border:1px solid gray;
+}
+</style>
+<body>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/javascript/javascript.min.js"></script>
+<script src="https://cdn.staticfile.org/codemirror/6.65.7/mode/xml/xml.min.js"></script>
+<script src="https://cdn.staticfile.org/codemirror/6.65.7/mode/css/css.min.js"></script>
+<script src="https://cdn.staticfile.org/codemirror/6.65.7/mode/htmlmixed/htmlmixed.min.js"></script>
+文件名：<input class="Hellopgrmminput" id="FileName"/>
+<button onclick="if(localStorage.length*5 < 1000){localStorage.setItem(FileName.value,editor.getValue());alert('保存成功。请到“我的小脑”->系统坤盘->MyFiles查看。')}else{alert('内存不足，保存失败。');}" class="HellopgrmmButton">保存文件</button>&nbsp;<button onclick="editor.setValue(localStorage.getItem(FileName.value))" class="HellopgrmmButton">读取</button><br><br>
+<textarea id="CodeMirrorEditor">
+</textarea>
+<script>
+  var editor = CodeMirror.fromTextArea(document.getElementById('CodeMirrorEditor') ,{
+    mode: 'htmlmixed',
+    lineNumbers: true,
+    theme: 'default',
+    lineWrapping: true,
+});
+  editor.setSize("100%","80%");
+</script>
