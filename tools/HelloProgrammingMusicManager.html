@@ -1,0 +1,145 @@
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <script src="https://hellopgrmm.github.io/tools/prism.js"></script>
+   <link href="https://hellopgrmm.github.io/tools/prism.css" rel="stylesheet" />
+
+ <title>Hellopgrmm音乐区编辑|Hellopgrmm 一个分享编程经验的网站</title>
+ <a style='font-size:30px'>此功能仅站长用:Hellopgrmm音乐区编辑</a><br>
+<script src='https://hellopgrmm.github.io/tools/lrcParser.js'></script>
+<button onclick='generate()'>生成网页</button><br>
+<div id='next'>
+输入歌曲名称：<input type='text' id='songname'/><br>
+输入音频源：<input type='text' id='songlink'/>
+<br>输入歌曲简介：<br><textarea rows='5' cols='30' id='description'></textarea><br>
+输入/粘贴LRC:<br><textarea id='yessir' cols='50' rows='20'></textarea>
+</div>
+<div style='display:none' id='codes'>
+生成的代码如下：<br>
+<textarea id='CODE' style='height:90%;width:90%'></textarea><br><xmp>
+</script>
+<script>
+document.getElementById('bs').style.display="none";
+</script>
+<!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
+</xmp><br><a href='https://github.com/hellopgrmm/hellopgrmm.github.io/tree/main/musics/ads/'>前往部署(需要登陆)</a><a onclick='codes.style.display="none";next.style.display="";'>返回</a>
+</div>
+<script>
+function convertTimeCodeToSecond(Time_Code){
+    var AA = Time_Code.split('.');
+    var AB = AA[0].split(':');
+    var AD = AB[0];
+    var AE = AB[1];
+    if(AA[1] > 50){
+        var AC = eval(`${AD}*60+${AE}+1`);
+    }else{var AC = eval(`${AD}*60+${AE}`);}
+    return AC;
+}
+function generate()
+{
+    var desc = document.getElementById('description').value;
+    var songsong = document.getElementById('songname').value;
+    var sl = document.getElementById('songlink').value;
+    next.style.display='none';
+    var M = ParseLyrics(document.getElementById('yessir').value,'NORMAL');
+    document.getElementById('CODE').value = `<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <title>音乐播放器|Hellopgrmm 一个分享编程经验的网站</title>
+ <a href="https://hellopgrmm.github.io/musics/">返回</a><br>
+<a style='font-size:35px;'>${songsong}</a><br><br><a>音乐简介：</a><br><font color='#ccc'>${desc} </font>
+<audio src='${sl}' id='player'></audio><br><a id='curtime' >0</a><a>秒</a><a>/</a><a id='duration'>0</a><a>秒</a>
+<input type='range' style='width:736px;' id='xx'><br><button id='cc' class='dd'>播放</button>
+<button style='height:30px;width:70px;background-color:#00caca;color:black;border-radius:114514px;' onclick="player.loop='';">停止循环</button>
+<button style='height:30px;width:70px;background-color:#00caca;color:black;border-radius:114514px;' onclick="player.loop='true';">洗脑循环</button><button style='height:30px;width:70px;background-color:#00caca;color:black;border-radius:114514px;' onclick="player.loop='';">取消循环</button>
+<link rel="stylesheet" type="text/css" href="button.css">
+<button style='height:30px;width:50px;background-color:#00caca;color:black;border-radius:114514px;' onclick="bs.style.display='';">倍速</button>
+<button id='mtes' style='height:30px;width:75px;background-color:#00caca;color:black;border-radius:114514px;' onclick="player.muted='true'">静音</button>
+<button id='mtes' style='height:30px;width:75px;background-color:#00caca;color:black;border-radius:114514px;' onclick="player.muted=''">取消静音</button>
+<input id='times' style='font-family:ht;' placeholder='跳转到…秒(输入数字)' type='text'/><a>秒</a>
+<button style='height:30px;width:75px;background-color:#00caca;color:black;border-radius:114514px;' onclick="document.querySelector('audio').currentTime=times.value">跳转</button>
+<div id='bs'>
+<button onclick='player.playbackRate = 10'>10x(鬼畜模式)</button>
+<button onclick='player.playbackRate = 2.0'>2x</button>
+<button onclick='player.playbackRate = 1.75'>1.75x</button>
+<button onclick='player.playbackRate = 1.5'>1.5x</button>
+<button onclick='player.playbackRate = 1.0'>1x</button>
+<button onclick='player.playbackRate = 0.75'>0.75x</button>
+<button onclick='player.playbackRate = 0.5'>0.5</button>
+<button onclick='bs.style.display="none";'>关闭</button>
+</div><br>
+<a style='font-size:20px' id='lrc'>Display Error.</a>
+<script>
+window.onload=function(){
+  var player = document.getElementById("player"),
+  oBtn = document.getElementById("cc"), 
+  mteu = document.getElementById("mtes"), 
+  dn = document.getElementById("xx"),
+  curtime = document.getElementById("curtime"),
+  duration = document.getElementById("duration");
+  duration.innerHTML = player.duration.toFixed(0);
+  xx.max=player.duration
+  oBtn.onclick = function(){
+    if (player.paused){
+      player.play();
+      oBtn.innerHTML = "播放中";
+    } 
+    else {
+      player.pause();
+      oBtn.innerHTML = "已暂停";
+    }
+  }
+
+  setInterval(function(){
+      xx.value = player.currentTime;
+      var ac = player.currentTime.toFixed(0);
+      curtime.innerHTML = player.currentTime.toFixed(0);`;
+      for(var i = 1;i < M.length;i=i+2){
+          var TEMP = convertTimeCodeToSecond(M[i-1]);
+          var clickclick = M[i];
+          //alert(i);
+          //alert(M.length)
+          //alert(TEMP+clickclick);
+          if(i == 1){
+              CODE.value+=`\nif(ac == ${TEMP}){lrc.innerHTML = "${clickclick}";}\n`;
+          }else{
+              CODE.value+=`else if(ac == ${TEMP}){lrc.innerHTML = "${clickclick}";}\n`;
+          }
+      }
+      CODE.value+=`  },250);
+}
+`;
+      codes.style.display = '';
+}
+</script>
+ <!--end--><hr><center><spam>Copyright (C) Hello-Programming 2024｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
