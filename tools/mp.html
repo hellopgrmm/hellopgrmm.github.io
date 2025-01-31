@@ -18,13 +18,14 @@ ale=1">
   </xmp>
   
   <hr>MarkDown预览效果。<br>切换：
-<button onclick="result.style.display = '';codes.style.display = 'none';">Markdown预览效果</button><button onclick="result.style.display = 'none';codes.style.display = '';">HTML代码</button><button onclick="cpy()">复制HTML代码</button><br>
+<button onclick="result.style.display = '';codes.style.display = 'none';">Markdown预览效果</button><button onclick="result.style.display = 'none';divv.style.display = '';">HTML代码</button><button onclick="cpy()">复制HTML代码</button><br>
 <mp class="markdown-body" style='display:inline-block;width:48%;font-family:ht;' id="result"></mp>
+ <div id="divv">
 <xmp><link rel="stylesheet" href="https://hellopgrmm.github.io/tools/githubMarkdown.css">
 <div class="markdown-body"></div>
 </xmp>
 <xmp style='display:inline-block;display:none;width:100%;height:50%;border-radius:0px;font-family:ht;font-size:17px;' id="codes"></xmp>
-   <xmp></div></xmp>
+   <xmp></div></xmp></div>
 <script>
 function cpy(){
 var ax=document.getElementById("codes").value;
