@@ -40,11 +40,30 @@ body{
 <center>
 <h1>KunOS Player</h1><a>支持MP4等音视频文件。</a><br>
 <video id="videoPlayer"></video><br>
-<input type="file" id="fileInput"/><br><br>Controls<br><br><div id='mainly' style='width:80%;height:35px;border-radius:5px;box-shadow:0px 0px 1px 1px #ccc;'><div id='barmprogress' style='width:0%;border-radius:5px;background:#96fed1;height:100%;'></div></div><br><button onclick='videoPlayer.play();exvideo()' class='HellopgrmmButton'>VID PLAY</button><button onclick='videoPlayer.pause()' class='HellopgrmmButton'>VID PUSE.</button><button onclick='videoPlayer.playbackRate = "0.5";' class='HellopgrmmButton'>RATE 0.5</button><button onclick='videoPlayer.playbackRate = "1.0";' class='HellopgrmmButton'>RATE 1.0</button><button onclick='videoPlayer.playbackRate = "1.5";' class='HellopgrmmButton'>RATE 1.5</button><button onclick='videoPlayer.playbackRate = "2.0";' class='HellopgrmmButton'>RATE 2.0</button>
+<input type="file" id="fileInput"/><br><br>Controls<br><br><div id='mainly' style='width:80%;height:35px;border-radius:5px;box-shadow:0px 0px 1px 1px #ccc;'><div id='barmprogress' style='width:0%;border-radius:5px;background:#96fed1;height:100%;'></div></div><br><button onclick='videoPlayer.play();exvideo()' class='HellopgrmmButton'>VID PLAY</button><button onclick='videoPlayer.pause()' class='HellopgrmmButton'>VID PUSE.</button><button onclick='videoPlayer.playbackRate = "0.5";' class='HellopgrmmButton'>RATE 0.5</button><button onclick='videoPlayer.playbackRate = "1.0";' class='HellopgrmmButton'>RATE 1.0</button><button onclick='videoPlayer.playbackRate = "1.5";' class='HellopgrmmButton'>RATE 1.5</button><button onclick='videoPlayer.playbackRate = "2.0";' class='HellopgrmmButton'>RATE 2.0</button><br><br>
+<div class="HellopgrmmBox" style="height:100px;width:80%;overflow: auto;">网络收听(点击歌曲名，播放键即可收听)<hr><a id="musicLink"></a></div>
 </center>
 <br>
 </div>
 <script>
+var jsonmusic = []
+function H_fetchJson(path){
+fetch(path)
+  .then(response => response.json())
+  .then(data => {
+    for(var a in data)
+    {
+        jsonmusic.push(a)
+        jsonmusic.push(data[a]);
+    }
+    for(var m = 0;m < jsonmusic.length;m = m+2)
+    {
+        document.getElementById("musicLink").innerHTML += `<a onclick="videoPlayer.src = '${jsonmusic[m+1]}';">${jsonmusic[m]}</a><br>`;
+    }
+  })
+  .catch(error => console.error(error));
+}
+H_fetchJson("https://hellopgrmm.github.io/simul/musicData.json");
     document.getElementById('fileInput').addEventListener('change', function(e) {
         var file = e.target.files[0];
         var videoPlayer = document.getElementById('videoPlayer');
