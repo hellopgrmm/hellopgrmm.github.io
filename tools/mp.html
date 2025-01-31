@@ -19,7 +19,7 @@ ale=1">
   
   <hr>MarkDown预览效果。<br>切换：
 <button onclick="result.style.display = '';codes.style.display = 'none';">Markdown预览效果</button><button onclick="result.style.display = 'none';codes.style.display = '';">HTML代码</button><button onclick="cpy()">复制HTML代码</button><br>
-<mp class="markdown-body" style='display:inline-block;width:48%;font-family:ht;' id="result"></mp>
+<xmp class="markdown-body" style='display:inline-block;width:48%;font-family:ht;' id="result"></xmp>
 <textarea style='display:inline-block;display:none;width:100%;height:50%;border-radius:0px;font-family:ht;font-size:17px;' id="codes"></textarea>
 <script>
 function cpy(){
@@ -33,7 +33,7 @@ document.body.removeChild(ax);
 }
 function cm() {
     document.getElementById('result').innerHTML = marked.parse(mk.value);
-    document.getElementById('codes').innerHTML = '<!--MP.HelloPgrmm.MarkDown.Convert.HTML-->\n<!DOCTYPE HTML>\n<html>\nale=1"><link rel="stylesheet" href="https://hellopgrmm.github.io/tools/githubMarkdown.css">\n<title>你的网页标题-Your WebPage Title</title>\n'+marked.parse(mk.value)
+    document.getElementById('codes').innerHTML = marked.parse(mk.value)
 }
 //setInterval('cm()',10)
 </script>
