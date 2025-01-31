@@ -510,8 +510,10 @@ async function popp()
 {
     computerz();
     await sleep(300);
+    document.querySelector("body").style.transform = `rotateY(180deg)`;
     computers();
     await sleep(300);
+    document.querySelector("body").style.transform = `rotateY(360deg)`;
     blue= blue+1;
     if(blue == 100){
         window.location.href='https://hellopgrmm.github.io/nifs/blueScreen.html?info=UNDEF_KUNVIR_114514';
