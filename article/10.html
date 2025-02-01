@@ -1,0 +1,105 @@
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <title>各式各样的文字|Hellopgrmm 一个分享编程经验的网站</title>
+ <a style='font-size:30px'>各式各样的文字-HTML文本标签拓展</a><br>
+<link rel="stylesheet" href="https://hellopgrmm.github.io/tools/githubMarkdown.css">
+<article class="markdown-body">
+<p>在上一阶段的学习中，我们知道了如何使用<code>&lt;h1&gt;</code>和<code>&lt;a&gt;</code>标签来实现不同的文字效果。现在，如果你想让你的网页更加多姿多彩。那么，你可以尝试使用更多的文本标签来装饰你的网页。在这一片教程中，我们将学会怎么使用其它的标签来实现五彩斑斓的文字、加粗强调的文字、斜斜的文字等等更多的文字效果。</p>
+<h2>1.旨在强调：<code>&lt;b&gt;</code>标签</h2>
+<p><code>&lt;b&gt;</code>标签可以让字体加粗，起到强调的作用。你想要在电子文章中“划重点”吗？当然，划重点就能让读者一目了然。你可以使用<code>&lt;b&gt;</code>标签来突出一段文字，用法也是和<code>&lt;a&gt;</code>标签差不多，就像这样。</p>
+<pre><code class="language-HTML">There is a &lt;b&gt;Fox&lt;/b&gt;,he is eating an apple.
+</code></pre>
+<p>呈现的效果：<br>
+There is a <b>Fox</b>,he is eating an apple.
+<br>是不是很突出了？什么？读者看不到？哦，稍微“麻烦”一点吧，就用一下<code>&lt;font&gt;</code>标签吧。<code>&lt;font&gt;</code>标签可以让文字呈现不同的颜色，这样或许可以更加突出重点。还是用回上面那个例子。让我们看一看怎么用：</p>
+<pre><code class="language-HTML">There is a &lt;font color=&quot;red&quot;&gt;Fox&lt;/font&gt;,he is eating an apple.
+</code></pre>
+<p>效果如下：<br>
+There is a <font color="red">Fox</font>,he is eating an apple.
+<br>使用了红色突出了重点，是不是更加鲜明了？这里的<code>color=&quot;red&quot;</code>作为标签的一个<strong>属性</strong>，属性一般在HTML的标签内（当然最好不要出现在结束的标签那里，你不可能写成<code>&lt;/font color=&quot;red&quot;&gt;</code>，那样看起来会很奇怪的。）color代表颜色，&quot;red&quot;代表使用红色字体来表示。双引号中的内容可以改成别的颜色单词。比如yellow,blue,purple,green,pink等等。这里先说一个color属性，其他属性接下来我们再慢慢说。</p>
+<h2>2.这段内容不要了：<code>&lt;del&gt;</code>标签</h2>
+<p>什么？你说某段文字不需要了？那就划掉吧！在HTML中，如果你想表示“划掉”某文字，表示“这个是错误的”。你可以使用<code>&lt;del&gt;</code>标签来删除某段文字。就和<code>&lt;b&gt;</code>一样。</p>
+<pre><code class="language-HTML">It has been &lt;del&gt;delet&lt;/del&gt;!
+</code></pre>
+<p>效果：<br>It has been <del>delet</del>!
+<br>这段文字“delet”被删掉了，就不需要关注它。这样的标签效果也很明显。</p>
+<h2>3.传送门：<code>&lt;a href&gt;</code>文本标签<code>&lt;a&gt;</code>的升级版</h2>
+<pre><code class="language-HTML">&lt;a href=&quot;https://hellopgrmm.github.io/&quot;&gt;返回主页&lt;/a&gt;
+</code></pre>
+<p>点击这-&gt;<a href="https://hellopgrmm.github.io/">返回主页</a>。噢，你还没看完这篇教程，怎么就返回去了？快回来。这是一个链接标签。其中href属性就是表示要跳转的地方，双引号就是你需要填入的地址。这样子，你就会得到一个带有蓝色的、有下划线的文字，而且点击它，还能传送到别的网站去的文本。你亲手在网页中创造了一个“传送门”！就像刚刚你看到的蓝色文字“返回主页”一样，那就是链接，这相当于告诉浏览器：“哥们，这里创建一个链接文本，文本内容是xxx。点击一下就可以传送到某个网站。”这相当于是<code>&lt;a&gt;</code>标签的升级版。</p>
+<h2>3.歪过来的文字：<code>&lt;em&gt;</code>斜体文字。</h2>
+<pre><code class="language-HTML">&lt;em&gt;斜过来了！！！&lt;/em&gt;
+</code></pre>
+<p>哦!<em>斜过来了！</em>这样的斜体文字很简单，如果你需要在文本中表达些特殊的东西，你只需像上面这么写就行了，改动中间的文字就可以了。你可以将这标签插入在某段文本里。</p>
+<pre><code class="language-HTML">张养浩的&lt;em&gt;《山坡羊 潼关怀古》&lt;/em&gt;打动人心，引起共鸣。
+</code></pre>
+<p>张养浩的<em>《山坡羊 潼关怀古》</em>打动人心，引起共鸣。</p>
+<h2>4.下划线的文字：<code>&lt;u&gt;</code></h2>
+<pre><code class="language-HTML">&lt;u&gt;“十年饮冰，未凉热血。”&lt;/u&gt;即使经历了无数的风霜与挫折，仍然不忘初心、热情未眠、继续前行。
+</code></pre>
+<p><u>“十年饮冰，未凉热血。”</u>即使经历了无数的风霜与挫折，仍然不忘初心、热情未眠、继续前行。<br>
+哦，很好。</p>
+<h2>5.会动的文字：<code>&lt;marquee&gt;</code>标签</h2>
+<p>看右边，文字飘过来了：
+<br><marquee>我在这里。</marquee><br>这段文字为什么会动？因为使用了HTML的<code>&lt;marquee&gt;</code>标签。这个标签将会实现一个弹幕文字，能从屏幕的右边跑过来。你只需要这样子写，比如：</p>
+<pre><code class="language-HTML">&lt;marquee&gt;我在这里！&lt;/marquee&gt;
+</code></pre>
+<p>就能实现上面的效果。</p>
+<h2>6.插入代码：<code>&lt;xmp&gt;</code>和<code>&lt;pre&gt;</code>标签。</h2>
+<p>你要写有关编程的文章吗？哦，这两个标签可以帮助你插入代码。
+如果你想要插入另外的HTML代码。可以这样子。</p>
+<pre><code class="language-html">&lt;xmp&gt;
+&lt;h1&gt;haha&lt;/h1&gt;
+&lt;/xmp&gt;
+</code></pre>
+<p><code>&lt;xmp&gt;</code>标签可以阻挡HTML代码的实现，直接让浏览器呈现出原本的HTML代码，如果你也是一个HTML教程编写者，你也可以尝试这样子演示HTML代码。
+它的效果如下:</p>
+<pre><code>&lt;h1&gt;haha&lt;/h1&gt;
+</code></pre>
+<p>你在&lt;xmp&gt;中写的HTML代码，是不会被实现的。但是&lt;pre&gt;标签却不一样。你在&lt;pre&gt;标签中写的HTML代码，还是有可能会实现的。它的效果和xmp标签差不多。</p>
+<h2>7.齐聚一堂：混合代码。</h2>
+<p>会动的蓝色文字：</p>
+<pre><code class="language-HTML">&lt;marquee&gt;&lt;font color=&quot;blue&quot;&gt;Running!!!&lt;/font&gt;&lt;/marquee&gt;
+</code></pre>
+<p><marquee><font color="blue">Running!!!</font></marquee>
+<br>被划掉的斜体：</p>
+<pre><code>&lt;em&gt;&lt;del&gt;Delete&lt;/del&gt;&lt;/em&gt;
+</code></pre>
+<p><em><del>Delete</del></em><br><hr>实际上还有很多这样的混合代码，你可以运用学到的标签混合在一起，组成更多的效果。装饰你的网页。</p>
+</article><br><br>
+  <style>
+.tk-submit-action-icon{
+    height:20px;
+}
+#twikoo{
+    width:95%;
+}
+</style>
+<div id="comment"></div>
+<script src="https://hellopgrmm.github.io/tools/twikoo.min.js"></script>
+<link rel="stylesheet" href="https://hellopgrmm.github.io/tools/twikoo.min.css">
+<script>
+twikoo.init({
+  envId: 'https://cheerful-moonbeam-4f1337.netlify.app/.netlify/functions/twikoo',
+  el: '#comment', 
+  path: location.pathname, 
+  lang: 'zh-CN', 
+})
+</script>
+ <!--end--><hr><center><spam>Copyright (C) Hello-Programming 2024｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
