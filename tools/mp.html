@@ -38,7 +38,8 @@ document.body.removeChild(ax);
 }
 function cm() {
     document.getElementById('result').innerHTML = marked.parse(mk.value);
-    document.getElementById('codes').innerHTML = marked.parse(mk.value)
+    document.getElementById('codes').innerHTML = marked.parse(mk.value);
+    localStorage.setItem("Markdown-content",mk.value);
 }
 //setInterval('cm()',10)
 </script>
