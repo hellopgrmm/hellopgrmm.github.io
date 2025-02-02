@@ -39,6 +39,11 @@ body{
     top:25%;
     left:25%;
 }
+#mem{
+    position:relative;
+    top:10%;
+    left:10%;
+}
 iframe{
     overflow: hidden;
 }
@@ -75,6 +80,7 @@ input{
 <!--KunOS Main--><br><div id='Main'><br>
 <div onclick='About.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a style='color:white'>KunOS MBR Manager</a></div>&nbsp;<br><br>
 <div onclick='JIU.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a style='color:white'>KunOS账户管理</a></div>&nbsp;<br><br>
+<div onclick='mem.style.display="";'>&nbsp;<img style='height:50px;width:50px' src='kunpics/KunICON/BLUE.png'/><br><a style='color:white'>Memory Cleaner</a></div>&nbsp;<br><br>
 <a style='position:absolute;text-align:right;align:right;color:blue'>版本3.23.0;<br>网络访问限制:完全<br>Build 3236<br>token:N1Fv19381xn184nad81<br>无法访问任何可疑文件<br>持续更新</a>
 <div draggable="true" style='overflow: auto;height:50%;width:50%;position:absolute;border:1px solid black;background:white;cursor:move;' id='About'><button onclick="About.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="About.style.height='95%';About.style.width='100%';About.style.left='0%';About.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="About.style.height='50%';About.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="About.style.height='80%';About.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;KunOS MBR管理器</a><!--Main--><br>
 <h2>MBR管理</h2><hr><a>MBR状态:</a><br><a id='mbr'>开机时指向:/KunOS.html</a><button onclick=
@@ -87,6 +93,9 @@ input{
 <br><a>存储空间:</a><br><progress id='mb' style='width:80%' max='1000'></progress><br><a id='kunkun'>Undefined MB可用，一共1000MB可用，剩余不知道MB可用</a><hr><a style='font-size:20px'>您的安全</a><br><a>找回密码</a><br><table border='1px'><tr><td>用户名</td><td>在PASSWORD里的文件值</td></tr><tr><td><a id='user'></a></td><td><a id='psv'></a></td></tr></table><a>选项:<br>-------</a><br><a onclick='logs.innerHTML+="申请KUNOS注入权限中。<br>";psv.innerHTML = localStorage.getItem("ActiveForPassword.kunos");logs.innerHTML+="获取完成。<br>";'>[获取在PASSWORD里的文件值]</a><br><a onclick='localStorage.removeItem("ActiveForPassword.kunos");psv.innerHTML = "没有任何的值";'>[删除PASSWORD的值文件]</a><br><a onclick='for(var i = 0;i <= 101;i++){if(localStorage.getItem(`${i}.txt`)=="grass and green grass!"){localStorage.removeItem(`${i}.txt`);logs.innerHTML+=`<br>正在删除${i}.txt...`;}else{continue;}}logs.innerHTML+=`<br>完成。`;'>[垃圾文件清理]</a><br><a style='color:#ccc'>*此操作将自动审查并清理那些无意义的“垃圾文件”</a><br>
 <a>输出日志:</a><hr>
 <a id='logs'></a>
+</div>
+<div draggable="true" style='overflow: auto;height:80%;width:82%;position:absolute;border:1px solid black;background:white;cursor:move;' id='mem'><button onclick="mem.style.display='none'" style="height:25px;width:50px;border:1px solid black;background:red;color:white;font-family:ht;">关闭</button><button onclick="mem.style.height='95%';mem.style.width='100%';mem.style.left='0%';mem.style.top='5%'" style="height:25px;width:75px;border:1px solid black;background:#ccc;color:black;font-family:ht;">最大化</button><button onclick="mem.style.height='50%';mem.style.width='20%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">最小化</button><button onclick="mem.style.height='80%';mem.style.width='82%'" style="height:25px;width:75px;border:1px solid black;background:blue;color:white;font-family:ht;">中等大小</button><a>&nbsp;Memory Cleaner</a><!--Main--><hr>
+<a style='font-size:20px'>Clean some files To make your KunOS more quicker.</a><br>当您的KunOS内存过载以至于严重影响加载速度时，您可以使用此功能。<br><br><font color='#ccc'>*注意：本操作不会检测您的KunOS情况，只会清理垃圾文件和占内存的一些其他文件。</font><br><br><a onclick='for(var i = 0;i <= 101;i++){if(localStorage.getItem(`${i}.txt`)=="grass and green grass!"){localStorage.removeItem(`${i}.txt`);loga.innerHTML+=`<br>删除产生的垃圾文件:${i}.txt。<br>`;}else{continue;}}for(var t = 0;t<localStorage.length;t++){if(localStorage.key(t).includes("hash_")){localStorage.removeItem(localStorage.key(t));loga.innerHTML+=`删除语言缓存文件:${localStorage.key(t)}。<br>`;}else{continue;}}loga.innerHTML += "已完成清理文件，请检查内存释放情况。<br>";'>[一键清理]</a><br><hr><a id='loga'>输出:<br></a>
 </div>
 <div style='display:none;' id='foverlay'>
     <div style='display:none;position: relative;left:45%' id='fcontent'>
@@ -125,6 +134,7 @@ start.style.display='';
 KunMain.style.display='none';
 About.style.display='none';
 JIU.style.display='none';
+mem.style.display = 'none';
 function rere()
 {
     if(localStorage.getItem('K')){
@@ -189,6 +199,7 @@ function cnm() {
 }
 drager("About");
 drager("JIU");
+drager('mem');
 var dd = 1000-localStorage.length*5;
 function re()
 {
