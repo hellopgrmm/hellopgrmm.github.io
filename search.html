@@ -1,67 +1,92 @@
-<meta charset='utf-8'>
-<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
-<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
-<title>HelloPgrmm搜索</title>
+<html><head><meta charset='utf-8'><title>Hello Programming 搜索｜HelloPgrmm,一个分享编程经验的网站</title><meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type='text/css' rel='stylesheet' href='https://hellopgrmm.github.io/pulicstyle.css'/><img src='https://hellopgrmm.github.io/imgs/logo.jpg' alt='图片显示错误了,可以刷新一下哟' style='height:100px;width:200px;'><img id='en' src='https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg' style='height:60px;width:500px;'><br><a href='https://hellopgrmm.github.io/' id='home' ><b>首页</b><!--以下内容是先预设好的,到后面再加上去--><a href='https://hellopgrmm.github.io/tools.html' id='tool' ><b>工具</b><a href='https://hellopgrmm.github.io/about.html' id='tool' ><b>关于</b><a href='https://hellopgrmm.github.io/others.html' id='home' ><b>更多</b></a><br><div id='line' style='position: relative;top:5.5px;'></div><body><!--Main--><br>
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.0/dist/algoliasearch-lite.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.37.3/dist/instantsearch.production.min.js"></script>
+    <script src="https://hellopgrmm.github.io/codes/jquery-3.6.3.min.js"></script>
     <style>
-        #KEYWORDS {
-            margin-bottom: 10px;
-            width:600px;height:50px;font-size:20px;outline:none;font-family:ht;
-        }
-        .FORMATS li {
-            display: none;
-        }
-        .pagination {
-            margin-top: 10px;
-        }
-        #d2{
-            display:none;
-        }
+    .ais-Highlight-highlighted{
+        background: #ccff99;
+        border-radius: 5px;
+        height: 50px;
+    }
+    a{
+        text-decoration: none;
+    }
+    .result_hellopgrmm
+    {
+        height: 75px;
+        width: 80%;
+        border-radius: 10px;
+        box-shadow: 0px 0px 5px 1px #ccc;
+        transition: background 0.5s;
+        font-family: ht;
+    }
+    .result_hellopgrmm:hover
+    {
+        background: rgb(230,230,230);
+    }
+    .result_hellopgrmm{
+        padding-left:20px;
+    }
+input
+{
+    border-radius: 5px;
+    outline: none;
+    font-size: 15px;
+    font-family: ht;
+    height: 35px;
+    width: 50%;
+    background: white;
+    border: 0.5px solid #ccc;
+    transition: background 0.3s;
+}
+input:hover
+{
+    background: rgb(250, 250, 250);
+}    
+.ais-SearchBox-submit
+{
+    height: 35px;
+    width: 80px;
+    color:black;
+    border: 0px solid white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 2px #ccc;
+    transition: background 0.3s;
+}
+.ais-SearchBox-submit:hover
+{
+    background: #ccc;
+}
+.ais-SearchBox-reset
+{
+    height: 35px;
+    width: 80px;
+    color:black;
+    border: 0px solid white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 2px #ccc;
+    transition: background 0.3s;
+}
+.ais-SearchBox-reset:hover
+{
+    background: #ccc;
+}
     </style>
-</head>
-<body>
+    <div id="search-box"></div>
+    <div id="hits"></div>
+    <script>
+      const search = instantsearch({
+        indexName: 'HelloPgrmm',
+        searchClient: algoliasearch('BD85X9IXP2', 'aea16fab055e1280454dbce4948d71e0'),
+      });
+      var search_result = 
+      search.addWidget(instantsearch.widgets.searchBox({ container: '#search-box'}));
+      search.addWidget(instantsearch.widgets.hits({ container: '#hits',templates:{empty:"没有找到搜索结果，请检查您的拼写是否有误。",item: `<div onclick="window.location.href='{{link}}';" class="result_hellopgrmm"><h3 class="result">{{#helpers.highlight}}{"attribute":"title"}{{/helpers.highlight}}</h3><font class="result" color="#ccc">{{link}}</font></div>`}}));
 
-<input type="text" id="KEYWORDS" placeholder="输入文章标题关键字或音乐名称搜索">
-<ul class="FORMATS">
-    <li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/article/1.html" data-lastfrom="" title="不同的编程语言输出HelloWorld">不同的编程语言输出HelloWorld</a></li>
-    <li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/article/2.html" data-lastfrom="" title="The Day You Went Away-M2M 欧美老歌 英文歌">The Day You Went Away-M2M</a></li>
-     <li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/article/3.html" data-lastfrom="" title="高还原Minecraft终末之诗">高还原Minecraft终末之诗</a></li>
-      <li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/Downloads/dn1.html" data-lastfrom="" title="Jquery3.6.3下载">Jquery3.6.3下载</a></li>
-       <li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/musics/ads/02.html" data-lastfrom="" title="逝去日子-BEYOND">逝去日子-BEYOND</a></li>
-         <li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/musics/ads/04.html" data-lastfrom="" title="SuperGlam-Unkonw">SuperGlam-Unknow</a></li>
-           <li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/musics/ads/07.html" data-lastfrom="" title="seve-Tez Candy">seve-Tez Candy</a></li>
-             <li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/musics/ads/06.html" data-lastfrom="" title="Way Back Home-SHAUN">Way Back Home-SHAUN</a></li>
-              <li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/musics/ads/03.html" data-lastfrom="" title="下个，路口，见-李宇春">下个，路口，见-李宇春</a></li>
- <li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/musics/ads/05.html" data-lastfrom="" title="飞-ANU">飞-ANU</a></li>
-<li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/musics/ads/01.html" data-lastfrom="" title="Alpha-C418">Alpha-C418</a></li>
-    <li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/article/4.html" data-lastfrom="" title="HelloPgrmm音乐更新！！">HelloPgrmm音乐更新！！</a></li>
- <li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/article/5.html" data-lastfrom="" title="制作网页版系统不再是一件困难的事-kunsystool.js">制作网页版系统不再是一件困难的事-kunsystool.js</a></li>
-<li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/musics/ads/08.html" data-lastfrom="" title="青春 欧美经典老歌 Free Loop Daniel Powter">Free Loop-Daniel Powter</a></li>
-<li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/ib2" data-lastfrom="" title="imageboom image boom">MMCjelly---ImageBoom 惊艳的图片效果</a></li>
-<li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/musics/ads/09" data-lastfrom="" title="面会菜-林生祥 口哨 轻音乐  ">面会菜-林生祥</a></li>
-<li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/hpgmtoolsbag.html" data-lastfrom="" title="Hpgm工具箱">HelloPgrmm全新推出：Hpgm工具箱</a></li>
-<li class="aurl"><a style='text-decoration:none;color:green;font-size:15px;' href="https://hellopgrmm.github.io/article/7.html" data-lastfrom="" title="让你的前端博客也有一个真正的评论区-Twikoo前端部署">Twikoo前端部署教程</a></li>
-
-</ul>
-<a>文章投稿处:qwqexplorer@163.com</a>
-<!--以下代码来源于CSDN-->
-<script>
-    document.getElementById('KEYWORDS').addEventListener('input', function () {
-        var searchKeyword = this.value.toLowerCase();
-        var links = document.querySelectorAll('.FORMATS a');
-
-        links.forEach(function (link) {
-            var title = link.getAttribute('title').toLowerCase();
-            var url = link.getAttribute('href').toLowerCase();
-
-            if (title.includes(searchKeyword)) {
-                link.parentNode.style.display = 'block';
-            } else {
-                link.parentNode.style.display = 'none';
-            }
-        });
-    });
-</script>
-<!--end--><hr><center><spam>Copyright (C) Hello-Programming 2023｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+      search.start();
+$('.ais-SearchBox-input').attr('placeholder', '搜索Hello-Programming的文档、音乐、资源等。');
+    </script>
+ <!--end--><hr><center><spam>Copyright (C) Hello-Programming 2025｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
 <a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
 <a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
 <a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
