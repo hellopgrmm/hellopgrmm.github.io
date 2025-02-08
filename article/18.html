@@ -1,0 +1,91 @@
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <title>Algolia搜索服务的配置使用|Hellopgrmm 一个分享编程经验的网站</title>
+ <a style='font-size:30px'>Algolia搜索服务的配置使用</a><br>
+<link rel="stylesheet" href="https://hellopgrmm.github.io/tools/githubMarkdown.css">
+<article style="font-family: ht;" class="markdown-body">
+<p>Algolia是一个网站搜索服务。很多网站都使用此搜索服务，Algolia具有即时性、可定制性（用户可以随自己喜好定制自己的搜索界面）、还有AI搜索，能及时返回搜索结果，并对搜索结果进行及时的匹配、高亮。可以去Hello Programming的<a href="https://hellopgrmm.github.io/search.html">搜索界面</a>体验。</p>
+<h2>1.注册Algolia账号</h2>
+<p>先去<a href="https://algolia.com/">Algolia官网</a>注册一个账号。用自己的邮箱或者Github、Google账号注册一个，注册完之后可能会直接由Dashboard跳转到Launchpad，这相当于已经为你创建一个Application了。因为Algolia搜索需要Index Name、Application ID和API Key，才能提供搜索。</p>
+<h2>2.创建索引，获取Key</h2>
+<p>你应该会在DashBoard的主页看到Application的App ID和API Key，或者点击上方的应用（Application）查看Application ID，也可以在主页点击“API Keys”查看API Key。<br>
+<img src="https://s2.loli.net/2025/02/07/4HBlCWAjXiqITgx.jpg" alt="Algolia"><br>
+<img src="https://s2.loli.net/2025/02/07/ihVHrSon6QECsax.jpg" alt="Algolia"><br><img src="https://s2.loli.net/2025/02/07/bVed4JQv67Klcao.jpg" alt="Algolia">
+<br>
+点击左侧的Search，进入到索引（Index）界面，创建一个新的索引，名字随意。(点击上方的Index，点击“Create Index”创建。)<br><img src="https://s2.loli.net/2025/02/07/sqS1duZTURym4JI.jpg" alt="Algolia5">
+<br>创建好索引之后，点击Add records添加记录。如果想以JSON格式添加记录，点击Add manually，在新弹出的窗口中输入JSON信息，输入完成后，点击“save”添加记录，就像这样。</p>
+<pre><code class="language-JSON">[
+    {
+        &quot;title&quot;:&quot;Hello World&quot;,
+        &quot;link&quot;:&quot;https://example.com/&quot;
+    }
+]
+</code></pre>
+<p>提交记录之后Index界面就会出现你添加的记录，上面会显示着各种attr的信息。</p>
+<h2>3.HTML+JS调用</h2>
+<p>保存好你的<code>Application ID</code>、<code>Search API Key</code>和<code>Index Name</code>。新建一个html或者htm文件，编辑如下基本代码，成功之后可以根据喜好修改。</p>
+<pre><code class="language-HTML">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/algoliasearch@4.13.0/dist/algoliasearch-lite.umd.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/instantsearch.js@4.37.3/dist/instantsearch.production.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;search-box&quot;&gt;&lt;/div&gt; &lt;!-- 搜索框容器 --&gt;
+    &lt;div id=&quot;hits&quot;&gt;&lt;/div&gt; &lt;!-- 搜索结果容器 --&gt;
+    &lt;script&gt;
+      const search = instantsearch({
+        indexName: &#39;替换成你自己的Index Name&#39;,
+        searchClient: algoliasearch(&#39;替换成你自己的Application ID&#39;, &#39;替换成你的Search API Key&#39;),
+      });
+      search.addWidget(instantsearch.widgets.searchBox({ container: &#39;#search-box&#39; }));
+      search.addWidget(instantsearch.widgets.hits({ container: &#39;#hits&#39; }));
+      search.start();
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>这段代码运行之后，你的搜索应该能正常运行。但是数据有些杂乱，如果你需要展示特定的内容，可以在<code>search.addWidget(instantsearch.widgets.searchBox({ container: &#39;#search-box&#39; }));</code>这段里面使用templates来自定义搜索结果模版。可以将那行代码改成：</p>
+<pre><code class="language-Javascript">//自定义搜索模版示例。可以将item里的内容改成你自己想要的样子。
+search.addWidget(instantsearch.widgets.hits({ container: &#39;#hits&#39;,templates:{empty:&quot;没有找到搜索结果。&quot;,item: `&lt;a href=&quot;{{link}}&quot;&gt;{{#helpers.highlight}}{&quot;attribute&quot;:&quot;title&quot;}{{/helpers.highlight}}&lt;/a&gt;`}}));
+</code></pre>
+<p>成功之后，可以装饰你的搜索界面，然后测试。可以的话就挂在你自己的网站/博客上。</p><hr>
+</article><br><br>
+  <style>
+.tk-submit-action-icon{
+    height:20px;
+}
+#twikoo{
+    width:95%;
+}
+</style>
+<div id="comment"></div>
+<script src="https://hellopgrmm.github.io/tools/twikoo.min.js"></script>
+<link rel="stylesheet" href="https://hellopgrmm.github.io/tools/twikoo.min.css">
+<script>
+twikoo.init({
+  envId: 'https://cheerful-moonbeam-4f1337.netlify.app/.netlify/functions/twikoo',
+  el: '#comment', 
+  path: location.pathname, 
+  lang: 'zh-CN', 
+})
+</script>
+ <!--end--><hr><center><spam>Copyright (C) Hello-Programming 2024｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
