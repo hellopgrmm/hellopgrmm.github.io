@@ -1,0 +1,144 @@
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <title>Graphics.h：利用C++实现地月系运转模拟|Hellopgrmm 一个分享编程经验的网站</title>
+ <a style='font-size:30px'>Graphics.h：利用C++实现地月系运转模拟</a><br>
+<link rel="stylesheet" href="https://hellopgrmm.github.io/tools/githubMarkdown.css">
+<article class="markdown-body">
+<p>之前看到Turbo C内置的模拟时钟程序看上去很有趣。闲的无事，自己也打算做一个像模拟时钟那样会动的。所以利用了C++的<code>graphics.h</code>头文件实现一个地月系运转的模拟小程序（即月亮围绕地球转动），程序效果如下。
+<img src="https://s2.loli.net/2025/02/11/Nkl3S4LUrR1E2Cb.jpg" alt="Image"></p>
+<p>看上去是比较抽象，不过<code>graphics.h</code>毕竟是DOS时代的老产物了，也不指望能模拟得那么真实。</p>
+<h2>程序思路</h2>
+<p>这里主要使用了<code>graphics.h</code>（绘制图像）<code>windows.h</code>（动画延迟）<code>cmath</code>（旋转处理）库。
+大概思路是这样的:</p>
+<pre><code>初始化图像画布-&gt;绘制一个圆形（代表地球）-&gt;
+绘制另一个圆形（代表月球）-&gt;循环执行(“月球”旋转一个角度，更新旋转之后的x坐标和y坐标，按位置绘制“月球”。绘制“地球”，清空画布，继续循环。)
+</code></pre>
+<h2>开始编写</h2>
+<h3>引入必要的头文件</h3>
+<p>这个开头已经列举出来了，先引入如下头文件，辅助绘制、处理旋转和动画。</p>
+<pre><code class="language-C++">#include&lt;graphics.h&gt;
+#include&lt;windows.h&gt;
+#include&lt;cmath&gt;
+</code></pre>
+<p>引入cmath是为了处理“月球”的旋转，就需要用到数字处理（处理角度，位置等），<code>cmath</code>库就起作用了。</p>
+<h3>初始化画布</h3>
+<pre><code class="language-C++">int main()
+{
+    int gd = DETECT, gm;
+    initgraph(&amp;gd, &amp;gm, NULL);
+}
+</code></pre>
+<h3>定义初始坐标</h3>
+<blockquote>
+<p>注意，以下的代码都应当出现在main函数里。</p>
+</blockquote>
+<pre><code class="language-C++">int mx = 300;
+int my = 250;
+int angle = 0;
+</code></pre>
+<p>这里的<code>angle</code>变量是专门为“月球”定义的，到时候旋转处理会用上。</p>
+<h3>绘制最初状态</h3>
+<blockquote>
+<p>注意，以下的代码都应该出现在while循环内，不然绘制只执行一次，就会立即退出。</p>
+</blockquote>
+<p>先添加一个while循环。这里使用两个不同的圆形来代替“地球”和“月球”，绘制圆形需要使用<code>circle(int x,int y,int radius,PIMAGE pimg = NULL)</code>函数。在对应的x和y坐标上绘制出大小为radius的圆形。
+为了区分，同时也需要用到<code>setcolor()</code>函数来设置不同的颜色，这里提供了<code>RED</code>、<code>GREEN</code>、<code>BLUE</code>和<code>WHITE</code>四种基本的颜色，如果需要混合颜色，则用竖杠“|”分开。例如<code>GREEN|RED</code>(黄色)。顺便使用<code>outtextxy()</code>函数来标记文字“Earth”和“Moon”</p>
+<pre><code class="language-C++">setcolor(BLUE);
+circle(300, 250, 50);
+setcolor(GREEN);
+outtextxy(280, 300, &quot;Earth&quot;);
+setcolor(BLUE | GREEN);
+circle(300, 250, 30);
+setcolor(GREEN | RED);
+outtextxy(300 - 20,250 + 30, &quot;Moon&quot;);
+</code></pre>
+<p>这段代码绘制出了一个“月球”和“地球”，只不过用了两个圆形（一个蓝色，一个浅青色）来代替，并且标注上文字。绘制出最初状态。</p>
+<h3>处理旋转</h3>
+<p>这个程序的核心部分就是要让月球“旋转”起来，以“地球”为中心点，绕点旋转。就很需要用到<code>cmath</code>库里的<code>sin()</code>和<code>cos()</code>运算函数。同时，新建两个变量，一个<code>mmx</code>,一个<code>mmy</code>，这两个变量循环更新旋转后的坐标。</p>
+<pre><code class="language-C++">setcolor(BLUE);
+circle(300, 250, 50);
+setcolor(GREEN);
+outtextxy(280, 300, &quot;Earth&quot;);
+int mmx = mx + (int)(130 * cos(angle * 3.14159265 / 180));/*添加这行*/
+int mmy = my + (int)(130 * sin(angle * 3.14159265 / 180));/*添加这行*/
+setcolor(BLUE | GREEN);
+circle(mmx, mmy, 30);/*将这里的坐标替换成mmx和mmy*/
+setcolor(GREEN | RED);
+outtextxy(mmx - 20, mmy + 30, &quot;Moon&quot;);/*同样替换*/
+angle--;/*角度偏移（自西向东）*/
+</code></pre>
+<h3>刷新画面</h3>
+<p>完成得差不多了，只不过运行的时候“月球”旋转的时候还会留下旋转痕迹。因为没有清空画布，上一次绘制的痕迹就会保留。我们可以使用<code>cleardevice()</code>函数来清空画布，不需要任何参数，直接调用就可以。同时，控制速度，我们可以使用<code>windows.h</code>里面的<code>Sleep(ms)</code>函数来控制延迟，也可以使用库自带的<code>delay(ms)</code>。</p>
+<pre><code class="language-C++">Sleep(10);
+cleardevice();
+</code></pre>
+<h3>完整代码</h3>
+<pre><code class="language-C++">#include&lt;graphics.h&gt;
+#include&lt;windows.h&gt;
+#include&lt;cmath&gt;
+#include&lt;stdio.h&gt;
+int main() {
+    HWND hWnd = GetConsoleWindow();/*隐藏控制台窗口（可选）*/
+    ShowWindow(hWnd, SW_HIDE);
+    int gd = DETECT, gm;
+    initgraph(&amp;gd, &amp;gm, NULL);
+    int mx = 300;
+    int my = 250;
+    int angle = 0;
+    while (1) {
+        setcolor(BLUE);
+        circle(300, 250, 50);
+        setcolor(GREEN);
+        outtextxy(280, 300, &quot;Earth&quot;);
+        int mmx = mx + (int)(130 * cos(angle * 3.14159265 / 180));
+        int mmy = my + (int)(130 * sin(angle * 3.14159265 / 180));
+        setcolor(BLUE | GREEN);
+        circle(mmx, mmy, 30);
+        setcolor(GREEN | RED);
+        outtextxy(mmx - 20, mmy + 30, &quot;Moon&quot;);
+        angle--;
+        Sleep(10);
+        cleardevice();
+    }
+    return 0;
+}
+</code></pre>
+<h3>完善、修改</h3>
+<p>可以添加“月球”的x坐标和y坐标，还可以顺便标注一下程序的描述等等都可以。</p>
+</article><br><br>
+  <style>
+.tk-submit-action-icon{
+    height:20px;
+}
+#twikoo{
+    width:95%;
+}
+</style>
+<div id="comment"></div>
+<script src="https://hellopgrmm.github.io/tools/twikoo.min.js"></script>
+<link rel="stylesheet" href="https://hellopgrmm.github.io/tools/twikoo.min.css">
+<script>
+twikoo.init({
+  envId: 'https://cheerful-moonbeam-4f1337.netlify.app/.netlify/functions/twikoo',
+  el: '#comment', 
+  path: location.pathname, 
+  lang: 'zh-CN', 
+})
+</script>
+ <!--end--><hr><center><spam>Copyright (C) Hello-Programming 2024｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
