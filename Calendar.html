@@ -22,10 +22,59 @@ h1,a
 {
     color:white;
 }
+#Month-Week
+{
+    font-size:3em;
+}
+#Date-Time
+{
+    font-size:2em;
+}
+#Day
+{
+    font-size:17em;
+}
+#MainDate
+{
+    width:30%;
+}
+@media only screen and (max-width : 725px){
+    #Month-Week{
+        font-size:1.5em;
+    }
+    #Day
+    {
+        font-size:5em;
+    }
+    #Date-Time
+    {
+        font-size:1em;
+    }
+    #MainDate
+    {
+        width:90%;
+    }
+}
+@media only screen and (max-width : 1000px){
+    #Month-Week{
+        font-size:2em;
+    }
+    #Day
+    {
+        font-size:8em;
+    }
+    #Date-Time
+    {
+        font-size:2em;
+    }
+    #MainDate{
+        width:90%;
+    }
+}
 </style>
-<center><div style='width:30%' id='MainDate'>
-<h1 id='Month-Week' style='display:none;font-size:3em'>1月 | 星期一</h1>
-<a id='Day' style='display:none;font-size:17em'>01</a><br><a style='display:none;font-size:2em' id='Date-Time'>1970年1月1日 0:00:00</a><br><hr id='mmhr' style='display:none'><a style='display:none' id='Sentence'>新的一天，新的开始，让我们一起努力成为更好的自己💪。</a>
+<center><div id='MainDate'>
+<h1 id='Month-Week' style='display:none;'>1月 | 星期一</h1>
+<a id='Day' style='display:none;'>01</a><br><a style='display:none;' id='Date-Time'>1970年1月1日 0:00:00</a><br><hr id='mmhr' style='display:none'><a style='display:none' id='Sentence'>新的一天，新的开始，让我们一起努力成为更好的自己💪。</a>
 </div>
 <script>
 $('#Month-Week').show('drop',1000);
