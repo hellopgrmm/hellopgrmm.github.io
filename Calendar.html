@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>电子台历-Hello Programming</title>
+<link href="https://hellopgrmm.github.io/tools/jquery-ui.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src='https://hellopgrmm.github.io/tools/jquery-ui.js'></script>
+</head>
+<body bgcolor='orange'>
+<style>
+@font-face
+{
+    font-family:trebuc;
+    src:url(https://hellopgrmm.github.io/font/TREBUC.TTF)
+}
+body
+{
+    font-family:trebuc;
+}
+h1,a
+{
+    color:white;
+}
+</style>
+<center><div style='width:30%' id='MainDate'>
+<h1 id='Month-Week' style='display:none;font-size:3em'>1月 | 星期一</h1>
+<a id='Day' style='display:none;font-size:17em'>01</a><br><a style='display:none;font-size:2em' id='Date-Time'>1970年1月1日 0:00:00</a><br><hr id='mmhr' style='display:none'><a style='display:none' id='Sentence'>新的一天，新的开始，让我们一起努力成为更好的自己💪。</a>
+</div>
+<script>
+$('#Month-Week').show('drop',1000);
+$('#Day').show('drop',1000);
+setTimeout("$('#Date-Time').fadeIn(1000);$('#mmhr').fadeIn(1000);$('#Sentence').fadeIn(1500);",1000);
+var ColorArray = ['blue','green','cyan','orange','pink','purple','red','green','blue','orange','#eb4f4f','purple'];
+function updateTime()
+{
+    var m = new Date();
+    var m2 = m.getMonth()+1;
+    document.querySelector('body').style.background = ColorArray[m2-1];
+    switch(m.getDay()){
+        case 1:document.getElementById('Month-Week').innerHTML = m2+"月 | 星期一";break;
+        case 2:document.getElementById('Month-Week').innerHTML = m2+"月 | 星期二";break;
+        case 3:document.getElementById('Month-Week').innerHTML = m2+"月 | 星期三";break;
+        case 4:document.getElementById('Month-Week').innerHTML = m2+"月 | 星期四";break;
+        case 5:document.getElementById('Month-Week').innerHTML = m2+"月 | 星期五";break;
+        case 6:document.getElementById('Month-Week').innerHTML = m2+"月 | 星期六";break;
+        case 7:document.getElementById('Month-Week').innerHTML = m2+"月 | 星期日";break;
+    }
+    Day.innerHTML = m.getDate();
+    document.getElementById('Date-Time').innerHTML = m.getYear()+1900 + '年<br>' + m.getHours() + ':' + m.getMinutes() + ':' + m.getSeconds();
+}
+setInterval('updateTime();',1)
+</script>
