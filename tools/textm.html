@@ -1,0 +1,98 @@
+<meta charset='utf-8'>
+<meta name="description" content="HelloPgrmm是一个编程经验分享网站,HelloPgrmm的全拼是Hello Programming(你好,编程),你可以在这里寻找到很多编程资源，你也可以下载到很多编程资源。"><link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css"></head><body><img src="https://hellopgrmm.github.io/imgs/logo.jpg" alt="图片显示错误了,可以刷新一下哟" style="height:100px;width:200px;"><img id="en" src="https://hellopgrmm.github.io/imgs/38B64F34-CE30-4ACC-9572-8CC2894F4182.jpeg" style="height:60px;width:500px;"><br><a href="https://hellopgrmm.github.io/" id="home"><b>首页</b><!--以下内容是先预设好的,到后面再加上去--></a><a href="https://hellopgrmm.github.io/tools.html" id="tool"><b>工具</b></a><a href="https://hellopgrmm.github.io/about.html" id="tool"><b>关于</b></a><a href="https://hellopgrmm.github.io/others.html" id="home"><b>更多</b></a><br><div id="line" style="position: relative;top:5.5px;"></div><!--Main--><br>
+<link type="text/css" rel="stylesheet" href="https://hellopgrmm.github.io/pulicstyle.css">
+ <script src="https://hellopgrmm.github.io/tools/prism.js"></script>
+   <link href="https://hellopgrmm.github.io/tools/prism.css" rel="stylesheet" />
+  
+ <title>Lrc转JS活动字幕|Hellopgrmm 一个分享编程经验的网站</title>
+ <a style='font-size:30px'>Lrc转JS活动字幕</a><br>
+<ul><li>使用方法：请在下方输入框输入或者粘贴LRC内容，之后单击“生成”按钮，即可将Lrc内容转换为可执行的HTML+JS活动代码。<br></li></ul>
+<h2>粘贴LRC内容:</h2>
+<textarea id='libbay' style='height:30%;width:35%'></textarea>
+<h2>HTML动态字幕代码</h2>
+<xmp id='innerCode'>
+</xmp>
+<button onclick='parsed()'>生成</button>
+<script>
+function convertTimeCodeToSecond(Time_Code){
+    var AA = Time_Code.split('.');
+    var AB = AA[0].split(':');
+    var AD = AB[0];
+    var AE = AB[1];
+    if(AA[1] > 50){
+        var AC = eval(`${AD}*60+${AE}+1`);
+    }else{var AC = eval(`${AD}*60+${AE}`);}
+    return AC;
+}
+function ParseLyrics(LyricsText,Type){var NORMAL = 'NORMAL';var DICT = 'DICT';var OriginalLyricsText = LyricsText;var SplitLyrics = OriginalLyricsText.split('\n');var ArrayOfLyrics = [];var Kara = {};for(var i = 0;i < SplitLyrics.length;i++){var Temp = SplitLyrics[i];const match = Temp.match(/\[(\d{2}):(\d{2})\.(\d{2})\]/);if(match){const TimeCode = match[0];const EXLyrics = Temp.substring(TimeCode.length).trim();var Extract = TimeCode.replace('[','').replace(']','');if(Type == NORMAL){ArrayOfLyrics.push(Extract);ArrayOfLyrics.push(EXLyrics);}else if(Type == DICT){Kara[Extract] = EXLyrics;}}}if(Type == NORMAL){return ArrayOfLyrics;}else if(Type == DICT){return Kara;};}
+function parsed(){
+    var Texts = ParseLyrics(document.getElementById('libbay').value,'NORMAL');
+    innerCode.innerHTML+=`
+<meta charset='utf-8'>
+<body>
+<style>
+body{
+    font-family: Helvetica,Arial,sans-serif;
+}
+#textView
+{
+    /*字幕CSS样式*/
+    background:black;
+    color:white;
+    opacity:0.7;
+}
+</style>
+<video controls='' id='player' src='SomethingYouWantToPlay.mp4'></video><br>
+<!--字幕标签-->
+<a id='textView'></a>
+<script>
+setInterval(function(){
+    var Seconds = player.currentTime.toFixed(0);`;
+    for(var i = 1;i < Texts.length;i=i+2){
+          var TEMP = convertTimeCodeToSecond(Texts[i-1]);
+          var clickclick = Texts[i];
+          if(i == 1){
+              innerCode.innerHTML+=`\n    if(Seconds == ${TEMP}){textView.innerHTML = "${clickclick}";}\n`;
+          }else{
+              innerCode.innerHTML+=`    else if(Seconds == ${TEMP}){textView.innerHTML = "${clickclick}";}\n`;
+          }
+      }
+      innerCode.innerHTML+=`  },250);`;
+      innerCode.innerHTML+='<'+'/'+'script'+'>';
+}
+</script>
+  <style>
+.tk-submit-action-icon{
+    height:20px;
+}
+#twikoo{
+    width:95%;
+}
+</style>
+<div id="comment"></div>
+<script src="https://hellopgrmm.github.io/tools/twikoo.min.js"></script>
+<link rel="stylesheet" href="https://hellopgrmm.github.io/tools/twikoo.min.css">
+<script>
+twikoo.init({
+  envId: 'https://cheerful-moonbeam-4f1337.netlify.app/.netlify/functions/twikoo',
+  el: '#comment', 
+  path: location.pathname, 
+  lang: 'zh-CN', 
+})
+</script>
+ <!--end--><hr><center><spam>Copyright (C) Hello-Programming 2024｜<span>仅用于分享编程经验</span><br><span>我的E-mail:qwqexplorer@163.com</span></spam><br><a>语言：</a>
+<a style="text-decoration:none;color:blue;" href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("english")'>English</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("russian")'>Русский</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("thai")'>ภาษาไทย</a><a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("korean")'>한국어</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("german")'>Deutsch</a>
+<a>|</a>
+<a style="text-decoration:none;color:blue;" href='javascript:translate.changeLanguage("singapore")'>සිංගාපුර්</a><br>
+<div id="translate"><a>更多语言在这里选择</a></div><br><script src="https://res.zvo.cn/translate/translate.js"></script></center></body></html></center>
+<script>
+translate.language.setLocal('chinese_simplified');translate.execute();
+</script>
+</body></html>
