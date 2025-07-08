@@ -42,7 +42,7 @@ input{
 </div>
 <br><br>
 <a>PS:感谢Github项目“webextension_english_chinese_dictionary”提供了词典资源。</a>
- <a id='bet'></a>
+<br><a id='bet'></a>
 <script>
 var ee = Date.now();
 var endict = {};
@@ -56,6 +56,7 @@ fetch(path)
       for(var a in data){
           endict[a] = data[a];
           res++;
+          bet.innerHTML = '成功加载'+res+'个单词资源，使用时间:'+vhy/1000+' Second(s)。';
       }
       var vhy = Date.now() - ee;
       bet.innerHTML = '成功加载'+res+'个单词资源，使用时间:'+vhy/1000+' Second(s)。';
