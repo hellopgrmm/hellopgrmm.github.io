@@ -1,0 +1,425 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Vek</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+<style>
+body
+{
+	font-family: ui-monospace,consolas,monospace;
+	background-color:rgb(117,158,188);
+}
+#start
+{
+	background: black;
+	height:100%;
+	width:100%;
+	position: absolute;
+	color:white;
+	left:0;
+	top:0;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+  	flex-direction: column;
+}
+#desktop
+{
+	position: relative;
+	left:0px;
+	top:0px;
+	font-size:15px;
+	display: none;
+}
+#vek_bar
+{
+	position: fixed;
+	left:0px;
+	top:0px;
+	width:100%;
+	word-spacing:15px;
+	background: linear-gradient(#ccc,white);
+	color:black;
+	padding-top:2px;
+	padding-left:3px;
+	padding-bottom:2px;	
+}
+#vek_bar_text{
+	color:black;
+	transition:color 0.3s;
+}
+#vek_bar_text:hover
+{
+	color:blue;
+}
+#vek_icon
+{
+	border-radius:5px;
+	padding-top:5px;
+	padding-left:5px;
+	padding-bottom: 5px;
+	padding-right:5px;
+	trasnition:background 0.3s;
+	width:100px;
+	word-wrap: break-word;
+}
+#vek_icon:hover
+{
+	background:rgba(200,200,200,0.5);
+}
+.vek_window
+{
+	position:absolute;
+	top:38px;
+	left:50px;
+	height:50%;
+	width:60%;
+	border-radius: 5px;
+	border:1px soild black;
+	background: white;
+	box-shadow:2px 2px 2px 2px black;
+	padding-top:5px;
+	padding-left:5px;
+	display:none;
+}
+#vek_overlay
+{
+	background: rgba(0,0,0,0.5);
+	height:100%;
+	width:100%;
+	position: fixed;
+	color:white;
+	left:0;
+	top:0;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+  	z-index: 9999;
+  	flex-direction: column;
+}
+#vek_wd
+{
+	position:absolute;
+	top:38px;
+	left:50px;
+	width:30%;
+	border-radius: 5px;
+	border:1px soild black;
+	background: white;
+	box-shadow:2px 2px 2px 2px black;
+	padding-top:5px;
+	padding-left:5px;
+	display:none;
+}
+.vek_button
+{
+	background: linear-gradient(#ccc,white);
+	border:1px soild black;
+	border-radius:5px;
+	font-family: ui-monospace,consolas,monospace;
+	font-size:15px;
+	height:35px;
+	border-color:black;
+	color:black;
+}
+.vek_button:hover
+{
+	background: linear-gradient(white,#ccc);
+}
+.vek_textarea
+{
+	height:70%;
+	width:98%;
+	outline:none;
+	border-radius:5px;
+	font-family: ui-monospace,consolas,monospace;
+	font-size:15px;
+	border:1px soild #ccc;
+}
+.vek_input
+{
+	height:35px;
+	width:300px;
+	outline:none;
+	border-radius:5px;
+	font-family: ui-monospace,consolas,monospace;
+	font-size:15px;
+	border:1px soild #ccc;
+}
+</style>
+<div id="start">
+	<a id="vek_title" style="font-size:80px">Vek</a>
+	<br><a style="font-size:20px;" id="vek_start_sign">正在启动...</a><br>
+	<font color="gray">Hello-Programming&copy;2025</font>
+	<br><textarea id="vek_output" style="height:30%;width:69%;font-family:ui-monospace,consolas,monospace;border-width:0px;font-size:20px;color:cyan;outline:none;background:black;" readonly></textarea>
+	<br><a>其它作品：<a href="https://hellopgrmm.github.io/simul/KunOS_new" style="color:cyan">KunOS</a></a>
+</div>
+<div id="desktop">
+<!--菜单栏-->
+<div id="vek_bar">
+<em>Vek</em> <a id="vek_bar_text" onclick="topmost('vek_overlay');$('#vek_overlay').fadeIn();">电源</a> <a id="vek_time"></a></div>
+<!--图标区域-->
+<br><br>
+<div id="vek_icon" onclick="topmost('vek_filemanager');$('#vek_filemanager').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/gXyOvQi7NYwEdpn.png" alt="文件管理的图标"><br>文件管理</center></div>
+<div id="vek_icon" onclick="topmost('vek_texteditor');$('#vek_texteditor').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/rI9jP4tgTmu8Yhs.png" alt="文本编辑器的图标"><br>文本编辑器</center></div>
+<div id="vek_icon" onclick="topmost('vek_browser');$('#vek_browser').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/i73nS4xYWmbXf2h.png" alt="浏览器的图标"><br>浏览器</center></div>
+<div id="vek_icon" onclick="topmost('vek_bg');$('#vek_bg').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="设置和个性化的图标"><br>设置和个性化</center></div>
+<div id="vek_icon" onclick="topmost('vek_vm');$('#vek_vm').fadeIn();vmmain.src=location.href;"><center><img src="https://s2.loli.net/2025/08/17/82RtI3vbmP1AXlu.png" alt="vek虚拟机的图标"><br>Vek虚拟机</center></div>
+<div id="vek_icon" onclick="topmost('vek_c09');$('#vek_c09').fadeIn();window.open('https://g209.wuaze.com/');"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="209聊天框的图标"><br>209聊天框</center></div>
+<div id="vek_icon" onclick="topmost('vek_bricks');$('#vek_bricks').fadeIn();bsqq.src = 'bsqq.html';"><center><img src="https://s2.loli.net/2025/08/18/WGzZgEY6ymq2FkU.png" alt="打砖块的图标"><br>打砖块</center></div>
+<div id="vek_icon" onclick="topmost('vek_about');$('#vek_about').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/YunUq6dwE3iH1zm.png" alt="关于的图标"><br>关于Vek</center></div>
+</div>
+<!--窗口区域-->
+<div class="vek_window" id="vek_filemanager" style="overflow: auto;" onclick="topmost('vek_filemanager')"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_filemanager').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" onclick="biggest(vek_filemanager);" title="最大化">◎</a> <a id="vek_bar_text" onclick="smallest(vek_filemanager);" title="最小化">_</a> <b>文件管理</b><hr><!--主体-->
+	<h1 id="vek_filetitle">文件管理</h1>可导入Vek Mod文件或者其他文件(Vek Mod文件开头前缀必须要为vkm.) <input type="file" id="inputentry1"/> <button onclick="readfile('inputentry1');" class='vek_button'>导入</button><hr>
+	<div id="vek_file_homepage"><div id="vek_icon" style="display:inline-block;" onclick="systemfile();"><center><img src="https://s2.loli.net/2025/08/15/gXyOvQi7NYwEdpn.png" alt="系统文件"><br>系统文件</center></div><div id="vek_icon" style="display:inline-block;" onclick="personalfile();"><center><img src="https://s2.loli.net/2025/08/15/gXyOvQi7NYwEdpn.png" alt="个人文件"><br>个人文件</center></div></div>
+	<div id="vek_filelist1" style="display:none;"><font color="#ccc">(系统文件不支持直接读取)</font><br><br><button class="vek_button" onclick="back(vek_filelist1,vek_file_homepage);">返回</button> <b id="len"></b><article id="vek_filelist1b"></article><br></div>
+	<div id="vek_filelist2" style="display:none;"><button class="vek_button" onclick="back(vek_filelist2,vek_file_homepage);">返回</button> <b id="len1"></b><article id="vek_filelistb1"></article><br></div>
+	<div id="vek_file3" style="display:none;"><button class="vek_button" onclick="back(vek_file3,vek_filelist2);vek_filetitle.innerHTML = '个人文件';">返回</button> <b id="len2"></b><br><br><textarea class="vek_textarea" readonly id="vek_file_content"></textarea><br></div>
+	<hr>Vek File manager 1.0,powered by Hello-Programming(2025).
+</div>
+
+
+<div class="vek_window" id="vek_texteditor" style="overflow:auto" onclick="topmost('vek_texteditor');topmost('vek_wd');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_texteditor').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_texteditor);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_texteditor);" title="最小化">_</a> <b>文本编辑</b><hr><!--主体--><input placeholder="输入文件名" id="vek_filename_entry" class="vek_input"><button onclick="localStorage.setItem(vek_filename_entry.value,vek_entry.value);vek_window('文本编辑','已保存');" class="vek_button">保存</button><button onclick="vek_entry.value = localStorage.getItem(vek_filename_entry.value);" class="vek_button">读取</button><hr><textarea id="vek_entry" class="vek_textarea"></textarea></div>
+
+<div class="vek_window" id="vek_browser" onclick="topmost('vek_browser');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_browser').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_browser);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_browser);" title="最小化">_</a> <b>浏览器</b><hr><!--主体--><input id="vek_addr" style="width:80%;" class="vek_input" placeholder="输入网址（不能加入https或者http前缀，不支持访问本地文件。）"><button onclick="vek_iframe_x.src='http://'+vek_addr.value;" class="vek_button">GO!</button><br><iframe id="vek_iframe_x" style="width:90%;height:70%;"></iframe></div>
+
+<div class="vek_window" id="vek_bg" style="overflow:auto" onclick="topmost('vek_bg');topmost('vek_wd');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_bg').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_bg);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_bg);" title="最小化">_</a> <b>设置和个性化</b><hr><!--主体-->
+<h1>设置和个性化</h1>
+<h2>背景设置</h2>
+(当前仅支持纯色背景)<br>R:<input oninput="changecolor();" type="range" max=255 id="vek_color_r"/> <a id="r"></a><br>G:<input oninput="changecolor();" type="range" max=255 id="vek_color_g"/> <a id="g"></a><br>B:<input oninput="changecolor();" max=255 type="range" id="vek_color_b"/> <a id="b"></a><br><div style="width:150px;height:50px;" id="vek_preview">颜色预览</div><button onclick="localStorage.setItem('vek.bgColor',`rgb(${vek_color_r.value},${vek_color_g.value},${vek_color_b.value})`);vek_window('设置和个性化','更改成功。');confirmcolor()" class="vek_button">更换</button><button onclick="localStorage.removeItem('vek.bgColor');vek_window('设置和个性化','更改成功，该操作需要重启Vek。');" class="vek_button">恢复默认</button><h2>字体大小设置</h2>
+字体大小：<input oninput="changeSize();" type='range' value=15 max=50 id="vek_fss"/> <a id="vek_fs"></a> <button class="vek_button" onclick="localStorage.setItem('vek.fontSize',`${vek_fss.value}px`);changefs();vek_window('个性化','字体大小已经更新。');">更改</button><br><a id="fsprw">字体预览</a>
+</div>
+
+<div class="vek_window" id="vek_vm" onclick="topmost('vek_vm');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_vm').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_vm);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_vm);" title="最小化">_</a> <b>Vek虚拟机</b><hr><!--主体-->
+<iframe style="width:98%;height:80%;" id="vmmain" src=""></iframe><br>
+<button onclick="vmmain.src=location.href;" class="vek_button">重新启动</button> <button onclick="if(vmselect.value == 'v0'){vmmain.src = 'Vek.html';}else if(vmselect.value == 'v1'){vmmain.src = 'https://hellopgrmm.github.io/simul/boot_new';}" class="vek_button">启动选中的虚拟机</button> 选择镜像：<select id="vmselect"><option value="v0">Vek</option><option value="v1">KunOS(New User Interface)</option></select>
+</div>
+
+<div class="vek_window" id="vek_c09" onclick="topmost('vek_c09');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_c09').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_c09);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_c09);" title="最小化">_</a> <b>209聊天框</b><hr><!--主体-->
+<h1>正在跳转至209聊天框。</h1>209聊天框也是Hello-Programming开发的一款在线网络聊天网站。<br>
+</div>
+
+<div class="vek_window" id="vek_bricks" onclick="topmost('vek_bricks');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_bricks').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_bricks);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_bricks);" title="最小化">_</a> <b>打砖块</b><hr><!--主体-->
+使用键盘 ← → 移动（游戏开始后请迅速点击游戏界面，否则没有反应）。 <button onclick="bsqq.src = 'bsqq.html';" class="vek_button">重新开始</button><br>
+<iframe id="bsqq" height="80%" width="90%"></iframe>
+</div>
+
+<div class="vek_window" id="vek_about" style="overflow:auto;" onclick="topmost('vek_about');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_about').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_about);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_about);" title="最小化">_</a> <b>个性化</b><hr><!--主体-->
+<h1>关于Vek</h1>
+Vek是一个网页版的系统（模拟，并非真实系统），灵感取自Windows93(windows93.net)。从而制成此网页。<br>注意：该网页并非真正的系统，操作系统是需要独立运行的，而不是基于一个系统之上、一个软件之上运行。请正在使用本网页的用户清楚认知此概念。
+<br>Vek版本：2.00<br>开发时间：2025年8月16日21:43:12<br><br>Vek将会持续更新新功能。
+<br><h2>关于Vek Mod的一些说明</h2>Vek Mod允许用户制作自己的mod，导入到Vek中，从而可以让Vek拓展出更多的功能。Vek Mod的前缀是vkm，（示例：vkm.helloworld）vkm文件用Javascript语言为主，这也是网页交互的必要语言之一。<br>如果您熟悉Javascript，那么您可以仔细阅读源代码，寻找一些Vek的对象名（比如说vek_start_sign，这是开机提示文字的对象，示例代码：vek_start_sign.innerHTML = 'Hello!Test 1234567890Yes Ok.';）然后您编写js代码，就可以为Vek拓展功能。
+</div>
+
+<div class="vek_window" style="width:98%;height:98%;top:2px;left:2px;" id="vek_rick" onclick="topmost('vek_rick');"><!--标题栏--><br><hr><!--主体-->
+<h1>正在关机，请稍后...</h1>
+<video src='https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4' id="rickroll_video" controls height="80%" width="auto"></video>
+</div>
+
+<!--Vek模拟系统的窗口提示-->
+<div id="vek_wd" onclick="topmost('vek_wd');">
+<b id="vek_wdt"></b><hr><br><a id="vek_wdtext"></a><br><hr><button onclick="$('#vek_wd').fadeOut();" class="vek_button">确定</button></div>
+<div id="vek_overlay"><h1>您想要做什么？</h1><br><button onclick="$('#vek_rick').fadeIn();topmost('vek_rick');rickroll_video.play();" style="height:50px;width:200px;" class="vek_button">关闭Vek</button><br><button onclick="window.location.reload();" style="height:50px;width:200px;" class="vek_button">重新启动Vek</button><br><button class="vek_button" onclick="$('#vek_overlay').fadeOut();" style="height:50px;width:200px;">关闭菜单</button></div>
+
+<script>
+
+vek_overlay.style.display = 'none';
+changecolor();
+changeSize();
+function changecolor()
+{
+	vek_preview.style.background = `rgb(${vek_color_r.value},${vek_color_g.value},${vek_color_b.value})`;
+	r.innerHTML = vek_color_r.value;
+	g.innerHTML = vek_color_g.value;
+	b.innerHTML = vek_color_b.value;
+}
+function changeSize()
+{
+	fsprw.style.fontSize = `${vek_fss.value}px`;
+	vek_fs.innerHTML = vek_fss.value+' (默认值为15)';
+}
+function changefs()
+{
+	if(localStorage.getItem('vek.fontSize')){desktop.style.fontSize = localStorage.getItem('vek.fontSize');}else{}
+}
+function back(e1,e2)
+{
+	e1.style.display="none";
+	e2.style.display="";
+	vek_filetitle.innerHTML = "文件管理";
+}
+function gf(localvalue)
+{
+	vek_file_content.value = localStorage.getItem(localvalue);
+	len2.innerHTML = localvalue;
+	vek_file3.style.display = "";
+	vek_filelist2.style.display = "none";
+}
+function personalfile()
+{
+	vek_filetitle.innerHTML = "个人文件";
+	var lens = 0;
+	vek_filelistb1.innerHTML="";
+	vek_file_homepage.style.display = "none";
+	vek_filelist2.style.display = "";
+	for(var i = 0;i < localStorage.length;i++)
+	{
+		if(localStorage.key(i).includes("hash_")){continue;}
+		else if(localStorage.key(i).substr(0,4).toLowerCase() == "vek."){continue;}
+		else if(localStorage.key(i).substr(0,4).toLowerCase() == "vkm."){vek_filelistb1.innerHTML+=`<div id="vek_icon" style="display:inline-block;" onclick="eval(localStorage.getItem('${localStorage.key(i)}'));"><center><img src="https://s2.loli.net/2025/08/15/rI9jP4tgTmu8Yhs.png" alt="文件：${localStorage.key(i)}"><br>${localStorage.key(i)}</center></div><button onclick="localStorage.removeItem('${localStorage.key(i)}');alert('已完成删除，如果文件仍然显示，请返回重进以刷新界面。');personalfile();">删除</button>`;lens++;}
+		else if(localStorage.key(i).includes("eaglercraft")){continue;}
+		else{vek_filelistb1.innerHTML+=`<div id="vek_icon" style="display:inline-block;" onclick="gf('${localStorage.key(i)}');"><center><img src="https://s2.loli.net/2025/08/15/rI9jP4tgTmu8Yhs.png" alt="文件：${localStorage.key(i)}"><br>${localStorage.key(i)}</center></div><button onclick="localStorage.removeItem('${localStorage.key(i)}');alert('已完成删除，如果文件仍然显示，请返回重进以刷新界面。');personalfile();">删除</button>`;lens++;}
+	}
+	len1.innerHTML = `一共${localStorage.length}个文件，此处仅展示了${lens}个文件。`;
+}
+function systemfile()
+{
+	vek_filetitle.innerHTML = "系统文件";
+	var lens = 0;
+	vek_filelist1b.innerHTML = "";
+	vek_file_homepage.style.display = "none";
+	vek_filelist1.style.display = "";
+	for(var i = 0;i < localStorage.length;i++)
+	{
+		if(localStorage.key(i).includes("hash_")){vek_filelist1b.innerHTML+=`<div id="vek_icon" style="display:inline-block;" onclick="alert('抱歉，该文件无法直接读取。原因：特殊文件。');"><center><img src="https://s2.loli.net/2025/08/15/rI9jP4tgTmu8Yhs.png" alt="文件：${localStorage.key(i)}"><br>${localStorage.key(i)}</center></div><button onclick="localStorage.removeItem('${localStorage.key(i)}');alert('已完成删除，如果文件仍然显示，请返回重进以刷新界面。');systemfile();">删除</button>`;lens++;}
+		else if(localStorage.key(i).includes("VEK.BOOT_MGR")){continue;}
+		else if(localStorage.key(i).substr(0,4).toLowerCase() == "vek."){vek_filelist1b.innerHTML+=`<div id="vek_icon" style="display:inline-block;" onclick="onclick="alert('抱歉，该文件无法直接读取。原因：特殊文件。');"><center><img src="https://s2.loli.net/2025/08/15/rI9jP4tgTmu8Yhs.png" alt="文件：${localStorage.key(i)}"><br>${localStorage.key(i)}</center></div><button onclick="localStorage.removeItem('${localStorage.key(i)}');alert('已完成删除，如果文件仍然显示，请返回重进以刷新界面。');systemfile();">删除</button>`;lens++;}
+		else{continue;}
+	}
+	len.innerHTML = `一共${localStorage.length}个文件，此处仅展示了${lens}个文件。`;
+}
+function topmost(elementId) {
+    const elements = document.querySelectorAll('*');
+    let maxZIndex = 0;
+    elements.forEach(el => {
+        const zIndex = parseInt(window.getComputedStyle(el).zIndex);
+        if (zIndex > maxZIndex) maxZIndex = zIndex;
+    });
+    document.getElementById(elementId).style.zIndex = maxZIndex + 1;
+}
+function vek_window(title,contents)
+{
+	$('#vek_wd').fadeIn();
+	vek_wd.style.top="40%";
+	vek_wd.style.left="30%";
+	vek_wdt.innerHTML = title;
+	vek_wdtext.innerHTML = contents;
+}
+function tpad(num)
+{
+	return num.toString().padStart(2, '0');
+}
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+function rand(s,e)
+{
+	return Math.floor(Math.random() * e) + s;
+}
+function biggest(element)
+{
+	element.style.top="35px";
+	element.style.left="5px";
+	element.style.width="98%";
+	element.style.height="95%";
+	console.log("Ok.");
+}
+function smallest(element)
+{
+	element.style.top="35px";
+	element.style.left="5px";
+	element.style.width="50%";
+	element.style.height="60%";
+}
+function readfile(inputentry) {
+    const fileinput = document.getElementById(inputentry);
+    if (fileinput.files.length > 0) {
+        const file = fileinput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            //return e.target.result;
+            localStorage.setItem(file.name,e.target.result);
+            alert('已导入文件“'+file.name+'”，存于‘个人文件’中。');
+        };
+        reader.readAsText(file, 'UTF-8');
+    } else {
+        return 'pls select a file.';
+    }
+}
+function confirmcolor()
+{
+	if(localStorage.getItem('vek.bgColor')){document.body.style.background = localStorage.getItem('vek.bgColor');}else{}
+}
+async function Vek_init()
+{
+	if(localStorage.getItem('vek.VEK.BOOT_MGR')){eval(localStorage.getItem('vek.VEK.BOOT_MGR'));}else{}
+	if(localStorage.getItem('vek.bgColor')){document.body.style.background = localStorage.getItem('vek.bgColor');}else{}
+	if(localStorage.getItem('vek.fontSize')){desktop.style.fontSize = localStorage.getItem('vek.fontSize');}else{}
+	vek_output.innerHTML+="重要说明：Vek是Hello-Programming开发的一个网页版的模拟系统。Hello-Programming官网：https://hellopgrmm.github.io/\n";
+	await delay(500);
+	vek_output.innerHTML+="声明：本网页并非是一个真正的系统，Hello-Programming已清楚操作系统和模拟的详细概念，此为网页模拟。\n";
+	await delay(1000);
+	vek_output.innerHTML+="Starting WebSystem...\n";
+	await delay(600);
+	vek_output.innerHTML+="Preparing desktop...\n";
+	await delay(695);
+	vek_output.innerHTML+="[LocalStorage]Loading localStorage Files...\n";
+	await delay(896);
+	for(var i = 0;i < localStorage.length;i++)
+	{
+		vek_output.scrollTop = vek_output.scrollHeight;
+		vek_output.innerHTML+="[LocalStorage #"+i+"]Loaded File:"+localStorage.key(i)+"\n";
+		await delay(20);
+	}
+	await delay(1024);
+	vek_output.innerHTML+="Now entering desktop...\n";
+	vek_output.scrollTop = vek_output.scrollHeight;
+	await delay(100);
+	$("#start").fadeOut(1000);
+	//desktop.style.display = "";
+	$("#desktop").fadeIn(1000);
+}
+function gettime()
+{
+	const currentTime = new Date();
+	const year = currentTime.getFullYear();
+	const month = currentTime.getMonth() + 1;
+	const day = currentTime.getDate();
+	const hours = currentTime.getHours();
+	const minutes = currentTime.getMinutes();
+	const seconds = currentTime.getSeconds();
+	return year+"-"+month+"-"+day+" "+tpad(hours)+":"+tpad(minutes)+":"+tpad(seconds);
+}
+setInterval("vek_time.innerHTML = gettime();",1000);
+$(function() {
+    $("#vek_filemanager").resizable();
+    $("#vek_filemanager").draggable();
+    $("#vek_texteditor").resizable();
+    $("#vek_texteditor").draggable();
+    $("#vek_browser").resizable();
+    $("#vek_browser").draggable();
+    $("#vek_bg").resizable();
+    $("#vek_bg").draggable();
+    $("#vek_about").resizable();
+    $("#vek_about").draggable();
+    $("#vek_vm").resizable();
+    $("#vek_vm").draggable();
+    $("#vek_c09").resizable();
+    $("#vek_c09").draggable();
+    $("#vek_bricks").resizable();
+    $("#vek_bricks").draggable();
+    $("#vek_rick").draggable();
+    $("#vek_wd").draggable();
+});
+
+
+Vek_init();
+</script>
+</body>
+</html>

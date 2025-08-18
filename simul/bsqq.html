@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>HTML5 打砖块</title>
+<style>
+    body{margin:0;background:#111;display:flex;justify-content:center;align-items:center;height:100vh;color:#fff;font-family:Arial,Helvetica,sans-serif}
+    canvas{background:#000;border:2px solid #fff}
+</style>
+</head>
+<body>
+<canvas id="game" width="480" height="320"></canvas>
+<script>
+const cvs   = document.getElementById('game');
+const ctx   = cvs.getContext('2d');
+const W     = cvs.width;
+const H     = cvs.height;
+const ROW        = 5;
+const COL        = 8;
+const BRICK_W    = 50;
+const BRICK_H    = 20;
+const BRICK_GAP  = 5;
+const BRICK_OFF  = {x: 30, y: 30};
+let   bricks = [];
+const PADDLE_W   = 75;
+const PADDLE_H   = 10;
+let   paddle = {x: (W - PADDLE_W)/2, y: H - 20, dx: 0, speed: 10};
+let ball = {
+    x: W/2, y: H/2,
+    r: 8,
+    dx: 4, dy: -4
+};
+let score = 0;
+let leftPressed  = false;
+let rightPressed = false;
+let gameOver = false;
+for (let r = 0; r < ROW; r++) {
+    for (let c = 0; c < COL; c++) {
+        bricks.push({
+            x: BRICK_OFF.x + c * (BRICK_W + BRICK_GAP),
+            y: BRICK_OFF.y + r * (BRICK_H + BRICK_GAP),
+            w: BRICK_W, h: BRICK_H,
+            hit: false
+        });
+    }
+}
+document.addEventListener('keydown', e=>{
+    if (e.key === 'ArrowLeft')  leftPressed  = true;
+    if (e.key === 'ArrowRight') rightPressed = true;
+});
+document.addEventListener('keyup', e=>{
+    if (e.key === 'ArrowLeft')  leftPressed  = false;
+    if (e.key === 'ArrowRight') rightPressed = false;
+});
+function gameLoop() {
+    if (gameOver) return;
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
+}
+function update() {
+    if (leftPressed)  paddle.dx = -paddle.speed;
+    else if (rightPressed) paddle.dx = paddle.speed;
+    else paddle.dx = 0;
+    paddle.x += paddle.dx;
+    if (paddle.x < 0) paddle.x = 0;
+    if (paddle.x + PADDLE_W > W) paddle.x = W - PADDLE_W;
+    ball.x += ball.dx;
+    ball.y += ball.dy;
+    if (ball.x - ball.r < 0 || ball.x + ball.r > W) ball.dx = -ball.dx;
+    if (ball.y - ball.r < 0) ball.dy = -ball.dy;
+    if (ball.y + ball.r > H) {
+        alert('您失败了。游戏结束，得分：' + score);
+        gameOver = true;
+    }
+    if (ball.y + ball.r > paddle.y &&
+        ball.x > paddle.x && ball.x < paddle.x + PADDLE_W) {
+        ball.dy = -Math.abs(ball.dy);
+        ball.dx = 8 * ((ball.x - (paddle.x + PADDLE_W/2)) / (PADDLE_W/2));
+    }
+    for (let b of bricks) {
+        if (!b.hit &&
+            ball.x + ball.r > b.x && ball.x - ball.r < b.x + b.w &&
+            ball.y + ball.r > b.y && ball.y - ball.r < b.y + b.h) {
+            ball.dy = -ball.dy;
+            b.hit = true;
+            score++;
+        }
+    }
+    if (bricks.every(b=>b.hit)) {
+        alert('您已成功通关，得分：' + score);
+        gameOver = true;
+    }
+}
+function draw() {
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = 'cyan';
+    for (let b of bricks) {
+        if (!b.hit) ctx.fillRect(b.x, b.y, b.w, b.h);
+    }
+    ctx.fillStyle = 'orange';
+    ctx.fillRect(paddle.x, paddle.y, PADDLE_W, PADDLE_H);
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2);
+    ctx.fillStyle = 'white';
+    ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.font = '16px Helvetica';
+    ctx.fillText('得分：' + score, 10, 20);
+}
+gameLoop();
+</script>
+</body>
+</html>
