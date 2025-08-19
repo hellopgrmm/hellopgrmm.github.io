@@ -172,6 +172,7 @@ body
 <div id="vek_icon" onclick="topmost('vek_vm');$('#vek_vm').fadeIn();vmmain.src=location.href;"><center><img src="https://s2.loli.net/2025/08/17/82RtI3vbmP1AXlu.png" alt="vek虚拟机的图标"><br>Vek虚拟机</center></div>
 <div id="vek_icon" onclick="topmost('vek_c09');$('#vek_c09').fadeIn();window.open('https://g209.wuaze.com/');"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="209聊天框的图标"><br>209聊天框</center></div>
 <div id="vek_icon" onclick="topmost('vek_bricks');$('#vek_bricks').fadeIn();bsqq.src = 'bsqq.html';"><center><img src="https://s2.loli.net/2025/08/18/WGzZgEY6ymq2FkU.png" alt="打砖块的图标"><br>打砖块</center></div>
+<div id="vek_icon" onclick="topmost('vek_vp');$('#vek_vp').fadeIn();"><center><img src="https://s2.loli.net/2025/08/18/m7LZseg9GBicpT8.png" alt="VP的图标"><br>Vek Player</center></div>
 <div id="vek_icon" onclick="topmost('vek_about');$('#vek_about').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/YunUq6dwE3iH1zm.png" alt="关于的图标"><br>关于Vek</center></div>
 </div>
 <!--窗口区域-->
@@ -208,6 +209,68 @@ body
 <div class="vek_window" id="vek_bricks" onclick="topmost('vek_bricks');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_bricks').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_bricks);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_bricks);" title="最小化">_</a> <b>打砖块</b><hr><!--主体-->
 使用键盘 ← → 移动（游戏开始后请迅速点击游戏界面，否则没有反应）。 <button onclick="bsqq.src = 'bsqq.html';" class="vek_button">重新开始</button><br>
 <iframe id="bsqq" height="80%" width="90%"></iframe>
+</div>
+
+<div class="vek_window" id="vek_vp" onclick="topmost('vek_vp');" style="overflow:auto;"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_vp').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_vp);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_vp);" title="最小化">_</a> <b>Vek Player</b><hr><!--主体-->
+<h2>Vek Player</h2>
+<video id="videoPlayer"></video><br>
+<input type="file" id="fileInput"/><br><br>控制面板<br><br><div id='mainly' style='width:80%;height:35px;border-radius:5px;box-shadow:0px 0px 1px 1px #ccc;'><div id='barmprogress' style='width:0%;border-radius:5px;background:#96fed1;height:100%;'></div></div><br><button onclick='videoPlayer.play();exvideo()' class='vek_button'>播放</button><button onclick='videoPlayer.pause()' class='vek_button'>暂停</button><button onclick='videoPlayer.playbackRate = "0.5";' class='vek_button'>0.5倍速</button><button onclick='videoPlayer.playbackRate = "1.0";' class='vek_button'>1.0倍速</button><button onclick='videoPlayer.playbackRate = "1.5";' class='vek_button'>1.5倍速</button><button onclick='videoPlayer.playbackRate = "2.0";' class='vek_button'>2.0倍速</button><br><br>
+<div style="height:100px;width:80%;box-shadow:0px 0px 25px 0px #ccc;border-radius:15px;overflow: auto;padding-top:5px;padding-left:5px;">网络收听(点击歌曲名，播放键即可收听)<hr><a id="musicLink"></a></div>
+</center>
+<br>
+</div>
+<script>
+var jsonmusic = []
+function H_fetchJson(path){
+fetch(path)
+  .then(response => response.json())
+  .then(data => {
+    for(var a in data)
+    {
+        jsonmusic.push(a)
+        jsonmusic.push(data[a]);
+    }
+    for(var m = 0;m < jsonmusic.length;m = m+2)
+    {
+        document.getElementById("musicLink").innerHTML += `<a onclick="videoPlayer.src = '${jsonmusic[m+1]}';">${jsonmusic[m]}</a><br>`;
+    }
+  })
+  .catch(error => console.error(error));
+}
+H_fetchJson("https://hellopgrmm.github.io/simul/musicData.json");
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        var videoPlayer = document.getElementById('videoPlayer');
+
+        //if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                videoPlayer.src = e.target.result;
+                videoPlayer.load();
+            };
+
+            reader.readAsDataURL(file);
+            videoPlayer.style.height='200px';
+        //} else {
+            //videoPlayer.src = '';
+        //}
+    });
+    function myy()
+    {
+        var rect = mainly.getBoundingClientRect();
+        var met = rect.width/videoPlayer.duration*videoPlayer.currentTime;
+        document.getElementById('barmprogress').style.width = `${met}px`;
+        barmprogress.innerHTML = videoPlayer.currentTime.toFixed(0)+'/'+videoPlayer.duration.toFixed(0);
+    }
+    function exvideo()
+    {
+        //alert(videoPlayer.duration);
+        //alert(rect.width);
+        //alert(videoPlayer.currentTime);
+        setInterval('myy()',350);
+    }
+</script>
 </div>
 
 <div class="vek_window" id="vek_about" style="overflow:auto;" onclick="topmost('vek_about');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_about').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_about);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_about);" title="最小化">_</a> <b>个性化</b><hr><!--主体-->
@@ -414,6 +477,8 @@ $(function() {
     $("#vek_c09").draggable();
     $("#vek_bricks").resizable();
     $("#vek_bricks").draggable();
+    $("#vek_vp").draggable();
+    $("#vek_rick").draggable();
     $("#vek_rick").draggable();
     $("#vek_wd").draggable();
 });
@@ -424,3 +489,4 @@ Vek_init();
 </body>
 
 </html>
+
