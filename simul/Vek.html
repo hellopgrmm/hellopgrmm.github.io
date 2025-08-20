@@ -211,7 +211,11 @@ body
 使用键盘 ← → 移动（游戏开始后请迅速点击游戏界面，否则没有反应）。 <button onclick="bsqq.src = 'bsqq.html';" class="vek_button">重新开始</button><br>
 <iframe id="bsqq" height="80%" width="90%"></iframe>
 </div>
-
+<div class="vek_window" id="vek_tzfe" onclick="topmost('vek_tzfe');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_tzfe').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_tzfe);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_tzfe);" title="最小化">_</a> <b>2048</b><hr><!--主体-->
+使用键盘 ↑ ↓ ← → 移动（游戏开始后请点击游戏界面，否则没有反应）。 <button onclick="tzf.src = '2048.html';" class="vek_button">重新开始</button><br>
+<iframe id="tzf" height="80%" width="90%"></iframe>
+</div>
+	
 <div class="vek_window" id="vek_vp" onclick="topmost('vek_vp');" style="overflow:auto;"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_vp').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_vp);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_vp);" title="最小化">_</a> <b>Vek Player</b><hr><!--主体-->
 <h2>Vek Player</h2>
 <video id="videoPlayer"></video><br>
@@ -491,6 +495,7 @@ Vek_init();
 </body>
 
 </html>
+
 
 
 
