@@ -83,6 +83,21 @@ body
 	width:100px;
 	word-wrap: break-word;
 }
+#vek_iconf
+{
+	border-radius:5px;
+	padding-top:5px;
+	padding-left:5px;
+	padding-bottom: 5px;
+	padding-right:5px;
+	trasnition:background 0.3s;
+	width:100px;
+	word-wrap: break-word;
+}
+#vek_iconf:hover
+{
+	background:rgba(200,200,200,0.5);
+}
 #vek_icon:hover
 {
 	background:rgba(200,200,200,0.5);
@@ -196,7 +211,7 @@ body
 <!--窗口区域-->
 <div class="vek_window" id="vek_filemanager" style="overflow: auto;" onclick="topmost('vek_filemanager')"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_filemanager').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" onclick="biggest(vek_filemanager);" title="最大化">◎</a> <a id="vek_bar_text" onclick="smallest(vek_filemanager);" title="最小化">_</a> <b>文件管理</b><hr><!--主体-->
 	<h1 id="vek_filetitle">文件管理</h1>可导入Vek Mod文件或者其他文件(Vek Mod文件开头前缀必须要为vkm.) <input type="file" id="inputentry1"/> <button onclick="readfile('inputentry1');" class='vek_button'>导入</button><hr>
-	<div id="vek_file_homepage"><div id="vek_icon" style="display:inline-block;" onclick="systemfile();"><center><img src="https://s2.loli.net/2025/08/15/gXyOvQi7NYwEdpn.png" alt="系统文件"><br>系统文件</center></div><div id="vek_icon" style="display:inline-block;" onclick="personalfile();"><center><img src="https://s2.loli.net/2025/08/15/gXyOvQi7NYwEdpn.png" alt="个人文件"><br>个人文件</center></div></div>
+	<div id="vek_file_homepage"><div id="vek_iconf" style="display:inline-block;" onclick="systemfile();"><center><img src="https://s2.loli.net/2025/08/15/gXyOvQi7NYwEdpn.png" alt="系统文件"><br>系统文件</center></div><div id="vek_iconf" style="display:inline-block;" onclick="personalfile();"><center><img src="https://s2.loli.net/2025/08/15/gXyOvQi7NYwEdpn.png" alt="个人文件"><br>个人文件</center></div></div>
 	<div id="vek_filelist1" style="display:none;"><font color="#ccc">(系统文件不支持直接读取)</font><br><br><button class="vek_button" onclick="back(vek_filelist1,vek_file_homepage);">返回</button> <b id="len"></b><article id="vek_filelist1b"></article><br></div>
 	<div id="vek_filelist2" style="display:none;"><button class="vek_button" onclick="back(vek_filelist2,vek_file_homepage);">返回</button> <b id="len1"></b><article id="vek_filelistb1"></article><br></div>
 	<div id="vek_file3" style="display:none;"><button class="vek_button" onclick="back(vek_file3,vek_filelist2);vek_filetitle.innerHTML = '个人文件';">返回</button> <b id="len2"></b><br><br><textarea class="vek_textarea" readonly id="vek_file_content"></textarea><br></div>
@@ -385,9 +400,9 @@ function personalfile()
 	{
 		if(localStorage.key(i).includes("hash_")){continue;}
 		else if(localStorage.key(i).substr(0,4).toLowerCase() == "vek."){continue;}
-		else if(localStorage.key(i).substr(0,4).toLowerCase() == "vkm."){vek_filelistb1.innerHTML+=`<div id="vek_icon" style="display:inline-block;" onclick="eval(localStorage.getItem('${localStorage.key(i)}'));"><center><img src="https://s2.loli.net/2025/08/15/rI9jP4tgTmu8Yhs.png" alt="文件：${localStorage.key(i)}"><br>${localStorage.key(i)}</center></div><button onclick="localStorage.removeItem('${localStorage.key(i)}');alert('已完成删除，如果文件仍然显示，请返回重进以刷新界面。');personalfile();">删除</button>`;lens++;}
+		else if(localStorage.key(i).substr(0,4).toLowerCase() == "vkm."){vek_filelistb1.innerHTML+=`<div id="vek_iconf" style="display:inline-block;" onclick="eval(localStorage.getItem('${localStorage.key(i)}'));"><center><img src="https://s2.loli.net/2025/08/15/rI9jP4tgTmu8Yhs.png" alt="文件：${localStorage.key(i)}"><br>${localStorage.key(i)}</center></div><button onclick="localStorage.removeItem('${localStorage.key(i)}');alert('已完成删除，如果文件仍然显示，请返回重进以刷新界面。');personalfile();">删除</button>`;lens++;}
 		else if(localStorage.key(i).includes("eaglercraft")){continue;}
-		else{vek_filelistb1.innerHTML+=`<div id="vek_icon" style="display:inline-block;" onclick="gf('${localStorage.key(i)}');"><center><img src="https://s2.loli.net/2025/08/15/rI9jP4tgTmu8Yhs.png" alt="文件：${localStorage.key(i)}"><br>${localStorage.key(i)}</center></div><button onclick="localStorage.removeItem('${localStorage.key(i)}');alert('已完成删除，如果文件仍然显示，请返回重进以刷新界面。');personalfile();">删除</button>`;lens++;}
+		else{vek_filelistb1.innerHTML+=`<div id="vek_iconf" style="display:inline-block;" onclick="gf('${localStorage.key(i)}');"><center><img src="https://s2.loli.net/2025/08/15/rI9jP4tgTmu8Yhs.png" alt="文件：${localStorage.key(i)}"><br>${localStorage.key(i)}</center></div><button onclick="localStorage.removeItem('${localStorage.key(i)}');alert('已完成删除，如果文件仍然显示，请返回重进以刷新界面。');personalfile();">删除</button>`;lens++;}
 	}
 	len1.innerHTML = `一共${localStorage.length}个文件，此处仅展示了${lens}个文件。`;
 }
@@ -400,9 +415,9 @@ function systemfile()
 	vek_filelist1.style.display = "";
 	for(var i = 0;i < localStorage.length;i++)
 	{
-		if(localStorage.key(i).includes("hash_")){vek_filelist1b.innerHTML+=`<div id="vek_icon" style="display:inline-block;" onclick="alert('抱歉，该文件无法直接读取。原因：特殊文件。');"><center><img src="https://s2.loli.net/2025/08/15/rI9jP4tgTmu8Yhs.png" alt="文件：${localStorage.key(i)}"><br>${localStorage.key(i)}</center></div><button onclick="localStorage.removeItem('${localStorage.key(i)}');alert('已完成删除，如果文件仍然显示，请返回重进以刷新界面。');systemfile();">删除</button>`;lens++;}
+		if(localStorage.key(i).includes("hash_")){vek_filelist1b.innerHTML+=`<div id="vek_iconf" style="display:inline-block;" onclick="alert('抱歉，该文件无法直接读取。原因：特殊文件。');"><center><img src="https://s2.loli.net/2025/08/15/rI9jP4tgTmu8Yhs.png" alt="文件：${localStorage.key(i)}"><br>${localStorage.key(i)}</center></div><button onclick="localStorage.removeItem('${localStorage.key(i)}');alert('已完成删除，如果文件仍然显示，请返回重进以刷新界面。');systemfile();">删除</button>`;lens++;}
 		else if(localStorage.key(i).includes("VEK.BOOT_MGR")){continue;}
-		else if(localStorage.key(i).substr(0,4).toLowerCase() == "vek."){vek_filelist1b.innerHTML+=`<div id="vek_icon" style="display:inline-block;" onclick="onclick="alert('抱歉，该文件无法直接读取。原因：特殊文件。');"><center><img src="https://s2.loli.net/2025/08/15/rI9jP4tgTmu8Yhs.png" alt="文件：${localStorage.key(i)}"><br>${localStorage.key(i)}</center></div><button onclick="localStorage.removeItem('${localStorage.key(i)}');alert('已完成删除，如果文件仍然显示，请返回重进以刷新界面。');systemfile();">删除</button>`;lens++;}
+		else if(localStorage.key(i).substr(0,4).toLowerCase() == "vek."){vek_filelist1b.innerHTML+=`<div id="vek_iconf" style="display:inline-block;" onclick="onclick="alert('抱歉，该文件无法直接读取。原因：特殊文件。');"><center><img src="https://s2.loli.net/2025/08/15/rI9jP4tgTmu8Yhs.png" alt="文件：${localStorage.key(i)}"><br>${localStorage.key(i)}</center></div><button onclick="localStorage.removeItem('${localStorage.key(i)}');alert('已完成删除，如果文件仍然显示，请返回重进以刷新界面。');systemfile();">删除</button>`;lens++;}
 		else{continue;}
 	}
 	len.innerHTML = `一共${localStorage.length}个文件，此处仅展示了${lens}个文件。`;
@@ -542,5 +557,6 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
