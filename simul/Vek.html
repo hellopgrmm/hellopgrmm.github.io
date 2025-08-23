@@ -206,6 +206,7 @@ body
 <div id="vek_icon" onclick="topmost('vek_vm');$('#vek_vm').fadeIn();vmmain.src=location.href;"><center><img src="https://s2.loli.net/2025/08/17/82RtI3vbmP1AXlu.png" alt="vek虚拟机的图标"><br>Vek虚拟机</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_c09');$('#vek_c09').fadeIn();window.open('https://g209.wuaze.com/');"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="209聊天框的图标"><br>209聊天框</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_bricks');$('#vek_bricks').fadeIn();bsqq.src = 'bsqq.html';"><center><img src="https://s2.loli.net/2025/08/18/WGzZgEY6ymq2FkU.png" alt="打砖块的图标"><br>打砖块</center></div>
+<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_gravity');$('#vek_gravity').fadeIn();gg.src = 'G.html';"><center><img src="https://s2.loli.net/2025/08/18/WGzZgEY6ymq2FkU.png" alt="重力模拟的图标"><br>重力模拟</center></div>
 <div id="vek_icon" onclick="topmost('vek_tzfe');$('#vek_tzfe').fadeIn();tzf.src = '2048.html';"><center><img src="https://s2.loli.net/2025/08/20/3l8L5N4vKDdXFpZ.png" alt="2048的图标"><br>2048</center></div>
 <div id="vek_icon" onclick="topmost('vek_vp');$('#vek_vp').fadeIn();"><center><img src="https://s2.loli.net/2025/08/18/m7LZseg9GBicpT8.png" alt="VP的图标"><br>Vek Player</center></div>
 <div id="vek_icon" onclick="topmost('vek_about');$('#vek_about').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/YunUq6dwE3iH1zm.png" alt="关于的图标"><br>关于Vek</center></div>
@@ -317,6 +318,11 @@ H_fetchJson("https://hellopgrmm.github.io/simul/musicData.json");
 <h1>文字转语音</h1><input type="text" class="vek_input" placeholder="请输入文本。" id="SpeechText"> <button onclick="speech(SpeechText.value,'zh',rate1.value/10);" class="vek_button">生成</button><br><br>设置：<br>语速设置(最大10，最小0.1)：<input type="range" value=10 id="rate1" oninput="rate2.innerHTML = `${rate1.value/10}x`;" min=1 max=100/> <a id="rate2">1.0x</a>
 </div>
 
+<div class="vek_window" id="vek_gravity" onclick="topmost('vek_gravity');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_gravity').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_gravity);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_gravity);" title="最小化">_</a> <b>重力模拟</b><hr><!--主体-->
+<button onclick="gg.src = 'G.html';" class="vek_button">重新开始</button><br>
+<iframe id="gg" height="80%" width="90%"></iframe>
+</div>
+	
 <div class="vek_window" id="vek_about" style="overflow:auto;" onclick="topmost('vek_about');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_about').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_about);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_about);" title="最小化">_</a> <b>关于Vek</b><hr><!--主体-->
 <h1>关于Vek</h1>
 Vek是一个网页版的系统（模拟，并非真实系统），灵感取自Windows93(windows93.net)。从而制成此网页。<br>注意：该网页并非真正的系统，操作系统是需要独立运行的，而不是基于一个系统之上、一个软件之上运行。请正在使用本网页的用户清楚认知此概念。
@@ -545,6 +551,8 @@ $(function() {
     $("#vek_c09").draggable();
     $("#vek_bricks").resizable();
     $("#vek_bricks").draggable();
+    $("#vek_gravity").resizable();
+    $("#vek_gravity").draggable();
     $("#vek_vp").resizable();
     $("#vek_vp").draggable();
     $("#vek_tzfe").resizable();
@@ -560,6 +568,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
