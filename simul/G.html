@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<style>
+    body
+    {
+        font-family:ui-monospace,consolas,monospace;
+    }
+    body::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.1);
+    }
+    body::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0,0.3);
+    }
+    body::-webkit-scrollbar-thumb:hover {
+        background: rgba(0,0,0,0.5);
+    }
+    body::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+    #box
+    {
+        padding-top:10px;
+        padding-left:5px;
+        padding-bottom:10px;
+        border-radius:5px;
+        box-shadow:5px 5px 5px 5px #ccc;
+        background:orange;
+        border:1px soild black;
+        width:30%;
+    }
+</style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jGravity/0.8.0/jGravity-min.js"></script>
+    <div id="container"></div>
+    <title>重力模拟器</title>
+    <input type="range" id="blockcount" value=50 max=100 min=5 oninput="rangedisplay.innerHTML='正方体数量：'+blockcount.value;"/> <a id="rangedisplay">正方体数量：50</a> <button onclick="generate(blockcount.value);">开始</button><br><br>
+    <div id="box">
+        jGravity介绍<br><br>
+        本网页用的插件是jGravity。jGravity是基于jQuery的一个第三方库，它主要在HTML上模拟现实中的重力效果。可以模拟其物理掉落、弹力等等。是一个还原性较强的2D重力模拟库。这个界面就是对于jGravity的演示。
+    </div>
+<script>
+function rand(s,e)
+{
+    return Math.floor(Math.random() * e) + s;
+}
+function gravity_start(){
+    $('#container').jGravity({
+        target: 'everything',
+        ignoreClass: 'ignoreMe',
+        weight: 25,
+        depth: 5,
+        drag: true
+    });
+}
+function generate(count){
+    for(var i = 0;i < count;i++)
+    {
+        container.innerHTML+=`<div style="height:50px;width:50px;border-radius:15px;border:1px soild black;background:rgb(${rand(0,255)},${rand(0,255)},${rand(0,255)});display: inline-flex;align-items: center;justify-content: center;flex-direction: column;color:white;">${i+1}</div>`;
+    }
+    gravity_start();
+}
+</script>
+</body>
+</html>
