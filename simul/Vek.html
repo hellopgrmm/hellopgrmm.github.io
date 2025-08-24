@@ -244,6 +244,10 @@ body
 <h2>背景设置</h2>
 (当前仅支持纯色背景)<br>R:<input oninput="changecolor();" type="range" max=255 id="vek_color_r"/> <a id="r"></a><br>G:<input oninput="changecolor();" type="range" max=255 id="vek_color_g"/> <a id="g"></a><br>B:<input oninput="changecolor();" max=255 type="range" id="vek_color_b"/> <a id="b"></a><br><div style="width:150px;height:50px;" id="vek_preview">颜色预览</div><button onclick="localStorage.setItem('vek.bgColor',`rgb(${vek_color_r.value},${vek_color_g.value},${vek_color_b.value})`);vek_window('设置和个性化','更改成功。');confirmcolor()" class="vek_button">更换</button><button onclick="localStorage.removeItem('vek.bgColor');vek_window('设置和个性化','更改成功，该操作需要重启Vek。');" class="vek_button">恢复默认</button><h2>字体大小设置</h2>
 字体大小：<input oninput="changeSize();" type='range' value=15 max=50 id="vek_fss"/> <a id="vek_fs"></a> <button class="vek_button" onclick="localStorage.setItem('vek.fontSize',`${vek_fss.value}px`);changefs();vek_window('个性化','字体大小已经更新。');">更改</button><br><a id="fsprw">字体预览</a>
+<h2>窗口外观</h2>
+窗口圆角大小：<input type="range" max=50 min=0 value=5 oninput="borderradius.innerHTML = borderrd.value;" id="borderrd"/> <a id="borderradius">5</a>px <button onclick="savechange_br();" class="vek_button">保存设置</button>
+<br>
+<input type="checkbox" id="shadow_effect" oninput="shadowset();"/>阴影效果
 </div>
 
 <div class="vek_window" id="vek_vm" onclick="topmost('vek_vm');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_vm').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_vm);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_vm);" title="最小化">_</a> <b>Vek虚拟机</b><hr><!--主体-->
@@ -359,6 +363,55 @@ Vek是一个网页版的系统（模拟，并非真实系统），灵感取自Wi
 vek_overlay.style.display = 'none';
 changecolor();
 changeSize();
+loadchange_br();
+loadshadow();
+function loadshadow()
+{
+	if(localStorage.getItem("vek.disable_shadow_of_window"))
+	{
+		shadow_effect.checked = false;
+		const awindows = document.querySelectorAll('.vek_window');
+		awindows.forEach(element => {
+    		element.style.boxShadow = '0px 0px 0px 0px black';
+		});
+	}
+	else
+	{
+		shadow_effect.checked = true;
+	}	
+}
+function loadchange_br()
+{
+	if(localStorage.getItem("vek.border_radius_of_window"))
+	{
+		const vekwindows = document.querySelectorAll('.vek_window');
+		vekwindows.forEach(element => {
+    		element.style.borderRadius = localStorage.getItem("vek.border_radius_of_window");
+		});		
+	}
+}
+function savechange_br()
+{
+	localStorage.setItem("vek.border_radius_of_window",`${borderrd.value}px`);
+	const windows = document.querySelectorAll('.vek_window');
+	windows.forEach(element => {
+    	element.style.borderRadius = localStorage.getItem("vek.border_radius_of_window");
+	});
+	vek_window("个性化","窗口外观更改完成。");
+}
+function shadowset()
+{
+	if(shadow_effect.checked)
+	{
+		localStorage.removeItem("vek.disable_shadow_of_window");
+		vek_window("个性化","已重新打开阴影，重启Vek即可生效。");
+	}
+	else
+	{
+		localStorage.setItem("vek.disable_shadow_of_window","TRUE");
+	}
+	loadshadow();
+}
 function changecolor()
 {
 	vek_preview.style.background = `rgb(${vek_color_r.value},${vek_color_g.value},${vek_color_b.value})`;
@@ -581,6 +634,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
