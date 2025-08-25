@@ -215,6 +215,7 @@ body
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_browser');$('#vek_browser').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/i73nS4xYWmbXf2h.png" alt="浏览器的图标"><br>浏览器</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="gravityStart();"><center><img src="https://s2.loli.net/2025/08/22/U9kDmYMJWHGTnPz.png" alt="别点这个的图标"><br>别点这个</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_textspeech');$('#vek_textspeech').fadeIn();"><center><img src="https://s2.loli.net/2025/08/22/8WF1waZED6GTXox.png" alt="文字转语音的图标"><br>文字转语音</center></div>
+<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_bb');$('#vek_bb').fadeIn();bbb.src = 'bytebeat.html';"><center><img src="https://s2.loli.net/2025/08/25/HedUuT5gApVWO9j.png" alt="ByteBeat的图标"><br>Byte Beat</center></div>
 <div id="vek_icon" onclick="topmost('vek_bg');$('#vek_bg').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="设置和个性化的图标"><br>设置和个性化</center></div>
 <div id="vek_icon" onclick="topmost('vek_vm');$('#vek_vm').fadeIn();vmmain.src=location.href;"><center><img src="https://s2.loli.net/2025/08/17/82RtI3vbmP1AXlu.png" alt="vek虚拟机的图标"><br>Vek虚拟机</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_c09');$('#vek_c09').fadeIn();window.open('https://g209.wuaze.com/');"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="209聊天框的图标"><br>209聊天框</center></div>
@@ -269,6 +270,11 @@ body
 <iframe id="tzf" height="80%" width="90%"></iframe>
 </div>
 
+<div class="vek_window" id="vek_bb" onclick="topmost('vek_bb');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_bb').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_bb);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_bb);" title="最小化">_</a> <b>Byte Beat</b><hr><!--主体-->
+<button onclick="bbb.src = 'bytebeat.html';" class="vek_button">刷新</button><br>
+<iframe id="bbb" height="80%" width="90%"></iframe>
+</div>
+	
 <div class="vek_window" id="vek_vp" onclick="topmost('vek_vp');" style="overflow:auto;"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_vp').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_vp);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_vp);" title="最小化">_</a> <b>Vek Player</b><hr><!--主体-->
 <h2>Vek Player</h2>
 <video id="videoPlayer"></video><br>
@@ -625,6 +631,8 @@ $(function() {
     $("#vek_tzfe").draggable();
     $("#vek_textspeech").resizable();
     $("#vek_textspeech").draggable();
+    $("#vek_bb").resizable();
+    $("#vek_bb").draggable();
     $("#vek_rick").draggable();
     $("#vek_wd").draggable();
 });
@@ -634,6 +642,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
