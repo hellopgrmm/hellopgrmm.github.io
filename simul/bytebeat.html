@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HTML5 ByteBeat</title>
+	<script src="bytebeat.js"></script>
+</head>
+<body>
+<style>
+	body
+	{
+		font-family: ui-monospace,consolas,monospace;
+		background: black;
+		color:white;
+	}
+	body::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.1);
+    }
+    body::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0,0.3);
+    }
+    body::-webkit-scrollbar-thumb:hover {
+        background: rgba(0,0,0,0.5);
+    }
+    body::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+	.button_bb
+	{
+		height:35px;
+		color:white;
+		font-family: sans-serif;
+		background: linear-gradient(black,gray);
+		border-color:black gray black gray;
+	}
+	.input_bb
+	{
+		height:35px;
+		width:50%;
+		font-size:25px;
+		color:cyan;
+		font-family: monospace;
+		background: black;
+		border-color:black gray black gray;
+		outline:none;
+	}
+	.select_bb
+	{
+		height:35px;
+		display:inline-block;
+		font-size:25px;
+		color:cyan;
+		font-family: monospace;
+		background: black;
+		border-color:black gray black gray;
+		outline:none;		
+	}
+</style>
+<div style="z-index:9999;background:rgba(30,30,30,0.5);position: fixed;top:0px;left:0px;width:100%;"><b style="color:white;font-size:25px;">BYTEBEAT</b> <input class="input_bb" id="fml" value="((t >> 10) & 42) * t" oninput="playBB();"/> <button class="button_bb" onclick="playBB();">Play</button> <button onclick="bbplay.pause();" class="button_bb">Pause</button> <br>Select Freq:<select id="freq" class="select_bb"><option value=8000>8kHz</option><option value=11000>11kHz</option><option value=22000>22kHz</option><option value=32000>32kHz</option><option value=48000>48kHz</option></select> Duration(Seconds):<input class="input_bb" placeholder="Enter Duration" value=8 id="dr"> <a>HTML5 ByteBeat Version 1</a> <font color="red" id="warning"></font></div><canvas id="waves"></canvas><audio id="bbplay" loop></audio>
+<script>
+function playBB()
+{
+	warning.innerHTML = "";
+	waves.height = window.innerHeight;
+	waves.width = window.innerWidth;
+	try{ const sound = [compileComposer(fml.value)]; 
+	const bytebeat = makeSound(sound, dr.value, freq.value, 1);
+	showAudioVisual(bytebeat, bbplay, waves);
+	bbplay.play();}catch(e){warning.innerHTML = 'Oops!Something went wrong!'+e};
+}
+</script>
+</body>
+</html>
