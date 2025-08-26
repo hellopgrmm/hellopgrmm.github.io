@@ -15,6 +15,7 @@ body
 	font-family: ui-monospace,consolas,monospace;
 	background-color:rgb(117,158,188);
 }
+	/*Scroll Bar*/
 		body::-webkit-scrollbar-track {
              background: rgba(0,0,0,0.1);
         }
@@ -25,19 +26,6 @@ body
             background: rgba(0,0,0,0.5);
         }
         body::-webkit-scrollbar {
-            width: 5px;
-            height: 12px;
-        }
-		.vek_window::-webkit-scrollbar-track {
-             background: rgba(0,0,0,0.1);
-        }
-        .vek_window::-webkit-scrollbar-thumb {
-            background: rgba(0,0,0,0.3);
-        }
-        .vek_window::-webkit-scrollbar-thumb:hover {
-            background: rgba(0,0,0,0.5);
-        }
-        .vek_window::-webkit-scrollbar {
             width: 5px;
             height: 5px;
         }
@@ -195,6 +183,19 @@ body
 	font-size:15px;
 	border:1px soild #ccc;
 }
+		.vek_window::-webkit-scrollbar-track {
+             background: rgba(0,0,0,0.1);
+        }
+        .vek_window::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.3);
+        }
+        .vek_window::-webkit-scrollbar-thumb:hover {
+            background: rgba(0,0,0,0.5);
+        }
+        .vek_window::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
 </style>
 <div id="start">
 	<a id="vek_title" style="font-size:80px">Vek</a>
@@ -215,12 +216,11 @@ body
 <div id="vek_icon" style="display:inline-block;" onclick="gravityStart();"><center><img src="https://s2.loli.net/2025/08/22/U9kDmYMJWHGTnPz.png" alt="别点这个的图标"><br>别点这个</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_textspeech');$('#vek_textspeech').fadeIn();"><center><img src="https://s2.loli.net/2025/08/22/8WF1waZED6GTXox.png" alt="文字转语音的图标"><br>文字转语音</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_bb');$('#vek_bb').fadeIn();bbb.src = 'bytebeat.html';"><center><img src="https://s2.loli.net/2025/08/25/HedUuT5gApVWO9j.png" alt="ByteBeat的图标"><br>Byte Beat</center></div>
-<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_sw');$('#vek_sw').fadeIn();sws.src = 'starwars.html';"><center><img src="https://s2.loli.net/2025/08/26/QIKVrnAutJzNLZh.png" alt="StartWars的图标"><br>StarWars.MP4</center></div>
 <div id="vek_icon" onclick="topmost('vek_bg');$('#vek_bg').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="设置和个性化的图标"><br>设置和个性化</center></div>
 <div id="vek_icon" onclick="topmost('vek_vm');$('#vek_vm').fadeIn();vmmain.src=location.href;"><center><img src="https://s2.loli.net/2025/08/17/82RtI3vbmP1AXlu.png" alt="vek虚拟机的图标"><br>Vek虚拟机</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_c09');$('#vek_c09').fadeIn();window.open('https://g209.wuaze.com/');"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="209聊天框的图标"><br>209聊天框</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_bricks');$('#vek_bricks').fadeIn();bsqq.src = 'bsqq.html';"><center><img src="https://s2.loli.net/2025/08/18/WGzZgEY6ymq2FkU.png" alt="打砖块的图标"><br>打砖块</center></div>
-<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_gravity');$('#vek_gravity').fadeIn();gg.src = 'G.html';"><center><img src="https://s2.loli.net/2025/08/18/WGzZgEY6ymq2FkU.png" alt="重力模拟的图标"><br>重力模拟</center></div>
+<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_gravity');$('#vek_gravity').fadeIn();gg.src = 'G.html';"><center><img src="https://s2.loli.net/2025/08/23/4Q7OdBNKDkbmqwc.png" alt="重力模拟的图标"><br>重力模拟</center></div>
 <div id="vek_icon" onclick="topmost('vek_tzfe');$('#vek_tzfe').fadeIn();tzf.src = '2048.html';"><center><img src="https://s2.loli.net/2025/08/20/3l8L5N4vKDdXFpZ.png" alt="2048的图标"><br>2048</center></div>
 <div id="vek_icon" onclick="topmost('vek_vp');$('#vek_vp').fadeIn();"><center><img src="https://s2.loli.net/2025/08/18/m7LZseg9GBicpT8.png" alt="VP的图标"><br>Vek Player</center></div>
 <div id="vek_icon" onclick="topmost('vek_about');$('#vek_about').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/YunUq6dwE3iH1zm.png" alt="关于的图标"><br>关于Vek</center></div>
@@ -265,21 +265,16 @@ body
 <iframe id="bsqq" height="80%" width="90%"></iframe>
 </div>
 
-<div class="vek_window" id="vek_bb" onclick="topmost('vek_bb');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_bb').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_bb);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_bb);" title="最小化">_</a> <b>Byte Beat</b><hr><!--主体-->
-<button onclick="bbb.src = 'bytebeat.html';" class="vek_button">刷新</button><br>
-<iframe id="bbb" height="80%" width="90%"></iframe>
-</div>
-
-<div class="vek_window" id="vek_sw" onclick="topmost('vek_sw');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_sw').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_sw);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_sw);" title="最小化">_</a> <b>StarWars.MP4</b><hr><!--主体-->
-<button onclick="sws.src = 'starwars.html';" class="vek_button">重播动画</button><br>
-<iframe id="sws" height="80%" width="90%"></iframe>
-</div>
-
 <div class="vek_window" id="vek_tzfe" onclick="topmost('vek_tzfe');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_tzfe').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_tzfe);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_tzfe);" title="最小化">_</a> <b>2048</b><hr><!--主体-->
 使用键盘 ↑ ↓ ← → 移动（游戏开始后请点击游戏界面，否则没有反应）。 <button onclick="tzf.src = '2048.html';" class="vek_button">重新开始</button><br>
 <iframe id="tzf" height="80%" width="90%"></iframe>
 </div>
 
+<div class="vek_window" id="vek_bb" onclick="topmost('vek_bb');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_bb').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_bb);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_bb);" title="最小化">_</a> <b>Byte Beat</b><hr><!--主体-->
+<button onclick="bbb.src = 'bytebeat.html';" class="vek_button">刷新</button><br>
+<iframe id="bbb" height="80%" width="90%"></iframe>
+</div>
+	
 <div class="vek_window" id="vek_vp" onclick="topmost('vek_vp');" style="overflow:auto;"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_vp').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_vp);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_vp);" title="最小化">_</a> <b>Vek Player</b><hr><!--主体-->
 <h2>Vek Player</h2>
 <video id="videoPlayer"></video><br>
@@ -350,12 +345,13 @@ H_fetchJson("https://hellopgrmm.github.io/simul/musicData.json");
 <button onclick="gg.src = 'G.html';" class="vek_button">重新开始</button><br>
 <iframe id="gg" height="80%" width="90%"></iframe>
 </div>
-
-<div class="vek_window" id="vek_about" style="overflow:auto;" onclick="topmost('vek_about');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_about').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_about);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_about);" title="最小化">_</a> <b>个性化</b><hr><!--主体-->
+	
+<div class="vek_window" id="vek_about" style="overflow:auto;" onclick="topmost('vek_about');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_about').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_about);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_about);" title="最小化">_</a> <b>关于Vek</b><hr><!--主体-->
 <h1>关于Vek</h1>
 Vek是一个网页版的系统（模拟，并非真实系统），灵感取自Windows93(windows93.net)。从而制成此网页。<br>注意：该网页并非真正的系统，操作系统是需要独立运行的，而不是基于一个系统之上、一个软件之上运行。请正在使用本网页的用户清楚认知此概念。
-<br>Vek版本：5.00<br>开发时间：2025年8月16日21:43:12<br><br>Vek将会持续更新新功能。
+<br>Vek版本：5.35<br>开发时间：2025年8月16日21:43:12<br><br>Vek将会持续更新新功能。
 <br><h2>关于Vek Mod的一些说明</h2>Vek Mod允许用户制作自己的mod，导入到Vek中，从而可以让Vek拓展出更多的功能。Vek Mod的前缀是vkm，（示例：vkm.helloworld）vkm文件用Javascript语言为主，这也是网页交互的必要语言之一。<br>如果您熟悉Javascript，那么您可以仔细阅读源代码，寻找一些Vek的对象名（比如说vek_start_sign，这是开机提示文字的对象，示例代码：vek_start_sign.innerHTML = 'Hello!Test 1234567890Yes Ok.';）然后您编写js代码，就可以为Vek拓展功能。
+<h2>本次更新内容</h2><ul><li>解决了文字显示的一些问题；</li><li>新增了一些功能。</li></ul>
 </div>
 
 <div class="vek_window" style="width:98%;height:98%;top:2px;left:2px;" id="vek_rick" onclick="topmost('vek_rick');"><!--标题栏--><br><hr><!--主体-->
@@ -472,7 +468,7 @@ function speech(text_to_speech,language,rate){
 }
 function gravityStart()
 {
-	gengravity(".vek_window,#vek_icon,#vek_bar,#vek_filemanager");
+	gengravity("#vek_icon,#vek_bar");
 }
 function personalfile()
 {
@@ -627,18 +623,16 @@ $(function() {
     $("#vek_c09").draggable();
     $("#vek_bricks").resizable();
     $("#vek_bricks").draggable();
+    $("#vek_gravity").resizable();
+    $("#vek_gravity").draggable();
     $("#vek_vp").resizable();
     $("#vek_vp").draggable();
     $("#vek_tzfe").resizable();
     $("#vek_tzfe").draggable();
     $("#vek_textspeech").resizable();
     $("#vek_textspeech").draggable();
-    $("#vek_gravity").resizable();
-    $("#vek_gravity").draggable();
     $("#vek_bb").resizable();
     $("#vek_bb").draggable();
-    $("#vek_sw").resizable();
-    $("#vek_sw").draggable();
     $("#vek_rick").draggable();
     $("#vek_wd").draggable();
 });
@@ -648,3 +642,13 @@ Vek_init();
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
