@@ -250,6 +250,10 @@ body
 窗口圆角大小：<input type="range" max=50 min=0 value=5 oninput="borderradius.innerHTML = borderrd.value;" id="borderrd"/> <a id="borderradius">5</a>px <button onclick="savechange_br();" class="vek_button">保存设置</button>
 <br>
 <input type="checkbox" id="shadow_effect" oninput="shadowset();"/>阴影效果
+<h2>高级选项</h2>
+高级选项仅供专业人员调试使用，打开后，调试窗口不会置顶。（我也不知道怎么回事）如果你看不见调试窗口，请移开或者关闭设置与个性化窗口。<br>
+<button class="vek_button" onclick="$('#vek_debugger').fadeIn();topmost('vek_debugger');const monitor = new UserActionMonitor();">打开User Action Listener（调试用）</button><br>
+<button class="vek_button" onclick="$('#vek_JSdebugger').fadeIn();topmost('vek_JSdebugger');">打开JavaScript终端</button>
 </div>
 
 <div class="vek_window" id="vek_vm" onclick="topmost('vek_vm');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_vm').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_vm);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_vm);" title="最小化">_</a> <b>Vek虚拟机</b><hr><!--主体-->
@@ -275,6 +279,100 @@ body
 <button onclick="bbb.src = 'bytebeat.html';" class="vek_button">刷新</button><br>
 <iframe id="bbb" height="80%" width="90%"></iframe>
 </div>
+
+<!--调试窗口-->
+<div class="vek_window" id="vek_JSdebugger" onclick="topmost('vek_JSdebugger');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_JSdebugger').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_JSdebugger);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_JSdebugger);" title="最小化">_</a> <b>JavaScript终端</b><hr><!--主体-->
+<input type="text" style="width:95%;" placeholder="Please Enter Javascript Codes(Enter=execute)..." class="vek_input" id="jscode"/>
+<div id="jsexec" style="overflow:auto;height:80%;"></div>
+<script>
+jscode.addEventListener('keydown',function(e){if(e.keyCode == 13){try{jsexec.innerHTML += `<font color="green">[User]</font>${jscode.value}<br><font color="blue">[JavaScript Response]</font>${eval(jscode.value)}<br>`;}catch(e){jsexec.innerHTML += `<font color="green">[User]</font>${jscode.value}<br><font color="red">[JavaScript Error Response:错误的回应]</font>${e}<br>`;}jscode.value = "";}jsexec.scrollTop = jsexec.scrollHeight;},false);
+</script>
+</div>
+<div class="vek_window" id="vek_debugger" style="overflow:auto;" onclick="topmost('vek_debugger');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_debugger').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_debugger);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_debugger);" title="最小化">_</a> <b>User Action Listener</b><hr><!--主体-->
+<h1>用户操作监听</h1>
+(注意：本监听器仅监听用户在浏览器内的活动，您的任何操作不会被上传到服务器。)
+<table id="actions" border=1>
+	<tr><td>用户操作</td><td>时间戳</td></tr>
+</table>
+<script>
+class UserActionMonitor {
+  constructor() {
+    this.actions = [];
+    this.count = 0;
+    this.initListeners();
+  }
+
+  initListeners() {
+    document.addEventListener('visibilitychange', () => {
+      this.logAction({
+        type: 'TabVisibility',
+        details: document.hidden ? 'TabHidden' : 'TabVisible'
+      });
+    });
+    window.addEventListener('focus', () => 
+      this.logAction({ type: 'WindowFocus', details: 'GainedFocus' }));
+    window.addEventListener('blur', () => 
+      this.logAction({ type: 'WindowFocus', details: 'LostFocus' }));
+    document.addEventListener('click', this.handleInteraction.bind(this));
+    document.addEventListener('keydown', this.handleInteraction.bind(this));
+    document.addEventListener('mousemove', this.throttle(this.handleInteraction.bind(this), 500));
+    window.addEventListener('popstate', () => 
+      this.logAction({ type: 'Navigation', details: 'HistoryChange' }));
+    window.addEventListener('orientationchange', () => 
+      this.logAction({ 
+        type: 'DeviceOrientation', 
+        details: `Angle: ${window.orientation}°` 
+      }));
+  }
+
+  handleInteraction(event) {
+    const actionMap = {
+      click: {
+        type: 'MouseClick',
+        details: `Target: ${event.target.tagName}`
+      },
+      keydown: {
+        type: 'KeyboardInput',
+        details: `Key: ${event.key} (Code: ${event.code})`
+      },
+    };
+
+    if (actionMap[event.type]) {
+      this.logAction(actionMap[event.type]);
+    }
+  }
+
+  logAction(data) {
+    const timestamp = new Date().toISOString();
+    const action = {
+      id: ++this.count,
+      type: data.type,
+      target: data.details,
+      timestamp,
+      rawEvent: data
+    };
+
+    this.actions.push(action);
+    this.updateUI(action);
+  }
+
+  updateUI(action) {
+    actions.innerHTML+=`<tr><td>事件名称：${action.type}</td><td>${action.timestamp}</td></tr>`;
+  }
+
+  throttle(fn, delay) {
+    let lastCall = 0;
+    return function(...args) {
+      const now = new Date();
+      if (now - lastCall < delay) return;
+      lastCall = now;
+      return fn(...args);
+    };
+  }
+}
+</script>
+</div>
+<!--结束线-->
 	
 <div class="vek_window" id="vek_vp" onclick="topmost('vek_vp');" style="overflow:auto;"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_vp').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_vp);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_vp);" title="最小化">_</a> <b>Vek Player</b><hr><!--主体-->
 <h2>Vek Player</h2>
@@ -641,6 +739,10 @@ $(function() {
     $("#vek_bb").draggable();
     $("#vek_sw").resizable();
     $("#vek_sw").draggable();
+    $("#vek_debugger").resizable();
+    $("#vek_debugger").draggable();
+    $("#vek_JSdebugger").resizable();
+    $("#vek_JSdebugger").draggable();
     $("#vek_rick").draggable();
     $("#vek_wd").draggable();
 });
@@ -650,6 +752,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
