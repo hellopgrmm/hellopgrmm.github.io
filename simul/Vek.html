@@ -216,6 +216,7 @@ body
 <div id="vek_icon" style="display:inline-block;" onclick="gravityStart();"><center><img src="https://s2.loli.net/2025/08/22/U9kDmYMJWHGTnPz.png" alt="别点这个的图标"><br>别点这个</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_textspeech');$('#vek_textspeech').fadeIn();"><center><img src="https://s2.loli.net/2025/08/22/8WF1waZED6GTXox.png" alt="文字转语音的图标"><br>文字转语音</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_bb');$('#vek_bb').fadeIn();bbb.src = 'bytebeat.html';"><center><img src="https://s2.loli.net/2025/08/25/HedUuT5gApVWO9j.png" alt="ByteBeat的图标"><br>Byte Beat</center></div>
+<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_sw');$('#vek_sw').fadeIn();sws.src = 'starwars.html';"><center><img src="https://s2.loli.net/2025/08/26/QIKVrnAutJzNLZh.png" alt="StartWars的图标"><br>StarWars.MP4</center></div>
 <div id="vek_icon" onclick="topmost('vek_bg');$('#vek_bg').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="设置和个性化的图标"><br>设置和个性化</center></div>
 <div id="vek_icon" onclick="topmost('vek_vm');$('#vek_vm').fadeIn();vmmain.src=location.href;"><center><img src="https://s2.loli.net/2025/08/17/82RtI3vbmP1AXlu.png" alt="vek虚拟机的图标"><br>Vek虚拟机</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_c09');$('#vek_c09').fadeIn();window.open('https://g209.wuaze.com/');"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="209聊天框的图标"><br>209聊天框</center></div>
@@ -341,6 +342,11 @@ H_fetchJson("https://hellopgrmm.github.io/simul/musicData.json");
 <h1>文字转语音</h1><input type="text" class="vek_input" placeholder="请输入文本。" id="SpeechText"> <button onclick="speech(SpeechText.value,'zh',rate1.value/10);" class="vek_button">生成</button><br><br>设置：<br>语速设置(最大10，最小0.1)：<input type="range" value=10 id="rate1" oninput="rate2.innerHTML = `${rate1.value/10}x`;" min=1 max=100/> <a id="rate2">1.0x</a>
 </div>
 
+<div class="vek_window" id="vek_sw" onclick="topmost('vek_sw');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_sw').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_sw);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_sw);" title="最小化">_</a> <b>StarWars.MP4</b><hr><!--主体-->
+<button onclick="sws.src = 'starwars.html';" class="vek_button">重播动画</button><br>
+<iframe id="sws" height="80%" width="90%"></iframe>
+</div>
+	
 <div class="vek_window" id="vek_gravity" onclick="topmost('vek_gravity');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_gravity').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_gravity);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_gravity);" title="最小化">_</a> <b>重力模拟</b><hr><!--主体-->
 <button onclick="gg.src = 'G.html';" class="vek_button">重新开始</button><br>
 <iframe id="gg" height="80%" width="90%"></iframe>
@@ -633,6 +639,8 @@ $(function() {
     $("#vek_textspeech").draggable();
     $("#vek_bb").resizable();
     $("#vek_bb").draggable();
+    $("#vek_sw").resizable();
+    $("#vek_sw").draggable();
     $("#vek_rick").draggable();
     $("#vek_wd").draggable();
 });
@@ -642,6 +650,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
