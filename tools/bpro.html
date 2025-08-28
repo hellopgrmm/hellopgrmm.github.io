@@ -159,7 +159,7 @@ function opentune()
 	for(var i = 0;i<localStorage.length;i++)
 	{
 		if(localStorage.key(i).includes(".bb")){
-			beats.innerHTML = `<button onclick='readtune(atob("${localStorage.getItem(localStorage.key(i))}"));'>${localStorage.key(i)}</button> <button onclick='localStorage.removeItem("${localStorage.key(i)}");opentune();'>删除</button><br>`;
+			beats.innerHTML += `<button onclick='readtune(atob("${localStorage.getItem(localStorage.key(i))}"));'>${localStorage.key(i)}</button> <button onclick='localStorage.removeItem("${localStorage.key(i)}");opentune();'>删除</button><br>`;
 			l++;
 		}
 		else
@@ -192,4 +192,5 @@ setInterval(function()
 },100);
 </script>
 </body>
+
 </html>
