@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ByteBeat编辑器专业版</title>
+</head>
+<body>
+<script src="https://unpkg.com/wavesurfer.js@7"></script>
+<script src="bytebeat.js"></script>
+<style>
+body
+{
+	font-family:sans-serif;
+	background: rgb(60,60,60);
+}
+.bbwindow
+{
+	background:rgb(60,60,60);
+	border:1px solid white;
+	width:30%;
+	z-index:9999;
+	position: fixed;
+	top:40%;
+	left:30%;
+	padding-top:5px;
+	padding-left:5px;
+	padding-bottom:5px;
+	padding-right: 5px;
+	font-family: monospace;
+	color:white;
+}
+button
+{
+	background: linear-gradient(rgb(50,50,50),rgb(80,80,80));
+	border:1px solid black;
+	color:white;
+	font-family: monospace;
+	font-size:15px;
+	height:25px;
+}
+input,textarea,select
+{
+	background: rgb(30,30,30);
+	border:1px solid black;
+	color:white;
+	font-family: monospace;
+	font-size:15px;
+	outline:none;
+}
+.diva
+{
+	background: rgb(50,50,50);
+	border:1px solid black;
+	color:white;
+	font-family: monospace;
+	font-size:15px;
+	padding-top:5px;
+	padding-left:5px;
+	padding-bottom:5px;
+}
+button:hover
+{
+	background: linear-gradient(rgb(80,80,80),rgb(50,50,50));
+}
+</style>
+<div class="diva">
+<b style="font-size:30px;">Byte+</b> Online Bytebeat Editor | 保存于 <input id="filename" value="Untitled"/>.wav <button onclick="downloadaudio(bytebeat_player,`${filename.value}.wav`);">下载音频</button> <button onclick="savetune();">保存旋律</button> <button onclick="opentune();">打开旋律</button> <button onclick="showInfoGUI('关于Byte+','Byte+在线ByteBeat编辑器/播放器<br>版本1.0<br>Hello-Programming&copy;2025 版权所有<br><br>个人网站：https://hellopgrmm.github.io/');">关于</button>
+</div>
+<audio id="bytebeat_player"></audio>
+<div class="diva">
+<h3>公式输入</h3>
+<textarea cols=50 rows=10 id="fml"></textarea><br>
+频率 <select id="freq">
+	<option value=8000>8kHz</option>
+	<option value=12000>12kHz</option>
+	<option value=22000>22kHz</option>
+	<option value=32000>32kHz</option>
+	<option value=44000>44kHz</option>
+	<option value=48000>48kHz</option>
+	<option value=56000>56kHz</option>
+	<option value=56000>56kHz</option>
+	<option value=11025>11025</option>
+</select>
+<button onclick="bbgen();">生成</button> <button onclick="state.innerHTML = '播放中';wavesurfer.play();bytebeat_player.play();">播放</button> <button onclick="wavesurfer.pause();bytebeat_player.pause();state.innerHTML = '暂停';">暂停</button>
+预设<select id="simple">
+	<option value="">无预设</option>
+	<option value="(t%(t&t>>12)/2**(t/1024%4-3)&127)+(8e3**(1-t%16384/1e4)&64)">Funk(lhphr)</option>
+	<option value="(t>>4)*(t>>3)">Simple 2</option>
+	<option value="(t>>10)*t">Simple 3</option>
+	<option value="((t>>10)&42)*t">The 42 melody</option>
+</select>
+<br><br>
+长度 <input value=12 id="duration"/>秒 <font color="orange" id="bblate" style="font-family:Helvetica;font-size:20px;">00:00.000/00:00.000</font> 当前状态：<font color="#ccc" id="state">就绪</font><br>
+</div>
+<div style="background: black;" id="audiowave" onclick="bytebeat_player.currentTime = wavesurfer.getCurrentTime();state.innerHTML = `将音频 跳转到${wavesurfer.getCurrentTime().toFixed(2)}秒。`;"></div>
+<div class="diva">
+<canvas style="border:2px solid black;border-color:gray black gray black;" height=256 id="bytebeat_viz"></canvas>
+</div>
+<div class="bbwindow" id="infowindow"><b id="ttl"></b><hr><br><a id="info"></a><br><center><button onclick="infowindow.style.display = 'none';">确定</button></center></div>
+<div class="bbwindow" id="selecttuneweb"><b>选择旋律名称</b><hr><br><a id="lle"></a><div style="height:100px;overflow:auto;" id="beats"></div><br><center><button onclick="selecttuneweb.style.display = 'none';">取消</button></center></div>
+<script>
+infowindow.style.display = "none";
+selecttuneweb.style.display = "none";
+bytebeat_player.muted = true;
+bytebeat_viz.width = window.innerWidth-50;
+simple.addEventListener("change",function(e){fml.value = simple.value});
+window.addEventListener("resize",function(e){bytebeat_viz.width = window.innerWidth-50;});
+function showInfoGUI(title_a,text_a)
+{
+	infowindow.style.display = "";
+	ttl.innerHTML = title_a;
+	info.innerHTML = text_a;
+}
+function downloadaudio(ee, ff) {
+    const asr = ee.src;
+    const link = document.createElement('a');
+    link.href = asr;
+    link.download = ff;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+const wavesurfer = WaveSurfer.create({
+    container:"#audiowave",
+    waveColor:"lightgreen",
+    progressColor:"green",
+    cursorColor:"red",
+    cursorWidth:1,
+    height:128,
+    normalize: true
+});
+function bbgen()
+{
+	try{
+		state.innerHTML = "准备生成";
+		const snd = compileComposer(fml.value);
+		state.innerHTML = "解析";
+		const sound = makeSound([snd], duration.value, freq.value, 1);
+		state.innerHTML = "生成音频";
+		showAudioVisual(sound,bytebeat_player,bytebeat_viz);
+		wavesurfer.load(bytebeat_player.src);
+		state.innerHTML = "准备播放";
+	}catch(e){
+		state.innerHTML = "解析(已停止)";
+		showInfoGUI('发生了一个错误',"表达式错误或者是网页出现内部错误：<br>"+e);
+	}
+}
+function savetune()
+{
+	localStorage.setItem(filename.value+'.bb',btoa(`${fml.value}<Extsplit>${duration.value}<Extsplit>${freq.value}`));
+	showInfoGUI('提示','项目已存储。');
+}
+function opentune()
+{
+	beats.innerHTML = "";
+	selecttuneweb.style.display = "";
+	var l = 0;
+	for(var i = 0;i<localStorage.length;i++)
+	{
+		if(localStorage.key(i).includes(".bb")){
+			beats.innerHTML = `<button onclick='readtune(atob("${localStorage.getItem(localStorage.key(i))}"));'>${localStorage.key(i)}</button> <button onclick='localStorage.removeItem("${localStorage.key(i)}");opentune();'>删除</button><br>`;
+			l++;
+		}
+		else
+		{
+			continue;
+		}
+	}
+	lle.innerHTML = '一共'+l+'首旋律，点击读取。';
+}
+function readtune(infos)
+{
+	var maininfo = infos.split('<Extsplit>');
+	fml.value = maininfo[0];
+	freq.value = maininfo[2];
+	duration.value = maininfo[1];
+	selecttuneweb.style.display = "none";
+	state.innerHTML = "读取完成，就绪。";
+}
+function formattime(seconds)
+{
+	const date = new Date(seconds * 1000);
+    const m = date.getUTCMinutes().toString().padStart(2, '0');
+    const s1 = date.getUTCSeconds().toString().padStart(2, '0');
+    const ms = date.getUTCMilliseconds().toString().padStart(3, '0');
+    return `${m}:${s1}.${ms}`;
+}
+setInterval(function()
+{
+	bblate.innerHTML = `${formattime(wavesurfer.getCurrentTime().toFixed(3))}/${formattime(wavesurfer.getDuration().toFixed(3))}`;
+},100);
+</script>
+</body>
+</html>
