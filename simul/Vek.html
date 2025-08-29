@@ -217,6 +217,7 @@ body
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_textspeech');$('#vek_textspeech').fadeIn();"><center><img src="https://s2.loli.net/2025/08/22/8WF1waZED6GTXox.png" alt="文字转语音的图标"><br>文字转语音</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_bb');$('#vek_bb').fadeIn();bbb.src = 'bytebeat.html';"><center><img src="https://s2.loli.net/2025/08/25/HedUuT5gApVWO9j.png" alt="ByteBeat的图标"><br>Byte Beat</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_sw');$('#vek_sw').fadeIn();sws.src = 'starwars.html';"><center><img src="https://s2.loli.net/2025/08/26/QIKVrnAutJzNLZh.png" alt="StartWars的图标"><br>StarWars.MP4</center></div>
+<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_img2asc');$('#vek_img2asc').fadeIn();"><center><img src="https://s2.loli.net/2025/08/29/uX9gUzSh3Q6J5sH.png" alt="img2asc的图标"><br>Img2Ascii</center></div>
 <div id="vek_icon" onclick="topmost('vek_bg');$('#vek_bg').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="设置和个性化的图标"><br>设置和个性化</center></div>
 <div id="vek_icon" onclick="topmost('vek_vm');$('#vek_vm').fadeIn();vmmain.src=location.href;"><center><img src="https://s2.loli.net/2025/08/17/82RtI3vbmP1AXlu.png" alt="vek虚拟机的图标"><br>Vek虚拟机</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_c09');$('#vek_c09').fadeIn();window.open('https://g209.wuaze.com/');"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="209聊天框的图标"><br>209聊天框</center></div>
@@ -373,6 +374,37 @@ class UserActionMonitor {
 </script>
 </div>
 <!--结束线-->
+
+<div class="vek_window" id="vek_img2asc" style="overflow:auto;" onclick="topmost('vek_img2asc');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_img2asc').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_img2asc);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_img2asc);" title="最小化">_</a> <b>Image2Ascii</b><hr><!--主体-->
+<h2>图片转字符画(Image to Ascii-Art)</h2>
+选择图片 <input type="file" id="img2ascii"/>
+<br>输入精度 <input class="vek_input" id="wd" value=50 placeholder="请输入一个数字（不要太大）。" /> <button onclick="asciiart(finalresult,wd.value);" class="vek_button">生成</button>
+<pre id="finalresult" style="font-family: ui-monospace,consolas,monospace;"></pre>
+<script>
+/**
+ * Skipped minification because the original files appears to be already minified.
+ * Original file: /npm/img2asciix@1.0.4/dist/img2asciix.bundle.js
+ *
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+	!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.AsciiArt=t():e.AsciiArt=t()}("undefined"!=typeof self?self:this,(()=>{return e={740:function(e){var t,r;t="undefined"!=typeof window?window:this,r=function(){"use strict";var e;e="undefined"!=typeof Image?Image:function(){throw new Error("当前环境不支持 Image 对象，请在浏览器环境或提供 polyfill 后使用。")};var t={width:100,height:void 0,asciiRamp:"@&#*+=-:. "};return{convert:function(r,n){return n=function(e){var r={};for(var n in t)t.hasOwnProperty(n)&&(r[n]=t[n]);if(e)for(var n in e)e.hasOwnProperty(n)&&(r[n]=e[n]);return r}(n),new Promise((function(t,o){var i,a;"string"==typeof r?(a=r,i=new Promise((function(t,r){var n;try{n=new e}catch(e){return r(e)}n.onload=function(){t(n)},n.onerror=function(){r(new Error("加载图片失败："+a))},n.src=a}))):i=Promise.resolve(r),i.then((function(e){var r,i=e.height/e.width,a=n.width,f=n.height||Math.round(a*i);try{r=function(e,t){if("undefined"!=typeof document&&"function"==typeof document.createElement){var r=document.createElement("canvas");return r.width=e,r.height=t,r}if("undefined"!=typeof OffscreenCanvas)return new OffscreenCanvas(e,t);throw new Error("当前环境不支持 Canvas，请在浏览器环境或提供 polyfill 后使用。")}(a,f)}catch(e){return o(e)}var c,u=r.getContext("2d");u.drawImage(e,0,0,a,f);try{c=u.getImageData(0,0,a,f).data}catch(e){return o(new Error("无法获取图像像素数据，可能是跨域问题。"))}for(var s="",d=n.asciiRamp,p=0;p<f;p++){for(var h=0;h<a;h++){var v=4*(p*a+h),w=.299*c[v]+.587*c[v+1]+.114*c[v+2],y=Math.floor(w/255*(d.length-1));s+=d.charAt(y)}s+="\n"}t(s)})).catch((function(e){o(e)}))}))}}},"object"==typeof e.exports?e.exports=r():t.AsciiArt=r()}},t={},function r(n){var o=t[n];if(void 0!==o)return o.exports;var i=t[n]={exports:{}};return e[n].call(i.exports,i,i.exports,r),i.exports}(740);var e,t}));
+	var fileimg;
+	img2ascii.addEventListener('change',function(e)
+	{
+		const reader = new FileReader();
+		reader.onload = function(e){
+			fileimg = e.target.result;
+		}
+		reader.readAsDataURL(e.target.files[0]);
+	});
+	function asciiart(element,widtha)
+	{
+		AsciiArt.convert(fileimg,{width:widtha})
+			.then(asciires=>element.innerHTML = asciires)
+			.catch(console.error)
+	}
+</script>
+</div>
 	
 <div class="vek_window" id="vek_vp" onclick="topmost('vek_vp');" style="overflow:auto;"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_vp').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_vp);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_vp);" title="最小化">_</a> <b>Vek Player</b><hr><!--主体-->
 <h2>Vek Player</h2>
@@ -739,6 +771,8 @@ $(function() {
     $("#vek_bb").draggable();
     $("#vek_sw").resizable();
     $("#vek_sw").draggable();
+    $("#vek_img2asc").resizable();
+    $("#vek_img2asc").draggable();
     $("#vek_debugger").resizable();
     $("#vek_debugger").draggable();
     $("#vek_JSdebugger").resizable();
@@ -752,6 +786,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
