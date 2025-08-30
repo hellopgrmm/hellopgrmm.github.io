@@ -220,6 +220,7 @@ body
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_sw');$('#vek_sw').fadeIn();sws.src = 'starwars.html';"><center><img src="https://s2.loli.net/2025/08/26/QIKVrnAutJzNLZh.png" alt="StartWars的图标"><br>StarWars.MP4</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_img2asc');$('#vek_img2asc').fadeIn();"><center><img src="https://s2.loli.net/2025/08/29/uX9gUzSh3Q6J5sH.png" alt="img2asc的图标"><br>Img2Ascii</center></div>
 <div id="vek_icon" onclick="topmost('vek_bg');$('#vek_bg').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="设置和个性化的图标"><br>设置和个性化</center></div>
+<div id="vek_icon" onclick="topmost('vek_csf');$('#vek_csf').fadeIn();"><center><img src="https://s2.loli.net/2025/08/30/YKo4cmvkjehwb1H.png" alt="csf的图标"><br>CSS Filters</center></div>
 <div id="vek_icon" onclick="topmost('vek_vm');$('#vek_vm').fadeIn();vmmain.src=location.href;"><center><img src="https://s2.loli.net/2025/08/17/82RtI3vbmP1AXlu.png" alt="vek虚拟机的图标"><br>Vek虚拟机</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_c09');$('#vek_c09').fadeIn();window.open('https://g209.wuaze.com/');"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="209聊天框的图标"><br>209聊天框</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_bricks');$('#vek_bricks').fadeIn();bsqq.src = 'bsqq.html';"><center><img src="https://s2.loli.net/2025/08/18/WGzZgEY6ymq2FkU.png" alt="打砖块的图标"><br>打砖块</center></div>
@@ -258,6 +259,24 @@ body
 <button class="vek_button" onclick="$('#vek_JSdebugger').fadeIn();topmost('vek_JSdebugger');">打开JavaScript终端</button>
 </div>
 
+<div class="vek_window" id="vek_csf" onclick="topmost('vek_csf');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_csf').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_csf);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_csf);" title="最小化">_</a> <b>CSS Filters</b><hr><!--主体-->
+<h1>特效</h1>
+模糊(Blur) <input max=50 type="range" id="blurr" value=0 oninput="enableeffect();"/><br>
+反色(Invert) <input max=100 type="range" id="ivtt" value=0 oninput="enableeffect();"/><br>
+灰度(Gray) <input max=100 type="range" id="ggray" value=0 oninput="enableeffect();"/><br>
+饱和度(Saturate) <input type="range" max=500 id="saturate" value=100 oninput="enableeffect();"/><br>
+<a id="infos_ff"></a>
+<script>
+	infos_ff.innerHTML = `模糊度：${blurr.value}% 反色：${ivtt.value}% 灰度：${ggray.value}% 饱和度：${saturate.value}%`;
+	function enableeffect()
+	{
+		document.body.style.filter = `blur(${blurr.value}px) invert(${ivtt.value}%) grayscale(${ggray.value}%) saturate(${saturate.value}%`;
+		infos_ff.innerHTML = `模糊度：${blurr.value}% 反色：${ivtt.value}% 灰度：${ggray.value}% 饱和度：${saturate.value}%`;
+	}
+</script>
+</div>
+
+	
 <div class="vek_window" id="vek_vm" onclick="topmost('vek_vm');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_vm').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_vm);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_vm);" title="最小化">_</a> <b>Vek虚拟机</b><hr><!--主体-->
 <iframe style="width:98%;height:80%;" id="vmmain" src=""></iframe><br>
 <button onclick="vmmain.src=location.href;" class="vek_button">重新启动</button> <button onclick="if(vmselect.value == 'v0'){vmmain.src = 'Vek.html';}else if(vmselect.value == 'v1'){vmmain.src = 'https://hellopgrmm.github.io/simul/boot_new';}" class="vek_button">启动选中的虚拟机</button> 选择镜像：<select id="vmselect"><option value="v0">Vek</option><option value="v1">KunOS(New User Interface)</option></select>
@@ -778,6 +797,8 @@ $(function() {
     $("#vek_debugger").draggable();
     $("#vek_JSdebugger").resizable();
     $("#vek_JSdebugger").draggable();
+    $("#vek_csf").resizable();
+    $("#vek_csf").draggable();
     $("#vek_rick").draggable();
     $("#vek_wd").draggable();
 });
@@ -787,6 +808,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
