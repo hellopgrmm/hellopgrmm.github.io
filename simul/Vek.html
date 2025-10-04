@@ -8,9 +8,32 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jGravity/0.8.0/jGravity-min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/virtual-keyboard/1.30.4/css/keyboard-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/virtual-keyboard/1.30.4/js/jquery.keyboard.min.js"></script>
 </head>
 <body>
 <style>
+.ui-keyboard-button {
+    border: 1px solid #404040 !important;
+    padding: 0 0.5em;
+    margin: 1px;
+    min-width: 3em;
+    height: 3em;
+    line-height: 3em;
+    vertical-align: top;
+    font-family: Helvetica,Arial,sans-serif;
+    color: #eee !important;
+    text-align: center;
+    border-radius: 5px;
+    -webkit-box-shadow: 1px 1px 3px 0 rgb(0 0 0 / 50%);
+    box-shadow: 1px 1px 3px 0 rgb(0 0 0 / 50%);
+    background: #444;
+    background-image: -webkit-linear-gradient(-90deg,#444 0,#333 100%) !important;
+    background-image: linear-gradient(-90deg,#444 0,#333 100%) !important;
+    cursor: pointer;
+    overflow: hidden;
+    -moz-user-focus: ignore;
+}
 body
 {
 	font-family: ui-monospace,consolas,monospace;
@@ -825,6 +848,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
