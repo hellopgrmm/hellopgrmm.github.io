@@ -780,10 +780,10 @@ function confirmcolor()
 }
 async function Vek_init()
 {
-	if(localStorage.getItem('vek.imgbg')){document.body.style.backgroundImage = `url(${localStorage.getItem('vek.imgbg')})`;}else{}
 	if(localStorage.getItem('vek.VEK.BOOT_MGR')){eval(localStorage.getItem('vek.VEK.BOOT_MGR'));}else{}
 	if(localStorage.getItem('vek.bgColor')){document.body.style.background = localStorage.getItem('vek.bgColor');}else{}
 	if(localStorage.getItem('vek.fontSize')){desktop.style.fontSize = localStorage.getItem('vek.fontSize');}else{}
+	if(localStorage.getItem('vek.imgbg')){document.body.style.backgroundImage = `url(${localStorage.getItem('vek.imgbg')})`;}else{}
 	vek_output.innerHTML+="重要说明：Vek是Hello-Programming开发的一个网页版的模拟系统。Hello-Programming官网：https://hellopgrmm.github.io/\n";
 	await delay(500);
 	vek_output.innerHTML+="声明：本网页并非是一个真正的系统，Hello-Programming已清楚操作系统和模拟的详细概念，此为网页模拟。\n";
@@ -868,6 +868,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
