@@ -271,8 +271,7 @@ body
 <div class="vek_window" id="vek_bg" style="overflow:auto" onclick="topmost('vek_bg');topmost('vek_wd');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_bg').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_bg);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_bg);" title="最小化">_</a> <b>设置和个性化</b><hr><!--主体-->
 <h1>设置和个性化</h1>
 <h2>背景设置</h2>
-(当前仅支持纯色背景)<br>R:<input oninput="changecolor();" type="range" max=255 id="vek_color_r"/> <a id="r"></a><br>G:<input oninput="changecolor();" type="range" max=255 id="vek_color_g"/> <a id="g"></a><br>B:<input oninput="changecolor();" max=255 type="range" id="vek_color_b"/> <a id="b"></a><br><div style="width:150px;height:50px;" id="vek_preview">颜色预览</div><button onclick="localStorage.setItem('vek.bgColor',`rgb(${vek_color_r.value},${vek_color_g.value},${vek_color_b.value})`);vek_window('设置和个性化','更改成功。');confirmcolor()" class="vek_button">更换</button><button onclick="localStorage.removeItem('vek.bgColor');vek_window('设置和个性化','更改成功，该操作需要重启Vek。');" class="vek_button">恢复默认</button><h2>字体大小设置</h2>
-字体大小：<input oninput="changeSize();" type='range' value=15 max=50 id="vek_fss"/> <a id="vek_fs"></a> <button class="vek_button" onclick="localStorage.setItem('vek.fontSize',`${vek_fss.value}px`);changefs();vek_window('个性化','字体大小已经更新。');">更改</button><br><a id="fsprw">字体预览</a>
+(当前仅支持纯色背景)<br>R:<input oninput="changecolor();" type="range" max=255 id="vek_color_r"/> <a id="r"></a><br>G:<input oninput="changecolor();" type="range" max=255 id="vek_color_g"/> <a id="g"></a><br>B:<input oninput="changecolor();" max=255 type="range" id="vek_color_b"/> <a id="b"></a><br><div style="width:150px;height:50px;" id="vek_preview">颜色预览</div><button onclick="localStorage.setItem('vek.bgColor',`rgb(${vek_color_r.value},${vek_color_g.value},${vek_color_b.value})`);vek_window('设置和个性化','更改成功。');confirmcolor()" class="vek_button">更换</button><button onclick="localStorage.removeItem('vek.bgColor');vek_window('设置和个性化','更改成功，该操作需要重启Vek。');" class="vek_button">恢复默认</button>
 设置图片背景 <input type="file" id="imgbg" oninput="img2base64();"/>
     <script>
         function img2base64() {
@@ -290,7 +289,9 @@ body
                 console.log('[调试错误信息T^T] ', error);
             };
         }
-    </script>
+    </script>	
+	<h2>字体大小设置</h2>
+	字体大小：<input oninput="changeSize();" type='range' value=15 max=50 id="vek_fss"/> <a id="vek_fs"></a> <button class="vek_button" onclick="localStorage.setItem('vek.fontSize',`${vek_fss.value}px`);changefs();vek_window('个性化','字体大小已经更新。');">更改</button><br><a id="fsprw">字体预览</a>
 <h2>窗口外观</h2>
 窗口圆角大小：<input type="range" max=50 min=0 value=5 oninput="borderradius.innerHTML = borderrd.value;" id="borderrd"/> <a id="borderradius">5</a>px <button onclick="savechange_br();" class="vek_button">保存设置</button>
 <br>
@@ -867,6 +868,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
