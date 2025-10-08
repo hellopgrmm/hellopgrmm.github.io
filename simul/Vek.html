@@ -273,6 +273,24 @@ body
 <h2>背景设置</h2>
 (当前仅支持纯色背景)<br>R:<input oninput="changecolor();" type="range" max=255 id="vek_color_r"/> <a id="r"></a><br>G:<input oninput="changecolor();" type="range" max=255 id="vek_color_g"/> <a id="g"></a><br>B:<input oninput="changecolor();" max=255 type="range" id="vek_color_b"/> <a id="b"></a><br><div style="width:150px;height:50px;" id="vek_preview">颜色预览</div><button onclick="localStorage.setItem('vek.bgColor',`rgb(${vek_color_r.value},${vek_color_g.value},${vek_color_b.value})`);vek_window('设置和个性化','更改成功。');confirmcolor()" class="vek_button">更换</button><button onclick="localStorage.removeItem('vek.bgColor');vek_window('设置和个性化','更改成功，该操作需要重启Vek。');" class="vek_button">恢复默认</button><h2>字体大小设置</h2>
 字体大小：<input oninput="changeSize();" type='range' value=15 max=50 id="vek_fss"/> <a id="vek_fs"></a> <button class="vek_button" onclick="localStorage.setItem('vek.fontSize',`${vek_fss.value}px`);changefs();vek_window('个性化','字体大小已经更新。');">更改</button><br><a id="fsprw">字体预览</a>
+设置图片背景 <input type="file" id="imgbg" oninput="img2base64();"/>
+    <script>
+        function img2base64() {
+            const fileInput = document.getElementById('imgbg');
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                const base64String = reader.result;
+                localStorage.setItem('vek.imgbg',base64String);
+				if(localStorage.getItem('vek.imgbg')){document.body.style.backgroundImage = `url(${localStorage.getItem('vek.imgbg')})`;}else{}
+                vek_window('设置和个性化','更改成功。');
+            };
+            reader.onerror = function (error) {
+                console.log('[调试错误信息T^T] ', error);
+            };
+        }
+    </script>
 <h2>窗口外观</h2>
 窗口圆角大小：<input type="range" max=50 min=0 value=5 oninput="borderradius.innerHTML = borderrd.value;" id="borderrd"/> <a id="borderradius">5</a>px <button onclick="savechange_br();" class="vek_button">保存设置</button>
 <br>
@@ -761,6 +779,7 @@ function confirmcolor()
 }
 async function Vek_init()
 {
+	if(localStorage.getItem('vek.imgbg')){document.body.style.backgroundImage = `url(${localStorage.getItem('vek.imgbg')})`;}else{}
 	if(localStorage.getItem('vek.VEK.BOOT_MGR')){eval(localStorage.getItem('vek.VEK.BOOT_MGR'));}else{}
 	if(localStorage.getItem('vek.bgColor')){document.body.style.background = localStorage.getItem('vek.bgColor');}else{}
 	if(localStorage.getItem('vek.fontSize')){desktop.style.fontSize = localStorage.getItem('vek.fontSize');}else{}
@@ -848,6 +867,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
