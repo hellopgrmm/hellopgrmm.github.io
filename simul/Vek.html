@@ -247,6 +247,7 @@ body
 <div id="vek_icon" onclick="topmost('vek_csf');$('#vek_csf').fadeIn();"><center><img src="https://s2.loli.net/2025/08/30/YKo4cmvkjehwb1H.png" alt="csf的图标"><br>CSS Filters</center></div>
 <div id="vek_icon" onclick="topmost('vek_vm');$('#vek_vm').fadeIn();vmmain.src=location.href;"><center><img src="https://s2.loli.net/2025/08/17/82RtI3vbmP1AXlu.png" alt="vek虚拟机的图标"><br>Vek虚拟机</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_c09');$('#vek_c09').fadeIn();window.open('https://g209.wuaze.com/');"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="209聊天框的图标"><br>209聊天框</center></div>
+<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_gpt');$('#vek_gpt').fadeIn();"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="gpt的图标"><br>ChatGPT 4.0</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_bricks');$('#vek_bricks').fadeIn();bsqq.src = 'bsqq.html';"><center><img src="https://s2.loli.net/2025/08/18/WGzZgEY6ymq2FkU.png" alt="打砖块的图标"><br>打砖块</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_gravity');$('#vek_gravity').fadeIn();gg.src = 'G.html';"><center><img src="https://s2.loli.net/2025/08/23/4Q7OdBNKDkbmqwc.png" alt="重力模拟的图标"><br>重力模拟</center></div>
 <div id="vek_icon" onclick="topmost('vek_tzfe');$('#vek_tzfe').fadeIn();tzf.src = '2048.html';"><center><img src="https://s2.loli.net/2025/08/20/3l8L5N4vKDdXFpZ.png" alt="2048的图标"><br>2048</center></div>
@@ -343,7 +344,30 @@ body
 <button onclick="bbb.src = 'bytebeat.html';" class="vek_button">刷新</button><button onclick="bbb.src = 'https://hellopgrmm.github.io/tools/bpro.html';" class="vek_button">使用专业版</button><br>
 <iframe id="bbb" height="80%" width="90%"></iframe>
 </div>
-
+<div class="vek_window" id="vek_gpt" onclick="topmost('vek_gpt');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_gpt').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_gpt);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_gpt);" title="最小化">_</a> <b>ChatGPT 4.0</b><hr><!--主体-->
+<input type="text" style="width:95%;" placeholder="向ChatGPT发送消息(ENTER=发送)..." class="vek_input" id="gptquery"/><br>
+*注意：Ai的回复需要一段时间，请等待。<br>
+<div id="quitanswer" style="overflow:auto;height:80%;"></div>
+<script>
+gptquery.addEventListener('keydown',async function(e){if(e.keyCode == 13){
+	quitanswer.innerHTML+="<font color='blue'>[用户]</font>"+gptquery.value+"<br>";
+	try{
+		const response = await fetch('https://text.pollinations.ai/用户：'+gptquery.value);
+		const gptreply = await response.text();
+		if(gptreply.includes("The response was filtered due to the prompt triggering Azure OpenAI's content management policy. Please modify your prompt and retry."))
+		{
+			quitanswer.innerHTML+="<font color='green'>[ChatGPT 4.0]</font>抱歉，对于这个需求我不能满足，请重新调整你的语言。<br>";
+		}else{
+			quitanswer.innerHTML+="<font color='green'>[ChatGPT 4.0]</font>"+gptreply.replaceAll('\n','<br>')+"<br>";
+		}
+	}catch(error)
+	{
+		quitanswer.innerHTML+="<font color='green'>[ChatGPT 4.0]</font>网络出现错误，请检查网络连接。<br>";
+	}
+	gptquery.value = "";
+}quitanswer.scrollTop = quitanswer.scrollHeight;},false);
+</script>
+</div>
 <!--调试窗口-->
 <div class="vek_window" id="vek_JSdebugger" onclick="topmost('vek_JSdebugger');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_JSdebugger').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_JSdebugger);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_JSdebugger);" title="最小化">_</a> <b>JavaScript终端</b><hr><!--主体-->
 <input type="text" style="width:95%;" placeholder="Please Enter Javascript Codes(Enter=execute)..." class="vek_input" id="jscode"/>
@@ -859,6 +883,8 @@ $(function() {
     $("#vek_csf").draggable();
     $("#vek_rick").draggable();
     $("#vek_wd").draggable();
+    $("#vek_gpt").resizable();
+    $("#vek_gpt").draggable();
 	$("#vek_vkey").resizable();
     $("#vek_vkey").draggable();
 });
@@ -868,6 +894,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
