@@ -231,7 +231,7 @@ body
 <div id="desktop">
 <!--菜单栏-->
 <div id="vek_bar">
-<em>Vek</em> <a id="vek_bar_text" onclick="topmost('vek_overlay');$('#vek_overlay').fadeIn();">电源</a> <a id="vek_time"></a></div>
+<em>Vek</em> <a id="vek_bar_text" onclick="topmost('vek_overlay');$('#vek_overlay').fadeIn();">电源</a> <a id="vek_bar_text"><a id="status" onclick="detectre();">屏幕录制</a></a> <a id="vek_time"></a></div>
 <!--图标区域-->
 <br><br>
 <div id="vek_icon" onclick="topmost('vek_filemanager');$('#vek_filemanager').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/gXyOvQi7NYwEdpn.png" alt="文件管理的图标"><br>文件管理</center></div>
@@ -693,6 +693,45 @@ function speech(text_to_speech,language,rate){
     utterThis.rate = rate;
     speechSynthesis.speak(utterThis);
 }
+function detectre()
+{
+	if(document.getElementById('status').innerHTML == "屏幕录制")
+	{
+		alert("注意：部分浏览器可能不支持录制屏幕的功能。请使用主流浏览器，如：Chrome,Edge等。");
+		startr();
+		document.getElementById('status').innerHTML = "录制中，点击停止···";
+	}
+	else if(document.getElementById('status').innerHTML == "录制中，点击停止···")
+	{
+		stopr();
+		document.getElementById('status').innerHTML = "屏幕录制";
+	}
+}
+let recorder;
+async function startr() {
+  const stream = await navigator.mediaDevices.getDisplayMedia({
+    video: { mediaSource: 'screen' },
+    audio: true
+  });
+  recorder = new RecordRTC(stream, {
+    type: 'video',
+    mimeType: 'video/mp4',
+    quality: 10
+  });
+  recorder.startRecording();
+}
+function stopr() {
+  recorder.stopRecording(() => {
+    const blob = recorder.getBlob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'VekRecord-'+Date.now()+'.mp4';
+    a.click();
+    recorder.destroy();
+    recorder = null;
+  });
+}
 function gravityStart()
 {
 	gengravity("#vek_icon,#vek_bar");
@@ -894,6 +933,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
