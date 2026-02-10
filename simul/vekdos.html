@@ -1,0 +1,33 @@
+<meta charset="utf-8">
+<style>
+  body
+  {
+    background: black;
+    color:white;
+  }
+</style>
+<body>
+<title>DOS</title>
+<script src="https://js-dos.com/cdn/js-dos-api.js"></script>
+<div id="dosbox" hidden></div>
+<a id="DOSstatic">正在加载DOS-Box，请稍后。</a><br>
+如果您的设备没有键盘，请点此开启：<input style="width:30px"/>
+<script>
+var originaltitle = document.title;//避免标题被api改掉
+var info = "";
+var dosbox = new Dosbox({
+  id:"dosbox",
+  onload:function(dosbox){
+    dosbox.run("https://hellopgrmm.github.io/simul/vekmsg.zip", "greet.bat");
+    DOSstatic.innerHTML="加载完成。";
+  },
+    onrun:function (dosbox,app){
+    info = document.title;//先获取一下DOSBOX运行信息标题
+    document.title = originaltitle;//再改回原标题
+    DOSstatic.innerHTML="状态：正常运行。<br>信息："+info+`<br>如果需要刷新整个界面，输入"CLS"或者"GREET.BAT"。<br>本网页是基于DOSBOX插件制作而成。<br>DOSBOX是一个模拟DOS环境的应用程序，官网：<a href="https://dosbox.com/">点此进入</a>`;
+    document.querySelector("#dosbox .dosbox-loader").style.display = "none";
+    document.getElementById("dosbox").hidden = false;
+  }
+});
+dosbox.ui.start.click();
+</script>
