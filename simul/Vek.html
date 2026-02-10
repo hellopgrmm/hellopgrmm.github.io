@@ -243,13 +243,14 @@ body
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_bb');$('#vek_bb').fadeIn();bbb.src = 'bytebeat.html';"><center><img src="https://s2.loli.net/2025/08/25/HedUuT5gApVWO9j.png" alt="ByteBeat的图标"><br>Byte Beat</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_sw');$('#vek_sw').fadeIn();sws.src = 'starwars.html';"><center><img src="https://s2.loli.net/2025/08/26/QIKVrnAutJzNLZh.png" alt="StartWars的图标"><br>StarWars.MP4</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_img2asc');$('#vek_img2asc').fadeIn();"><center><img src="https://s2.loli.net/2025/08/29/uX9gUzSh3Q6J5sH.png" alt="img2asc的图标"><br>Img2Ascii</center></div>
+<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_dospmt');$('#vek_dospmt').fadeIn();promptpage.focus();"><center><img src="https://i.imgs.ovh/2026/02/10/ypm2Pt.png" alt="cmd的图标"><br>DOS命令行</center></div>
 <div id="vek_icon" onclick="topmost('vek_bg');$('#vek_bg').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="设置和个性化的图标"><br>设置和个性化</center></div>
 <div id="vek_icon" onclick="topmost('vek_vkey');$('#vek_vkey').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="虚拟键盘的图标"><br>设置-虚拟键盘</center></div>
 <div id="vek_icon" onclick="topmost('vek_csf');$('#vek_csf').fadeIn();"><center><img src="https://s2.loli.net/2025/08/30/YKo4cmvkjehwb1H.png" alt="csf的图标"><br>CSS Filters</center></div>
 <div id="vek_icon" onclick="topmost('vek_vm');$('#vek_vm').fadeIn();vmmain.src=location.href;"><center><img src="https://s2.loli.net/2025/08/17/82RtI3vbmP1AXlu.png" alt="vek虚拟机的图标"><br>Vek虚拟机</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_c09');$('#vek_c09').fadeIn();window.open('https://g209.wuaze.com/');"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="209聊天框的图标"><br>209聊天框</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_gpt');$('#vek_gpt').fadeIn();"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="gpt的图标"><br>ChatGPT 4.0</center></div>
-<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_bricks');$('#vek_bricks').fadeIn();bsqq.src = 'bsqq.html';"><center><img src="https://s2.loli.net/2025/08/18/WGzZgEY6ymq2FkU.png" alt="打砖块的图标"><br>打砖块</center></div>
+<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_bricks');$('#vek_bricks').fadeIn();bsqq.src = 'bsqq.html';bsqq.focus();"><center><img src="https://s2.loli.net/2025/08/18/WGzZgEY6ymq2FkU.png" alt="打砖块的图标"><br>打砖块</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_gravity');$('#vek_gravity').fadeIn();gg.src = 'G.html';"><center><img src="https://s2.loli.net/2025/08/23/4Q7OdBNKDkbmqwc.png" alt="重力模拟的图标"><br>重力模拟</center></div>
 <div id="vek_icon" onclick="topmost('vek_tzfe');$('#vek_tzfe').fadeIn();tzf.src = '2048.html';"><center><img src="https://s2.loli.net/2025/08/20/3l8L5N4vKDdXFpZ.png" alt="2048的图标"><br>2048</center></div>
 <div id="vek_icon" onclick="topmost('vek_vp');$('#vek_vp').fadeIn();"><center><img src="https://s2.loli.net/2025/08/18/m7LZseg9GBicpT8.png" alt="VP的图标"><br>Vek Player</center></div>
@@ -331,11 +332,15 @@ body
 <h1>正在跳转至209聊天框。</h1>209聊天框也是Hello-Programming开发的一款在线网络聊天网站。<br>
 </div>
 
-<div class="vek_window" id="vek_bricks" onclick="topmost('vek_bricks');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_bricks').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_bricks);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_bricks);" title="最小化">_</a> <b>打砖块</b><hr><!--主体-->
+<div class="vek_window" id="vek_bricks" onclick="topmost('vek_bricks');bsqq.focus();"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_bricks').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_bricks);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_bricks);" title="最小化">_</a> <b>打砖块</b><hr><!--主体-->
 使用键盘 ← → 移动（游戏开始后请迅速点击游戏界面，否则没有反应）。 <button onclick="bsqq.src = 'bsqq.html';" class="vek_button">重新开始</button><br>
 <iframe id="bsqq" height="80%" width="90%"></iframe>
 </div>
-
+	
+<div class="vek_window" id="vek_dospmt" onclick="topmost('vek_dospmt');promptpage.focus();"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_dospmt').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_dospmt);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_dospmt);" title="最小化">_</a> <b>DOS Prompt</b><hr><!--主体-->
+<iframe style="height:92%;width:97%" src="vekdos.html" id="promptpage"></iframe>
+</div>
+	
 <div class="vek_window" id="vek_tzfe" onclick="topmost('vek_tzfe');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_tzfe').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_tzfe);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_tzfe);" title="最小化">_</a> <b>2048</b><hr><!--主体-->
 使用键盘 ↑ ↓ ← → 移动（游戏开始后请点击游戏界面，否则没有反应）。 <button onclick="tzf.src = '2048.html';" class="vek_button">重新开始</button><br>
 <iframe id="tzf" height="80%" width="90%"></iframe>
@@ -927,6 +932,8 @@ $(function() {
     $("#vek_gpt").draggable();
 	$("#vek_vkey").resizable();
     $("#vek_vkey").draggable();
+    $("#vek_dospmt").resizable();
+    $("#vek_dospmt").draggable();
 });
 
 
@@ -934,6 +941,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
