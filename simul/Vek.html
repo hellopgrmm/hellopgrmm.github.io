@@ -223,6 +223,12 @@ body
             width: 5px;
             height: 5px;
         }
+#vek_title
+{
+	animation: startUPA;
+	animation-iteration-count: infinite;
+	animation-duration:3.5s ;
+}
 @keyframes startUPA
 {
 	0%{opacity: 0.6}
@@ -913,7 +919,7 @@ async function Vek_init()
 	for(var i = 0;i < localStorage.length;i++)
 	{
 		//vek_output.scrollTop = vek_output.scrollHeight;
-		vek_output.innerHTML+="[LocalStorage #"+i+"]Loaded File:"+localStorage.key(i)+"\n";
+		vek_output.innerHTML="[LocalStorage #"+i+"]Loaded File:"+localStorage.key(i)+"\n";
 		await delay(20);
 	}
 	await delay(1024);
@@ -947,6 +953,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
