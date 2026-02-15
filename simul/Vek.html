@@ -223,13 +223,22 @@ body
             width: 5px;
             height: 5px;
         }
+@keyframes startUPA
+{
+	0%{opacity: 0.6}
+	50%{opacity: 1}
+	100%{opacity: 0.6}
+}
 </style>
 <div id="start">
-	<a id="vek_title" style="font-size:80px">Vek</a>
+	<!--<a id="vek_title" style="font-size:80px">Vek</a>
 	<br><a style="font-size:20px;" id="vek_start_sign">正在启动...</a><br>
 	<font color="gray">Hello-Programming&copy;2025</font>
 	<br><textarea id="vek_output" style="height:30%;width:69%;font-family:ui-monospace,consolas,monospace;border-width:0px;font-size:20px;color:cyan;outline:none;background:black;" readonly></textarea>
-	<br><a>其它作品：<a href="https://hellopgrmm.github.io/simul/KunOS_new" style="color:cyan">KunOS</a></a>
+	<br><a>其它作品：<a href="https://hellopgrmm.github.io/simul/KunOS_new" style="color:cyan">KunOS</a></a>-->
+	<a id="vek_output" style="position:absolute;top:0px;left:0px;font-family:ui-monospace,consolas,monospace;font-size:10px;color:white;opacity: 0.5;"></a>
+	<a id="vek_title" style="font-size:100px;">Vek 7</a><br><br>
+	<font color="gray">Hello-Programming&copy;2026</font>
 </div>
 <div id="desktop">
 <!--菜单栏-->
@@ -619,10 +628,10 @@ H_fetchJson("https://hellopgrmm.github.io/simul/musicData.json");
 	
 <div class="vek_window" id="vek_about" style="overflow:auto;" onclick="topmost('vek_about');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_about').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_about);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_about);" title="最小化">_</a> <b>关于Vek</b><hr><!--主体-->
 <h1>关于Vek</h1>
-Vek是一个网页版的系统（模拟，并非真实系统），灵感取自Windows93(windows93.net)。从而制成此网页。<br>注意：该网页并非真正的系统，操作系统是需要独立运行的，而不是基于一个系统之上、一个软件之上运行。请正在使用本网页的用户清楚认知此概念。
-<br>Vek版本：6.1<br>开发时间：2025年8月16日21:43:12<br><br>Vek将会持续更新新功能。
+Vek是一个由Hello-Programming开发的网页版的系统（模拟，并非真实系统），灵感取自Windows93(windows93.net)。从而制成此网页。<br>注意：该网页并非真正的系统，操作系统是需要独立运行的，而不是基于一个系统之上、一个软件之上运行。请正在使用本网页的用户清楚认知此概念。
+<br>Vek版本：7<br>开发时间：2025年8月16日21:43:12<br><br>Vek将会持续更新新功能。
 <br><h2>关于Vek Mod的一些说明</h2>Vek Mod允许用户制作自己的mod，导入到Vek中，从而可以让Vek拓展出更多的功能。Vek Mod的前缀是vkm，（示例：vkm.helloworld）vkm文件用Javascript语言为主，这也是网页交互的必要语言之一。<br>如果您熟悉Javascript，那么您可以仔细阅读源代码，寻找一些Vek的对象名（比如说vek_start_sign，这是开机提示文字的对象，示例代码：vek_start_sign.innerHTML = 'Hello!Test 1234567890Yes Ok.';）然后您编写js代码，就可以为Vek拓展功能。
-<h2>本次更新内容</h2><ul><li>“设置和个性化”增加调试功能</li><li>新增了一些功能。</li></ul>
+<h2>本次更新内容</h2><ul><li>“设置”增加功能</li><li>开机界面重制</li><li>新增画图</li></ul>
 </div>
 
 <div class="vek_window" style="width:98%;height:98%;top:2px;left:2px;" id="vek_rick" onclick="topmost('vek_rick');"><!--标题栏--><br><hr><!--主体-->
@@ -891,25 +900,25 @@ async function Vek_init()
 	if(localStorage.getItem('vek.bgColor')){document.body.style.background = localStorage.getItem('vek.bgColor');}else{}
 	if(localStorage.getItem('vek.fontSize')){desktop.style.fontSize = localStorage.getItem('vek.fontSize');}else{}
 	if(localStorage.getItem('vek.imgbg')){document.body.style.backgroundImage = `url(${localStorage.getItem('vek.imgbg')})`;}else{}
-	vek_output.innerHTML+="重要说明：Vek是Hello-Programming开发的一个网页版的模拟系统。Hello-Programming官网：https://hellopgrmm.github.io/\n";
+	vek_output.innerHTML="重要说明：Vek是Hello-Programming开发的一个网页版的模拟系统。Hello-Programming官网：https://hellopgrmm.github.io/\n";
 	await delay(500);
-	vek_output.innerHTML+="声明：本网页并非是一个真正的系统，Hello-Programming已清楚操作系统和模拟的详细概念，此为网页模拟。\n";
+	vek_output.innerHTML="声明：本网页并非是一个真正的系统，Hello-Programming已清楚操作系统和模拟的详细概念，此为网页模拟。\n";
 	await delay(1000);
-	vek_output.innerHTML+="Starting WebSystem...\n";
+	vek_output.innerHTML="Starting WebSystem...\n";
 	await delay(600);
-	vek_output.innerHTML+="Preparing desktop...\n";
+	vek_output.innerHTML="Preparing desktop...\n";
 	await delay(695);
-	vek_output.innerHTML+="[LocalStorage]Loading localStorage Files...\n";
+	vek_output.innerHTML="[LocalStorage]Loading localStorage Files...\n";
 	await delay(896);
 	for(var i = 0;i < localStorage.length;i++)
 	{
-		vek_output.scrollTop = vek_output.scrollHeight;
+		//vek_output.scrollTop = vek_output.scrollHeight;
 		vek_output.innerHTML+="[LocalStorage #"+i+"]Loaded File:"+localStorage.key(i)+"\n";
 		await delay(20);
 	}
 	await delay(1024);
-	vek_output.innerHTML+="Now entering desktop...\n";
-	vek_output.scrollTop = vek_output.scrollHeight;
+	vek_output.innerHTML="Now entering desktop...\n";
+	//vek_output.scrollTop = vek_output.scrollHeight;
 	await delay(100);
 	$("#start").fadeOut(1000);
 	//desktop.style.display = "";
@@ -938,6 +947,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
