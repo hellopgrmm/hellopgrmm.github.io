@@ -248,6 +248,7 @@ body
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_dospmt');$('#vek_dospmt').fadeIn();promptpage.focus();"><center><img src="https://i.imgs.ovh/2026/02/10/ypm2Pt.png" alt="cmd的图标"><br>DOS命令行</center></div>
 <div id="vek_icon" onclick="topmost('vek_bg');$('#vek_bg').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="设置和个性化的图标"><br>设置和个性化</center></div>
 <div id="vek_icon" onclick="topmost('vek_vkey');$('#vek_vkey').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="虚拟键盘的图标"><br>设置-虚拟键盘</center></div>
+<div id="vek_icon" onclick="topmost('vek_drin');$('#vek_drin').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="定制的图标"><br>设置-高级定制</center></div>
 <div id="vek_icon" onclick="topmost('vek_csf');$('#vek_csf').fadeIn();"><center><img src="https://s2.loli.net/2025/08/30/YKo4cmvkjehwb1H.png" alt="csf的图标"><br>CSS Filters</center></div>
 <div id="vek_icon" onclick="topmost('vek_vm');$('#vek_vm').fadeIn();vmmain.src=location.href;"><center><img src="https://s2.loli.net/2025/08/17/82RtI3vbmP1AXlu.png" alt="vek虚拟机的图标"><br>Vek虚拟机</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_c09');$('#vek_c09').fadeIn();window.open('https://g209.wuaze.com/');"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="209聊天框的图标"><br>209聊天框</center></div>
@@ -348,6 +349,38 @@ body
 <iframe id="tzf" height="80%" width="90%"></iframe>
 </div>
 
+<div class="vek_window" id="vek_drin" onclick="topmost('vek_drin');topmost('vek_wd');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_drin').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_drin);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_drin);" title="最小化">_</a> <b>设置-定制</b><hr><!--主体-->
+	<h2>定制</h2>
+	附加说明：Vek系统完全开源，有网页基础的用户可以对此WebOS进行深度定制，做成属于自己的WebOS挂载在用户个人网站上。
+	<br>
+	光标图案设置(选择图片文件)：<input type="file" id="curs" oninput="setcursor();"/> <button class="vek_button" onclick="localStorage.removeItem('vek.curs');vek_window('设置-定制','已恢复默认，该操作需要<b>重启Vek</b>。');">恢复默认光标</button>
+    <script>
+        function setcursor() {
+            const fileInput1 = document.getElementById('curs');
+            const file1 = fileInput1.files[0];
+            const reader1 = new FileReader();
+            reader1.readAsDataURL(file1);
+            reader1.onload = function () {
+                const base64String1 = reader1.result;
+                localStorage.setItem('vek.curs',base64String1);
+				if(localStorage.getItem('vek.curs')){document.body.style.cursor = `url(${localStorage.getItem('vek.curs')}),auto`;}else{}
+                
+                vek_window('设置-定制','更改成功。');
+            };
+            reader1.onerror = function (error) {
+                console.log('[调试错误信息T^T] ', error);
+            };
+        }
+    </script>
+    <h2>高级选项</h2>
+    请写入要作为VEK_START_ACTIONS内容的文本(Must be JavaScript,it will work when you restart Vek)：
+    <textarea class="vek_textarea" style="height:199px;" id="vsa_cts"></textarea>
+    <br><button class="vek_button" onclick="localStorage.setItem('vek.VEK_START_ACTIONS',vsa_cts.value);vek_window('设置-定制','Success!Please restart Vek!');">Write-In</button><button class="vek_button" onclick="vsa_cts.value = localStorage.getItem('vek.VEK_START_ACTIONS');">Read actions</button><button class="vek_button" onclick="localStorage.removeItem('vek.VEK_START_ACTIONS');vek_window('设置-定制','Success!Please reboot Vek.');">Delete actions</button><br>
+    请写入要作为BOOT内容的文本(Must be JavaScript,it will work when you restart Vek)(Be careful,vek will not boot normally if the code has bugs)：
+    <textarea class="vek_textarea" style="height:199px;" id="vsb_cts"></textarea>
+    <br><button class="vek_button" onclick="localStorage.setItem('vek.VEK.BOOT_MGR',vsb_cts.value);vek_window('设置-定制','已写入。');">Write</button><button class="vek_button" onclick="vsb_cts.value = localStorage.getItem('vek.VEK.BOOT_MGR');">Get</button><button class="vek_button" onclick="localStorage.removeItem('vek.VEK.BOOT_MGR');vek_window('设置-定制','已移除相关行为。');">Wipe</button>
+</div>
+	
 <div class="vek_window" id="vek_bb" onclick="topmost('vek_bb');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_bb').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_bb);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_bb);" title="最小化">_</a> <b>Byte Beat</b><hr><!--主体-->
 <button onclick="bbb.src = 'bytebeat.html';" class="vek_button">刷新</button><button onclick="bbb.src = 'https://hellopgrmm.github.io/tools/bpro.html';" class="vek_button">使用专业版</button><br>
 <iframe id="bbb" height="80%" width="90%"></iframe>
@@ -892,50 +925,9 @@ function gettime()
 }
 setInterval("vek_time.innerHTML = gettime();",1000);
 $(function() {
-    $("#vek_filemanager").resizable();
-    $("#vek_filemanager").draggable();
-    $("#vek_texteditor").resizable();
-    $("#vek_texteditor").draggable();
-    $("#vek_browser").resizable();
-    $("#vek_browser").draggable();
-    $("#vek_bg").resizable();
-    $("#vek_bg").draggable();
-    $("#vek_about").resizable();
-    $("#vek_about").draggable();
-    $("#vek_vm").resizable();
-    $("#vek_vm").draggable();
-    $("#vek_c09").resizable();
-    $("#vek_c09").draggable();
-    $("#vek_bricks").resizable();
-    $("#vek_bricks").draggable();
-    $("#vek_gravity").resizable();
-    $("#vek_gravity").draggable();
-    $("#vek_vp").resizable();
-    $("#vek_vp").draggable();
-    $("#vek_tzfe").resizable();
-    $("#vek_tzfe").draggable();
-    $("#vek_textspeech").resizable();
-    $("#vek_textspeech").draggable();
-    $("#vek_bb").resizable();
-    $("#vek_bb").draggable();
-    $("#vek_sw").resizable();
-    $("#vek_sw").draggable();
-    $("#vek_img2asc").resizable();
-    $("#vek_img2asc").draggable();
-    $("#vek_debugger").resizable();
-    $("#vek_debugger").draggable();
-    $("#vek_JSdebugger").resizable();
-    $("#vek_JSdebugger").draggable();
-    $("#vek_csf").resizable();
-    $("#vek_csf").draggable();
-    $("#vek_rick").draggable();
-    $("#vek_wd").draggable();
-    $("#vek_gpt").resizable();
-    $("#vek_gpt").draggable();
-	$("#vek_vkey").resizable();
-    $("#vek_vkey").draggable();
-    $("#vek_dospmt").resizable();
-    $("#vek_dospmt").draggable();
+	$("#vek_wd").draggable();
+    $(".vek_window").draggable();
+    $(".vek_window").resizable();
 });
 
 
@@ -943,6 +935,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
