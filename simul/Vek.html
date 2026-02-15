@@ -255,6 +255,7 @@ body
 <div id="vek_icon" onclick="topmost('vek_filemanager');$('#vek_filemanager').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/gXyOvQi7NYwEdpn.png" alt="文件管理的图标"><br>文件管理</center></div>
 <div id="vek_icon" onclick="topmost('vek_texteditor');$('#vek_texteditor').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/rI9jP4tgTmu8Yhs.png" alt="文本编辑器的图标"><br>文本编辑器</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_browser');$('#vek_browser').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/i73nS4xYWmbXf2h.png" alt="浏览器的图标"><br>浏览器</center></div>
+<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_netping');$('#vek_netping').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/i73nS4xYWmbXf2h.png" alt="PING的图标"><br>PING</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="gravityStart();"><center><img src="https://s2.loli.net/2025/08/22/U9kDmYMJWHGTnPz.png" alt="别点这个的图标"><br>别点这个</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_textspeech');$('#vek_textspeech').fadeIn();"><center><img src="https://s2.loli.net/2025/08/22/8WF1waZED6GTXox.png" alt="文字转语音的图标"><br>文字转语音</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_bb');$('#vek_bb').fadeIn();bbb.src = 'bytebeat.html';"><center><img src="https://s2.loli.net/2025/08/25/HedUuT5gApVWO9j.png" alt="ByteBeat的图标"><br>Byte Beat</center></div>
@@ -399,6 +400,43 @@ body
 <div class="vek_window" id="vek_jspaint" onclick="topmost('vek_jspaint');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_jspaint').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_jspaint);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_jspaint);" title="最小化">_</a> <b>画图</b><hr><!--主体-->
 <iframe id="jspp" height="80%" width="90%" src="https://jspaint.app/"></iframe>
 </div>	
+<div class="vek_window" id="vek_netping" onclick="topmost('vek_netping');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_netping').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_netping);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_netping);" title="最小化">_</a> <b>PING</b><hr><!--主体-->
+<input class="vek_input" placeholder="请输入网址，例如：baidu.com" id="source_ping"/><button class="vek_button" onclick="startping(source_ping.value);">开始</button>
+<div id="PINGresult" style="height:50%;width:95%;overflow: auto;"></div>
+<script>
+    var packets = 0;
+        function PING(target) {
+            const startTime = Date.now();
+            const url = `https://${target}/?t=${startTime}`;
+
+            fetch(url, { method: 'HEAD', mode: 'no-cors', timeout: 5000 })
+                .then(response => {
+                    const endTime = Date.now();
+                    const delay = endTime - startTime;
+                    PINGresult.innerHTML+=target+"的答复："+delay+"ms延迟.<br>";
+                    packets++;
+                })
+                .catch(error => {
+                    const endTime = Date.now();
+                    const delay = endTime - startTime;
+                    PINGresult.innerHTML+=target+"：无法接收。<br>";
+                });
+        }
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function startping(sourcea)
+        {
+            packets = 0;
+            for(var i = 0;i < 5;i++)
+            {
+                PING(sourcea);
+                await delay(1000);
+            }
+            PINGresult.innerHTML+=sourcea+"："+packets+"个请求已接收，"+eval(`5-${packets}`)+"个请求未接收。丢包率："+eval(`(5-${packets})/5*100`)+"%<br>";
+        }
+</script>
+</div>
 <div class="vek_window" id="vek_bb" onclick="topmost('vek_bb');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_bb').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_bb);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_bb);" title="最小化">_</a> <b>Byte Beat</b><hr><!--主体-->
 <button onclick="bbb.src = 'bytebeat.html';" class="vek_button">刷新</button><button onclick="bbb.src = 'https://hellopgrmm.github.io/tools/bpro.html';" class="vek_button">使用专业版</button><br>
 <iframe id="bbb" height="80%" width="90%"></iframe>
@@ -953,6 +991,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
