@@ -248,7 +248,8 @@ body
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_dospmt');$('#vek_dospmt').fadeIn();promptpage.focus();"><center><img src="https://i.imgs.ovh/2026/02/10/ypm2Pt.png" alt="cmd的图标"><br>DOS命令行</center></div>
 <div id="vek_icon" onclick="topmost('vek_bg');$('#vek_bg').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="设置和个性化的图标"><br>设置和个性化</center></div>
 <div id="vek_icon" onclick="topmost('vek_vkey');$('#vek_vkey').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="虚拟键盘的图标"><br>设置-虚拟键盘</center></div>
-<div id="vek_icon" onclick="topmost('vek_drin');$('#vek_drin').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="定制的图标"><br>设置-高级定制</center></div>
+<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_drin');$('#vek_drin').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="定制的图标"><br>设置-高级定制</center></div>
+<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_jspaint');$('#vek_jspaint').fadeIn();"><center><img src="https://i.imgs.ovh/2026/02/15/yulatA.png" alt="画图的图标"><br>画图</center></div>
 <div id="vek_icon" onclick="topmost('vek_csf');$('#vek_csf').fadeIn();"><center><img src="https://s2.loli.net/2025/08/30/YKo4cmvkjehwb1H.png" alt="csf的图标"><br>CSS Filters</center></div>
 <div id="vek_icon" onclick="topmost('vek_vm');$('#vek_vm').fadeIn();vmmain.src=location.href;"><center><img src="https://s2.loli.net/2025/08/17/82RtI3vbmP1AXlu.png" alt="vek虚拟机的图标"><br>Vek虚拟机</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_c09');$('#vek_c09').fadeIn();window.open('https://g209.wuaze.com/');"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="209聊天框的图标"><br>209聊天框</center></div>
@@ -380,7 +381,9 @@ body
     <textarea class="vek_textarea" style="height:199px;" id="vsb_cts"></textarea>
     <br><button class="vek_button" onclick="localStorage.setItem('vek.VEK.BOOT_MGR',vsb_cts.value);vek_window('设置-定制','已写入。');">Write</button><button class="vek_button" onclick="vsb_cts.value = localStorage.getItem('vek.VEK.BOOT_MGR');">Get</button><button class="vek_button" onclick="localStorage.removeItem('vek.VEK.BOOT_MGR');vek_window('设置-定制','已移除相关行为。');">Wipe</button>
 </div>
-	
+<div class="vek_window" id="vek_jspaint" onclick="topmost('vek_jspaint');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_jspaint').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_jspaint);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_jspaint);" title="最小化">_</a> <b>画图</b><hr><!--主体-->
+<iframe id="jspp" height="80%" width="90%" src="https://jspaint.app/"></iframe>
+</div>	
 <div class="vek_window" id="vek_bb" onclick="topmost('vek_bb');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_bb').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_bb);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_bb);" title="最小化">_</a> <b>Byte Beat</b><hr><!--主体-->
 <button onclick="bbb.src = 'bytebeat.html';" class="vek_button">刷新</button><button onclick="bbb.src = 'https://hellopgrmm.github.io/tools/bpro.html';" class="vek_button">使用专业版</button><br>
 <iframe id="bbb" height="80%" width="90%"></iframe>
@@ -935,6 +938,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
