@@ -943,6 +943,7 @@ async function Vek_init()
 	if(localStorage.getItem('vek.VEK.BOOT_MGR')){eval(localStorage.getItem('vek.VEK.BOOT_MGR'));}else{}
 	if(localStorage.getItem('vek.bgColor')){document.body.style.background = localStorage.getItem('vek.bgColor');}else{}
 	if(localStorage.getItem('vek.fontSize')){desktop.style.fontSize = localStorage.getItem('vek.fontSize');}else{}
+		if(localStorage.getItem('vek.curs')){document.body.style.cursor = `url(${localStorage.getItem('vek.curs')}),auto`;}else{}
 	if(localStorage.getItem('vek.imgbg')){document.body.style.backgroundImage = `url(${localStorage.getItem('vek.imgbg')})`;}else{}
 	vek_output.innerHTML="重要说明：Vek是Hello-Programming开发的一个网页版的模拟系统。Hello-Programming官网：https://hellopgrmm.github.io/\n";
 	await delay(500);
@@ -993,6 +994,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
