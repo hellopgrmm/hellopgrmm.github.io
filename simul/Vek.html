@@ -967,6 +967,8 @@ async function Vek_init()
 	$("#start").fadeOut(1000);
 	//desktop.style.display = "";
 	$("#desktop").fadeIn(1000);
+	await delay(1005);
+	if(localStorage.getItem('vek.VEK_START_ACTIONS')){eval(localStorage.getItem('vek.VEK_START_ACTIONS'));}else{}
 }
 function gettime()
 {
@@ -991,6 +993,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
