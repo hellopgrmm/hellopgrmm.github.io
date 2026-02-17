@@ -272,6 +272,7 @@ body
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_gpt');$('#vek_gpt').fadeIn();"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="gpt的图标"><br>ChatGPT 4.0</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_bricks');$('#vek_bricks').fadeIn();bsqq.src = 'bsqq.html';bsqq.focus();"><center><img src="https://s2.loli.net/2025/08/18/WGzZgEY6ymq2FkU.png" alt="打砖块的图标"><br>打砖块</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_gravity');$('#vek_gravity').fadeIn();gg.src = 'G.html';"><center><img src="https://s2.loli.net/2025/08/23/4Q7OdBNKDkbmqwc.png" alt="重力模拟的图标"><br>重力模拟</center></div>
+<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_winpinball');$('#vek_winpinball').fadeIn();document.getElementById('pbbpage').src = 'https://98.js.org/programs/pinball/space-cadet.html';"><center><img src="https://i.imgs.ovh/2026/02/17/yxlaqp.png" alt="pinball的图标"><br>SpaceCadet Pinball</center></div>
 <div id="vek_icon" onclick="topmost('vek_tzfe');$('#vek_tzfe').fadeIn();tzf.src = '2048.html';"><center><img src="https://s2.loli.net/2025/08/20/3l8L5N4vKDdXFpZ.png" alt="2048的图标"><br>2048</center></div>
 <div id="vek_icon" onclick="topmost('vek_vp');$('#vek_vp').fadeIn();"><center><img src="https://s2.loli.net/2025/08/18/m7LZseg9GBicpT8.png" alt="VP的图标"><br>Vek Player</center></div>
 <div id="vek_icon" onclick="topmost('vek_about');$('#vek_about').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/YunUq6dwE3iH1zm.png" alt="关于的图标"><br>关于Vek</center></div>
@@ -359,6 +360,11 @@ body
 	
 <div class="vek_window" id="vek_dospmt" onclick="topmost('vek_dospmt');promptpage.focus();"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_dospmt').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_dospmt);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_dospmt);" title="最小化">_</a> <b>DOS Prompt</b><hr><!--主体-->
 <iframe style="height:92%;width:97%" src="vekdos.html" id="promptpage"></iframe>
+</div>
+
+<div class="vek_window" id="vek_winpinball" onclick="topmost('vek_winpinball');pbbpage.focus();"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_winpinball').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_winpinball);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_winpinball);" title="最小化">_</a> <b>SpaceCadet Pinball</b><hr><!--主体-->
+Powered By 98.js.org <button class="vek_button" onclick="document.getElementById('pbbpage').src = 'https://98.js.org/programs/pinball/space-cadet.html';">重新加载</button><br>
+<iframe style="height:92%;width:97%" id="pbbpage"></iframe>
 </div>
 	
 <div class="vek_window" id="vek_tzfe" onclick="topmost('vek_tzfe');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_tzfe').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_tzfe);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_tzfe);" title="最小化">_</a> <b>2048</b><hr><!--主体-->
@@ -994,6 +1000,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
