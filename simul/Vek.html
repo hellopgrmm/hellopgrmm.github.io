@@ -259,6 +259,7 @@ body
 <div id="vek_icon" style="display:inline-block;" onclick="gravityStart();"><center><img src="https://s2.loli.net/2025/08/22/U9kDmYMJWHGTnPz.png" alt="别点这个的图标"><br>别点这个</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_textspeech');$('#vek_textspeech').fadeIn();"><center><img src="https://s2.loli.net/2025/08/22/8WF1waZED6GTXox.png" alt="文字转语音的图标"><br>文字转语音</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_bb');$('#vek_bb').fadeIn();bbb.src = 'bytebeat.html';"><center><img src="https://s2.loli.net/2025/08/25/HedUuT5gApVWO9j.png" alt="ByteBeat的图标"><br>Byte Beat</center></div>
+<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_lema');$('#vek_lema').fadeIn();lempa.src = 'lem.html';"><center><img src="https://i.imgs.ovh/2026/02/19/yBWZ29.png" alt="LEM的图标"><br>LEM</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_sw');$('#vek_sw').fadeIn();sws.src = 'starwars.html';"><center><img src="https://s2.loli.net/2025/08/26/QIKVrnAutJzNLZh.png" alt="StartWars的图标"><br>StarWars.MP4</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_img2asc');$('#vek_img2asc').fadeIn();"><center><img src="https://s2.loli.net/2025/08/29/uX9gUzSh3Q6J5sH.png" alt="img2asc的图标"><br>Img2Ascii</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_dospmt');$('#vek_dospmt').fadeIn();promptpage.focus();"><center><img src="https://i.imgs.ovh/2026/02/10/ypm2Pt.png" alt="cmd的图标"><br>DOS命令行</center></div>
@@ -406,6 +407,11 @@ Powered By 98.js.org <button class="vek_button" onclick="document.getElementById
 <div class="vek_window" id="vek_jspaint" onclick="topmost('vek_jspaint');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_jspaint').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_jspaint);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_jspaint);" title="最小化">_</a> <b>画图</b><hr><!--主体-->
 <iframe id="jspp" height="80%" width="90%" src="https://jspaint.app/"></iframe>
 </div>	
+
+<div class="vek_window" id="vek_lema" onclick="lempa.focus();topmost('vek_lema');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_lema').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_lema);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_lema);" title="最小化">_</a> <b>LEM</b><hr><!--主体-->
+<button onclick="lempa.src = 'lem.html';" class="vek_button">新建...</button><br>
+<iframe id="lempa" height="80%" width="90%"></iframe>
+</div>
 <div class="vek_window" id="vek_netping" onclick="topmost('vek_netping');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_netping').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_netping);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_netping);" title="最小化">_</a> <b>PING</b><hr><!--主体-->
 <input class="vek_input" placeholder="请输入网址，例如：baidu.com" id="source_ping"/><button class="vek_button" onclick="startping(source_ping.value);">开始</button>
 <div id="PINGresult" style="height:50%;width:95%;overflow: auto;"></div>
@@ -1000,6 +1006,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
