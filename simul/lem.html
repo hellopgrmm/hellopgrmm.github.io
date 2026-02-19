@@ -1,0 +1,129 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Lyrics Effect Maker</title>
+	<style>
+		body
+		{
+			background:#6D90BE;
+			color:white;
+			font-family: sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<h1>歌词效果在线制作、播放工具</h1>
+	这个工具可以制作一种歌词效果：歌词随着音乐的播放逐字出现，或者逐词出现。或者一次出现几个字，都可以自定义。
+	<h2>1.导入影像（可以是音频或视频）</h2>
+<input type="file" id="fileInput"/><br><video id="videoPlayer" controls></video>
+<script>
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        var videoPlayer = document.getElementById('videoPlayer');
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                videoPlayer.src = e.target.result;
+                videoPlayer.load();
+            };
+
+            reader.readAsDataURL(file);
+            videoPlayer.style.height='200px';
+    });
+</script>
+<h2>2.输入歌词并处理（不要分行，直接把所有歌词整合成一段，歌词可以有标点符号，但不能有尖括号&gt;和斜杠/）</h2>
+<textarea cols=50 rows=10 id="lyrictype" style="font-size:20px;outline:none;border-radius:0px;"></textarea>
+<br>处理方式：<button onclick="addspace(1)">逐字输出处理</button> 如果要自定义输出字数，可以手动加斜杠或者调整斜杠位置。如ab/c/d，ab/cd。
+<h2>3.开始录入效果</h2>
+选择模式：<select id="lrcmode"><option value='FEF'>逐渐输出为完整段</option><option value='SEF'>单字显示</option></select>
+<button onclick="prepare()">点击开始</button><br>
+<button style="font-size: 50px;" id="deem"></button><br>
+<textarea cols=50 rows=10 id="effectcode" style="font-size:20px;outline:none;border-radius:0px;"></textarea>
+<hr>
+<h2>播放歌词效果</h2>
+<button onclick="render_effect(effectcode.value,videoPlayer,bigo)">开始(适合逐渐输出为完整段模式)</button>
+<button onclick="render_effect(effectcode.value,videoPlayer,bigo2)">开始(适合单字显示模式)</button>
+<div id="bigo" style="background: white;height:45%;width:91%;font-size:20px;color:black;"></div><br>
+<div id="bigo2" style="background: black;height:45%;width:91%;font-size:78px;padding: 15px;color:orange"></div>
+<script>
+	var stat = '';
+	var ket = 0;
+	function addspace(numba)
+	{
+		var mest = lyrictype.value;lyrictype.value = '';for(var an = 0;an < mest.length;an = an+numba){if(an!=mest.length-1){lyrictype.value+=mest[an]+'/';}else{lyrictype.value+=mest[an];}}
+	}
+	function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+	async function render_effect(texts,audio_source,textshow_area)
+	{
+		textshow_area.innerHTML="";
+		audio_source.currentTime = 0;
+		audio_source.play();
+		var fmt = texts.split("\n")[0].replace('[format]','');
+		var stt = texts.split("\n")[1].replace('[start_time]','');
+		var Stt = Number(stt);
+		var lrc = texts.split('\n')[2];
+		console.log(`
+			DBG:
+			FMT = ${fmt}
+			STT = ${Stt}
+			LRC = ${lrc}
+		`);
+		var lra = lrc.split(">>");
+		console.log(lra);
+		await delay(Stt);
+		if(fmt == "FEF"){for(var lri = 0;lri < lra.length;lri++)
+		{
+			var lrt = lra[lri].split(">");
+			textshow_area.innerHTML+=lrt[0];
+			await delay(Number(lrt[1]));
+		}}else if(fmt == "SEF"){
+			for(var lri1 = 0;lri1 < lra.length;lri1++)
+			{
+				var lrt1 = lra[lri1].split(">");
+				textshow_area.innerHTML=lrt1[0];
+				await delay(Number(lrt1[1]));
+			}
+		}
+	}
+	function prepare()
+	{
+		ket = 0;
+		stat = lyrictype.value.split('/');
+		videoPlayer.play();
+		deem.innerHTML = stat[0];
+		deem.disabled = false;
+		effectcode.value="[format]"+lrcmode.value+"\n";
+	}
+let lastClickTime = 0;
+document.getElementById("deem").addEventListener("click", function() {
+    let currentTime = Date.now();
+    var jgsj = currentTime - lastClickTime;
+    lastClickTime = currentTime;
+    console.log("按钮被点击");
+    recordit(jgsj);
+});
+	function recordit(jg)
+	{
+		if(ket == stat.length-1)
+		{
+			deem.disabled = true;
+			alert("已完成录制");
+		}
+		if(ket == 0)
+		{
+			var starttime = videoPlayer.currentTime.toFixed(3)*1000;
+			effectcode.value+="[start_time]"+starttime+"\n"+stat[ket];
+		}
+		else
+		{
+			effectcode.value+=">"+jg+">>"+stat[ket];
+		}
+		ket++;
+		deem.innerHTML = stat[ket];
+	}
+</script>
+</body>
+</html>
