@@ -34,7 +34,7 @@
 </script>
 <h2>2.输入歌词并处理（不要分行，直接把所有歌词整合成一段，歌词可以有标点符号，但不能有尖括号&gt;和斜杠/）</h2>
 <textarea cols=50 rows=10 id="lyrictype" style="font-size:20px;outline:none;border-radius:0px;"></textarea>
-<br>处理方式：<button onclick="addspace(1)">逐字输出处理</button> 如果要自定义输出字数，可以手动加斜杠或者调整斜杠位置。如ab/c/d，ab/cd。
+<br>处理方式：<button onclick="addspace(1)">逐字输出处理</button><button onclick="lyrictype.value = lyrictype.value.replaceAll('\n','');">去除空行</button><button onclick="lyrictype.value = lyrictype.value.replaceAll(' ','/');">逐个单词分割(替换空格)</button><button onclick="lyrictype.value = removesymbols(lyrictype.value)">去除标点符号和空格</button> 如果要自定义输出字数，可以手动加斜杠或者调整斜杠位置。如ab/c/d，ab/cd。
 <h2>3.开始录入效果</h2>
 选择模式：<select id="lrcmode"><option value='FEF'>逐渐输出为完整段</option><option value='SEF'>单字显示</option></select>
 <button onclick="prepare()">点击开始</button><br>
@@ -49,6 +49,15 @@
 <script>
 	var stat = '';
 	var ket = 0;
+	function removesymbols(contexts)
+	{
+		var symbols = "，，。、；‘、【】（）“”,./;''\"\"!@#$%^&*()_+！`<>《》 ";
+		for(var sym = 0;sym < symbols.length;sym++)
+		{
+			contexts = contexts.replaceAll(symbols[sym],'');
+		}
+		return contexts;
+	}
 	function addspace(numba)
 	{
 		var mest = lyrictype.value;lyrictype.value = '';for(var an = 0;an < mest.length;an = an+numba){if(an!=mest.length-1){lyrictype.value+=mest[an]+'/';}else{lyrictype.value+=mest[an];}}
@@ -126,4 +135,5 @@ document.getElementById("deem").addEventListener("click", function() {
 	}
 </script>
 </body>
+
 </html>
