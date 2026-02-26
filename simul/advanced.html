@@ -1,0 +1,111 @@
+<meta charset='utf-8'>
+<title>Advanced Mode</title>
+<!--
+Advanced Mode
+By Hello-Programming
+You can copy the codes of this page,and make your own 'Advanced Mode'.
+-->
+<style>
+body
+{
+    background:rgb(0,0,150);
+}
+button
+{
+    width:95%;
+}
+</style>
+<body>
+<link rel="stylesheet" href="https://unpkg.com/98.css">
+<div class="window" style="width: 300px"><div class="title-bar"><div class="title-bar-text">Advanced Mode</div></div><div class="window-body">
+Choose a option.
+<br>
+<button onclick='getactions("outs.innerHTML+=\"Cleaning all user data....\";localStorage.clear();outs.innerHTML+=\"Done.<br>\";")'>Wipe all user data</button><br>
+<button onclick='cleantmp()'>Clean temp files</button><br>
+<button onclick='getactions("outs.innerHTML+=\"Wiping data in Boot Manager...\";localStorage.removeItem(BOOT_MANAGER_NAME);outs.innerHTML+=\"Done.<br>\";")'>Wipe all data in BOOT MANAGER</button><br>
+<button onclick='findproblems()'>Find problems on this device</button><br>
+<button onclick='restart()'>Restart System</button><br>
+Please click them carefully because it will change system files.
+<br>These can not be undone so make sure you have backups.
+<hr>
+Logs
+<pre id='outs' style='white-space:pre-wrap;height:70px;overflow:auto'>
+</pre>
+<hr>
+User Interface powered by <a href='https://botoxparty.github.io/XP.css/'>98CSS</a><br>
+Want to make your own Advanced Mode?<a href=''>Click here</a>
+</div></div>
+<script>
+outs.innerHTML += 'LocalStorage length:'+localStorage.length+'<br>Advanced mode version 1.0<br>';
+//Advance/Recovery WebPage Plugin
+//By Hello-Programming
+var BOOT_MANAGER_NAME = 'vek.VEK.BOOT_MGR'; //your boot localstorage key name
+var TEMP_FILE_KEYWORDS = 'speedDetection/hash_';//Keywords about Your localstorage temp key name,like 'temp_','hash_'.Split by symbol /
+var ERRCODES = 'throw.err/vek_bar/desktop.style/vek_window/localStorage./while'; //some codes that will make your webpage stop running.
+var REDIRECT_LINK = 'https://hellopgrmm.github.io/simul/Vek?source=ADVMODE';//When you click 'restart system',it will redirect to this link.
+function getactions(codes)
+{
+    if(confirm('Are you sure?'))
+    {
+        eval(codes);
+        outs.scrollTop = outs.scrollHeight;
+    }
+    else
+    {
+        return;
+    }
+}
+function ctar(str, arr) {
+    return arr.some(item => str.includes(item));
+}
+function delay(ms) { 
+    return new Promise(resolve => setTimeout(resolve, ms)); 
+} 
+async function cleantmp()
+{
+    var tmpa = TEMP_FILE_KEYWORDS.split('/');
+    outs.innerHTML+='Start cleaning.<br>';
+    for(var i = 0;i < localStorage.length;i++)
+    {
+        if(ctar(localStorage.key(i),tmpa))
+        {
+            outs.innerHTML+='Deleting temp file:'+localStorage.key(i)+'<br>';
+            localStorage.removeItem(localStorage.key(i));
+        }
+        else{
+                continue;
+        }
+        await delay(10);
+        outs.scrollTop = outs.scrollHeight;
+    }
+    outs.innerHTML+='Done!<br>LocalStorage length:'+localStorage.length+'<br>';
+}
+async function findproblems()
+{
+    var pblc = 0;
+    var bgcode = ERRCODES.split('/');
+    outs.innerHTML+='Finding,please wait...<br>';
+    if(localStorage.getItem(BOOT_MANAGER_NAME)==null)
+    {
+        outs.innerHTML+='There are no problems on your device!<br>';
+        outs.scrollTop = outs.scrollHeight;
+        return;
+    }
+    try{for(var k = 0;k < bgcode.length;k++)
+    {
+        if(localStorage.getItem(BOOT_MANAGER_NAME).includes(bgcode[k]))
+        {
+            pblc++;
+            outs.innerHTML+='Problem #'+pblc+':Some codes in BOOT_MANAGER will change your system appearance or make system stop running.<br>';
+        }
+        outs.scrollTop = outs.scrollHeight;
+        await delay(3456);
+    }
+    outs.innerHTML+='Done.'+pblc+' problems.';
+    if(pblc == 0){outs.innerHTML+='Perfect!<br>';}else{outs.innerHTML+='Maybe you need to wipe BOOT data.<br>';}}catch(err){outs.innerHTML+='An error occurred:'+err+'<br>';outs.scrollTop = outs.scrollHeight;}
+}
+function restart()
+{
+    location.href=REDIRECT_LINK;
+}
+</script>
