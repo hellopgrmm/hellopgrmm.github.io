@@ -268,6 +268,7 @@ body
 <div id="vek_icon" onclick="topmost('vek_vkey');$('#vek_vkey').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="虚拟键盘的图标"><br>设置-虚拟键盘</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_drin');$('#vek_drin').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/cIFW6Cd13TwitHk.png" alt="定制的图标"><br>设置-高级定制</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_jspaint');$('#vek_jspaint').fadeIn();"><center><img src="https://i.imgs.ovh/2026/02/15/yulatA.png" alt="画图的图标"><br>画图</center></div>
+<div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_rdg');$('#vek_rdg').fadeIn();ggrdrd.src = 'randomgame.html';"><center><img src="https://i.imgs.ovh/2026/02/26/yi7a1A.png" alt="rg的图标"><br>Random Game</center></div>
 <div id="vek_icon" onclick="topmost('vek_csf');$('#vek_csf').fadeIn();"><center><img src="https://s2.loli.net/2025/08/30/YKo4cmvkjehwb1H.png" alt="csf的图标"><br>CSS Filters</center></div>
 <div id="vek_icon" onclick="topmost('vek_vm');$('#vek_vm').fadeIn();vmmain.src=location.href;"><center><img src="https://s2.loli.net/2025/08/17/82RtI3vbmP1AXlu.png" alt="vek虚拟机的图标"><br>Vek虚拟机</center></div>
 <div id="vek_icon" style="display:inline-block;" onclick="topmost('vek_c09');$('#vek_c09').fadeIn();window.open('https://g209.wuaze.com/');"><center><img src="https://s2.loli.net/2025/08/17/JmWA4xVRo95IBsX.png" alt="209聊天框的图标"><br>209聊天框</center></div>
@@ -682,6 +683,11 @@ H_fetchJson("https://hellopgrmm.github.io/simul/musicData.json");
 <button onclick="gg.src = 'G.html';" class="vek_button">重新开始</button><br>
 <iframe id="gg" height="80%" width="90%"></iframe>
 </div>
+
+<div class="vek_window" id="vek_rdg" onclick="topmost('vek_rdg');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_rdg').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_rdg);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_rdg);" title="最小化">_</a> <b>Random Game</b><hr><!--主体-->
+<button onclick="ggrdrd.src = 'randomgame.html';" class="vek_button">重新开始</button><br>
+<iframe id="ggrdrd" height="80%" width="90%"></iframe>
+</div>
 	
 <div class="vek_window" id="vek_about" style="overflow:auto;" onclick="topmost('vek_about');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_about').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_about);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_about);" title="最小化">_</a> <b>关于Vek</b><hr><!--主体-->
 <h1>关于Vek</h1>
@@ -1007,6 +1013,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
