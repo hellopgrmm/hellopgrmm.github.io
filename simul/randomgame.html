@@ -1,0 +1,59 @@
+
+<meta charset='utf-8'>
+<title>Random Game</title>
+<style>
+body{
+    background:black !important;
+    color:white !important;
+}
+</style><body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nes.css/2.3.0/css/nes.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<h1>Random Game</h1>
+<i class='nes-bulbasaur'></i><div style='display:inline-block' class="nes-balloon from-left is-dark">Try to click <font style='color:rgb(0,230,0)'>'Add Random'</font>.</div>
+<div class='nes-container is-rounded is-dark'>
+<a class='nes-icon coin is-medium'></a> <a id='coins'>0</a> <button onclick='randomcount()' class='nes-btn is-success'>Add random</button> <a id='flash'>Waiting...</a>
+</div>
+<center>
+Win|Lost<br>
+<font color='lightgreen' id='winc'>0</font><font color='orange' id='lostc'>0</font><br><button onclick='loadlast()' class='nes-btn is-warning'>Load Last Data</button> 
+<button onclick="localStorage.removeItem('RandomGame_Coin');loadlast();" class='nes-btn is-primary'>Restore to 0</button></center>
+<script>
+var coincount = 0;
+var win = 0;
+var lose = 0;
+function loadlast()
+{
+    coincount = Number(localStorage.getItem('RandomGame_Coin'));
+    coins.innerHTML = coincount;
+}
+function delay(ms) { 
+    return new Promise(resolve => setTimeout(resolve, ms)); 
+} 
+function rand(s,e)
+{
+    return Math.floor(Math.random() * e) + s;
+}
+async function randomcount()
+{
+    var randa = 0;
+    for(var k = 0;k < 100;k++){randa = rand(-50,100);flash.innerHTML='Random:'+randa+'...';await delay(10);}
+    coincount = coincount + randa;
+    if(randa < 0)
+    {
+        var compensate = rand(0.5,2);
+        flash.innerHTML = randa+'.<font color="orange">You lost</font>.Compensation:'+compensate+' coin(s).';
+        coincount = coincount + compensate;
+        lose++;
+    }
+    else
+    {
+        flash.innerHTML = randa+'.A little profit.';
+        win++;
+    }
+    coins.innerHTML=coincount;
+    winc.innerHTML = win;
+    lostc.innerHTML = lose;
+    localStorage.setItem('RandomGame_Coin',coincount);
+}
+</script>
