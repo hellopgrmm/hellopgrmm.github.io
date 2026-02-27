@@ -317,6 +317,8 @@ body
             };
         }
     </script>	
+	<h2>多语言/Multi-Language</h2>
+	<div id="translate"><a>请选择一个合适的语言：</a></div><br><script src='https://res.zvo.cn/translate/translate.js'></script><script>translate.language.setLocal('chinese_simplified');translate.ignore.tag.push('pre');translate.execute();</script>
 	<h2>字体大小设置</h2>
 	字体大小：<input oninput="changeSize();" type='range' value=15 max=50 id="vek_fss"/> <a id="vek_fs"></a> <button class="vek_button" onclick="localStorage.setItem('vek.fontSize',`${vek_fss.value}px`);changefs();vek_window('个性化','字体大小已经更新。');">更改</button><br><a id="fsprw">字体预览</a>
 <h2>窗口外观</h2>
@@ -1013,6 +1015,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
