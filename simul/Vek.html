@@ -293,7 +293,7 @@ body
 
 <div class="vek_window" id="vek_texteditor" style="overflow:auto" onclick="topmost('vek_texteditor');topmost('vek_wd');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_texteditor').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_texteditor);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_texteditor);" title="最小化">_</a> <b>文本编辑</b><hr><!--主体--><input placeholder="输入文件名" id="vek_filename_entry" class="vek_input"><button onclick="localStorage.setItem(vek_filename_entry.value,vek_entry.value);vek_window('文本编辑','已保存');" class="vek_button">保存</button><button onclick="vek_entry.value = localStorage.getItem(vek_filename_entry.value);" class="vek_button">读取</button><hr><textarea id="vek_entry" class="vek_textarea"></textarea></div>
 
-<div class="vek_window" id="vek_browser" onclick="topmost('vek_browser');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_browser').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_browser);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_browser);" title="最小化">_</a> <b>浏览器</b><hr><!--主体--><input id="vek_addr" style="width:80%;" class="vek_input" placeholder="输入网址（不能加入https或者http前缀，不支持访问本地文件。）"><button onclick="vek_iframe_x.src='http://'+vek_addr.value;" class="vek_button">GO!</button><br><iframe id="vek_iframe_x" style="width:90%;height:70%;"></iframe></div>
+<div class="vek_window" id="vek_browser" onclick="topmost('vek_browser');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_browser').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_browser);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_browser);" title="最小化">_</a> <b>浏览器</b><hr><!--主体--><input id="vek_addr" style="width:80%;" class="vek_input" placeholder="输入网址（不能加入https或者http前缀，不支持访问本地文件。）"><button onclick="vek_iframe_x.src='https://'+vek_addr.value;" class="vek_button">GO!</button><br><iframe id="vek_iframe_x" style="width:90%;height:70%;"></iframe></div>
 
 <div class="vek_window" id="vek_bg" style="overflow:auto" onclick="topmost('vek_bg');topmost('vek_wd');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_bg').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_bg);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_bg);" title="最小化">_</a> <b>设置和个性化</b><hr><!--主体-->
 <h1>设置和个性化</h1>
@@ -1013,6 +1013,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
