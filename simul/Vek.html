@@ -250,7 +250,7 @@ body
 <div id="desktop">
 <!--菜单栏-->
 <div id="vek_bar">
-<em>Vek</em> <a id="vek_bar_text" onclick="topmost('vek_overlay');$('#vek_overlay').fadeIn();">电源</a> <a id="vek_bar_text"><a id="status" onclick="detectre();">屏幕录制</a></a> <a id="vek_time"></a></div>
+<em>Vek</em> <a id="vek_bar_text" onclick="topmost('vek_overlay');$('#vek_overlay').fadeIn();">电源</a> <a id="vek_bar_text"><a id="status" onclick="detectre();">屏幕录制</a></a> <a id="vek_bar_text" onclick="topmost('vek_commentbd');$('#vek_commentbd').fadeIn();cmtbd.src = 'vek_cmb.html';">留言板​✧(≖ ◡ ≖✿)</a> <a id="vek_time"></a></div>
 <!--图标区域-->
 <br><br>
 <div id="vek_icon" onclick="topmost('vek_filemanager');$('#vek_filemanager').fadeIn();"><center><img src="https://s2.loli.net/2025/08/15/gXyOvQi7NYwEdpn.png" alt="文件管理的图标"><br>文件管理</center></div>
@@ -683,6 +683,11 @@ H_fetchJson("https://hellopgrmm.github.io/simul/musicData.json");
 <iframe id="gg" height="80%" width="90%"></iframe>
 </div>
 
+<div class="vek_window" id="vek_commentbd" onclick="topmost('vek_commentbd');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_commentbd').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_commentbd);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_commentbd);" title="最小化">_</a> <b>留言板</b><hr><!--主体-->
+<button onclick="cmtbd.src = 'vek_cmb.html';" class="vek_button">刷新</button><br>
+<iframe id="cmtbd" height="80%" width="90%"></iframe>
+</div>
+	
 <div class="vek_window" id="vek_rdg" onclick="topmost('vek_rdg');"><!--标题栏--><a id="vek_bar_text" onclick="$('#vek_rdg').fadeOut(1000);" title="关闭">×</a> <a id="vek_bar_text" title="最大化" onclick="biggest(vek_rdg);">◎</a> <a id="vek_bar_text" onclick="smallest(vek_rdg);" title="最小化">_</a> <b>Random Game</b><hr><!--主体-->
 <button onclick="ggrdrd.src = 'randomgame.html';" class="vek_button">重新开始</button><br>
 <iframe id="ggrdrd" height="80%" width="90%"></iframe>
@@ -1012,6 +1017,7 @@ Vek_init();
 </script>
 </body>
 </html>
+
 
 
 
