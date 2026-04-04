@@ -1,0 +1,728 @@
+
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>NightSky</title> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> 
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css"/>
+    <link id='nsfontst' rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">    
+<style> 
+/*it looks like old system ui*/ 
+body 
+{ 
+    font-family:Roboto,Helvetica; 
+    background:linear-gradient(navy,blue) ; 
+    background-size:100%;
+} 
+button,input[type=submit] 
+{ 
+    background:linear-gradient(gray,black); 
+    height:30px; 
+    min-width:100px; 
+    font-family:Roboto,Helvetica; 
+    color:white; 
+    font-size:14px; 
+    border-radius:5px; 
+    border-width:0px; 
+    box-shadow:1px 1px 0px 1px gray; 
+} 
+button:hover,input[type=submit]:hover 
+{ 
+    background:linear-gradient(cyan,white); 
+    color:black; 
+    box-shadow:1px 1px 0px 1px rgba(91,78,13,0); 
+} 
+button:active 
+{ 
+    background:black; 
+    color:#ccc; 
+    margin-top:1px; 
+    margin-left:1px; 
+    box-shadow:0px 0px 0px 0px gray; 
+} 
+input 
+{ 
+    border:2px solid gray; 
+    background:linear-gradient(white,#ccc); 
+    font-size:20px; 
+    font-family:Roboto,Helvetica; 
+    outline:none; 
+    outline-color:orange; 
+    outline-width:3px; 
+} 
+input:focus 
+{ 
+    border:2px solid orange; 
+    background:white; 
+} 
+textarea 
+{ 
+    border:2px solid gray; 
+    font-size:14px; 
+    background:black;
+    color:white;
+    font-family:Roboto,Helvetica; 
+    outline:none; 
+    border-radius:0px; 
+} 
+textarea:focus 
+{ 
+    border-color:orange; 
+} 
+select 
+{ 
+    border:2px solid gray; 
+    background:linear-gradient(gray,black); 
+    border-radius:0px; 
+    font-size:14px; 
+    font-family:Roboto,Helvetica; 
+    outline:none; 
+    color:white; 
+    width:100px; 
+    height:30px; 
+} 
+select:hover{border:2px solid orange;} 
+select:active{background:black;} 
+option{background: black;color:white}
+option:hover{background: orange;color:black;}
+progress{ 
+  width:200px; 
+  height:30px; 
+  appearance:none; 
+  border-width:2px; 
+  border-color:black gray black gray; 
+  background:linear-gradient(gray,black); 
+} 
+progress::-webkit-progress-bar { 
+    border:2px solid black; 
+    background:linear-gradient(gray,black); 
+} 
+progress::-webkit-progress-value { 
+    background:linear-gradient(yellow,orange); 
+} 
+progress::-moz-progress-bar { 
+    border:2px solid black; 
+    background:linear-gradient(gray,black); 
+} 
+input[type=checkbox] 
+{ 
+    width: 20px; 
+    height: 30px; 
+    font-size:14px;
+    accent-color:orange; 
+} 
+.bi{font-size:40px;color:#ccc;} 
+.status_bar 
+{ 
+    background: linear-gradient(white,#ccc); 
+    width:100%; 
+    font-size:20px; 
+    position: absolute; 
+    top:0px; 
+    left:0px; 
+    text-align: center; 
+} 
+.desktop 
+{ 
+    padding:10px; 
+    padding-right: 10px; 
+    padding-bottom: 10px; 
+    position: absolute; 
+    top:30px;
+    height: 85%; 
+    width:calc(100% - 40px); 
+} 
+.ns-icon 
+{ 
+    padding:5px; 
+    color:white; 
+    text-shadow:1px 1px 2px black; 
+    text-align: center; 
+    border-radius: 5px; 
+    display: inline-block; 
+    width:80px; 
+    word-wrap: break-word; 
+} 
+.ns-icon:hover 
+{ 
+    background: rgba(255,255,255,0.3); 
+} 
+.window 
+{ 
+    background: black; 
+    color:white;
+    position: absolute; 
+    top:30px; 
+    left:0px; 
+    /*height:89%; */
+    width:100%; 
+    display: none; 
+    color:white;
+    overflow:auto;
+}
+.cess:hover{color:orange;}
+.nscard{background:linear-gradient(black,rgb(30,30,30));width:95%;color:white;font-size:20px;padding-top: 10px;padding-bottom: 10px;padding-left:10px;border:1px solid gray;}
+.nscard:hover{background: #069999;}
+#director{background:linear-gradient(rgb(30,30,30),rgb(50,50,50),rgb(30,30,30));width:100%;text-align:center;position:fixed;z-index:2026;bottom:0px;left:0px;padding-top:5px;padding-bottom:5px;}
+.casd{padding-top: 5px;padding-bottom: 5px;} 
+.casd:hover{background: #069999;} 
+.nstit{background:linear-gradient(rgb(70,70,70),rgb(30,30,30),rgb(70,70,70));color:white;font-size:20px;width:calc(100% - 10px);padding-top:5px;padding-bottom:5px;padding-left:5px;padding-right:5px;}
+.nsconta{background:rgb(70,70,70);box-shadow:2px 2px 2px 2px black;max-width:500px;padding-top:5px;padding-bottom:5px;margin:0 auto;position:relative;color:white;top:30%;padding:3px;}
+.nsoverlay{background:rgba(0,0,0,0.5);z-index:9999;position:fixed;left:0px;top:0px;height:100%;width:100%;color:white;display:none;justify-content:center;align-items:center;}
+</style> 
+</head> 
+<body> 
+<div class="status_bar">100% <i style="color:black;font-size:25px;" class="bi bi-battery-full"></i> <i style="color:black;font-size:25px;" class="bi bi-wifi"></i> <i style="color:black;font-size:25px;" class="bi bi-bar-chart-fill"></i> <strong id="timedisplay">--:--</strong></div> 
+<div class="desktop"> 
+    <div class="ns-icon"><i class="bi bi-folder-fill" onclick="topmost('nsfm');$('#nsfm').effect('slide',500);list_personal()"></i><br>文件</div> 
+    <div class="ns-icon"><i class="bi bi-file-text-fill" onclick="topmost('nsedit');$('#nsedit').effect('slide',500);"></i><br>文本编辑器</div> 
+    <div class="ns-icon"><i class="bi bi-browser-chrome" onclick="topmost('nsbrow');$('#nsbrow').effect('slide',500);"></i><br>浏览器</div> 
+    <div class="ns-icon"><i class="bi bi-filetype-txt" onclick="topmost('nsedit');$('#nsedit').effect('slide',500);ns_filecontext.value=CREDITS;ns_filename.value='CREDITS.TXT';"></i><br>CREDITS.TXT</div> 
+    <br> 
+    <div style="margin-top:12px;border:2px solid white;border-radius:5px;background: linear-gradient(to right,rgb(0,0,50),rgb(0,0,120));padding: 10px;color:white;word-wrap: break-word;"> 
+        <h1>欢迎使用NightSky</h1> 
+        TIPS:<b id="tips_show">NightSky是一个Hello-Programming制作的网页版伪系统，相比同系列的Vek，此“系统”更适合移动端设备、触屏设备使用。</b> 
+        <br> <br>
+        <button onclick="next_tip();">下一条</button>  第<strong id='tipcount' style='color:#ccc'>1/5</strong>条
+    </div> 
+    <!--More applications-->
+    <div class="ns-icon"><i class="bi bi-dash-circle-fill" style="position: absolute;bottom:10px;left:48%;" onclick="topmost('nsmore');$('#nsmore').effect('slide',500);"></i></div> 
+</div> 
+<!--导航栏-->
+<div id='director'><i class="bi bi-house cess" onclick='$(".window").fadeOut(200)' style='font-size:30px;color:white'></i></div>
+<div class="window" id="nsfm"> 
+<div class='nstit'>文件管理</div><br> 
+分类：<button onclick="nssys.setAttribute('hidden',true);nspers.removeAttribute('hidden');list_personal();">个人文件</button> <button onclick="nspers.setAttribute('hidden',true);nssys.removeAttribute('hidden');list_system();">系统文件</button> 导入外部文件<input style="background: black;border-width: 0px;width:100px;" type="file" id="inputentry1"/> <button onclick="readfile('inputentry1');" class='vek_button'>导入</button>
+<script>
+function readfile(inputentry) {
+    const fileinput = document.getElementById(inputentry);
+    if (fileinput.files.length > 0) {
+        const file = fileinput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            //return e.target.result;
+            localStorage.setItem(file.name,e.target.result);
+            list_personal();
+            ns_alert("导入完成",'已导入文件“'+file.name+'”，存于‘个人文件’中。');
+        };
+        reader.readAsText(file, 'UTF-8');
+    } else {
+        ns_alert("导入失败",'So..?你文件呢？');
+    }
+}
+</script>
+<div style='margin-top:10px' id="nspers"></div> 
+<div style='margin-top:10px' id="nssys"></div> 
+</div> 
+<div class="window" id="nsedit"> 
+<div class='nstit'>文本编辑器</div><br> 
+<input id="ns_filename" placeholder="文件名" /> <button onclick="localStorage.setItem(ns_filename.value,ns_filecontext.value);ns_alert('文件编辑','已保存，请在“文件”->“个人文件”查看。');">保存</button> <button onclick="topmost('nsfm');$('#nsfm').effect('slide',500);list_personal()">回到“文件”</button><br><br> 
+<textarea id="ns_filecontext" style="width:95%;height:calc(100% - 150px);margin-left:2%;"></textarea> 
+</div> 
+<div class='window' id='nsbrow'>
+<div class='nstit'> <i style='font-size:16px' class='bi bi-arrow-clockwise cess' onclick='awiframe.src = awiframe.src+"?ns_getmode=refresh";'></i> <input id='browser_addr' style='width:80%;' placeholder='输入网址，点击右箭头访问。不需要加入https或者http。'/> <i class='cess bi bi-arrow-right' onclick='awiframe.src = window.location.protocol+"//"+browser_addr.value;' style='font-size:16px'></i></div>
+<iframe style='width:100%;height:calc(100% - 45px);border-width:0px;' id='awiframe'></iframe>
+</div>
+<div class='window' id='nswebwatch'>
+<div class='nstit'><i class='cess bi bi-arrow-left' style='font-size:16px' onclick='$("#nswebwatch").fadeOut(300)'></i> <strong id='pw_tit'>Page Watcher</strong></div>
+<iframe style='width:100%;height:calc(100% - 45px);border-width:0px;background: white;' id='pawat'></iframe>
+</div>
+<div class="window" id="nssetting">
+    <div class="nstit">设置</div>
+    <div style="margin-top: 10px;" id="selectmenu">
+        <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nsgxh.removeAttribute('hidden');"><i class="bi bi-shadows"></i> 个性化</div>
+        <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nsdyy.removeAttribute('hidden');"><i class="bi bi-translate"></i> 多语言</div>
+        <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nscckj.removeAttribute('hidden');calculate_storage();"><i class="bi bi-hdd-stack-fill"></i> 存储空间</div>
+        <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);advancedop.removeAttribute('hidden');"><i class="bi bi-sliders"></i> 高级选项</div>
+        <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);aboutde.removeAttribute('hidden');"><i class="bi bi-info-circle-fill"></i> 关于</div>
+    </div>
+    <div style="margin-top: 10px;height:80%;overflow:auto;" id="nsgxh" hidden>
+        <button onclick="nsgxh.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/个性化
+        <hr>
+        <h2>壁纸</h2>
+        设置壁纸：<input type="file" id="wallpaperi" oninput="img2base64()" style="width:250px;border-width:0px;background: black;" /> <button onclick="localStorage.removeItem('NS_WALLPAPER.nsys');ns_alert('提示','已恢复默认。重启后生效。');">恢复默认</button>
+        <br>预设背景(来源于百度图片，版权归原作者所有)：<br>
+        <img onclick='localStorage.setItem("NS_WALLPAPER.nsys","https://imgsa.baidu.com/forum/wh%3D200%2C90%3B/sign=930a9541c05c1038242bc6c08221bf2a/f6113c34349b033b21ef698113ce36d3d439bdc5.jpg");ns_alert("提示","修改成功，重启生效。")' src='https://imgsa.baidu.com/forum/wh%3D200%2C90%3B/sign=930a9541c05c1038242bc6c08221bf2a/f6113c34349b033b21ef698113ce36d3d439bdc5.jpg' width=50 height=50/>
+        <img onclick='localStorage.setItem("NS_WALLPAPER.nsys","https://img.duoyi.com/com/214/pic/PL-83KI8OHbuo.gif");ns_alert("提示","修改成功，重启生效。")' src='https://img.duoyi.com/com/214/pic/PL-83KI8OHbuo.gif' width=50 height=50/>
+        <h2>字体大小</h2>
+        <input type="range" max=50 value=14 id="kksk" oninput="fontsz.innerHTML = kksk.value+'px';localStorage.setItem('NS_FONTSIZE.nsys',fontsz.innerHTML);document.body.style.fontSize = fontsz.innerHTML;" /> <b id="fontsz">14px</b> <button onclick="localStorage.removeItem('NS_FONTSIZE.nsys');ns_alert('提示','已恢复默认。重启后生效。');">恢复默认</button>
+        <h2>字体</h2>
+        选择系统字体：
+        <select id='fontsele' oninput='chsysf(fontsele.value)'>
+        <option value='Roboto'>Roboto(默认)</option>
+        <option value='Noto Sans TC'>思源黑体</option>
+        <option value='Noto Serif TC'>思源宋体</option>
+        <option value='Chiron Hei HK'>细黑体</option>
+        <option value='Coral Pixels'>Coral Pixels</option>
+        <option value='Chivo'>Chivo</option>
+        <option value='Finlandica'>Finlandica</option>
+        <option value='Quicksand'>QuickSand</option>
+        <option value='Comic Sans MS'>Comic Sans MS</option>
+        <option value='monospace'>Monospace</option>
+        <option value='Ubuntu'>Ubuntu</option>
+        <option value='Aleo'>Aleo</option>
+        <option value='Azeret Mono'>Azeret Mono</option>
+        <option value='Pixelify Sans'>Pixelify Sans</option>
+        </select>
+        <br><br><font color='gray'>字体由Google Fonts提供</font>
+        <script>
+        function chsysf(fontname)
+        {
+            var stylesheet_font = document.getElementById('nsfontst');
+            stylesheet_font.href=`https://fonts.googleapis.com/css2?family=${fontname}:wght@400;700&display=swap`;
+            try{$('button,input,select,body,textarea').css('font-family',fontname);
+            localStorage.setItem("NS_FONT_FAMILY.nsys",fontname);
+            ns_alert('提示','修改完成。');}catch(e){ns_alert('发生了一个错误','很抱歉，我们遇到了一个错误。系统返回的信息如下：<br>'+e+'<br><br>本错误不会影响系统运行，您可以再试一次。如果问题仍然存在，请尝试联系专业人员。<br>Sorry,an error occurred.This error will not affect the system,you can try again later.If the error still exists,please contact technical assistants.');}
+        }
+        function img2base64() {
+            const fileInput = document.getElementById('wallpaperi');
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                const base64String = reader.result;
+                localStorage.setItem('NS_WALLPAPER.nsys',base64String);
+                if(localStorage.getItem('NS_WALLPAPER.nsys')){document.body.style.backgroundImage = `url(${localStorage.getItem('NS_WALLPAPER.nsys')})`;}else{}
+                ns_alert('个性化','更改成功。');
+            };
+            reader.onerror = function (error) {
+                ns_alert('修改错误','发生了一个错误，导致无法完成更改。请稍后再试。<br>Sorry,an error occurred.Please try again later.');
+            };
+        }
+        </script>
+    </div>
+    <div style="margin-top: 10px;height:80%;overflow:auto;" id="nsdyy" hidden>
+        <button onclick="nsdyy.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/多语言
+        <div id="translate"><a>请选择一个合适的语言：</a></div><br><script src='https://res.zvo.cn/translate/translate.js'></script><script>translate.language.setLocal('chinese_simplified');translate.ignore.tag.push('pre');translate.execute();</script>
+    </div>
+    <div style="margin-top: 10px;height:80%;overflow:auto;" id="nscckj" hidden>
+        <button onclick="nscckj.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/存储空间<br>
+        <div style='margin-top:20px;padding:5px;background:rgb(40,40,40);'>
+        <h3>存储空间</h3>
+        <progress style="width:80%;margin-left:10px;" id="storage_c" max=80000></progress><br>
+        <br>
+        个人文件占比<font color="#ccc" id="nns1">0</font> MB，系统文件占比<font color="#ccc" id="nns2">0</font> MB，共80MB。<br>（80M够了，谁没事会把网页当系统用）
+        </div>
+        <br>
+        <button onclick='clear_temp()'>清除缓存</button> 
+        <a id='bruzne'></a>
+        <script>
+            async function calculate_storage()
+            {
+                //fake storage calc
+                //of course,the real MB calc is:stor/1024/1024,not stor/1024(it's KB)
+                var sys_str = 0;
+                var pers_str = 0;
+                var total_str = 0;
+                for(var i = 0;i < localStorage.length;i++)
+                {
+                    if(localStorage.key(i).endsWith('.nsys'))
+                    {
+                        sys_str+=localStorage.getItem(localStorage.key(i)).length;
+                    }
+                    else
+                    {
+                        pers_str+=localStorage.getItem(localStorage.key(i)).length;
+                    }
+                }
+                total_str = pers_str+sys_str/1024;
+                sys_str = sys_str/1024;
+                pers_str = pers_str/1024;
+                nns1.innerHTML = pers_str.toFixed(1);
+                nns2.innerHTML = sys_str.toFixed(1);
+                storage_c.value = total_str;
+            }
+            async function clear_temp()
+            {
+                for(var b = 0;b < localStorage.length;b++)
+                {
+                    if(localStorage.key(b).includes('hash_'))
+                    {
+                        localStorage.removeItem(localStorage.key(b));
+                        bruzne.innerHTML = "正在删除缓存文件:"+localStorage.key(b);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                    await delay(1);
+                }
+                bruzne.innerHTML = "已完成清理，请退出并重新进入本页面刷新内存。";
+            }
+        </script>
+    </div>
+    <div style="margin-top: 10px;height:80%;overflow:auto;" id="advancedop" hidden>
+    <button onclick="advancedop.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/高级选项
+    <h3>调试</h3>
+    <button onclick="topmost('nsjscons');$('#nsjscons').effect('slide',500);">打开JavaScript终端</button>
+    <h3>自启动项</h3>
+    请输入开机自启动项，一行一个。必须是“文件”中的项目。<br>
+    <textarea id='jsmedu' placeholder='请输入...' rows=10 cols=30></textarea>
+    <br><button onclick='localStorage.setItem("NS_STARTUP_OP.nsys",jsmedu.value);ns_alert("开机自启","写入完成，。")'>写入</button>
+    </div>
+    <div style="margin-top: 10px;height:80%;overflow:auto;" id="aboutde" hidden>
+    <button onclick="aboutde.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/关于
+    <br>
+    <div style='margin-top:15px' onclick='rickroll_c()' class='nscard'>
+    <a style='font-size:25px'>NightSky版本</a><br>
+    <font color='gray'>1.2</font>
+    <script>var rickroll_clc = 0;function rickroll_c(){rickroll_clc++;if(rickroll_clc > 5){rickroll_clc = 0;ns_alert('你被骗了','<video src="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4" id="rickroll_video" controls="" height="80%" width="98%"></video>');rickroll_video.play()}}</script>
+    </div>
+    <div class='nscard'>
+    <a style='font-size:25px'>具体信息</a><br>
+    <font color='gray'>NightSky_Webpage_FS_1.2.20260325.0404_HTML_OWLLYUG_3_BUILDON_W7</font>
+    </div>
+    <div class='nscard'>
+    <a style='font-size:25px'>User Agent</a><br>
+    <font id='useragentinfo' color='gray'>未知</font>
+    <script>useragentinfo.innerText = navigator.userAgent;</script>
+    </div>
+    <div class='nscard'>
+    <a style='font-size:25px'>实际运行平台</a><br>
+    <font id='platns' color='gray'>未知</font>
+    <script>platns.innerText = navigator.platform;</script>
+    </div>
+    <div class='nscard'>
+    <a style='font-size:25px'>首选语言</a><br>
+    <font id='localip' color='gray'>未知</font>
+    <script>localip.innerText = navigator.language;</script>
+    </div>
+    <div class='nscard'>
+    <a style='font-size:25px'>逻辑CPU核心数</a><br>
+    <font id='cpuc' color='gray'>未知</font>
+    <script>cpuc.innerText = navigator.hardwareConcurrency;</script>
+    </div>
+    <div class='nscard'>
+    <a style='font-size:25px'>设备最大触控点数</a><br>
+    <font id='pointc' color='gray'>未知</font>
+    <script>pointc.innerText = navigator.maxTouchPoints;</script>
+    </div>
+    </div>
+</div>
+<div class='window' id="nsmore" style="background: rgb(0,0,0,0.9);">
+    <div style="position: absolute;top:10px;left:10px;">
+        <h2>更多应用</h2>
+        <div class="ns-icon"><i class="bi bi-gear-fill" onclick="$('#nsmore').fadeOut(300);topmost('nssetting');$('#nssetting').effect('slide',500);"></i><br>设置</div> 
+        <div class="ns-icon"><i class="bi bi-boombox-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('bpro.html','ByteBeat');"></i><br>ByteBeat</div> 
+        <div class="ns-icon"><i class="bi bi-controller" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://98.js.org/programs/pinball/space-cadet.html','Space Cadet Pinball');"></i><br>Pinball</div> 
+        <div class="ns-icon"><i class="bi bi-file-earmark-music-fill" onclick="$('#nsmore').fadeOut(300);topmost('nsplay');$('#nsplay').effect('slide',500);"></i><br>NightSky 媒体播放器</div> 
+        <div class="ns-icon"><i class="bi bi-palette-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://jspaint.app','画图');"></i><br>画图</div> 
+        <div class="ns-icon"><i class="bi bi-wifi" onclick="$('#nsmore').fadeOut(300);topmost('nsping');$('#nsping').effect('slide',500);"></i><br>PING</div> 
+        <div class="ns-icon"><i class="bi bi-globe-asia-australia-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/G.html','重力模拟');"></i><br>重力模拟</div> 
+        <div class="ns-icon"><i class="bi bi-translate" onclick="$('#nsmore').fadeOut(300);topmost('translateapp');$('#translateapp').effect('slide',500);"></i><br>翻译</div> 
+    </div>
+</div>
+<div class="window" id="nsping">
+    <div class="nstit">PING</div>
+    网址：<input placeholder="如：baidu.com" id="ns_pingv"/> <br>包数：<input id="package_c" value="5"/> <button onclick="startping(ns_pingv.value,package_c.value)">开始</button>
+<div id="PINGresult" style="height:90%;width:95%;overflow: auto;left:5px;"></div>
+<script>
+    var packets = 0;
+        function PING(target) {
+            const startTime = Date.now();
+            const url = `https://${target}/?t=${startTime}`;
+
+            fetch(url, { method: 'HEAD', mode: 'no-cors', timeout: 5000 })
+                .then(response => {
+                    const endTime = Date.now();
+                    const delay = endTime - startTime;
+                    PINGresult.innerHTML+=target+"的答复："+delay+"ms延迟.<br>";
+                    packets++;
+                })
+                .catch(error => {
+                    const endTime = Date.now();
+                    const delay = endTime - startTime;
+                    PINGresult.innerHTML+=target+"：无法接收。<br>";
+                });
+        }
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function startping(sourcea,timesy)
+        {
+            packets = 0;
+            for(var i = 0;i < timesy;i++)
+            {
+                PING(sourcea);
+                await delay(1000);
+            }
+            PINGresult.innerHTML+=sourcea+"："+packets+"个请求已接收，"+eval(`${timesy}-${packets}`)+"个请求未接收。丢包率："+eval(`(${timesy}-${packets})/${timesy}*100`)+"%<br>";
+        }
+</script>
+</div>
+<div id="nsplay" class="window">
+    <div class="nstit">NightSky Media Player</div>
+    <center style='font-size:25px;' id='playtitle'>待播放...</center><br>
+    <video id="videoPlayer" style="height:48%;"></video><br>
+    <center>
+    选择文件以播放：<input type="file" id="fileInput" style="background: black;border-width: 0px;"/><br><br>
+    </center>
+    <progress id="playprog" value=0 style="width:100%"></progress>
+    <br><br>
+    <center>
+    <button onclick="totaltime.innerHTML = formattSeconds(videoPlayer.duration.toFixed(0));playprog.max = videoPlayer.duration.toFixed(0);videoPlayer.play()">播放</button> 
+    <button onclick="videoPlayer.pause()">暂停</button> 
+    <select id="play_rate" oninput="videoPlayer.playbackRate = play_rate.value;">
+        <option value="0.5">0.5 x</option>
+        <option value="1.0" selected>1.0 x</option>
+        <option value="1.5">1.5 x</option>
+        <option value="2.5">2.0 x</option>
+        <option value="10.0">10.0 x (满级)</option>
+    </select> <button onclick='topmost("biubiu");biubiu.style.display = "block";'>在线收听</button>
+    <a style='font-size:23px' id='playertimer'>00:00</a><font color='gray'>/<a id='totaltime'>00:00</a></font>
+    <div id='biubiu' class='nsoverlay'>
+    <div class='nsconta'>
+    在线收听。<br>点击歌名即可收听。<br>
+    <div style='border:1px solid white;height:60px;overflow:auto;' id='musicLink'>
+    <a onclick="playtitle.innerText = '花海 - 周杰伦';videoPlayer.src = 'https://www.joy127.com/url/147503.mp3';biubiu.style.display = 'none';totaltime.innerHTML = formattSeconds(videoPlayer.duration.toFixed(0));">花海 - 周杰伦</a><br>
+    </div>
+    <br>
+    <button onclick="biubiu.style.display = 'none';">关闭</button>
+    </div>
+    <script>
+var jsonmusic = [];
+function H_fetchJson(path){
+fetch(path)
+  .then(response => response.json())
+  .then(data => {
+    for(var a in data)
+    {
+        jsonmusic.push(a)
+        jsonmusic.push(data[a]);
+    }
+    for(var m = 0;m < jsonmusic.length;m = m+2)
+    {
+        document.getElementById("musicLink").innerHTML += `<a onclick="playtitle.innerText = '${jsonmusic[m]}';videoPlayer.src = '${jsonmusic[m+1]}';biubiu.style.display = 'none';totaltime.innerHTML = formattSeconds(videoPlayer.duration.toFixed(0));">${jsonmusic[m]}</a><br>`;
+    }
+  })
+  .catch(error => console.error(error));
+}
+H_fetchJson("https://hellopgrmm.github.io/simul/musicData.json");
+    </script>
+    </div>
+    <script>
+    $('#videoPlayer').css('width',$('.status_bar').css('width'));
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        var videoPlayer = document.getElementById('videoPlayer');
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                videoPlayer.src = e.target.result;
+                videoPlayer.load();
+            };
+            reader.readAsDataURL(file);
+            playprog.value = 0;
+            playtitle.innerText = file.name;
+    });
+function formattSeconds(seconds) {
+    const isNegative = seconds < 0;
+    const absSeconds = Math.abs(seconds);
+    const minutes = Math.floor(absSeconds / 60);
+    const remainingSeconds = absSeconds % 60;
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(Math.floor(remainingSeconds)).padStart(2, '0');
+    const result = `${formattedMinutes}:${formattedSeconds}`;
+    return isNegative ? `-${result}` : result;
+}
+    function upd_p()
+    {
+        playprog.value = videoPlayer.currentTime;
+        playertimer.innerHTML = formattSeconds(videoPlayer.currentTime.toFixed(0));
+    }
+    setInterval("upd_p()",300);
+    </script>
+</center>
+</div>
+<div class='window' id='nsjscons'>
+<div class='nstit'>JavaScript Console</div>
+<input placeholder='Please input the JS Code(enter=execute)' style='width:98%' id='jscmd'/><br>
+Preset functions:<br><ul><li>ns_alert(title,contents): Show a dialog window with a 'close' button.</li><li>ns_pagewatcher(url,title): Open a webpage on new window.</li></ul>
+<div style='width:100%;height:60%;overflow:auto' id='jsouts'>
+</div>
+<script>
+jscmd.addEventListener('keydown',function(ev){
+    if(ev.key == 'Enter')
+    {
+        try{jsouts.innerHTML += `<font color='lightgreen'>[User]</font>${jscmd.value}<br><font color='yellow'>[JavaScript]</font>${eval(jscmd.value)}<br>`;}catch(e){jsouts.innerHTML += `<font color='lightgreen'>[User]</font>${jscmd.value}<br><font color='orange'>[JavaScript Error]</font>${e}<br>`;}
+        jscmd.value = '';
+    }
+});
+</script>
+</div>
+<div id="translateapp" class="window">
+<div class="nstit">翻译</div>
+<textarea style="width:80%;margin-top: 10px;height:50px;" id="original_text" placeholder="输入原文"></textarea><br>
+<br>把 <select id="orlang">
+    <option value="chinese_simplified">中文简体</option>
+    <option value="chinese_traditional">中文繁体</option>
+    <option value="english">英文</option>
+    <option value="vietnamese">越南语</option>
+    <option value="russian">俄语</option>
+    <option value="japanese">日语</option>
+</select> 翻译成 <select id="goallang">
+    <option value="chinese_simplified">中文简体</option>
+    <option value="chinese_traditional">中文繁体</option>
+    <option value="english" selected>英文</option>
+    <option value="vietnamese">越南语</option>
+    <option value="russian">俄语</option>
+    <option value="japanese">日语</option>
+</select> <button onclick="start_translate()">翻译</button> <button onclick="original_text.value='北京欢迎你，为你开天辟地。流动中的魅力充满着朝气。\n北京欢迎你，在太阳下分享呼吸。在黄土地刷新奇迹！';">示例文本</button><br><br><a id="trans_res">翻译结果将会显示在此处。</a>
+<script>
+    function start_translate()
+    {
+        try{
+            trans_res.innerHTML = "翻译中，请稍后...";
+            translate.request.translateText({from:orlang.value,to:goallang.value,texts:original_text.value}, function(data){
+                trans_res.innerText = data.text[0];
+            });
+        }catch(e){
+            ns_alert("无法翻译","翻译失败。以下是可能的原因：<br>1.网络未连接/中途断网<br>2.接口自身问题，只需要重试。<br>3.若以上都不是，那么接口返回的信息如下：<br>"+e);
+        }
+    }
+</script>
+</div>
+<div id='alertmez' class='nsoverlay'>
+<div style='border:1px solid white;background:black;width:70%;padding:5px;padding-top:5px;padding-bottom:5px'>
+<a id='alert_title'>Alert</a>
+<hr>
+<a id='alert_ctn'>Contents</a>
+<hr>
+<button onclick='$("#alertmez").css("display","none")'>关闭</button>
+</div>
+</div>
+<script>
+if(localStorage.getItem('NS_WALLPAPER.nsys')){document.body.style.backgroundImage = `url(${localStorage.getItem('NS_WALLPAPER.nsys')})`;}else{}
+if(localStorage.getItem('NS_STARTUP_OP.nsys')){var medu_s = localStorage.getItem('NS_STARTUP_OP.nsys').split('\n');for(var mee = 0;mee < medu_s.length;mee++){eval(localStorage.getItem(medu_s[mee]));}jsmedu.value=localStorage.getItem('NS_STARTUP_OP.nsys');}else{}
+if(localStorage.getItem('NS_FONTSIZE.nsys')){document.body.style.fontSize = localStorage.getItem('NS_FONTSIZE.nsys');}else{}
+if(localStorage.getItem('NS_FONT_FAMILY.nsys')){
+var Astylesheet_font = document.getElementById('nsfontst');
+Astylesheet_font.href=`https://fonts.googleapis.com/css2?family=${localStorage.getItem('NS_FONT_FAMILY.nsys')}:wght@400;700&display=swap`;
+$('button,input,select,body,textarea').css('font-family',localStorage.getItem('NS_FONT_FAMILY.nsys'));}else{}
+var body_h = Number($('body').css('height').replace('px',''))
+var director_h = Number($('#director').css('height').replace('px',''));
+var statbar_h = Number($('.status_bar').css('height').replace('px',''));
+$('.window').css('height',`${body_h-director_h-statbar_h+7}px`);
+$('.window').css('top',`${statbar_h}px`);
+    var tips = ["NightSky是一个Hello-Programming制作的网页版伪系统，相比同系列的Vek，此“系统”更适合移动端设备、触屏设备使用。","点击下方的<i style='font-size:14px;' class='bi bi-dash-circle-fill'></i>(带横杠的圆形)图案，以显示更多程序。", 
+        "打开应用程序时，请点击图标，不要点击文字或者其他地方。", 
+        "NightSky系统在Github开源，可下载源码并自由增删功能。", 
+        "注意：本伪系统不是真正的操作系统，真正的操作系统是能独立运行的，而不是基于一个平台运行。"]; 
+    var tipc = 0; 
+    function next_tip() 
+    { 
+        if(tipc>3){tipc = 0;}else{tipc++;} 
+        tips_show.innerHTML = tips[tipc]; 
+        var tip_count = tipc+1;
+        tipcount.innerHTML = tip_count+'/5';
+    } 
+function topmost(elementId) { 
+    const elements = document.querySelectorAll('*'); 
+    let maxZIndex = 0; 
+    elements.forEach(el => { 
+        const zIndex = parseInt(window.getComputedStyle(el).zIndex); 
+        if (zIndex > maxZIndex) maxZIndex = zIndex; 
+    }); 
+    document.getElementById(elementId).style.zIndex = maxZIndex + 1; 
+} 
+function tpad(num) 
+{ 
+    return num.toString().padStart(2, '0'); 
+} 
+function gettime_1() 
+{ 
+    const currentTime = new Date(); 
+    const hours = currentTime.getHours(); 
+    const minutes = currentTime.getMinutes(); 
+    return tpad(hours)+":"+tpad(minutes); 
+} 
+function ns_alert(alert_titlel,alert_content)
+{
+    topmost('alertmez');
+    alert_title.innerHTML = alert_titlel;
+    alert_ctn.innerHTML = alert_content;
+    $("#alertmez").css("display","flex");
+}
+function ns_pagewatcher(url,title_name)
+{
+    topmost('nswebwatch');
+    $("#nswebwatch").effect('slide',300);
+    pw_tit.innerText = title_name;
+    pawat.src = url;    
+    if(title_name.toLowerCase().endsWith('.html')||title_name.toLowerCase().endsWith('.htm'))
+    {
+        pw_tit.innerHTML+=`<a style='color:yellow' onclick="topmost('nsedit');$('#nsedit').effect('slide',500);ns_filecontext.value=localStorage.getItem('${title_name}');ns_filename.value='${title_name}';"> [用编辑器打开]</a>`;
+    }
+}
+function ns_htmlwatch(lckey)
+{
+    try
+    {
+        ns_pagewatcher('about:blank',lckey);
+        const htmlctn = pawat.contentWindow.document;
+        htmlctn.write(localStorage.getItem(lckey));
+        htmlctn.close();
+    }catch(e)
+    {
+        ns_alert('网页发生错误','网页返回的信息：<br>'+e);
+    }
+}
+setInterval("timedisplay.innerHTML = gettime_1();",3000); 
+//files 
+function list_personal() 
+{ 
+    nspers.innerHTML =""; 
+    for(var i = 0;i < localStorage.length;i++) 
+    { 
+        if(localStorage.key(i).endsWith(".nsys") || localStorage.key(i).startsWith("hash_")) 
+        { 
+            continue; 
+        }else if(localStorage.key(i).toLowerCase().endsWith(".html")||localStorage.key(i).toLowerCase().endsWith(".htm")){
+            nspers.innerHTML += `<div class="casd"><i class="bi bi-file-text-fill"></i> <div style="display:inline-block;font-size:20px;width:80%;color:yellow;word-wrap:break-word;" onclick="ns_htmlwatch('${localStorage.key(i)}')">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
+        }else if(localStorage.key(i).toLowerCase().endsWith(".js")){
+            nspers.innerHTML += `<div class="casd"><i class="bi bi-file-text-fill"></i> <div style="display:inline-block;font-size:20px;width:80%;color:cyan;word-wrap:break-word;" onclick="eval(localStorage.getItem('${localStorage.key(i)}'))">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
+        }
+        else{ 
+            nspers.innerHTML += `<div class="casd"><i class="bi bi-file-text-fill"></i> <div style="display:inline-block;font-size:20px;width:80%;word-wrap:break-word;" onclick="topmost('nsedit');$('#nsedit').effect('slide',500);ns_filename.value='${localStorage.key(i)}';ns_filecontext.value=localStorage.getItem('${localStorage.key(i)}')">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
+        } 
+    } 
+    if(localStorage.length == 0){nspers.innerHTML = "<center style='font-size:30px'>无文件。<center>"}     
+} 
+function list_system() 
+{ 
+    var syst = 0; 
+    nssys.innerHTML =""; 
+    for(var i = 0;i < localStorage.length;i++) 
+    { 
+        if(localStorage.key(i).endsWith(".nsys") || localStorage.key(i).startsWith("hash_")) 
+        { 
+            nssys.innerHTML += `<div class="casd"><i class="bi bi-file-text-fill"></i> <a style="font-size:20px;word-wrap:break-word;">${localStorage.key(i)} (无权限读取)</a> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_system();" style="width:250px;position:absolute;right:20px;">删除（删除可能影响运行）</button></div>`; 
+            syst++; 
+        }else{ 
+            continue; 
+        } 
+    } 
+    if(syst == 0){nssys.innerHTML = "<center style='font-size:30px'>无文件。<center>"}     
+} 
+var CREDITS = `CREDITS:
+This is a Web System Simulator,called 'NightSky'.It is not a real operating system,just for fun.
+
+In this webpage,I had use some 3rd-party projects,here is the list:
+
+==========
+Animation:JQueryUI(https://jqueryui.com/)
+Icons:Bootstrap Icons(https://icons.getbootstrap.com/)
+==========
+
+I hope you can have fun!😉If you are interested in this project,please visit my github:https://github.com/hellopgrmm/hellopgrmm.github.io/tree/main/simul
+
+VERSION 1.2 CHANGELOG
+==========
+1.Added "Translate";
+2.Now you can import local files to this webpage.
+==========`;
+</script> 
+</body> 
+</html>
