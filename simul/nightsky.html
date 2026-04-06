@@ -182,7 +182,7 @@ input[type=checkbox]
     <div class="ns-icon"><i class="bi bi-browser-chrome" onclick="topmost('nsbrow');$('#nsbrow').effect('slide',500);"></i><br>浏览器</div> 
     <div class="ns-icon"><i class="bi bi-filetype-txt" onclick="topmost('nsedit');$('#nsedit').effect('slide',500);ns_filecontext.value=CREDITS;ns_filename.value='CREDITS.TXT';"></i><br>CREDITS.TXT</div> 
     <br> 
-    <div style="margin-top:12px;border:2px solid white;border-radius:5px;background: linear-gradient(to right,rgb(0,0,50),rgb(0,0,120));padding: 10px;color:white;word-wrap: break-word;"> 
+    <div style="margin-top:12px;border:2px solid white;border-radius:5px;background: linear-gradient(to right,rgb(0,0,50),rgb(0,0,120));padding: 10px;color:white;word-wrap: break-word;" id="tips_card"> 
         <h1>欢迎使用NightSky</h1> 
         TIPS:<b id="tips_show">NightSky是一个Hello-Programming制作的网页版伪系统，相比同系列的Vek，此“系统”更适合移动端设备、触屏设备使用。</b> 
         <br> <br>
@@ -237,6 +237,7 @@ function readfile(inputentry) {
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nsdyy.removeAttribute('hidden');"><i class="bi bi-translate"></i> 多语言</div>
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nscckj.removeAttribute('hidden');calculate_storage();"><i class="bi bi-hdd-stack-fill"></i> 存储空间</div>
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);advancedop.removeAttribute('hidden');"><i class="bi bi-sliders"></i> 高级选项</div>
+        <div class="nscard" onclick="ns_pagewatcher('https://hellopgrmm.github.io/simul/vek_cmb.html','留言板')"><i class="bi bi-chat-left-dots-fill"></i> Rate for me</div>
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);aboutde.removeAttribute('hidden');"><i class="bi bi-info-circle-fill"></i> 关于</div>
     </div>
     <div style="margin-top: 10px;height:80%;overflow:auto;" id="nsgxh" hidden>
@@ -292,6 +293,20 @@ function readfile(inputentry) {
                 ns_alert('修改错误','发生了一个错误，导致无法完成更改。请稍后再试。<br>Sorry,an error occurred.Please try again later.');
             };
         }
+        </script>
+        <h2>桌面小组件</h2>
+        操作引导指示卡片：<input type="checkbox" id="fuycj" oninput='if(fuycj.checked){localStorage.setItem("NS_TIPS_CARD.nsys","HIDE");tips_card.setAttribute("hidden",true);}else{localStorage.removeItem("NS_TIPS_CARD.nsys");tips_card.removeAttribute("hidden");}' /> 隐藏
+        <script>
+            if(localStorage.getItem("NS_TIPS_CARD.nsys") == "HIDE")
+            {
+                tips_card.setAttribute('hidden',true);
+                fuycj.checked = true;
+            }
+            else
+            {
+                tips_card.removeAttribute('hidden');
+                fuycj.checked = false;
+            }
         </script>
     </div>
     <div style="margin-top: 10px;height:80%;overflow:auto;" id="nsdyy" hidden>
@@ -362,18 +377,21 @@ function readfile(inputentry) {
     请输入开机自启动项，一行一个。必须是“文件”中的项目。<br>
     <textarea id='jsmedu' placeholder='请输入...' rows=10 cols=30></textarea>
     <br><button onclick='localStorage.setItem("NS_STARTUP_OP.nsys",jsmedu.value);ns_alert("开机自启","写入完成，。")'>写入</button>
+    <h3>自适应选项</h3>
+    当网页尺寸发生明显变化时，就会出现窗口显示异常，此时请点击“自适应”重新调整。
+    <br><button onclick="reinit_window()">自适应</button>
     </div>
     <div style="margin-top: 10px;height:80%;overflow:auto;" id="aboutde" hidden>
     <button onclick="aboutde.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/关于
     <br>
     <div style='margin-top:15px' onclick='rickroll_c()' class='nscard'>
     <a style='font-size:25px'>NightSky版本</a><br>
-    <font color='gray'>1.2</font>
+    <font color='gray'>1.8</font>
     <script>var rickroll_clc = 0;function rickroll_c(){rickroll_clc++;if(rickroll_clc > 5){rickroll_clc = 0;ns_alert('你被骗了','<video src="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4" id="rickroll_video" controls="" height="80%" width="98%"></video>');rickroll_video.play()}}</script>
     </div>
-    <div class='nscard'>
+    <div class='nscard' style="word-wrap: break-word;">
     <a style='font-size:25px'>具体信息</a><br>
-    <font color='gray'>NightSky_Webpage_FS_1.2.20260325.0404_HTML_OWLLYUG_3_BUILDON_W7</font>
+    <font color='gray'>NightSky_Webpage_NS1.8.20260325.0406_HTML_OWLLYUG_4_BUILDON_W7</font>
     </div>
     <div class='nscard'>
     <a style='font-size:25px'>User Agent</a><br>
@@ -413,7 +431,8 @@ function readfile(inputentry) {
         <div class="ns-icon"><i class="bi bi-wifi" onclick="$('#nsmore').fadeOut(300);topmost('nsping');$('#nsping').effect('slide',500);"></i><br>PING</div> 
         <div class="ns-icon"><i class="bi bi-globe-asia-australia-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/G.html','重力模拟');"></i><br>重力模拟</div> 
         <div class="ns-icon"><i class="bi bi-translate" onclick="$('#nsmore').fadeOut(300);topmost('translateapp');$('#translateapp').effect('slide',500);"></i><br>翻译</div> 
-        <div class="ns-icon"><i class="bi bi-device-ssd-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/lem','Lyric Effect Maker');"></i><br>Lyric Maker</div> 
+        <div class="ns-icon"><i class="bi bi-device-ssd-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/lem','Lyric Effect Maker');"></i><br>Lyric Maker</div>
+        <div class="ns-icon"><i class="bi bi-code-slash" onclick="$('#nsmore').fadeOut(300);topmost('codemirror');$('#codemirror').effect('slide',500);init_codemirror();"></i><br>CodeMirror</div> 
     </div>
 </div>
 <div class="window" id="nsping">
@@ -585,6 +604,49 @@ jscmd.addEventListener('keydown',function(ev){
     }
 </script>
 </div>
+<div id="codemirror" class="window">
+    <div class="nstit">CodeMirror</div>
+    <input id="savedfn" placeholder="文件名" /> <button onclick="save_cm_v()">保存</button>
+    <br><br>
+    <textarea cols=0 rows=0 id="mirrorinterface"></textarea>
+    <p id="loadstate">正在加载CodeMirror组件...(0/4)</p>
+    <script>
+    var editor;
+    var cm_isloaded = false;
+    async function init_codemirror(){
+        if(cm_isloaded == true)
+        {
+            return 0;//避免重复加载弄乱网页
+        }
+        mirrorinterface.style.display = "none";
+        var script = document.createElement('script');script.src = 'https://cdn.staticfile.org/codemirror/6.65.7/mode/htmlmixed/htmlmixed.min.js';document.head.appendChild(script);
+        loadstate.innerHTML = "正在加载CodeMirror组件...(1/4)";
+        var script2 = document.createElement('script');script2.src = 'https://cdn.staticfile.org/codemirror/6.65.7/mode/xml/xml.min.js';document.head.appendChild(script2);
+        loadstate.innerHTML = "正在加载CodeMirror组件...(2/4)";
+        var script3 = document.createElement('script');script3.src = 'https://cdn.staticfile.org/codemirror/6.65.7/mode/css/css.min.js';document.head.appendChild(script3);
+        loadstate.innerHTML = "正在加载CodeMirror组件...(3/4)";
+        var script4 = document.createElement('script');script4.src = 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/javascript/javascript.min.js';document.head.appendChild(script4);
+        loadstate.innerHTML = "正在加载CodeMirror组件...(4/4)";
+        mirrorinterface.style.display = "";
+        await delay(1000);
+        editor = CodeMirror.fromTextArea(document.getElementById('mirrorinterface') ,{
+            mode:"htmlmixed",
+            theme:"lesser-dark",
+            lineWrapping: true
+        });
+        loadstate.style.display="none";
+        editor.setSize('100%','85%');
+        editor.setOption("fontSize","20px");
+        $(".CodeMirror").css("font-family",localStorage.getItem('NS_FONT_FAMILY.nsys'));
+        $(".CodeMirror").css("font-size","20px");
+        cm_isloaded = true;
+    }
+    function save_cm_v()
+    {
+        localStorage.setItem(savedfn.value,editor.getValue());ns_alert('消息','已保存。');
+    }
+    </script>
+</div>
 <div id='alertmez' class='nsoverlay'>
 <div style='border:1px solid white;background:black;width:70%;padding:5px;padding-top:5px;padding-bottom:5px'>
 <a id='alert_title'>Alert</a>
@@ -602,11 +664,14 @@ if(localStorage.getItem('NS_FONT_FAMILY.nsys')){
 var Astylesheet_font = document.getElementById('nsfontst');
 Astylesheet_font.href=`https://fonts.googleapis.com/css2?family=${localStorage.getItem('NS_FONT_FAMILY.nsys')}:wght@400;700&display=swap`;
 $('button,input,select,body,textarea').css('font-family',localStorage.getItem('NS_FONT_FAMILY.nsys'));}else{}
-var body_h = Number($('body').css('height').replace('px',''))
-var director_h = Number($('#director').css('height').replace('px',''));
-var statbar_h = Number($('.status_bar').css('height').replace('px',''));
-$('.window').css('height',`${body_h-director_h-statbar_h+7}px`);
-$('.window').css('top',`${statbar_h}px`);
+function reinit_window(){
+    var body_h = Number($('body').css('height').replace('px',''))
+    var director_h = Number($('#director').css('height').replace('px',''));
+    var statbar_h = Number($('.status_bar').css('height').replace('px',''));
+    $('.window').css('height',`${body_h-director_h-statbar_h+7}px`);
+    $('.window').css('top',`${statbar_h}px`);
+}
+    reinit_window();
     var tips = ["NightSky是一个Hello-Programming制作的网页版伪系统，相比同系列的Vek，此“系统”更适合移动端设备、触屏设备使用。","点击下方的<i style='font-size:14px;' class='bi bi-dash-circle-fill'></i>(带横杠的圆形)图案，以显示更多程序。", 
         "打开应用程序时，请点击图标，不要点击文字或者其他地方。", 
         "NightSky系统在Github开源，可下载源码并自由增删功能。", 
@@ -659,6 +724,7 @@ function ns_pagewatcher(url,title_name)
 }
 function ns_htmlwatch(lckey)
 {
+    init_codemirror();
     try
     {
         ns_pagewatcher('about:blank',lckey);
@@ -728,6 +794,13 @@ VERSION 1.2 CHANGELOG
 ==========
 1.Added "Lyric Effect Maker".
 2.Fixed some problems.
+==========
+1.8 CHANGELOG
+==========
+1.Added "CodeMirror" Code Editor.
+2.Added Comment-Board.
+3.Added an appearance setting.
+4.Added something in Advance Settings.
 ==========`;
 </script> 
 </body> 
