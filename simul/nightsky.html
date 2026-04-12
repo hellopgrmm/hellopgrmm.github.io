@@ -311,6 +311,40 @@ function readfile(inputentry) {
                 fuycj.checked = false;
             }
         </script>
+                <h2>毛玻璃效果(Beta)</h2>
+        <p>开启毛玻璃效果之后，所有的窗口背景将会变为透明，这可能会影响观感。</p>
+         <button onclick='startglass()'>开启</button><br><br>
+         <font color="orange">
+            注意：本效果会影响视觉观感，因为模糊+透明的界面亮度高，文字显示可能不清晰。<br>如果觉得观感不适，请重启网页以关闭视觉效果。<br>如果您想要把它作为个性化选项，请在文本编辑器中创建一个内容为"startglass()"的文件，保存后在"设置"->"高级选项"->"自启动项中"写入这个文件名。<br>否则，就需要手动打开。<br>毛玻璃效果最好搭配深色调壁纸，不然太亮了看着不美观。
+         </font>
+        <script>
+        function startglass()
+        {
+            try{
+            $('.window,.nscard,button,input,textarea,#tips_card,#mezcont').css('background','rgba(255, 255, 255, 0.2)');
+            $('.window,.nscard,button,input,textarea,#tips_card,#mezcont').css('backdrop-filter','blur(10px)');
+            $('.window.nscard,button,input,textarea,#tips_card#mezcont').css('-webkit-backdrop-filter','blur(10px)');
+            $(".nscard,button,input,textarea,#tips_card,#mezcont").css("border","1px solid rgba(255, 255, 255, 0.3)");
+            $(".nscard,button,input.textarea,#tips_card,#mezcont").css("border-radius","5px");
+            $(".nscard").css("margin-left","5px");
+            $(".nscard").css("margin-top","5px");
+            $(".nscard").css("transition","margin-left 0.3s");
+            $("button").css("transition","transform 0.3s");
+            $("button").css("box-shadow",'0px 0px 0px 0px white');
+            $(".nscard").hover(
+                function(){$(this).css("margin-left","15px");},
+                function(){$(this).css("margin-left","5px");}
+            );
+            $("button").hover(
+                function(){$(this).css("transform","scale(0.9)");},
+                function(){$(this).css("transform","scale(1)");}
+            );
+            }catch(e)
+            {
+                ns_alert('',e);
+            }
+        }
+        </script>
     </div>
     <div style="margin-top: 10px;height:80%;overflow:auto;" id="nsdyy" hidden>
         <button onclick="nsdyy.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/多语言
@@ -389,12 +423,12 @@ function readfile(inputentry) {
     <br>
     <div style='margin-top:15px' onclick='rickroll_c()' class='nscard'>
     <a style='font-size:25px'>NightSky版本</a><br>
-    <font color='gray'>1.8</font>
+    <font color='gray'>2.0</font>
     <script>var rickroll_clc = 0;function rickroll_c(){rickroll_clc++;if(rickroll_clc > 5){rickroll_clc = 0;ns_alert('你被骗了','<video src="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4" id="rickroll_video" controls="" height="80%" width="98%"></video>');rickroll_video.play()}}</script>
     </div>
     <div class='nscard' style="word-wrap: break-word;">
     <a style='font-size:25px'>具体信息</a><br>
-    <font color='gray'>NightSky_Webpage_NS1.8.20260325.0406_HTML_OWLLYUG_4_BUILDON_W7</font>
+    <font color='gray'>NightSky_NSWS.20260325.0412_WEB_OWLLYUG_NUMBER_5_HELLOPGRMM</font>
     </div>
     <div class='nscard'>
     <a style='font-size:25px'>User Agent</a><br>
@@ -651,7 +685,7 @@ jscmd.addEventListener('keydown',function(ev){
     </script>
 </div>
 <div id='alertmez' class='nsoverlay'>
-<div style='border:1px solid white;background:black;width:70%;padding:5px;padding-top:5px;padding-bottom:5px'>
+<div style='border:1px solid white;background:black;width:70%;padding:5px;padding-top:5px;padding-bottom:5px' id="mezcont">
 <a id='alert_title'>Alert</a>
 <hr>
 <a id='alert_ctn'>Contents</a>
@@ -722,7 +756,7 @@ function ns_pagewatcher(url,title_name)
     pawat.src = url;    
     if(title_name.toLowerCase().endsWith('.html')||title_name.toLowerCase().endsWith('.htm'))
     {
-        pw_tit.innerHTML+=`<a style='color:yellow' onclick="topmost('nsedit');$('#nsedit').effect('slide',500);ns_filecontext.value=localStorage.getItem('${title_name}');ns_filename.value='${title_name}';"> [用编辑器打开]</a>`;
+        pw_tit.innerHTML+=`<a style='color:yellow' onclick="topmost('codemirror');$('#codemirror').effect('slide',500);editor.setValue(localStorage.getItem('${title_name}'));savedfn.value='${title_name}';"> [用编辑器打开]</a>`;
     }
 }
 function ns_htmlwatch(lckey)
@@ -804,6 +838,11 @@ VERSION 1.2 CHANGELOG
 2.Added Comment-Board.
 3.Added an appearance setting.
 4.Added something in Advance Settings.
+==========
+2.0 CHANGELOG
+==========
+1.Added Glass Effect
+2.Fixed some problems
 ==========`;
 </script> 
 </body> 
