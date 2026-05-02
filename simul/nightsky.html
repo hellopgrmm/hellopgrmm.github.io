@@ -470,6 +470,8 @@ function readfile(inputentry) {
         <div class="ns-icon"><i class="bi bi-translate" onclick="$('#nsmore').fadeOut(300);topmost('translateapp');$('#translateapp').effect('slide',500);"></i><br>翻译</div> 
         <div class="ns-icon"><i class="bi bi-device-ssd-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/lem','Lyric Effect Maker');"></i><br>Lyric Maker</div>
         <div class="ns-icon"><i class="bi bi-code-slash" onclick="$('#nsmore').fadeOut(300);topmost('codemirror');$('#codemirror').effect('slide',500);init_codemirror();"></i><br>CodeMirror</div> 
+         <h2>实用</h2>
+        <div class="ns-icon"><i class="bi bi-file-word-fill" onclick="$('#nsmore').fadeOut(300);topmost('apiranden');$('#apiranden').effect('slide',500);fetch_rde()"></i><br>每日英语单词</div> 
     </div>
 </div>
 <div class="window" id="nsping">
@@ -683,6 +685,21 @@ jscmd.addEventListener('keydown',function(ev){
         localStorage.setItem(savedfn.value,editor.getValue());ns_alert('消息','已保存。');
     }
     </script>
+</div>
+<div class='window' id='apiranden'>
+<div class='nstit'>每日英语单词</div>
+<div id='randendis'></div>
+<script>
+function fetch_rde()
+{
+    fetch('https://v2.xxapi.cn/api/randomenglishwords')
+    .then(response => response.json())
+    .then(datas => {
+        randendis.innerHTML = `<center><h1>${datas.data.word}</h1><font color='gray'>${datas.data.translations[0].pos}.</font>${datas.data.translations[0].tran_cn}<br><h2>发音音频：</h2>美式：${datas.data.usphone} <audio src='${datas.data.usspeech}' id='en_uss'></audio><button onclick='en_uss.play()'>播放</button><br>英式：${datas.data.ukphone} <audio src='${datas.data.ukspeech}' id='en_uks'></audio><button onclick='en_uks.play()'>播放</button></center>`;
+    })
+    .catch(error => ns_alert('Error:', error));
+}
+</script>
 </div>
 <div id='alertmez' class='nsoverlay'>
 <div style='border:1px solid white;background:black;width:70%;padding:5px;padding-top:5px;padding-bottom:5px' id="mezcont">
