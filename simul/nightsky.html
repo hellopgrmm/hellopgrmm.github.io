@@ -191,6 +191,29 @@ input[type=checkbox]
         <br> <br>
         <button onclick="next_tip();">下一条</button>  第<strong id='tipcount' style='color:#ccc'>1/5</strong>条
     </div> 
+    <div style="margin-top:12px;border:2px solid white;border-radius:5px;background: linear-gradient(to right,rgb(0,0,50),rgb(0,0,120));padding: 10px;color:white;word-wrap: break-word;height:100px;overflow:auto;" id="upd_news" hidden>
+    <script>
+    function loadhot(){
+        if(localStorage.getItem("HOT_CONTENT.nsys") == "true"){
+            upd_news.innerHTML="正在加载热搜...";
+            fetch('https://v2.xxapi.cn/api/baiduhot')
+            .then(response => response.json())
+            .then(datas => {
+                upd_news.innerHTML="<h3>百度热搜</h3>";
+                for(var nt = 0;nt < datas.data.length;nt++){
+                    upd_news.innerHTML+=`<p onclick="ns_alert('描述','${datas.data[nt].desc} <button onclick=\\'window.open(\`${datas.data[nt].url}\`);$(\`#alertmez\`).css(\`display\`,\`none\`)\\'>详情</button>');">${datas.data[nt].title} (热度：${datas.data[nt].hot})</p>`;
+                }
+            })
+            .catch(error => upd.news.innerHTML = "加载错误："+error);
+        }
+        else
+        {
+            console.log("Have a nice day.");
+        }
+    }
+    loadhot();
+    </script> 
+    </div> 
     <!--More applications-->
     <div class="ns-icon"><i class="bi bi-dash-circle-fill" style="position: absolute;bottom:10px;left:48%;" onclick="topmost('nsmore');$('#nsmore').effect('slide',500);"></i></div> 
 </div> 
@@ -298,7 +321,8 @@ function readfile(inputentry) {
         }
         </script>
         <h2>桌面小组件</h2>
-        操作引导指示卡片：<input type="checkbox" id="fuycj" oninput='if(fuycj.checked){localStorage.setItem("NS_TIPS_CARD.nsys","HIDE");tips_card.setAttribute("hidden",true);}else{localStorage.removeItem("NS_TIPS_CARD.nsys");tips_card.removeAttribute("hidden");}' /> 隐藏
+        操作引导指示卡片：<input type="checkbox" id="fuycj" oninput='if(fuycj.checked){localStorage.setItem("NS_TIPS_CARD.nsys","HIDE");tips_card.setAttribute("hidden",true);}else{localStorage.removeItem("NS_TIPS_CARD.nsys");tips_card.removeAttribute("hidden");}' /> 隐藏<br>
+        百度热搜卡片：<input type="checkbox" id="bdhot" oninput='if(bdhot.checked){localStorage.setItem("HOT_CONTENT.nsys","false");upd_news.setAttribute("hidden",true);}else{localStorage.setItem("HOT_CONTENT.nsys","true");upd_news.removeAttribute("hidden");loadhot();}' /> 隐藏
         <script>
             if(localStorage.getItem("NS_TIPS_CARD.nsys") == "HIDE")
             {
@@ -309,6 +333,17 @@ function readfile(inputentry) {
             {
                 tips_card.removeAttribute('hidden');
                 fuycj.checked = false;
+            }
+            if(localStorage.getItem("HOT_CONTENT.nsys") == "true")
+            {
+                upd_news.removeAttribute('hidden');
+                bdhot.checked = false;
+                loadhot();
+            }
+            else
+            {
+                upd_news.setAttribute('hidden',true);
+                bdhot.checked = true;
             }
         </script>
                 <h2>毛玻璃效果(Beta)</h2>
@@ -321,11 +356,11 @@ function readfile(inputentry) {
         function startglass()
         {
             try{
-            $('.window,.nscard,button,input,textarea,#tips_card,#mezcont').css('background','rgba(255, 255, 255, 0.2)');
-            $('.window,.nscard,button,input,textarea,#tips_card,#mezcont').css('backdrop-filter','blur(10px)');
-            $('.window.nscard,button,input,textarea,#tips_card#mezcont').css('-webkit-backdrop-filter','blur(10px)');
-            $(".nscard,button,input,textarea,#tips_card,#mezcont").css("border","1px solid rgba(255, 255, 255, 0.3)");
-            $(".nscard,button,input.textarea,#tips_card,#mezcont").css("border-radius","5px");
+            $('.window,.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont').css('background','rgba(255, 255, 255, 0.2)');
+            $('.window,.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont').css('backdrop-filter','blur(10px)');
+            $('.window.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont').css('-webkit-backdrop-filter','blur(10px)');
+            $(".nscard,button,input,textarea,#tips_card,#upd_news,#mezcont").css("border","1px solid rgba(255, 255, 255, 0.3)");
+            $(".nscard,button,input.textarea,#tips_card,#upd_news,#mezcont").css("border-radius","5px");
             $(".nscard").css("margin-left","5px");
             $(".nscard").css("margin-top","5px");
             $(".nscard").css("transition","margin-left 0.3s");
@@ -423,12 +458,12 @@ function readfile(inputentry) {
     <br>
     <div style='margin-top:15px' onclick='rickroll_c()' class='nscard'>
     <a style='font-size:25px'>NightSky版本</a><br>
-    <font color='gray'>2.0</font>
+    <font color='gray'>3.1</font>
     <script>var rickroll_clc = 0;function rickroll_c(){rickroll_clc++;if(rickroll_clc > 5){rickroll_clc = 0;ns_alert('你被骗了','<video src="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4" id="rickroll_video" controls="" height="80%" width="98%"></video>');rickroll_video.play()}}</script>
     </div>
     <div class='nscard' style="word-wrap: break-word;">
     <a style='font-size:25px'>具体信息</a><br>
-    <font color='gray'>NightSky_NSWS.20260325.0412_WEB_OWLLYUG_NUMBER_5_HELLOPGRMM</font>
+    <font color='gray'>NightSky_NSWSU.20260503.04138_WEB_OWLLYUG_NUMBER_6_HELLOPGRMM</font>
     </div>
     <div class='nscard'>
     <a style='font-size:25px'>User Agent</a><br>
@@ -472,6 +507,11 @@ function readfile(inputentry) {
         <div class="ns-icon"><i class="bi bi-code-slash" onclick="$('#nsmore').fadeOut(300);topmost('codemirror');$('#codemirror').effect('slide',500);init_codemirror();"></i><br>CodeMirror</div> 
          <h2>实用</h2>
         <div class="ns-icon"><i class="bi bi-file-word-fill" onclick="$('#nsmore').fadeOut(300);topmost('apiranden');$('#apiranden').effect('slide',500);fetch_rde()"></i><br>每日英语单词</div> 
+        <div class="ns-icon"><i class="bi bi-moisture" onclick="$('#nsmore').fadeOut(300);topmost('apioilprice');$('#apioilprice').effect('slide',500);fetch_oilp()"></i><br>油价查询</div> 
+        <div class="ns-icon"><i class="bi bi-car-front-fill" onclick="$('#nsmore').fadeOut(300);topmost('apijiakao');$('#apijiakao').effect('slide',500);"></i><br>随机驾考题目</div> 
+        <div class="ns-icon"><i class="bi bi-car-front" onclick="$('#nsmore').fadeOut(300);topmost('apicarprice');$('#apicarprice').effect('slide',500);"></i><br>车辆价格查询</div> 
+        <div class="ns-icon"><i class="bi bi-robot" onclick="$('#nsmore').fadeOut(300);topmost('apibot');$('#apibot').effect('slide',500);"></i><br>智娃</div> 
+        <p style="color:gray">实用工具基于API接口xxapi.cn。</p>
     </div>
 </div>
 <div class="window" id="nsping">
@@ -701,6 +741,121 @@ function fetch_rde()
 }
 </script>
 </div>
+<div class='window' id='apioilprice'>
+<div class='nstit'>油价查询</div>
+<font color="orange">*注：仅支持查询部分地区。<br>支持地区：北京,上海,江苏,天津,重庆,江西,辽宁,安徽,内蒙古,福建,宁夏,甘肃,青海,广东,山东,广西,山西,贵州,陕西,海南,四川,河北,西藏,河南,新疆,黑龙江,吉林,云南,湖北,浙江,湖南</font>
+<div id='oilpricedis'></div>
+<script>
+function fetch_oilp()
+{
+    oilpricedis.innerHTML = "加载中...";
+    fetch('https://v2.xxapi.cn/api/oilPrice')
+    .then(response => response.json())
+    .then(datas => {
+        oilpricedis.innerHTML = "";
+        for(var oil = 0;oil < datas.data.length;oil++){
+            oilpricedis.innerHTML += `<h3>${oil+1}.${datas.data[oil].regionName}</h3>最后更新时间：${datas.data[oil].date}
+        <br>
+        <ul>
+            <li>N0：${datas.data[oil].n0}元/升</li>
+            <li>N92：${datas.data[oil].n92}元/升</li>
+            <li>N95：${datas.data[oil].n95}元/升</li>
+            <li>N98：${datas.data[oil].n98}元/升</li>
+        </ul>
+        <hr>`;
+        }
+    })
+    .catch(error => ns_alert('Error:', error));
+}
+</script>
+</div>
+<div class='window' id='apijiakao'>
+<div class='nstit'>随机驾考题目</div>
+<button onclick="fetch_jk(1)">科目1</button>
+<button onclick="fetch_jk(4)">科目4</button>
+<div id='jiakaodis'></div>
+<script>
+function fetch_jk(subject)
+{
+    jiakaodis.innerHTML = "加载中...";
+    fetch('https://v2.xxapi.cn/api/jiakao?subject='+subject)
+    .then(response => response.json())
+    .then(datas => {
+            jiakaodis.innerHTML = `
+<h1>章节：${datas.data.chapter}</h1>
+${datas.data.question}<br><br>
+            `;
+        if(datas.data.pic)
+        {
+            jiakaodis.innerHTML+=`<img src="${datas.data.pic}" style="height:100px;width:auto"/><br>`;
+        }
+        if(datas.data.option1)
+        {
+            jiakaodis.innerHTML+=`${datas.data.option1}<br>${datas.data.option2}<br>${datas.data.option3}<br>${datas.data.option4}`;
+        }
+            jiakaodis.innerHTML += `
+<p>答案：<font color="cyan">${datas.data.answer}</font><br>解释：<font color="yellow">${datas.data.explain}</font></p>`;
+    })
+    .catch(error => ns_alert('Error:', error));
+}
+</script>
+</div>
+<div class='window' id='apicarprice'>
+<div class='nstit'>车价查询</div>
+<input placeholder="输入型号，例如：小米SU7" id="cartype"/> <button onclick="if(cartype.value){fetch_carp(cartype.value);}else{ns_alert('','请输入具体的型号。');}">查询</button>
+<div id='carpricedis'></div>
+<script>
+function fetch_carp(cartype)
+{
+    carpricedis.innerHTML = "加载中...";
+    fetch('https://v2.xxapi.cn/api/carprice?search='+cartype)
+    .then(response => response.json())
+    .then(datas => {
+        carpricedis.innerHTML = "";
+        for(var car = 0;car < datas.data.length;car++){
+            carpricedis.innerHTML += `<h2>${datas.data[car].brand_name} ${datas.data[car].car_name}</h2>
+            <img src="${datas.data[car].cover_url}" style="height:100px;width:auto;"/><br><br>
+            经销商价格：${datas.data[car].dealer_price}<br>价格：${datas.data[car].price}<br>
+        <hr>`;
+        }
+    })
+    .catch(error => ns_alert('错误', '并未查询到相关信息。'));
+}
+</script>
+</div>
+<div class='window' id='apibot'>
+<div class='nstit'>智娃</div>
+<div id='botter' style="padding: 5px;height:85%;width:90%;overflow: auto;">
+    <font color="gray">
+    备注：“智娃”是由北京光年无限科技有限公司研发并备案的生成式人工智能服务，主要面向儿童群体提供智能对话与教育陪伴功能，基于开源预训练大模型架构（TuringMM），补充亿级 token 数据与百万级精标对话数据进行训练 。被称为“儿童版ChatGPT”。</font><br>
+</div>
+<input placeholder="输入消息" id="botmsg" style="width:95%"/>
+<script>
+function fetch_bot(botmsg)
+{
+    botter.innerHTML+=`<font color="cyan"><b>用户</b> ${gettime_1()}</font>
+        <blockquote>${botmsg}</blockquote>
+    `;
+    fetch('https://v2.xxapi.cn/api/turing?msg='+botmsg)
+    .then(response => response.json())
+    .then(datas => {
+        botter.innerHTML+=`
+        <font color="yellow"><b>智娃</b> ${gettime_1()}</font>
+        <blockquote>${datas.data}</blockquote>
+    `;
+        document.getElementById('botter').scrollTop = document.getElementById('botter').scrollHeight;
+        document.getElementById('botmsg').value = "";
+    })
+    .catch(error => ns_alert('错误', error));
+}
+botmsg.addEventListener('keydown',function(ee){
+    if(ee.key == "Enter")
+    {
+        fetch_bot(botmsg.value);
+    }
+});
+</script>
+</div>
 <div id='alertmez' class='nsoverlay'>
 <div style='border:1px solid white;background:black;width:70%;padding:5px;padding-top:5px;padding-bottom:5px' id="mezcont">
 <a id='alert_title'>Alert</a>
@@ -860,6 +1015,10 @@ VERSION 1.2 CHANGELOG
 ==========
 1.Added Glass Effect
 2.Fixed some problems
+==========
+3.1 CHANGELOG
+==========
+1.Add some useful apps.
 ==========`;
 </script> 
 </body> 
