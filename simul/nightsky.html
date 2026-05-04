@@ -458,12 +458,12 @@ function readfile(inputentry) {
     <br>
     <div style='margin-top:15px' onclick='rickroll_c()' class='nscard'>
     <a style='font-size:25px'>NightSky版本</a><br>
-    <font color='gray'>3.1</font>
+    <font color='gray'>3.2</font>
     <script>var rickroll_clc = 0;function rickroll_c(){rickroll_clc++;if(rickroll_clc > 5){rickroll_clc = 0;ns_alert('你被骗了','<video src="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4" id="rickroll_video" controls="" height="80%" width="98%"></video>');rickroll_video.play()}}</script>
     </div>
     <div class='nscard' style="word-wrap: break-word;">
     <a style='font-size:25px'>具体信息</a><br>
-    <font color='gray'>NightSky_NSWSU.20260503.04138_WEB_OWLLYUG_NUMBER_6_HELLOPGRMM</font>
+    <font color='gray'>NightSky_NSWSU.20260504.04138_WEB_OWLLYUG_NUMBER_7_HELLOPGRMM</font>
     </div>
     <div class='nscard'>
     <a style='font-size:25px'>User Agent</a><br>
@@ -505,12 +505,13 @@ function readfile(inputentry) {
         <div class="ns-icon"><i class="bi bi-translate" onclick="$('#nsmore').fadeOut(300);topmost('translateapp');$('#translateapp').effect('slide',500);"></i><br>翻译</div> 
         <div class="ns-icon"><i class="bi bi-device-ssd-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/lem','Lyric Effect Maker');"></i><br>Lyric Maker</div>
         <div class="ns-icon"><i class="bi bi-code-slash" onclick="$('#nsmore').fadeOut(300);topmost('codemirror');$('#codemirror').effect('slide',500);init_codemirror();"></i><br>CodeMirror</div> 
-         <h2>实用</h2>
+         <h2>实用(需联网)</h2>
         <div class="ns-icon"><i class="bi bi-file-word-fill" onclick="$('#nsmore').fadeOut(300);topmost('apiranden');$('#apiranden').effect('slide',500);fetch_rde()"></i><br>每日英语单词</div> 
         <div class="ns-icon"><i class="bi bi-moisture" onclick="$('#nsmore').fadeOut(300);topmost('apioilprice');$('#apioilprice').effect('slide',500);fetch_oilp()"></i><br>油价查询</div> 
         <div class="ns-icon"><i class="bi bi-car-front-fill" onclick="$('#nsmore').fadeOut(300);topmost('apijiakao');$('#apijiakao').effect('slide',500);"></i><br>随机驾考题目</div> 
         <div class="ns-icon"><i class="bi bi-car-front" onclick="$('#nsmore').fadeOut(300);topmost('apicarprice');$('#apicarprice').effect('slide',500);"></i><br>车辆价格查询</div> 
         <div class="ns-icon"><i class="bi bi-robot" onclick="$('#nsmore').fadeOut(300);topmost('apibot');$('#apibot').effect('slide',500);"></i><br>智娃</div> 
+        <div class="ns-icon"><i class="bi bi-bandaid" onclick="$('#nsmore').fadeOut(300);topmost('apidisease');$('#apidisease').effect('slide',500);"></i><br>常见疾病查询</div> 
         <p style="color:gray">实用工具基于API接口xxapi.cn。</p>
     </div>
 </div>
@@ -856,6 +857,53 @@ botmsg.addEventListener('keydown',function(ee){
 });
 </script>
 </div>
+<div class="window" id="apidisease">
+<div class="nstit">常见疾病查询</div>
+<input id="disease_name" placeholder="请输入疾病名称"/> <button onclick="fetxh_disease(disease_name.value)">查询</button>
+<br>常见：<button onclick="fetxh_disease('流行性感冒')">流行性感冒</button> <button onclick="fetxh_disease('哮喘')">哮喘</button> <button onclick="fetxh_disease('支气管炎')">支气管炎</button> <button onclick="fetxh_disease('过敏')">过敏</button>
+<br>注：输入疾病名称时，请注意表述完整（“流感”->“流行性感冒”）。<br>
+<div id="disdis" style="line-height: 30px;font-size: 20px;">
+</div>
+<script>
+    function fetxh_disease(names)
+    {
+        disdis.innerHTML= "请稍后...";
+        fetch('https://v2.xxapi.cn/api/disease?word='+names)
+        .then(response => response.json())
+        .then(datas => {
+            disdis.innerHTML=`
+                <font color="gray">查询信息仅供参考，请根据自身实际情况，咨询专业医生，即时就诊，健康第一。</font>
+                <p><b>疾病名称：</b> ${datas.data[0].name}</p>
+                <p><b>患病概率：</b> ${datas.data[0].get_prob}</p>
+                <p><b>医保：</b> ${datas.data[0].yibao_status}</p>
+                <p><b>传播途径：</b> ${datas.data[0].get_way}</p>
+                <p><b>病情描述：</b> ${datas.data[0].desc}</p>
+                <h3>可能的患病原因</h3>
+                ${datas.data[0].cause.replaceAll("\n","<br>")}
+                <h3>并发症</h3>
+                ${datas.data[0].acompany}
+                <h3>科室</h3>
+                ${datas.data[0].cure_department}
+                <h3>检查项目</h3>
+                ${datas.data[0].check}
+                <h3>治疗</h3>
+                ${datas.data[0].cost_money}，治疗持续时间约${datas.data[0].cure_lasttime}，治疗方式有${datas.data[0].cure_way}，有${datas.data[0].cured_prob}的概率可以治疗成功。
+                <h3>推荐药物</h3><ul>`;
+                for(var de = 0;de < datas.data[0].recommand_drug.length;de++)
+                {
+                    disdis.innerHTML += `<li>${datas.data[0].recommand_drug[de]}</li>`;
+                }
+                disdis.innerHTML += `</ul><h3>药物详情</h3><ul>`;
+                for(var de1 = 0;de1 < datas.data[0].drug_detail.length;de1++)
+                {
+                    disdis.innerHTML += `<li>${datas.data[0].drug_detail[de1]}</li>`;
+                }
+                disdis.innerHTML += `</ul>`;
+        })
+        .catch(error => ns_alert('错误','未查询到相关信息。'));
+    }
+</script>
+</div>
 <div id='alertmez' class='nsoverlay'>
 <div style='border:1px solid white;background:black;width:70%;padding:5px;padding-top:5px;padding-bottom:5px' id="mezcont">
 <a id='alert_title'>Alert</a>
@@ -1016,7 +1064,7 @@ VERSION 1.2 CHANGELOG
 1.Added Glass Effect
 2.Fixed some problems
 ==========
-3.1 CHANGELOG
+3.1,3.2 CHANGELOG
 ==========
 1.Add some useful apps.
 ==========`;
