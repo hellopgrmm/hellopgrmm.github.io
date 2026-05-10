@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>画圆测试小游戏</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            secondary: '#10B981',
+            neutral: '#F3F4F6',
+            dark: '#1F2937'
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .grid-pattern {
+        background-image: linear-gradient(#e5e7eb 1px, transparent 1px),
+                          linear-gradient(to right, #e5e7eb 1px, transparent 1px);
+      }
+      .backdrop-blur-sm {
+        backdrop-filter: blur(4px);
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+    }
+  </style>
+</head>
+<body class="font-inter bg-white text-dark min-h-screen overflow-hidden">
+  <!-- 开始界面 -->
+  <div id="start-screen" class="fixed inset-0 flex flex-col items-center justify-center z-50 bg-white/95 backdrop-blur-sm transition-opacity duration-500">
+    <div class="max-w-md w-full p-8 bg-white rounded-2xl shadow-xl transform transition-all duration-500 hover:shadow-2xl">
+      <div class="text-center mb-8">
+        <h1 class="text-[clamp(2rem,5vw,3rem)] font-bold text-primary mb-4 text-shadow">画圆测试</h1>
+        <div class="w-20 h-1 bg-primary/50 mx-auto rounded-full"></div>
+      </div>
+      
+      <div class="space-y-4 mb-8">
+        <p class="text-lg text-dark/80 leading-relaxed">
+          <i class="fa fa-info-circle text-primary mr-2"></i>
+          在画布上用鼠标绘制一个完美的圆，系统将根据圆的完美程度评分。
+        </p>
+        <p class="text-lg text-dark/80 leading-relaxed">
+          <i class="fa fa-mouse-pointer text-primary mr-2"></i>
+          按住鼠标左键并拖动来绘制圆。
+        </p>
+        <p class="text-lg text-dark/80 leading-relaxed">
+          <i class="fa fa-refresh text-primary mr-2"></i>
+          绘制完成后点击"重新开始"按钮可以再次尝试。
+        </p>
+      </div>
+      
+      <button id="start-btn" class="w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center">
+        <span>开始游戏</span>
+        <i class="fa fa-play ml-2"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- 游戏画布区域 -->
+  <div id="game-container" class="fixed inset-0 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+    <!-- 顶部工具栏 -->
+    <div class="absolute top-4 left-0 right-0 flex justify-between items-center px-6 z-10">
+      <div class="bg-white/80 backdrop-blur-sm rounded-full py-2 px-6 shadow-md flex items-center">
+        <span class="text-dark/80 mr-2">得分:</span>
+        <span id="score-display" class="text-2xl font-bold text-primary">0</span>
+      </div>
+      
+      <button id="restart-btn" class="bg-white/80 backdrop-blur-sm hover:bg-white text-dark/80 hover:text-dark py-2 px-6 rounded-full shadow-md transition-all duration-300 flex items-center">
+        <i class="fa fa-refresh mr-2"></i>
+        <span>重新开始</span>
+      </button>
+    </div>
+    
+    <!-- 画布 -->
+    <canvas id="drawing-canvas" class="absolute inset-0 grid-pattern bg-neutral/50" style="background-size: 20px 20px;"></canvas>
+    
+    <!-- 结果弹窗 -->
+    <div id="result-modal" class="fixed inset-0 flex items-center justify-center z-40 bg-black/30 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+      <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full transform transition-all duration-500 scale-95">
+        <div class="text-center mb-6">
+          <h2 class="text-3xl font-bold text-primary mb-2">你的成绩</h2>
+          <div class="w-16 h-1 bg-primary/50 mx-auto rounded-full"></div>
+        </div>
+        
+        <div class="flex justify-center mb-8">
+          <div class="relative w-40 h-40 flex items-center justify-center">
+            <div id="score-circle" class="absolute w-full h-full rounded-full border-8 border-primary/20"></div>
+            <div id="score-progress" class="absolute w-full h-full rounded-full border-8 border-primary border-t-transparent border-r-transparent border-b-transparent transform -rotate-90 transition-all duration-1000"></div>
+            <span id="final-score" class="text-5xl font-bold text-primary">0</span>
+            <span class="absolute bottom-0 text-dark/70">分</span>
+          </div>
+        </div>
+        
+        <div class="space-y-3 mb-6">
+          <div class="flex justify-between items-center">
+            <span class="text-dark/70">圆度:</span>
+            <span id="roundness-value" class="font-medium">0%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2">
+            <div id="roundness-bar" class="bg-primary h-2 rounded-full transition-all duration-700" style="width: 0%"></div>
+          </div>
+          
+          <div class="flex justify-between items-center">
+            <span class="text-dark/70">对称性:</span>
+            <span id="symmetry-value" class="font-medium">0%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2">
+            <div id="symmetry-bar" class="bg-secondary h-2 rounded-full transition-all duration-700" style="width: 0%"></div>
+          </div>
+        </div>
+        
+        <button id="play-again-btn" class="w-full py-3 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center">
+          <span>再玩一次</span>
+          <i class="fa fa-repeat ml-2"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 获取DOM元素
+      const startScreen = document.getElementById('start-screen');
+      const gameContainer = document.getElementById('game-container');
+      const startBtn = document.getElementById('start-btn');
+      const restartBtn = document.getElementById('restart-btn');
+      const playAgainBtn = document.getElementById('play-again-btn');
+      const drawingCanvas = document.getElementById('drawing-canvas');
+      const scoreDisplay = document.getElementById('score-display');
+      const resultModal = document.getElementById('result-modal');
+      const finalScore = document.getElementById('final-score');
+      const scoreProgress = document.getElementById('score-progress');
+      const roundnessValue = document.getElementById('roundness-value');
+      const symmetryValue = document.getElementById('symmetry-value');
+      const roundnessBar = document.getElementById('roundness-bar');
+      const symmetryBar = document.getElementById('symmetry-bar');
+      
+      // 设置画布尺寸
+      function resizeCanvas() {
+        drawingCanvas.width = window.innerWidth;
+        drawingCanvas.height = window.innerHeight;
+      }
+      
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      
+      // 获取绘图上下文
+      const ctx = drawingCanvas.getContext('2d');
+      
+      // 游戏状态变量
+      let isDrawing = false;
+      let startX = 0;
+      let startY = 0;
+      let currentPath = [];
+      let allPaths = [];
+      let isGameActive = false;
+      
+      // 开始游戏
+      function startGame() {
+        startScreen.classList.add('opacity-0');
+        setTimeout(() => {
+          startScreen.classList.add('hidden');
+          gameContainer.classList.remove('opacity-0', 'pointer-events-none');
+          isGameActive = true;
+        }, 500);
+      }
+      
+      // 重置游戏
+      function resetGame() {
+        ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+        currentPath = [];
+        allPaths = [];
+        scoreDisplay.textContent = '0';
+        isGameActive = true;
+      }
+      
+      // 显示结果
+      function showResult(score, roundness, symmetry) {
+        isGameActive = false;
+        
+        // 设置分数和进度条
+        finalScore.textContent = Math.round(score);
+        scoreDisplay.textContent = Math.round(score);
+        
+        // 计算进度条角度
+        const angle = (score / 100) * 360;
+        scoreProgress.style.transform = `rotate(${(angle - 90)}deg)`;
+        
+        // 设置圆度和对称性
+        roundnessValue.textContent = `${Math.round(roundness * 100)}%`;
+        symmetryValue.textContent = `${Math.round(symmetry * 100)}%`;
+        
+        // 设置进度条宽度
+        roundnessBar.style.width = `${Math.round(roundness * 100)}%`;
+        symmetryBar.style.width = `${Math.round(symmetry * 100)}%`;
+        
+        // 显示结果弹窗
+        setTimeout(() => {
+          resultModal.classList.remove('opacity-0', 'pointer-events-none');
+          resultModal.querySelector('div').classList.remove('scale-95');
+          resultModal.querySelector('div').classList.add('scale-100');
+        }, 500);
+      }
+      
+      // 计算圆度
+      function calculateRoundness(points) {
+        if (points.length < 3) return 0;
+        
+        // 计算中心点
+        const center = {
+          x: points.reduce((sum, p) => sum + p.x, 0) / points.length,
+          y: points.reduce((sum, p) => sum + p.y, 0) / points.length
+        };
+        
+        // 计算平均半径
+        const radii = points.map(p => Math.sqrt(
+          Math.pow(p.x - center.x, 2) + Math.pow(p.y - center.y, 2)
+        ));
+        const avgRadius = radii.reduce((sum, r) => sum + r, 0) / radii.length;
+        
+        // 计算方差
+        const variance = radii.reduce((sum, r) => sum + Math.pow(r - avgRadius, 2), 0) / radii.length;
+        const stdDev = Math.sqrt(variance);
+        
+        // 圆度评分 (标准差越小，圆度越高)
+        const maxDeviation = avgRadius * 0.2; // 最大允许偏差为平均半径的20%
+        const roundness = Math.max(0, 1 - (stdDev / maxDeviation));
+        
+        return roundness;
+      }
+      
+      // 计算对称性
+      function calculateSymmetry(points) {
+        if (points.length < 3) return 0;
+        
+        // 计算中心点
+        const center = {
+          x: points.reduce((sum, p) => sum + p.x, 0) / points.length,
+          y: points.reduce((sum, p) => sum + p.y, 0) / points.length
+        };
+        
+        // 计算每个点相对于中心点的角度和距离
+        const pointData = points.map(p => {
+          const dx = p.x - center.x;
+          const dy = p.y - center.y;
+          return {
+            angle: Math.atan2(dy, dx),
+            distance: Math.sqrt(dx * dx + dy * dy)
+          };
+        });
+        
+        // 按角度排序
+        pointData.sort((a, b) => a.angle - b.angle);
+        
+        // 计算对称性 (比较相对点的距离差异)
+        let symmetryScore = 0;
+        const numPoints = pointData.length;
+        
+        for (let i = 0; i < numPoints; i++) {
+          // 找到相对点 (大约180度对面的点)
+          const oppositeIndex = Math.floor((i + numPoints / 2) % numPoints);
+          const distanceDiff = Math.abs(pointData[i].distance - pointData[oppositeIndex].distance);
+          const maxDistance = Math.max(pointData[i].distance, pointData[oppositeIndex].distance);
+          
+          // 差异越小，对称性越高
+          if (maxDistance > 0) {
+            symmetryScore += 1 - (distanceDiff / maxDistance);
+          }
+        }
+        
+        return symmetryScore / numPoints;
+      }
+      
+      // 计算最终得分
+      function calculateScore(points) {
+        const roundness = calculateRoundness(points);
+        const symmetry = calculateSymmetry(points);
+        
+        // 最终得分是圆度和对称性的平均值
+        const score = (roundness + symmetry) / 2 * 100;
+        
+        return { score, roundness, symmetry };
+      }
+      
+      // 绘制网格背景
+      function drawGrid() {
+        ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+        
+        // 绘制所有已保存的路径
+        allPaths.forEach(path => {
+          ctx.beginPath();
+          ctx.moveTo(path[0].x, path[0].y);
+          for (let i = 1; i < path.length; i++) {
+            ctx.lineTo(path[i].x, path[i].y);
+          }
+          ctx.strokeStyle = '#3B82F6';
+          ctx.lineWidth = 3;
+          ctx.stroke();
+        });
+      }
+      
+      // 鼠标按下事件
+      drawingCanvas.addEventListener('mousedown', (e) => {
+        if (!isGameActive) return;
+        
+        isDrawing = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        currentPath = [{ x: startX, y: startY }];
+        
+        // 清除之前的路径
+        ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+        drawGrid();
+      });
+      
+      // 鼠标移动事件
+      drawingCanvas.addEventListener('mousemove', (e) => {
+        if (isDrawing) {
+          const x = e.clientX;
+          const y = e.clientY;
+          currentPath.push({ x, y });
+          
+          // 绘制当前路径
+          drawGrid();
+          
+          ctx.beginPath();
+          ctx.moveTo(currentPath[0].x, currentPath[0].y);
+          for (let i = 1; i < currentPath.length; i++) {
+            ctx.lineTo(currentPath[i].x, currentPath[i].y);
+          }
+          ctx.strokeStyle = '#3B82F6';
+          ctx.lineWidth = 3;
+          ctx.stroke();
+        }
+      });
+      
+      // 鼠标释放事件
+      drawingCanvas.addEventListener('mouseup', () => {
+        if (isDrawing) {
+          isDrawing = false;
+          
+          if (currentPath.length > 10) { // 确保有足够的点
+            allPaths.push([...currentPath]);
+            
+            // 计算得分
+            const { score, roundness, symmetry } = calculateScore(currentPath);
+            
+            // 显示得分
+            showResult(score, roundness, symmetry);
+          }
+        }
+      });
+      
+      // 鼠标离开画布事件
+      drawingCanvas.addEventListener('mouseout', () => {
+        if (isDrawing) {
+          isDrawing = false;
+          
+          if (currentPath.length > 10) { // 确保有足够的点
+            allPaths.push([...currentPath]);
+            
+            // 计算得分
+            const { score, roundness, symmetry } = calculateScore(currentPath);
+            
+            // 显示得分
+            showResult(score, roundness, symmetry);
+          }
+        }
+      });
+      
+      // 移动端触摸事件
+      drawingCanvas.addEventListener('touchstart', (e) => {
+        if (!isGameActive) return;
+        e.preventDefault();
+        
+        isDrawing = true;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        currentPath = [{ x: startX, y: startY }];
+        
+        // 清除之前的路径
+        ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+        drawGrid();
+      });
+      
+      drawingCanvas.addEventListener('touchmove', (e) => {
+        if (isDrawing) {
+          e.preventDefault();
+          const x = e.touches[0].clientX;
+          const y = e.touches[0].clientY;
+          currentPath.push({ x, y });
+          
+          // 绘制当前路径
+          drawGrid();
+          
+          ctx.beginPath();
+          ctx.moveTo(currentPath[0].x, currentPath[0].y);
+          for (let i = 1; i < currentPath.length; i++) {
+            ctx.lineTo(currentPath[i].x, currentPath[i].y);
+          }
+          ctx.strokeStyle = '#3B82F6';
+          ctx.lineWidth = 3;
+          ctx.stroke();
+        }
+      });
+      
+      drawingCanvas.addEventListener('touchend', (e) => {
+        if (isDrawing) {
+          e.preventDefault();
+          isDrawing = false;
+          
+          if (currentPath.length > 10) { // 确保有足够的点
+            allPaths.push([...currentPath]);
+            
+            // 计算得分
+            const { score, roundness, symmetry } = calculateScore(currentPath);
+            
+            // 显示得分
+            showResult(score, roundness, symmetry);
+          }
+        }
+      });
+      
+      // 按钮事件监听
+      startBtn.addEventListener('click', startGame);
+      restartBtn.addEventListener('click', resetGame);
+      playAgainBtn.addEventListener('click', () => {
+        resultModal.classList.add('opacity-0', 'pointer-events-none');
+        resultModal.querySelector('div').classList.remove('scale-100');
+        resultModal.querySelector('div').classList.add('scale-95');
+        resetGame();
+      });
+    });
+  </script>
+</body>
+</html>
