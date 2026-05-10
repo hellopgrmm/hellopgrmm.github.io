@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js"></script>
     <script defer src="https://events.vercount.one/js"></script>
+    <script src="https://hellopgrmm.github.io/tools/md5.js"></script>
 <style> 
 /*it looks like old system ui*/ 
 body 
@@ -219,7 +220,63 @@ input[type=checkbox]
     <div class="ns-icon"><i class="bi bi-dash-circle-fill" style="position: absolute;bottom:10px;left:48%;" onclick="topmost('nsmore');$('#nsmore').effect('slide',500);"></i></div> 
 </div> 
 <!--导航栏-->
-<div id='director'><i class="bi bi-house cess" onclick='$(".window").fadeOut(200)' style='font-size:30px;color:white'></i></div>
+<div id='director'><i class="bi bi-house cess" onclick='$(".window").slideUp(400);' style='font-size:30px;color:white'></i> <i class="bi bi-lock cess" onclick="$('.window').fadeOut();$('.desktop').fadeOut();$('.lock_interface').fadeIn();" style='font-size:30px;color:white'></i></div>
+<!--Lock-->
+<div class="lock_interface" style="color:white;text-shadow: 1px 1px 1px black;margin-top: 100px;height:80%;width:100%;" onclick="process_unlock()">
+    <div style="margin-left: 30px;" class="cover_lock">
+    <a id="timeshow_line1" style="font-size: 70px;">10:</a>
+    <a id="timeshow_line2" style="font-size: 70px;">24</a>
+    <a id="timeshow_line3" style="font-size: 30px;">: 32</a><br><br>
+    <a id="timeshow_line4" style="font-size: 20px;">2018年10月24日</a><br><br>
+    <a id="hitokoto" style="width:80%"></a>
+    <a style="position:absolute;bottom: 100px;left:50px;font-size: 30px;">点击屏幕任意处解锁</a>
+    </div>
+    <div class="password_in" style="justify-content: center;align-items: center;" hidden>
+        <a id="qwq">要进入NightSky，请先输入您的密码。</a><br><br>
+        <input id="xxpsw" type="password"/>
+    </div>
+    <script>
+    $(".desktop").hide();
+    function process_unlock(){
+        if(localStorage.getItem('..nsys')){
+            $('.cover_lock').hide();
+            $('.password_in').show();
+            qwq.innerText="要进入NightSky，请先输入您的密码。";
+            xxpsw.focus();
+            xxpsw.addEventListener('keydown',function(er){
+                if(er.key == 'Enter'){
+                    if(MD5(xxpsw.value) == localStorage.getItem('..nsys')){
+                        $('.lock_interface').hide();$('.desktop').effect('slide');reinit_window();
+                        xxpsw.value = '';
+                        $('.cover_lock').show();
+                        $('.password_in').hide();
+                    }
+                    else
+                    {
+                        qwq.innerText = "密码错误。";
+                        xxpsw.value = '';
+                        xxpsw.focus();
+                    }
+                }
+            });
+        }else{
+            $('.lock_interface').hide();$('.desktop').effect('slide');reinit_window();
+        }
+    }
+        function _timedis()
+        {
+            const now = new Date();
+            timeshow_line1.innerHTML = now.getHours().toString().padStart(2,'0')+":";
+            timeshow_line2.innerHTML = now.getMinutes().toString().padStart(2,'0');
+            timeshow_line3.innerHTML = ": "+now.getSeconds().toString().padStart(2,'0');
+            timeshow_line4.innerHTML = `${now.getFullYear()}年${now.getMonth()}月${now.getDate()}日`;
+        }
+        fetch("https://v2.xxapi.cn/api/yiyan?type=poetry")
+            .then(res => res.json())
+            .then(datas => {hitokoto.innerText = datas.data});
+        setInterval("_timedis()",500);
+    </script>
+</div>
 <div class="window" id="nsfm"> 
 <div class='nstit'>文件管理</div><br> 
 分类：<button onclick="nssys.setAttribute('hidden',true);nspers.removeAttribute('hidden');list_personal();">个人文件</button> <button onclick="nspers.setAttribute('hidden',true);nssys.removeAttribute('hidden');list_system();">系统文件</button> 导入外部文件<input style="background: black;border-width: 0px;width:100px;" type="file" id="inputentry1"/> <button onclick="readfile('inputentry1');" class='vek_button'>导入</button>
@@ -262,6 +319,7 @@ function readfile(inputentry) {
     <div style="margin-top: 10px;" id="selectmenu">
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nsgxh.removeAttribute('hidden');"><i class="bi bi-shadows"></i> 个性化</div>
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nsdyy.removeAttribute('hidden');"><i class="bi bi-translate"></i> 多语言</div>
+        <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);safer.removeAttribute('hidden');"><i class="bi bi-lock-fill"></i> 安全选项</div>
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nscckj.removeAttribute('hidden');calculate_storage();"><i class="bi bi-hdd-stack-fill"></i> 存储空间</div>
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);advancedop.removeAttribute('hidden');"><i class="bi bi-sliders"></i> 高级选项</div>
         <div class="nscard" onclick="ns_pagewatcher('https://hellopgrmm.github.io/simul/vek_cmb.html','留言板')"><i class="bi bi-chat-left-dots-fill"></i> Rate for me</div>
@@ -386,6 +444,108 @@ function readfile(inputentry) {
     <div style="margin-top: 10px;height:80%;overflow:auto;" id="nsdyy" hidden>
         <button onclick="nsdyy.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/多语言
         <div id="translate"><a>请选择一个合适的语言：</a></div><br><script src='https://res.zvo.cn/translate/translate.js'></script><script>translate.language.setLocal('chinese_simplified');translate.ignore.tag.push('pre');translate.execute();</script>
+    </div>
+    <div style="margin-top: 10px;height:80%;overflow:auto;" id="safer" hidden>
+    <script src="https://hellopgrmm.github.io/tools/md5.js"></script>
+    <button onclick="safer.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/安全
+    <h1>设置锁屏密码</h1>
+    设置密码：<input type="password" id="original_psw" oninput="ispswsafe()" /><br>
+    确认密码：<input type="password" id="cf_psw"/><br>
+    <button onclick="if(original_psw.value==cf_psw.value){localStorage.setItem('..nsys',MD5(cf_psw.value));ns_alert('提示','密码设置完成，<font color=yellow>请牢记您的密码</font>，原密码无法找回，只能删除。');}else{ns_alert('提示','密码不一致，请重新设置。');}original_psw.value='';cf_psw.value='';">设置</button> <button onclick="localStorage.removeItem('..nsys');ns_alert('已关闭','已关闭密码。')">关闭密码</button>
+    <p style="color:orange" id="safetip"></p>
+    <script>
+function checkPasswordSafe(password) {
+  // 1. 空值/长度太短直接不安全
+  if (!password || password.length < 6) {
+    return false;
+  }
+
+  // 2. 检测纯重复字符：如 888888、aaaaa、bbbbbb
+  const repeatReg = /^(.)\1+$/;
+  if (repeatReg.test(password)) {
+    return false;
+  }
+
+  // 3. 检测纯数字连续递增/递减：123456、987654
+  const numReg = /^\d+$/;
+  if (numReg.test(password)) {
+    let isIncrement = true; // 递增
+    let isDecrement = true; // 递减
+    for (let i = 1; i < password.length; i++) {
+      const prev = parseInt(password[i - 1]);
+      const curr = parseInt(password[i]);
+      if (curr !== prev + 1) isIncrement = false;
+      if (curr !== prev - 1) isDecrement = false;
+    }
+    if (isIncrement || isDecrement) {
+      return false;
+    }
+  }
+
+  // 4. 检测字母连续顺序：abcd、dcba、abcdef
+  const letterReg = /^[a-zA-Z]+$/;
+  if (letterReg.test(password)) {
+    const lowerPwd = password.toLowerCase();
+    let isLetterIncrement = true;
+    let isLetterDecrement = true;
+    for (let i = 1; i < lowerPwd.length; i++) {
+      const prev = lowerPwd.charCodeAt(i - 1);
+      const curr = lowerPwd.charCodeAt(i);
+      if (curr !== prev + 1) isLetterIncrement = false;
+      if (curr !== prev - 1) isLetterDecrement = false;
+    }
+    if (isLetterIncrement || isLetterDecrement) {
+      return false;
+    }
+  }
+
+  // 5. 检测键盘连续顺序（最常用弱密码）：asdfgh、qwert、zxcvb
+  const keyboardRows = [
+    'qwertyuiop',
+    'asdfghjkl',
+    'zxcvbnm'
+  ];
+  const lowerPwd = password.toLowerCase();
+  let isKeyboardSequence = false;
+
+  // 遍历每一行键盘布局
+  for (const row of keyboardRows) {
+    // 正向连续匹配
+    if (row.includes(lowerPwd)) {
+      isKeyboardSequence = true;
+      break;
+    }
+    // 反向连续匹配（poiuytrewq）
+    const reverseRow = row.split('').reverse().join('');
+    if (reverseRow.includes(lowerPwd)) {
+      isKeyboardSequence = true;
+      break;
+    }
+  }
+
+  if (isKeyboardSequence) {
+    return false;
+  }
+
+  // 所有弱密码规则都不满足 → 安全
+  return true;
+}
+        function ispswsafe()
+        {
+            if(checkPasswordSafe(original_psw.value))
+            {
+                safetip.innerHTML = "";
+            }
+            else if(original_psw.value=="")
+            {
+                safetip.innerHTML="";
+            }
+            else
+            {
+                safetip.innerHTML="您所设置的密码不安全，他人可能会轻易猜到密码，建议更改密码（不改也行）。<br>像有规律的数字、字母（例如abcdefg、123456/88888）都是不安全密码。";
+            }
+        }
+    </script>
     </div>
     <div style="margin-top: 10px;height:80%;overflow:auto;" id="nscckj" hidden>
         <button onclick="nscckj.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/存储空间<br>
