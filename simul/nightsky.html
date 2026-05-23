@@ -1514,7 +1514,7 @@ function srec() {
         if(!recognition){INIT_S();}
         recognition.start();
         stabtn.disabled = true;
-        stabtn.value="正在识别";
+        stabtn.innerHTML="正在识别";
         recognition.onresult = function(e){
             let text = '\n';
             for(let i=e.resultIndex; i<e.results.length; i++){
@@ -1523,7 +1523,7 @@ function srec() {
             s2t_res.innerText += text;
         }
         recognition.onerror = function(e){
-            ns_alert('识别出错，信息如下：',e.error);
+            ns_alert('识别出错，信息如下：',e.error+'<br>刷新网页或许能解决问题');
             stabtn.value="开始录音&识别";
         }
     }
