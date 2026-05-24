@@ -335,6 +335,35 @@ function readfile(inputentry) {
         <img onclick='localStorage.setItem("NS_WALLPAPER.nsys","https://imgsa.baidu.com/forum/wh%3D200%2C90%3B/sign=930a9541c05c1038242bc6c08221bf2a/f6113c34349b033b21ef698113ce36d3d439bdc5.jpg");ns_alert("提示","修改成功，重启生效。")' src='https://imgsa.baidu.com/forum/wh%3D200%2C90%3B/sign=930a9541c05c1038242bc6c08221bf2a/f6113c34349b033b21ef698113ce36d3d439bdc5.jpg' width=50 height=50/>
         <img onclick='localStorage.setItem("NS_WALLPAPER.nsys","https://img.duoyi.com/com/214/pic/PL-83KI8OHbuo.gif");ns_alert("提示","修改成功，重启生效。")' src='https://img.duoyi.com/com/214/pic/PL-83KI8OHbuo.gif' width=50 height=50/>
         <img onclick='localStorage.setItem("NS_WALLPAPER.nsys","https://coze-coding-project.tos.coze.site/coze_storage_7630179118994391040/images/1777885043780_3rzugk_a910f6e8.jpeg?sign=2093245044-7ea9ce52a3-0-e0f0357daedfe9c26288dfb61b25e3b1a0597463448e01625455c046945768bc");ns_alert("提示","修改成功，重启生效。")' src='https://coze-coding-project.tos.coze.site/coze_storage_7630179118994391040/images/1777885043780_3rzugk_a910f6e8.jpeg?sign=2093245044-7ea9ce52a3-0-e0f0357daedfe9c26288dfb61b25e3b1a0597463448e01625455c046945768bc' width=50 height=50/>
+        <h2>主题</h2>
+        选择主题或导入主题。<input style="background: black;border-width: 0px;width:100px;" type="file" id="inputentry2"/> <button onclick="readtheme('inputentry2');">导入</button>
+<script>
+function readtheme(input) {
+    const fileinput = document.getElementById(input);
+    if (fileinput.files.length > 0) {
+        const file = fileinput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            localStorage.setItem('NS_THEME.nsys',e.target.result);
+            applytheme(e.target.result);
+            ns_alert("导入完成",'已导入。');
+        };
+        reader.readAsText(file, 'UTF-8');
+    } else {
+        ns_alert("导入失败",'导入失败，请确保你选择了文件。');
+    }
+}
+</script>
+        <p>预设主题(点击方块即可切换)</p>
+        <div style="background:linear-gradient(gray,black);padding:5px;height:120px;width:120px;display:inline-block;vertical-align:top" onclick="applytheme('restore_default')">
+            OriSky(默认)
+        </div>
+        <div style="background:rgb(50,255,255,0.5);padding:5px;height:120px;width:120px;display:inline-block;vertical-align:top;border:2px solid cyan;color:cyan" onclick="applytheme(THEME_TECHNOLY)">
+            Technoly
+        </div>
+        <div style="background:black;padding:5px;height:120px;width:120px;display:inline-block;vertical-align:top;border:2px solid white;color:white" onclick="applytheme(THEME_SIMPLEBW)">
+            SimpleBW
+        </div>
         <h2>字体大小</h2>
         <input type="range" max=50 value=14 id="kksk" oninput="fontsz.innerHTML = kksk.value+'px';localStorage.setItem('NS_FONTSIZE.nsys',fontsz.innerHTML);document.body.style.fontSize = fontsz.innerHTML;" /> <b id="fontsz">14px</b> <button onclick="localStorage.removeItem('NS_FONTSIZE.nsys');ns_alert('提示','已恢复默认。重启后生效。');">恢复默认</button>
         <h2>字体</h2>
@@ -627,12 +656,12 @@ function checkPasswordSafe(password) {
     <br>
     <div style='margin-top:15px' onclick='rickroll_c()' class='nscard'>
     <a style='font-size:25px'>NightSky版本</a><br>
-    <font color='gray'>7.0</font>
+    <font color='gray'>7.1</font>
     <script>var rickroll_clc = 0;function rickroll_c(){rickroll_clc++;if(rickroll_clc > 5){rickroll_clc = 0;ns_alert('你被骗了','<video src="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4" id="rickroll_video" controls="" height="80%" width="98%"></video>');rickroll_video.play()}}</script>
     </div>
     <div class='nscard' style="word-wrap: break-word;" onclick='opendeve()'>
     <a style='font-size:25px'>具体信息</a><br>
-    <font color='gray'>NightSky_NSWSU.20260523.05172_WEB_OWLLYUG_NUMBER_10_HELLOPGRMM</font>
+    <font color='gray'>NightSky_NSWSU.20260524.0524.7.1_WEB_OWLLYUG_NUMBER_12_HELLOPGRMM</font>
     <script>var deve_clc = 0;function opendeve(){deve_clc++;if(deve_clc > 5){ns_alert("开发者模式","您已进入开发者模式（调试模式）。");developer_option.removeAttribute('hidden');}}</script>
     </div>
     <div class='nscard'>
@@ -1601,6 +1630,7 @@ function srec() {
 if(localStorage.getItem('NS_WALLPAPER.nsys')){document.body.style.backgroundImage = `url(${localStorage.getItem('NS_WALLPAPER.nsys')})`;}else{}
 if(localStorage.getItem('NS_STARTUP_OP.nsys')){var medu_s = localStorage.getItem('NS_STARTUP_OP.nsys').split('\n');for(var mee = 0;mee < medu_s.length;mee++){eval(localStorage.getItem(medu_s[mee]));}jsmedu.value=localStorage.getItem('NS_STARTUP_OP.nsys');}else{}
 if(localStorage.getItem('NS_FONTSIZE.nsys')){document.body.style.fontSize = localStorage.getItem('NS_FONTSIZE.nsys');}else{}
+if(localStorage.getItem('NS_THEME.nsys')){applytheme(localStorage.getItem('NS_THEME.nsys'));}else{}
 if(localStorage.getItem('NS_FONT_FAMILY.nsys')){
 var Astylesheet_font = document.getElementById('nsfontst');
 Astylesheet_font.href=`https://fonts.googleapis.com/css2?family=${localStorage.getItem('NS_FONT_FAMILY.nsys')}:wght@400;700&display=swap`;
@@ -1714,6 +1744,53 @@ function list_system()
     } 
     if(syst == 0){nssys.innerHTML = "<center style='font-size:30px'>无文件。<center>"}     
 } 
+var THEME_TECHNOLY = `Y2xhc3M6d2luZG93CmJhY2tncm91bmQ9PiMwRjYwNkMKbmV4dDsKZWxlbWVudDpidXR0b24KYmFja2dyb3VuZD0+cmdiYSg1MCwyNTUsMjU1LDAuNSkKYm9yZGVyPT4xcHggc29saWQgY3lhbgpjb2xvcj0+Y3lhbgpib3JkZXItcmFkaXVzPT4wcHgKaG92ZXI9PmJhY2tncm91bmQ6cmdiYSg1MCwyNTUsMjU1LDAuOCkvYmFja2dyb3VuZDpyZ2JhKDUwLDI1NSwyNTUsMC41KQpib3gtc2hhZG93PT4xcHggMXB4IDFweCAxcHggY3lhbgpuZXh0OwplbGVtZW50OmlucHV0CmJhY2tncm91bmQ9PnJnYmEoNTAsMjU1LDI1NSwwLjUpCmJvcmRlcj0+MXB4IHNvbGlkIGN5YW4KYm9yZGVyLXJhZGl1cz0+MHB4CmNvbG9yPT53aGl0ZQpuZXh0OwplbGVtZW50OnRleHRhcmVhCmJhY2tncm91bmQ9PnJnYmEoNTAsMjU1LDI1NSwwLjUpCmJvcmRlcj0+MXB4IHNvbGlkIGN5YW4KYm9yZGVyLXJhZGl1cz0+MHB4CmNvbG9yPT53aGl0ZQpuZXh0OwppZDp0aXBzX2NhcmQKYmFja2dyb3VuZD0+cmdiYSg1MCwyNTUsMjU1LDAuNSkKYm9yZGVyPT4xcHggc29saWQgY3lhbgpib3JkZXItcmFkaXVzPT4wcHgKYmFja2Ryb3AtZmlsdGVyPT5ibHVyKDVweCkKbmV4dDsKaWQ6dXBkX25ld3MKYmFja2dyb3VuZD0+cmdiYSg1MCwyNTUsMjU1LDAuNSkKYm9yZGVyPT4xcHggc29saWQgY3lhbgpib3JkZXItcmFkaXVzPT4wcHgKYmFja2Ryb3AtZmlsdGVyPT5ibHVyKDVweCkKbmV4dDsKY2xhc3M6bnNjYXJkCmJhY2tncm91bmQ9PnJnYmEoNTAsMjU1LDI1NSwwLjUpCmJvcmRlcj0+MXB4IHNvbGlkIGN5YW4KYm9yZGVyLXJhZGl1cz0+MHB4CmJhY2tkcm9wLWZpbHRlcj0+Ymx1cig1cHgpCmhvdmVyPT5iYWNrZ3JvdW5kOnJnYmEoNTAsMjU1LDI1NSwwLjgpL2JhY2tncm91bmQ6cmdiYSg1MCwyNTUsMjU1LDAuNSk=`;
+var THEME_SIMPLEBW = `Y2xhc3M6d2luZG93CmJhY2tncm91bmQ9PmJsYWNrCm5leHQ7CmVsZW1lbnQ6YnV0dG9uCmJhY2tncm91bmQ9PmJsYWNrCmJvcmRlcj0+MXB4IHNvbGlkIHdoaXRlCmNvbG9yPT53aGl0ZQpib3JkZXItcmFkaXVzPT4wcHgKaG92ZXI9PmJhY2tncm91bmQ6cmdiYSgyNTUsMjU1LDI1NSwwLjgpL2JhY2tncm91bmQ6YmxhY2sKYm94LXNoYWRvdz0+MXB4IDFweCAxcHggMXB4IHdoaXRlCm5leHQ7CmVsZW1lbnQ6aW5wdXQKYmFja2dyb3VuZD0+YmxhY2sKYm9yZGVyPT4xcHggc29saWQgd2hpdGUKYm9yZGVyLXJhZGl1cz0+MHB4CmNvbG9yPT53aGl0ZQpuZXh0OwplbGVtZW50OnRleHRhcmVhCmJhY2tncm91bmQ9PmJsYWNrCmJvcmRlcj0+MXB4IHNvbGlkIHdoaXRlCmJvcmRlci1yYWRpdXM9PjBweApjb2xvcj0+d2hpdGUKbmV4dDsKaWQ6dGlwc19jYXJkCmJhY2tncm91bmQ9PnJnYmEoMjU1LDI1NSwyNTUsMC4wKQpib3JkZXI9PjFweCBzb2xpZCB3aGl0ZQpib3JkZXItcmFkaXVzPT4wcHgKYmFja2Ryb3AtZmlsdGVyPT5ibHVyKDVweCkKbmV4dDsKaWQ6dXBkX25ld3MKYmFja2dyb3VuZD0+cmdiYSgyNTUsMjU1LDI1NSwwLjApCmJvcmRlcj0+MXB4IHNvbGlkIHdoaXRlCmJvcmRlci1yYWRpdXM9PjBweApiYWNrZHJvcC1maWx0ZXI9PmJsdXIoNXB4KQpuZXh0OwpjbGFzczpuc2NhcmQKYmFja2dyb3VuZD0+cmdiYSgyNTUsMjU1LDI1NSwwLjApCmJvcmRlcj0+MXB4IHNvbGlkIHdoaXRlCmJvcmRlci1yYWRpdXM9PjBweApiYWNrZHJvcC1maWx0ZXI9PmJsdXIoNXB4KQpob3Zlcj0+YmFja2dyb3VuZDpyZ2JhKDI1NSwyNTUsMjU1LDAuOCkvYmFja2dyb3VuZDpibGFjaw==`;
+function parse_theme(description)
+{
+    var JQUERY_CODE = '';
+    var parts = atob(description).toLowerCase().split("\nnext;\n");
+    var temp0 = [];
+    var elname = "";
+    for(var temp1 = 0;temp1<parts.length;temp1++)
+    {
+        temp0 = parts[temp1].split("\n");
+        if(temp0[0].startsWith("element:")) elname=`$("${temp0[0].split(":")[1]}")`;
+        else if(temp0[0].startsWith("id:")) elname=`$("#${temp0[0].split(":")[1]}")`;
+        else if(temp0[0].startsWith("class:")) elname=`$(".${temp0[0].split(":")[1]}")`;
+        for(var temp2 = 1;temp2<temp0.length;temp2++)
+        {
+            var attr = temp0[temp2].split("=>")[0];
+            var val = temp0[temp2].split("=>")[1];
+            if(attr == "hover")
+            {
+                JQUERY_CODE+=`${elname}.hover(
+    function(){$(this).css("${val.split('/')[0].split(':')[0]}","${val.split('/')[0].split(':')[1]}");},
+    function(){$(this).css("${val.split('/')[1].split(':')[0]}","${val.split('/')[1].split(':')[1]}");}
+);\n`;
+            }
+            else
+            {
+                JQUERY_CODE+=`${elname}.css("${attr}","${val}");\n`;
+            }
+        }
+    }
+    return JQUERY_CODE;
+}
+function applytheme(THM_DESC)
+{
+    if(THM_DESC == "restore_default")
+    {
+        localStorage.removeItem("NS_THEME.nsys");
+        ns_alert("主题","已恢复默认，重启生效。");
+    }
+    else
+    {
+        console.log(parse_theme(THM_DESC));
+        eval(parse_theme(THM_DESC));
+        localStorage.setItem("NS_THEME.nsys",THM_DESC);
+    }
+}
 var CREDITS = `CREDITS:
 This is a Web System Simulator,called 'NightSky'.It is not a real operating system,just for fun.
 
@@ -1764,6 +1841,7 @@ VERSION 1.2 CHANGELOG
 7.0 CHANGELOG
 ==========
 1.新增了4个功能。分别是：相机、定位、开发者模式、语音识别。
+2.(7.1)新增主题功能。
 ==========`;
 </script> 
 </body> 
