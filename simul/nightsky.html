@@ -657,12 +657,12 @@ function checkPasswordSafe(password) {
     <br>
     <div style='margin-top:15px' onclick='rickroll_c()' class='nscard'>
     <a style='font-size:25px'>NightSky版本</a><br>
-    <font color='gray'>7.1</font>
+    <font color='gray'>7.2</font>
     <script>var rickroll_clc = 0;function rickroll_c(){rickroll_clc++;if(rickroll_clc > 5){rickroll_clc = 0;ns_alert('你被骗了','<video src="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4" id="rickroll_video" controls="" height="80%" width="98%"></video>');rickroll_video.play()}}</script>
     </div>
     <div class='nscard' style="word-wrap: break-word;" onclick='opendeve()'>
     <a style='font-size:25px'>具体信息</a><br>
-    <font color='gray'>NightSky_NSWSU.20260524.0524.7.1_WEB_OWLLYUG_NUMBER_12_HELLOPGRMM</font>
+    <font color='gray'>NightSky_NSWSU.20260530.0530.7.2_WEB_OWLLYUG_NUMBER_1E_HELLOPGRMM</font>
     <script>var deve_clc = 0;function opendeve(){deve_clc++;if(deve_clc > 5){ns_alert("开发者模式","您已进入开发者模式（调试模式）。");developer_option.removeAttribute('hidden');}}</script>
     </div>
     <div class='nscard'>
@@ -749,6 +749,7 @@ function checkPasswordSafe(password) {
         <div class="ns-icon"><i class="bi bi-code-slash" onclick="$('#nsmore').fadeOut(300);topmost('codemirror');$('#codemirror').effect('slide',500);init_codemirror();"></i><br>CodeMirror</div> 
         <div class="ns-icon"><i class="bi bi-camera2" onclick="$('#nsmore').fadeOut(300);topmost('nsCAM');$('#nsCAM').effect('slide',500);startcam();"></i><br>相机</div> 
         <div class="ns-icon"><i class="bi bi-geo-alt-fill" onclick="$('#nsmore').fadeOut(300);topmost('nslocation');$('#nslocation').effect('slide',500);dingwei();"></i><br>当前定位</div> 
+        <div class="ns-icon"><i class="bi bi-terminal" onclick="$('#nsmore').fadeOut(300);topmost('nsprompt');$('#nsprompt').effect('slide',500);user_cmd.focus()"></i><br>命令行</div> 
          <h2>实用(需联网)</h2>
         <div class="ns-icon"><i class="bi bi-file-word-fill" onclick="$('#nsmore').fadeOut(300);topmost('apiranden');$('#apiranden').effect('slide',500);fetch_rde()"></i><br>每日英语单词</div> 
         <div class="ns-icon"><i class="bi bi-moisture" onclick="$('#nsmore').fadeOut(300);topmost('apioilprice');$('#apioilprice').effect('slide',500);fetch_oilp()"></i><br>油价查询</div> 
@@ -1618,6 +1619,64 @@ function srec() {
         }
     </script>
 </div>
+<div id='nsprompt' class='window'>
+<div class='nstit'>Command Prompt</div>
+<div id='ns_cmd_dis'>
+NightSky Terminal version:0.1.260529. [SIMULATE]e webpage/TC<br>
+Copyright &copy; Hello-Programming 2026<br>
+Type 'HELP' to get the guide
+</div>
+<a id='plat'>~root</a> <input id='user_cmd' style='border-width:0px;outline:none;background:black;width:75%;color:white;font-size:16px;padding:0px;'/>
+<script>
+var CMD = document.getElementById('ns_cmd_dis');
+plat.innerText = navigator.platform+'~root#]';
+async function E_U_C(commands,elu)
+{
+    var help = `NightSky Terminal Guide:
+PRINT [Text]:Display texts on the screen.
+WRITE [Content]=>[File Name]:Create a file named[File Name] and write [Content] to it.
+FLIST:List all user files.
+DELET [N]:Delete [N].
+FREAD [File]:Get the contents of [File].
+EXCJS [Code]:Execute JavaScript code.
+TUIWD [Title]:[Content]:[CallBack] :Create a window.
+COLOR [COLOR]:Set terminal color.
+SETBG [COLOR]:Set terminal background color.
+USRAG:Get user-agents.
+CLEAR:Clear all contents on the screen.
+FETCH [url]:Fetch something from [url].`;
+    var cmd = commands.toLowerCase();
+    if(!cmd){elu.innerHTML+='';return 0;}
+    else if(cmd == 'help') elu.innerText+='\n'+help;
+    else if(cmd.startsWith('print ')) elu.innerHTML+='<br>'+cmd.replace('print ','');
+    else if(cmd.startsWith('write ')){var tmp1 = cmd.replace('write ','');localStorage.setItem(tmp1.split('=>')[1],tmp1.split('=>')[0]);elu.innerHTML+='<br>File wrote successfully.';}
+    else if(cmd.startsWith('fread ')) elu.innerHTML+='<br>'+localStorage.getItem(cmd.replace('fread ',''));
+    else if(cmd.startsWith('delet ')){localStorage.removeItem(cmd.replace('delet ',''));elu.innerHTML+='<br>Item deleted.';}
+    else if(cmd == 'flist'){for(var fp = 0;fp < localStorage.length;fp++){elu.innerText+='\n'+localStorage.key(fp);}}
+    else if(cmd.startsWith('excjs ')) elu.innerHTML+='<br>'+eval(cmd.replace('excjs ',''));
+    else if(cmd.startsWith('color ')) elu.style.color=cmd.replace('color ','');
+    else if(cmd.startsWith('setbg ')) elu.style.background=cmd.replace('setbg ','');
+    else if(cmd=='usrag') elu.innerHTML+='<br>'+navigator.userAgent;
+    else if(cmd=='clear') elu.innerHTML='';
+    else if(cmd.startsWith('fetch ')){
+        var resp = await fetch(cmd.replace('fetch ',''));
+        var resp1 = await resp.text();
+        elu.innerText+='\n'+resp1;
+    }
+    else if(cmd.startsWith('tuiwd ')){var tmp2 = cmd.replace('tuiwd ','');var window_bdy = `<div style='color:white;padding:3px;background:navy;border:1px solid white;'>${tmp2.split(':')[0]}<hr>${tmp2.split(':')[1]}<hr><center><a onclick='eval(\`${tmp2.split(":")[2]}\`)'>[OK]</a></center></div>`;elu.innerHTML+=window_bdy;}
+    else{elu.innerHTML+='<br>Invalid command: '+cmd}
+}
+user_cmd.addEventListener('keydown',function(ek){
+    if(ek.key == 'Enter')
+    {
+        CMD.innerHTML+=`<br>${plat.innerHTML} ${user_cmd.value}`;
+        E_U_C(user_cmd.value,CMD);
+        nsprompt.scrollTop=nsprompt.scrollHeight;
+        user_cmd.value = '';
+    }
+});
+</script>
+</div>
 <div id='alertmez' class='nsoverlay'>
 <div style='border:1px solid white;background:black;width:70%;padding:5px;padding-top:5px;padding-bottom:5px' id="mezcont">
 <a id='alert_title'>Alert</a>
@@ -1843,6 +1902,7 @@ VERSION 1.2 CHANGELOG
 ==========
 1.新增了4个功能。分别是：相机、定位、开发者模式、语音识别。
 2.(7.1)新增主题功能。
+3.（7.3版本）增加命令行。
 ==========`;
 </script> 
 </body> 
