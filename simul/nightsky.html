@@ -122,13 +122,15 @@ input[type=checkbox]
 .bi{font-size:40px;color:#ccc;} 
 .status_bar 
 { 
-    background: linear-gradient(white,#ccc); 
-    width:100%; 
+    background: linear-gradient(black,rgb(30,30,30)); 
+    width:calc(100% - 3px); 
     font-size:20px; 
     position: absolute; 
     top:0px; 
     left:0px; 
     text-align: center; 
+    color:white;
+    padding-right:3px;
 } 
 .desktop 
 { 
@@ -180,7 +182,7 @@ input[type=checkbox]
 </style> 
 </head> 
 <body> 
-<div class="status_bar">100% <i style="color:black;font-size:25px;" class="bi bi-battery-full"></i> <i style="color:black;font-size:25px;" class="bi bi-wifi"></i> <i style="color:black;font-size:25px;" class="bi bi-bar-chart-fill"></i> <strong id="timedisplay">--:--</strong></div> 
+<div class="status_bar"><i style="color:white;font-size:25px;" class="bi bi-wifi"></i> <i style="color:white;font-size:25px;" class="bi bi-bar-chart-fill"></i> 100% <i style="color:#21b524;font-size:25px;" class="bi bi-battery-full"></i> <a style="color:#71cfd1" id="timedisplay">--:--</a></div> 
 <div class="desktop"> 
     <div class="ns-icon"><i class="bi bi-folder-fill" onclick="topmost('nsfm');$('#nsfm').effect('slide',500);list_personal()"></i><br>文件</div> 
     <div class="ns-icon"><i class="bi bi-file-text-fill" onclick="topmost('nsedit');$('#nsedit').effect('slide',500);"></i><br>文本编辑器</div> 
@@ -332,9 +334,11 @@ function readfile(inputentry) {
         <h2>壁纸</h2>
         设置壁纸：<input type="file" id="wallpaperi" oninput="img2base64()" style="width:250px;border-width:0px;background: black;" /> <button onclick="localStorage.removeItem('NS_WALLPAPER.nsys');ns_alert('提示','已恢复默认。重启后生效。');">恢复默认</button>
         <br>预设背景(来源于百度图片，版权归原作者所有)：<br>
-        <img onclick='localStorage.setItem("NS_WALLPAPER.nsys","https://imgsa.baidu.com/forum/wh%3D200%2C90%3B/sign=930a9541c05c1038242bc6c08221bf2a/f6113c34349b033b21ef698113ce36d3d439bdc5.jpg");ns_alert("提示","修改成功，重启生效。")' src='https://imgsa.baidu.com/forum/wh%3D200%2C90%3B/sign=930a9541c05c1038242bc6c08221bf2a/f6113c34349b033b21ef698113ce36d3d439bdc5.jpg' width=50 height=50/>
-        <img onclick='localStorage.setItem("NS_WALLPAPER.nsys","https://img.duoyi.com/com/214/pic/PL-83KI8OHbuo.gif");ns_alert("提示","修改成功，重启生效。")' src='https://img.duoyi.com/com/214/pic/PL-83KI8OHbuo.gif' width=50 height=50/>
-        <img onclick='localStorage.setItem("NS_WALLPAPER.nsys","https://coze-coding-project.tos.coze.site/coze_storage_7630179118994391040/images/1777885043780_3rzugk_a910f6e8.jpeg?sign=2093245044-7ea9ce52a3-0-e0f0357daedfe9c26288dfb61b25e3b1a0597463448e01625455c046945768bc");ns_alert("提示","修改成功，重启生效。")' src='https://coze-coding-project.tos.coze.site/coze_storage_7630179118994391040/images/1777885043780_3rzugk_a910f6e8.jpeg?sign=2093245044-7ea9ce52a3-0-e0f0357daedfe9c26288dfb61b25e3b1a0597463448e01625455c046945768bc' width=50 height=50/>
+        <img onclick='localStorage.setItem("NS_WALLPAPER.nsys","https://imgsa.baidu.com/forum/wh%3D200%2C90%3B/sign=930a9541c05c1038242bc6c08221bf2a/f6113c34349b033b21ef698113ce36d3d439bdc5.jpg");ns_alert("提示","修改成功，重启生效。");localStorage.removeItem("NS_WALLPAPER2.nsys");' src='https://imgsa.baidu.com/forum/wh%3D200%2C90%3B/sign=930a9541c05c1038242bc6c08221bf2a/f6113c34349b033b21ef698113ce36d3d439bdc5.jpg' width=50 height=50/>
+        <img onclick='localStorage.setItem("NS_WALLPAPER.nsys","https://img.duoyi.com/com/214/pic/PL-83KI8OHbuo.gif");ns_alert("提示","修改成功，重启生效。");localStorage.removeItem("NS_WALLPAPER2.nsys");' src='https://img.duoyi.com/com/214/pic/PL-83KI8OHbuo.gif' width=50 height=50/>
+        <img onclick='localStorage.setItem("NS_WALLPAPER.nsys","https://coze-coding-project.tos.coze.site/coze_storage_7630179118994391040/images/1777885043780_3rzugk_a910f6e8.jpeg?sign=2093245044-7ea9ce52a3-0-e0f0357daedfe9c26288dfb61b25e3b1a0597463448e01625455c046945768bc");ns_alert("提示","修改成功，重启生效。");localStorage.removeItem("NS_WALLPAPER2.nsys");' src='https://coze-coding-project.tos.coze.site/coze_storage_7630179118994391040/images/1777885043780_3rzugk_a910f6e8.jpeg?sign=2093245044-7ea9ce52a3-0-e0f0357daedfe9c26288dfb61b25e3b1a0597463448e01625455c046945768bc' width=50 height=50/>
+         <p>设置纯色壁纸</p>
+        点击按钮取色：<input type="color" id="ns_bgSET" oninput="ns_bgSET_preview.style.background = ns_bgSET.value;ns_bgSET_preview.innerHTML = ns_bgSET.value;"/> <a id="ns_bgSET_preview">颜色预览将会在此处显示。</a> <button onclick="$('body').css('background',ns_bgSET.value);localStorage.setItem('NS_WALLPAPER2.nsys',ns_bgSET.value);localStorage.removeItem('NS_WALLPAPER.nsys');ns_alert('个性化','设置完成，已生效。')">设置</button>
         <h2>主题</h2>
         选择主题或导入主题。<input style="background: black;border-width: 0px;width:100px;" type="file" id="inputentry2"/> <button onclick="readtheme('inputentry2');">导入</button>
 <script>
@@ -657,12 +661,12 @@ function checkPasswordSafe(password) {
     <br>
     <div style='margin-top:15px' onclick='rickroll_c()' class='nscard'>
     <a style='font-size:25px'>NightSky版本</a><br>
-    <font color='gray'>7.2</font>
+    <font color='gray'>7.4</font>
     <script>var rickroll_clc = 0;function rickroll_c(){rickroll_clc++;if(rickroll_clc > 5){rickroll_clc = 0;ns_alert('你被骗了','<video src="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4" id="rickroll_video" controls="" height="80%" width="98%"></video>');rickroll_video.play()}}</script>
     </div>
     <div class='nscard' style="word-wrap: break-word;" onclick='opendeve()'>
     <a style='font-size:25px'>具体信息</a><br>
-    <font color='gray'>NightSky_NSWSU.20260530.0530.7.2_WEB_OWLLYUG_NUMBER_1E_HELLOPGRMM</font>
+    <font color='gray'>NightSky_NSWSU.20260531.0530.7.4_WEB_OWLLYUG_NUMBER_14_HELLOPGRMM</font>
     <script>var deve_clc = 0;function opendeve(){deve_clc++;if(deve_clc > 5){ns_alert("开发者模式","您已进入开发者模式（调试模式）。");developer_option.removeAttribute('hidden');}}</script>
     </div>
     <div class='nscard'>
@@ -1688,6 +1692,7 @@ user_cmd.addEventListener('keydown',function(ek){
 </div>
 <script>
 if(localStorage.getItem('NS_WALLPAPER.nsys')){document.body.style.backgroundImage = `url(${localStorage.getItem('NS_WALLPAPER.nsys')})`;}else{}
+if(localStorage.getItem('NS_WALLPAPER2.nsys')){document.body.style.background = `${localStorage.getItem('NS_WALLPAPER2.nsys')}`;}else{}
 if(localStorage.getItem('NS_STARTUP_OP.nsys')){var medu_s = localStorage.getItem('NS_STARTUP_OP.nsys').split('\n');for(var mee = 0;mee < medu_s.length;mee++){eval(localStorage.getItem(medu_s[mee]));}jsmedu.value=localStorage.getItem('NS_STARTUP_OP.nsys');}else{}
 if(localStorage.getItem('NS_FONTSIZE.nsys')){document.body.style.fontSize = localStorage.getItem('NS_FONTSIZE.nsys');}else{}
 if(localStorage.getItem('NS_THEME.nsys')){applytheme(localStorage.getItem('NS_THEME.nsys'));}else{}
@@ -1903,6 +1908,7 @@ VERSION 1.2 CHANGELOG
 1.新增了4个功能。分别是：相机、定位、开发者模式、语音识别。
 2.(7.1)新增主题功能。
 3.（7.3版本）增加命令行。
+4.(7.4)修改了状态栏样式和新增纯色背景设置。
 ==========`;
 </script> 
 </body> 
