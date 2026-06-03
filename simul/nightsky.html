@@ -1650,25 +1650,28 @@ USRAG:Get user-agents.
 CLEAR:Clear all contents on the screen.
 FETCH [url]:Fetch something from [url].`;
     var cmd = commands.toLowerCase();
+    if(cmd.length>6){
+        var acmd = commands.substr(6,cmd.length);
+    }
     if(!cmd){elu.innerHTML+='';return 0;}
     else if(cmd == 'help') elu.innerText+='\n'+help;
-    else if(cmd.startsWith('print ')) elu.innerHTML+='<br>'+cmd.replace('print ','');
-    else if(cmd.startsWith('write ')){var tmp1 = cmd.replace('write ','');localStorage.setItem(tmp1.split('=>')[1],tmp1.split('=>')[0]);elu.innerHTML+='<br>File wrote successfully.';}
-    else if(cmd.startsWith('fread ')) elu.innerHTML+='<br>'+localStorage.getItem(cmd.replace('fread ',''));
-    else if(cmd.startsWith('delet ')){localStorage.removeItem(cmd.replace('delet ',''));elu.innerHTML+='<br>Item deleted.';}
+    else if(cmd.startsWith('print ')) elu.innerHTML+='<br>'+acmd;
+    else if(cmd.startsWith('write ')){var tmp1 = acmd;localStorage.setItem(tmp1.split('=>')[1],tmp1.split('=>')[0]);elu.innerHTML+='<br>File wrote successfully.';}
+    else if(cmd.startsWith('fread ')) elu.innerHTML+='<br>'+localStorage.getItem(acmd);
+    else if(cmd.startsWith('delet ')){localStorage.removeItem(acmd);elu.innerHTML+='<br>Item deleted.';}
     else if(cmd == 'flist'){for(var fp = 0;fp < localStorage.length;fp++){elu.innerText+='\n'+localStorage.key(fp);}}
-    else if(cmd.startsWith('excjs ')) elu.innerHTML+='<br>'+eval(cmd.replace('excjs ',''));
-    else if(cmd.startsWith('color ')) elu.style.color=cmd.replace('color ','');
-    else if(cmd.startsWith('setbg ')) elu.style.background=cmd.replace('setbg ','');
+    else if(cmd.startsWith('excjs ')) elu.innerHTML+='<br>'+eval(acmd);
+    else if(cmd.startsWith('color ')) elu.style.color=acmd;
+    else if(cmd.startsWith('setbg ')) elu.style.background=acmd;
     else if(cmd=='usrag') elu.innerHTML+='<br>'+navigator.userAgent;
     else if(cmd=='clear') elu.innerHTML='';
     else if(cmd.startsWith('fetch ')){
-        var resp = await fetch(cmd.replace('fetch ',''));
+        var resp = await fetch(acmd);
         var resp1 = await resp.text();
         elu.innerText+='\n'+resp1;
     }
-    else if(cmd.startsWith('tuiwd ')){var tmp2 = cmd.replace('tuiwd ','');var window_bdy = `<div style='color:white;padding:3px;background:navy;border:1px solid white;'>${tmp2.split(':')[0]}<hr>${tmp2.split(':')[1]}<hr><center><a onclick='eval(\`${tmp2.split(":")[2]}\`)'>[OK]</a></center></div>`;elu.innerHTML+=window_bdy;}
-    else{elu.innerHTML+='<br>Invalid command: '+cmd}
+    else if(cmd.startsWith('tuiwd ')){var tmp2 = acmd;var window_bdy = `<div style='color:white;padding:3px;background:navy;border:1px solid white;'>${tmp2.split(':')[0]}<hr>${tmp2.split(':')[1]}<hr><center><a onclick='eval(\`${tmp2.split(":")[2]}\`)'>[OK]</a></center></div>`;elu.innerHTML+=window_bdy;}
+    else{elu.innerHTML+='<br>Invalid command: '+commands}
 }
 user_cmd.addEventListener('keydown',function(ek){
     if(ek.key == 'Enter')
@@ -1909,6 +1912,7 @@ VERSION 1.2 CHANGELOG
 2.(7.1)新增主题功能。
 3.（7.3版本）增加命令行。
 4.(7.4)修改了状态栏样式和新增纯色背景设置。
+5.修复了命令行的输入问题。
 ==========`;
 </script> 
 </body> 
