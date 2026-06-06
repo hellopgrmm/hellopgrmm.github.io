@@ -182,7 +182,29 @@ input[type=checkbox]
 </style> 
 </head> 
 <body> 
-<div class="status_bar"><i style="color:white;font-size:25px;" class="bi bi-wifi"></i> <i style="color:white;font-size:25px;" class="bi bi-bar-chart-fill"></i> 100% <i style="color:#21b524;font-size:25px;" class="bi bi-battery-full"></i> <a style="color:#71cfd1" id="timedisplay">--:--</a></div> 
+<div class="status_bar"><i style="color:white;font-size:25px;" class="bi bi-wifi"></i> <i style="color:white;font-size:25px;" class="bi bi-bar-chart-fill"></i> <a style='color:white' id='battery_vald'>100%</a>
+<div id='battery_fl' style='display:inline-block;border:1px solid #ccc;width:30px;height:15px'>
+    <div id='battery_sim' style='width:100%;height:100%;background:#00c21a'></div>
+</div>
+<script>
+const crt = new Date();
+var crt_btr = (100-((Number(crt.getHours())*60+Number(crt.getMinutes()))/(24*60)*100)).toFixed(0)+'%';
+battery_sim.style.width=crt_btr;
+battery_vald.innerText=crt_btr;
+var ctr_btr = Number(crt_btr.replace('%',''));
+if(ctr_btr<=10)
+{
+    battery_sim.style.background='red';
+}
+else if(ctr_btr<=20)
+{
+    battery_sim.style.background='#cf7c00';
+}
+else
+{
+    battery_sim.style.background='#00c21a';
+}
+</script> <a style="color:#71cfd1" id="timedisplay">--:--</a></div> 
 <div class="desktop"> 
     <div class="ns-icon"><i class="bi bi-folder-fill" onclick="topmost('nsfm');$('#nsfm').effect('slide',500);list_personal()"></i><br>文件</div> 
     <div class="ns-icon"><i class="bi bi-file-text-fill" onclick="topmost('nsedit');$('#nsedit').effect('slide',500);"></i><br>文本编辑器</div> 
@@ -325,7 +347,7 @@ function readfile(inputentry) {
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nscckj.removeAttribute('hidden');calculate_storage();"><i class="bi bi-hdd-stack-fill"></i> 存储空间</div>
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);advancedop.removeAttribute('hidden');"><i class="bi bi-sliders"></i> 高级选项</div>
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);developerop.removeAttribute('hidden');" hidden id="developer_option"><i class="bi bi-braces"></i> 开发人员选项</div>
-        <div class="nscard" onclick="ns_pagewatcher('https://hellopgrmm.github.io/simul/vek_cmb.html','留言板')"><i class="bi bi-chat-left-dots-fill"></i> Rate for me</div>
+        <div class="nscard" onclick="ns_pagewatcher('https://hellopgrmm.github.io/simul/vek_cmb.html','留言板(,,>᎑<,,)')"><i class="bi bi-chat-left-dots-fill"></i> 留言板 ෆ( ˶'ᵕ'˶)ෆ </div>
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);aboutde.removeAttribute('hidden');"><i class="bi bi-info-circle-fill"></i> 关于</div>
     </div>
     <div style="margin-top: 10px;height:80%;overflow:auto;" id="nsgxh" hidden>
@@ -1913,6 +1935,7 @@ VERSION 1.2 CHANGELOG
 3.（7.3版本）增加命令行。
 4.(7.4)修改了状态栏样式和新增纯色背景设置。
 5.修复了命令行的输入问题。
+6.顺便把电量显示模式换一下 (◍＞◡＜◍)
 ==========`;
 </script> 
 </body> 
