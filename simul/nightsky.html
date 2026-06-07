@@ -20,6 +20,19 @@ body
     background:linear-gradient(navy,blue) ; 
     background-size:100%;
 } 
+		body::-webkit-scrollbar-track {
+             background: rgba(0,0,0,0.1);
+        }
+        body::-webkit-scrollbar-thumb {
+            background: rgba(70,70,70,0.5);
+        }
+        body::-webkit-scrollbar-thumb:hover {
+            background: rgba(70,70,70,0.8);
+        }
+        body::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
 button,input[type=submit] 
 { 
     background:linear-gradient(gray,black); 
@@ -1752,6 +1765,7 @@ socket.on('leave', ({ alias,total }) => {
       socket.send(cr_msg.value);
       cr_clog.innerHTML+=`<div style="width:calc(100% - 5px);padding:5px;background:rgb(50,50,50);"><font color="cyan">${room_nick.value} </font> <font color="gray">${gettime_1()}</font><blockquote>${cr_msg.value}</blockquote></div>`;
       cr_msg.value = "";
+      document.getElementById('cr_clog').scrollTop = document.getElementById('cr_clog').scrollHeight;
     }
 }
 cr_msg.addEventListener("keydown",function(me){
