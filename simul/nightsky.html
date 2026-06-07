@@ -1727,7 +1727,7 @@ user_cmd.addEventListener('keydown',function(ek){
         </p>
     </div>
     <div id="main_cr" hidden>
-        <div id="cr_clog" style="width:95%;height:80%">
+        <div id="cr_clog" style="width:95%;height:80%;overflow:auto;">
             <font color="gray">注：在线人数统计可能不准确，但不影响聊天。</font><br>
         </div>
         <div style="display:flex;align-items: center;"><textarea style="width:70%;height:50px" id="cr_msg" placeholder="输入信息，Ctrl+Shift换行。"></textarea> <button style="margin-left: 5px;" onclick="wss_send()">发送</button> <button style="margin-left: 5px;" onclick='preset_set.removeAttribute("hidden");main_cr.setAttribute("hidden",true);room_fnum.innerHTML = "";'>离开聊天室</button></div>
