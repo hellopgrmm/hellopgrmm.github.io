@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <title>NightSky</title> 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> 
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css"/>
-    <link id='nsfontst' rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/theme/lesser-dark.min.css" />
+    <link id='nsfontst' rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js"></script>
     <script defer src="https://events.vercount.one/js"></script>
@@ -187,6 +185,7 @@ input[type=checkbox]
     <div id='battery_sim' style='width:100%;height:100%;background:#00c21a'></div>
 </div>
 <script>
+function nsbtr(){
 const crt = new Date();
 var crt_btr = (100-((Number(crt.getHours())*60+Number(crt.getMinutes()))/(24*60)*100)).toFixed(0)+'%';
 battery_sim.style.width=crt_btr;
@@ -204,6 +203,8 @@ else
 {
     battery_sim.style.background='#00c21a';
 }
+}
+    nsbtr();
 </script> <a style="color:#71cfd1" id="timedisplay">--:--</a></div> 
 <div class="desktop"> 
     <div class="ns-icon"><i class="bi bi-folder-fill" onclick="topmost('nsfm');$('#nsfm').effect('slide',500);list_personal()"></i><br>文件</div> 
@@ -683,12 +684,12 @@ function checkPasswordSafe(password) {
     <br>
     <div style='margin-top:15px' onclick='rickroll_c()' class='nscard'>
     <a style='font-size:25px'>NightSky版本</a><br>
-    <font color='gray'>7.4</font>
+    <font color='gray'>7.5</font>
     <script>var rickroll_clc = 0;function rickroll_c(){rickroll_clc++;if(rickroll_clc > 5){rickroll_clc = 0;ns_alert('你被骗了','<video src="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4" id="rickroll_video" controls="" height="80%" width="98%"></video>');rickroll_video.play()}}</script>
     </div>
     <div class='nscard' style="word-wrap: break-word;" onclick='opendeve()'>
     <a style='font-size:25px'>具体信息</a><br>
-    <font color='gray'>NightSky_NSWSU.20260531.0530.7.4_WEB_OWLLYUG_NUMBER_14_HELLOPGRMM</font>
+    <font color='gray'>NightSky_NSWSU.20260607.0607.7.4_WEB_OWLLYUG_NUMBER_15_HELLOPGRMM</font>
     <script>var deve_clc = 0;function opendeve(){deve_clc++;if(deve_clc > 5){ns_alert("开发者模式","您已进入开发者模式（调试模式）。");developer_option.removeAttribute('hidden');}}</script>
     </div>
     <div class='nscard'>
@@ -776,6 +777,7 @@ function checkPasswordSafe(password) {
         <div class="ns-icon"><i class="bi bi-camera2" onclick="$('#nsmore').fadeOut(300);topmost('nsCAM');$('#nsCAM').effect('slide',500);startcam();"></i><br>相机</div> 
         <div class="ns-icon"><i class="bi bi-geo-alt-fill" onclick="$('#nsmore').fadeOut(300);topmost('nslocation');$('#nslocation').effect('slide',500);dingwei();"></i><br>当前定位</div> 
         <div class="ns-icon"><i class="bi bi-terminal" onclick="$('#nsmore').fadeOut(300);topmost('nsprompt');$('#nsprompt').effect('slide',500);user_cmd.focus()"></i><br>命令行</div> 
+        <div class="ns-icon"><i class="bi bi-chat-left" onclick="$('#nsmore').fadeOut(300);topmost('nschats');$('#nschats').effect('slide',500);"></i><br>在线聊天室</div> 
          <h2>实用(需联网)</h2>
         <div class="ns-icon"><i class="bi bi-file-word-fill" onclick="$('#nsmore').fadeOut(300);topmost('apiranden');$('#apiranden').effect('slide',500);fetch_rde()"></i><br>每日英语单词</div> 
         <div class="ns-icon"><i class="bi bi-moisture" onclick="$('#nsmore').fadeOut(300);topmost('apioilprice');$('#apioilprice').effect('slide',500);fetch_oilp()"></i><br>油价查询</div> 
@@ -990,7 +992,6 @@ jscmd.addEventListener('keydown',function(ev){
         await delay(1000);
         editor = CodeMirror.fromTextArea(document.getElementById('mirrorinterface') ,{
             mode:"htmlmixed",
-            theme:"lesser-dark",
             lineWrapping: true
         });
         loadstate.style.display="none";
@@ -1706,6 +1707,61 @@ user_cmd.addEventListener('keydown',function(ek){
 });
 </script>
 </div>
+<div id="nschats" class="window">
+    <div class="nstit">在线聊天室 版本1 <a id="room_fnum"></a></div>
+    <div id="preset_set">
+        <h1>在线聊天室</h1>
+        <p>输入以下必要信息，即可创建/加入聊天。</p>
+        <p>创建房间号(可自定义) <input id="room_n"/></p>
+        <p>自定义昵称 <input id="room_nick"/></p>
+        <button onclick="start_wss()">进入</button>
+        <p style="color:gray">
+            操作指引：<br>
+            [创建房间]<br>
+            1.自定义一个房间号，并且输入名称。<br>
+            2.点击进入，即可进入空聊天室。<br>
+            [加入房间]<br>
+            1.邀请其他人，告诉您设定的房间号。
+            <br>2.让他人输入您的房间号，即可进入。（双方之间的房间号必须相同，否则互相收不到消息）
+            <br>本聊天室基于WebSocket技术实现，不会保存用户聊天记录，请手动复制导出。本聊天室适用于临时/应急场景，不要当成主力应用使用。
+        </p>
+    </div>
+    <div id="main_cr" hidden>
+        <div id="cr_clog" style="width:95%;height:80%">
+            <font color="gray">注：在线人数统计可能不准确，但不影响聊天。</font><br>
+        </div>
+        <div style="display:flex;align-items: center;"><textarea style="width:70%;height:50px" id="cr_msg" placeholder="输入信息，Ctrl+Shift换行。"></textarea> <button style="margin-left: 5px;" onclick="wss_send()">发送</button> <button style="margin-left: 5px;" onclick='preset_set.removeAttribute("hidden");main_cr.setAttribute("hidden",true);room_fnum.innerHTML = "";'>离开聊天室</button></div>
+    </div>
+    <script type="module">
+import { connect } from 'https://cdn.jsdelivr.net/npm/itty-sockets@0.9.3/+esm';
+window.start_wss=() => {
+    preset_set.setAttribute("hidden",true);
+    main_cr.removeAttribute("hidden");
+    room_fnum.innerHTML = "(房间号："+room_n.value+")";
+    const socket=connect(room_n.value,{as:room_nick.value});
+    socket.on('message', ({ message, alias }) => {
+        cr_clog.innerHTML+=`<div style="width:calc(100% - 5px);padding:5px;"><font color="yellow">${alias}</font> <font color="gray">${gettime_1()}</font><blockquote>${message}</blockquote></div>`;
+    });
+socket.on('join', ({ alias,total }) => {
+   cr_clog.innerHTML+=`<font color="lightgreen">${alias}加入了房间。(${total}人在线)</font><br>`;
+});
+socket.on('leave', ({ alias,total }) => {
+  cr_clog.innerHTML+=`<font color="orange">${alias}离开了房间。(${total}人在线)</font><br>`;
+});
+    window.wss_send=() => {
+      socket.send(cr_msg.value);
+      cr_clog.innerHTML+=`<div style="width:calc(100% - 5px);padding:5px;background:rgb(50,50,50);"><font color="cyan">${room_nick.value} </font> <font color="gray">${gettime_1()}</font><blockquote>${cr_msg.value}</blockquote></div>`;
+      cr_msg.value = "";
+    }
+}
+cr_msg.addEventListener("keydown",function(me){
+    if(me.key == "Enter")
+    {
+        wss_send();
+    }
+});
+    </script>
+</div>
 <div id='alertmez' class='nsoverlay'>
 <div style='border:1px solid white;background:black;width:70%;padding:5px;padding-top:5px;padding-bottom:5px' id="mezcont">
 <a id='alert_title'>Alert</a>
@@ -1797,7 +1853,7 @@ function ns_htmlwatch(lckey)
         ns_alert('网页发生错误','网页返回的信息：<br>'+e);
     }
 }
-setInterval("timedisplay.innerHTML = gettime_1();",3000); 
+setInterval("timedisplay.innerHTML = gettime_1();nsbtr();",3000); 
 //files 
 function list_personal() 
 { 
@@ -1935,7 +1991,8 @@ VERSION 1.2 CHANGELOG
 3.（7.3版本）增加命令行。
 4.(7.4)修改了状态栏样式和新增纯色背景设置。
 5.修复了命令行的输入问题。
-6.顺便把电量显示模式换一下 (◍＞◡＜◍)
+6.更换电量显示模式
+7.(7.5)增加wss聊天室
 ==========`;
 </script> 
 </body> 
