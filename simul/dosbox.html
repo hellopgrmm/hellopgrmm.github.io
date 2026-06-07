@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>DOSBOX</title>
+</head>
+<body>
+<script src="https://js-dos.com/cdn/js-dos-api.js"></script>
+<style>body{background: black;color:white}</style>
+<button onclick="force.focus()" style="position: fixed;right:0px">打开键盘</button>
+<div id="dosbox" hidden></div>
+<a id="DOSstatic">正在加载DosBox，请稍后...</a><br>
+<input id="force" hidden/>
+<script>
+var dosbox = new Dosbox({
+  id:"dosbox",
+  onload:function(dosbox){
+  	dosbox.run("","");
+    DOSstatic.innerHTML="加载完成。";
+  },
+    onrun:function (dosbox,app){
+    	document.querySelector("#dosbox .dosbox-loader").style.display = "none";
+    	document.getElementById("dosbox").hidden = false;
+    	DOSstatic.innerHTML="";
+  }
+});
+dosbox.ui.start.click();
+</script>
+</body>
+</html>
