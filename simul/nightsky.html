@@ -1754,9 +1754,11 @@ window.start_wss=() => {
     room_fnum.innerHTML = "(房间号："+room_n.value+")";
     const socket=connect(room_n.value,{as:room_nick.value});
     socket.on('message', ({ message, alias }) => {
-		document.getElementById('cr_clog').scrollTop = document.getElementById('cr_clog').scrollHeight;
         cr_clog.innerHTML+=`<div style="width:calc(100% - 5px);padding:5px;"><font color="yellow">${alias}</font> <font color="gray">${gettime_1()}</font><blockquote>${message}</blockquote></div>`;
 		//document.getElementById('cr_clog').scrollTop = document.getElementById('cr_clog').scrollHeight;
+const elem = document.getElementById('cr_clog');
+elem.offsetHeight;
+elem.scrollTop = elem.scrollHeight;
     });
 socket.on('join', ({ alias,total }) => {
    cr_clog.innerHTML+=`<font color="lightgreen">${alias}加入了房间。(${total}人在线)</font><br>`;
