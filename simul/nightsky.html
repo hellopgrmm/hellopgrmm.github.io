@@ -697,12 +697,12 @@ function checkPasswordSafe(password) {
     <br>
     <div style='margin-top:15px' onclick='rickroll_c()' class='nscard'>
     <a style='font-size:25px'>NightSky版本</a><br>
-    <font color='gray'>7.5</font>
+    <font color='gray'>8.0</font>
     <script>var rickroll_clc = 0;function rickroll_c(){rickroll_clc++;if(rickroll_clc > 5){rickroll_clc = 0;ns_alert('你被骗了','<video src="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4" id="rickroll_video" controls="" height="80%" width="98%"></video>');rickroll_video.play()}}</script>
     </div>
     <div class='nscard' style="word-wrap: break-word;" onclick='opendeve()'>
     <a style='font-size:25px'>具体信息</a><br>
-    <font color='gray'>NightSky_NSWSU.20260607.0607.7.4_WEB_OWLLYUG_NUMBER_15_HELLOPGRMM</font>
+    <font color='gray'>NightSky_NSWSU.20260614.0614.8.0_WEB_OWLLYUG_NUMBER_16_HELLOPGRMM</font>
     <script>var deve_clc = 0;function opendeve(){deve_clc++;if(deve_clc > 5){ns_alert("开发者模式","您已进入开发者模式（调试模式）。");developer_option.removeAttribute('hidden');}}</script>
     </div>
     <div class='nscard'>
@@ -792,6 +792,7 @@ function checkPasswordSafe(password) {
         <div class="ns-icon"><i class="bi bi-terminal" onclick="$('#nsmore').fadeOut(300);topmost('nsprompt');$('#nsprompt').effect('slide',500);user_cmd.focus()"></i><br>命令行</div> 
         <div class="ns-icon"><i class="bi bi-chat-left" onclick="$('#nsmore').fadeOut(300);topmost('nschats');$('#nschats').effect('slide',500);"></i><br>在线聊天室</div> 
 		<div class="ns-icon"><i class="bi bi-terminal-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/dosbox.html','DosBox');"></i><br>DosBox</div>
+		<div class="ns-icon"><i class="bi bi-telephone" onclick="$('#nsmore').fadeOut(300);topmost('nstelefon');$('#nstelefon').effect('slide',500);"></i><br>电话</div> 
          <h2>实用(需联网)</h2>
         <div class="ns-icon"><i class="bi bi-file-word-fill" onclick="$('#nsmore').fadeOut(300);topmost('apiranden');$('#apiranden').effect('slide',500);fetch_rde()"></i><br>每日英语单词</div> 
         <div class="ns-icon"><i class="bi bi-moisture" onclick="$('#nsmore').fadeOut(300);topmost('apioilprice');$('#apioilprice').effect('slide',500);fetch_oilp()"></i><br>油价查询</div> 
@@ -1787,6 +1788,138 @@ cr_msg.addEventListener("keydown",function(me){
 });
     </script>
 </div>
+<div id="nstelefon" class="window">
+    <div class="nstit">电话</div>
+    <div id="tel_main">
+    <center id="tttkeyboard">
+        <div id="tnumber_display" style="font-size:70px;text-align: center;height:90px"></div>
+    </center>
+    <center>
+        <button style="background: linear-gradient(rgb(0,200,0),green);height:50px;width:300px;font-size: 35px;" onclick="dial_v(tnumber_display.innerHTML)">拨打</button><br><br>
+        <button style="background: linear-gradient(red,rgb(200,0,0));height:50px;width:300px;font-size: 35px;" onclick="tnumber_display.innerHTML = '';">清空</button>
+    </center>
+    </div>
+<div id="dial_main" hidden>
+    <a style="font-size:50px" id="dial_vn"></a><br>
+    <a id="dial_sta">正在拨打...</a><br><br>
+    <button onclick="dial_stop(tnumber_display.innerHTML);" style="background: linear-gradient(red,rgb(200,0,0));height:85px;width:210px;font-size: 30px;">中断</button>
+</div>
+</div>
+<div id="dial_fis" class="window">
+    <style>
+        #incoming_sign
+        {
+            animation:incoming 1s steps(1) ;
+            animation-iteration-count: infinite;
+        }
+        @keyframes incoming
+        {
+            0%{opacity: 0}
+            50%{opacity: 1}
+            100%{opacity: 0}
+        }
+        #dial_si{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation:guang 3s;
+            animation-iteration-count: infinite;
+        }
+        @keyframes guang
+        {
+            0%{box-shadow: 0px 0px 10px 2px cyan;}
+            50%{box-shadow: 0px 0px 10px 5px cyan;}
+            100%{box-shadow: 0px 0px 10px 2px cyan;}
+        }
+    </style>
+<div id="incoming_main">
+    <audio src="https://www.joy127.com/url/153140.mp3" id="dial_ringtone"></audio>
+    <b style="font-size:30px" id="incoming_sign">来电</b>
+    <p><a id="dial_ni">未知号码</a> | <a id="dial_pl"></a></p>
+    <center>
+    <div style="background: linear-gradient(#288fc3,#296b9e);height:100px;width:100px;" id="dial_si"><i style="color:white" class="bi bi-telephone-inbound-fill
+"></i></div><p style="font-size: 30px;">未知号码</p>
+    <div style="margin-top: 50px;">
+    <button onclick="ns_alert('电话','暂不支持该功能。')" style="background: linear-gradient(rgb(0,200,0),green);height:75px;width:210px;font-size: 30px;position: absolute;right:5px;">接听</button>
+    <button onclick="dial_s();" style="background: linear-gradient(red,rgb(200,0,0));height:75px;width:210px;font-size: 30px;position: absolute;left:5px;">拒绝</button>
+    </div>
+    </center>
+</div>
+</div>
+    <script type="module">
+        import { connect } from 'https://cdn.jsdelivr.net/npm/itty-sockets@0.9.3/+esm';
+        var vtelnum = "";
+        if(localStorage.getItem('NS_VT.nsys')){var vtelnum = localStorage.getItem('NS_VT.nsys');}else{vtelnum = Math.floor(Math.random() * 999999) + 111111;localStorage.setItem('NS_VT.nsys',vtelnum);}
+        var numbersa = ['789','456','123','0'];
+function loadtkey(){
+    for(var linef = 0;linef<numbersa.length;linef++)
+    {
+        for(var alef = 0;alef<numbersa[linef].length;alef++)
+        {
+            document.getElementById("tttkeyboard").innerHTML+=`<button style="height:70px;width:70px;font-size:30px;" onclick="tnumber_display.innerText+='${numbers[linef][alef]}'">${numbersa[linef][alef]}</button> `;
+        }
+        document.getElementById("tttkeyboard").innerHTML+="<br><br>";
+    }
+}
+var di_rcv;
+        window.onload = function() { 
+            const tlch = connect("TELS",{as:vtelnum});
+            loadtkey();
+            window.dial_v=(vN) => {
+                tlch.send("DIAL-"+vN+","+navigator.platform);
+                tel_main.hidden = true;
+                dial_main.hidden = false;
+                dial_vn.innerHTML = vN;
+            }
+            window.dial_s=() => {
+                dial_ringtone.pause();
+                tlch.send("REFU-"+di_rcv);
+                $("#dial_fis").fadeOut(200);
+                $(".desktop").hide();
+                $(".lock_interface").show();
+            }
+            window.dial_stop=(vN2) => {
+                dial_ringtone.pause();
+                tlch.send("STOP-"+vN2);
+                tel_main.hidden = false;
+                dial_main.hidden = true;
+            }
+            tlch.on('message', ({ message, alias }) => {
+                if(message.includes("DIAL-"+vtelnum)){
+                    dial_ringtone.currentTime = 0;
+                    dial_ringtone.play();
+                    di_rcv = alias;
+                    dial_ni.innerText = alias;
+                    dial_pl.innerText = message.split(",")[1]+"平台";
+                    $(".lock_interface").hide();
+                    $("#dial_fis").fadeIn(200);
+                    topmost("dial_fis");
+                    reinit_window();
+                }
+                else if(message.includes("REFU-"+vtelnum))
+                {
+                    dial_ringtone.pause();
+                    tel_main.hidden = false;
+                    dial_main.hidden = true;
+                    ns_alert("电话","对方已拒绝。");
+                    $("#dial_fis").fadeOut(200);
+                    $(".desktop").hide();
+                    $(".lock_interface").show();                   
+                }
+                else if(message.includes("STOP-"+vtelnum))
+                {
+                    dial_ringtone.pause();
+                    tel_main.hidden = false;
+                    dial_main.hidden = true;
+                    $("#dial_fis").fadeOut(200);
+                    $(".desktop").hide();
+                    $(".lock_interface").show();                   
+                }
+            });
+            console.log("Channel Connected!");
+         }
+    </script>
+</div>
 <div id='alertmez' class='nsoverlay'>
 <div style='border:1px solid white;background:black;width:70%;padding:5px;padding-top:5px;padding-bottom:5px' id="mezcont">
 <a id='alert_title'>Alert</a>
@@ -2018,6 +2151,10 @@ VERSION 1.2 CHANGELOG
 5.修复了命令行的输入问题。
 6.更换电量显示模式
 7.(7.5)增加wss聊天室
+==========
+8.0 CHANGELOG
+==========
+1.增加模拟拨号模块。
 ==========`;
 </script> 
 </body> 
