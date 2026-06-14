@@ -716,6 +716,11 @@ function checkPasswordSafe(password) {
     <script>platns.innerText = navigator.platform;</script>
     </div>
     <div class='nscard'>
+    <a style='font-size:25px'>虚拟号码</a><br>
+    <font id='vtelna' color='gray'>未知</font>
+    <script>localip.innerText = navigator.language;</script>
+    </div>
+    <div class='nscard'>
     <a style='font-size:25px'>首选语言</a><br>
     <font id='localip' color='gray'>未知</font>
     <script>localip.innerText = navigator.language;</script>
@@ -1797,6 +1802,7 @@ cr_msg.addEventListener("keydown",function(me){
     <center>
         <button style="background: linear-gradient(rgb(0,200,0),green);height:50px;width:300px;font-size: 35px;" onclick="dial_v(tnumber_display.innerHTML)">拨打</button><br><br>
         <button style="background: linear-gradient(red,rgb(200,0,0));height:50px;width:300px;font-size: 35px;" onclick="tnumber_display.innerHTML = '';">清空</button>
+		<p>注：自己的虚拟号码在“设置-关于”里面查看（不是真实号码，不能代替实际拨号）</p>
     </center>
     </div>
 <div id="dial_main" hidden>
@@ -1849,7 +1855,7 @@ cr_msg.addEventListener("keydown",function(me){
     <script type="module">
         import { connect } from 'https://cdn.jsdelivr.net/npm/itty-sockets@0.9.3/+esm';
         var vtelnum = "";
-        if(localStorage.getItem('NS_VT.nsys')){var vtelnum = localStorage.getItem('NS_VT.nsys');}else{vtelnum = Math.floor(Math.random() * 999999) + 111111;localStorage.setItem('NS_VT.nsys',vtelnum);}
+        if(localStorage.getItem('NS_VT.nsys')){var vtelnum = localStorage.getItem('NS_VT.nsys');}else{vtelnum = Math.floor(Math.random() * 999999) + 111111;localStorage.setItem('NS_VT.nsys',vtelnum);}vtelna.innerHTML = vtelnum;
         var numbersa = ['789','456','123','0'];
 function loadtkey(){
     for(var linef = 0;linef<numbersa.length;linef++)
