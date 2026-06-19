@@ -1,0 +1,105 @@
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323:wght@400;700&display=swap"> 
+<title>在线网络收音机</title>
+<style>
+body
+{
+    background:#ece9d8;
+    font-family:VT323;
+    font-size:20px;
+}
+button
+{
+    height:35px;
+    border-width:2px;
+    border-color:white #ccc #ccc white;
+    box-shadow:0px 0px 1px 1px gray;
+    font-family:VT323;
+    color:black;
+    font-size:16px;
+    background:#ece9d8;
+}
+button:active
+{
+    border-color:#ccc white white #ccc;
+}
+input
+{
+    height:35px;
+    border-radius:0px;
+    max-width:300px;
+    border-width:2px;
+    border-color:gray #ccc #ccc gray;
+    font-family:VT323;
+    color:black;
+    font-size:20px;
+    outline:none;
+}
+</style>
+<body>
+<div id='screen' style='border:1px solid gray;padding:5px;'>
+<div style='height:100px;width:calc(100% - 20px);background:black;border:5px solid #ccc;border-color:#ccc white #ccc white;color:rgb(0,255,0);font-size:25px;padding:5px;'>
+<a id='playstate'>等待播放</a>
+<hr style='background:rgb(0,255,0);height:1px;border-width:0px;'>
+<marquee id='playname'>无节目-No Programmes</marquee>
+<audio id='broadcast'></audio>
+</div><br>
+<button onclick='broadcast.pause();playstate.innerHTML="暂停";isstop=true;'>PAUSE</button>
+<button onclick='broadcast.play();isstop=false;'>PLAY</button>
+<p>预设(点击电台名称收听)</p>
+<div style='overflow:auto;padding:5px;height:100px;width:80%;border:1px solid black' id='diantais'>
+<p onclick='playit("http://ngcdn001.cnr.cn/live/zgzs/index.m3u8",this.innerHTML);'>中央人民广播电台 中国之声</p>
+<p onclick='playit("http://ngcdn001.cnr.cn/live/yyzs/index.m3u8",this.innerHTML);'>中央人民广播电台 音乐之声</p>
+<p onclick='playit("http://ngcdn001.cnr.cn/live/jjzs/index.m3u8",this.innerHTML);'>中央人民广播电台 经济之声</p>
+<p onclick='playit("http://ngcdn001.cnr.cn/live/lnzs/index.m3u8",this.innerHTML);'>中央人民广播电台 老年之声</p>
+<p onclick='playit("https://stream.live.vc.bbcmedia.co.uk/bbc_world_service",this.innerHTML);'>BBC World Service</p>
+<p onclick='playit("https://media-ssl.musicradio.com/ClassicFM",this.innerHTML);'>ClassicFM</p>
+<p onclick='playit("https://jazz-wr04.ice.infomaniak.ch/jazz-wr04-128.mp3",this.innerHTML);'>Jazz Radio</p>
+</div>
+<p>收听其它电台</p>
+电台名 <input placeholder='请输入' id='add_n'/>
+电台源 <input placeholder='https://...' id='add_s'/>
+<button onclick='playit(add_s.value,add_n.value)'>收听</button>
+</div>
+<script>
+var timer=0;
+var isstop = true;
+function delay(ms) { 
+    return new Promise(resolve => setTimeout(resolve, ms)); 
+}
+function formatsec(seconds) {
+    const isNegative = seconds < 0;
+    const absSeconds = Math.abs(seconds);
+    const minutes = Math.floor(absSeconds / 60);
+    const remainingSeconds = absSeconds % 60;
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(Math.floor(remainingSeconds)).padStart(2, '0');
+    const result = `${formattedMinutes}'${formattedSeconds}`;
+    return isNegative ? `-${result}` : result;
+}
+function playit(source,name)
+{
+    broadcast.pause();
+    isstop=true;
+    broadcast.src=source;
+    playname.innerHTML = '正在收听:'+name;
+    broadcast.play().catch(error=>{
+        playstate.innerHTML='播放失败';
+        playname.innerHTML='错误:'+error;
+    });
+    timer=0;
+    playstate.innerHTML = '接收中';
+}
+broadcast.addEventListener('playing',function(e){
+    isstop=false;
+    start_timer();
+});
+async function start_timer()
+{
+    await delay(1000);
+    timer++;
+    playstate.innerHTML=formatsec(timer);
+    if(isstop){return 0;}else{start_timer();}
+}
+</script>
