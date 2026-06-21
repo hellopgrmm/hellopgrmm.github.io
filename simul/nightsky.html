@@ -698,12 +698,12 @@ function checkPasswordSafe(password) {
     <br>
     <div style='margin-top:15px' onclick='rickroll_c()' class='nscard'>
     <a style='font-size:25px'>NightSky版本</a><br>
-    <font color='gray'>8.0</font>
+    <font color='gray'>8.1</font>
     <script>var rickroll_clc = 0;function rickroll_c(){rickroll_clc++;if(rickroll_clc > 5){rickroll_clc = 0;ns_alert('你被骗了','<video src="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4" id="rickroll_video" controls="" height="80%" width="98%"></video>');rickroll_video.play()}}</script>
     </div>
     <div class='nscard' style="word-wrap: break-word;" onclick='opendeve()'>
     <a style='font-size:25px'>具体信息</a><br>
-    <font color='gray'>NightSky_NSWSU.20260614.0614.8.0_WEB_OWLLYUG_NUMBER_16_HELLOPGRMM</font>
+    <font color='gray'>NightSky_NSWSU.20260621.0621.8.1_WEB_OWLLYUG_NUMBER_17_HELLOPGRMM</font>
     <script>var deve_clc = 0;function opendeve(){deve_clc++;if(deve_clc > 5){ns_alert("开发者模式","您已进入开发者模式（调试模式）。");developer_option.removeAttribute('hidden');}}</script>
     </div>
     <div class='nscard'>
@@ -1755,6 +1755,7 @@ user_cmd.addEventListener('keydown',function(ek){
     </div>
     <script type="module">
 import { connect } from 'https://cdn.jsdelivr.net/npm/itty-sockets@0.9.3/+esm';
+window.connect = connect;
 window.start_wss=() => {
     preset_set.setAttribute("hidden",true);
     main_cr.removeAttribute("hidden");
@@ -1854,7 +1855,6 @@ cr_msg.addEventListener("keydown",function(me){
 </div>
 </div>
     <script type="module">
-        import { connect } from 'https://cdn.jsdelivr.net/npm/itty-sockets@0.9.3/+esm';
         var vtelnum = "";
         if(localStorage.getItem('NS_VT.nsys')){var vtelnum = localStorage.getItem('NS_VT.nsys');}else{vtelnum = Math.floor(Math.random() * 999999) + 111111;localStorage.setItem('NS_VT.nsys',vtelnum);}vtelna.innerHTML = vtelnum;
         var numbersa = ['789','456','123','0'];
@@ -1925,6 +1925,83 @@ var di_rcv;
             });
             console.log("Channel Connected!");
          }
+    </script>
+</div>
+<div id="nsremote" class="window">
+    <div class="nstit">远程控制NightSky 版本1</div>
+    <div id="prepare_interface">
+        <h1>远程控制</h1>
+        <p>注：只能远程控制打开NightSky的网页，不能控制真实机器。</p>
+        <h2>远控端登录</h2>
+        输入接收方的虚拟号码：<input id="receiver_vn"/>
+        <button onclick="enter_rm1(receiver_vn.value)">开始远程控制</button>
+        <h2>接收方登录</h2>
+        <p>如果对方已经准备好远程控制你的设备，请点击下方按钮。</p>
+        <button onclick="enter_rm()">已被远控，接受远程申请</button>
+        <p>（自己的虚拟号码在“设置->关于”查看）</p>
+    </div>
+    <div id="remoting" hidden><h1>远程控制中...</h1><button onclick="end_rss()">退出</button></div>
+    <div id="remoter" hidden>
+        <h1>远程操作</h1>
+        打开应用 <select id="rem_cmd">
+            <option value="topmost('nsfm');$('#nsfm').effect('slide',500);list_personal()">文件管理器</option>
+            <option value="topmost('nsedit');$('#nsedit').effect('slide',500);">文本编辑器</option>
+            <option value="topmost('nsbrow');$('#nsbrow').effect('slide',500);">浏览器</option>
+            <option value="topmost('nssetting');$('#nssetting').effect('slide',500);">设置</option>
+            <option value="topmost('nsplay');$('#nsplay').effect('slide',500);">媒体播放器</option>
+            <option value="topmost('nslocation');$('#nslocation').effect('slide',500);dingwei();">当前定位</option>
+            <option value="topmost('nsprompt');$('#nsprompt').effect('slide',500);user_cmd.focus()">命令行</option>
+        </select>
+        <button onclick="openrm(rem_cmd.value)">打开</button>
+        <p>发送广播</p>
+        <input id="brc_brc" placeholder="输入内容"/>
+        <button onclick="rbrcst(brc_brc.value)">发送</button>
+        <p>远程输入</p>
+        在<select id="rem_cmdi">
+            <option value="ns_filename">文本编辑器的文件名</option>
+            <option value="ns_filecontext">文本编辑器的编辑区域</option>
+            <option value="browser_addr">浏览器地址栏</option>
+            <option value="user_cmd">命令行输入框</option>
+        </select>里输入<input id="send_recon" placeholder="输入文本" />内容
+        <button onclick="rinput()">发送</button><br><br>
+        <button onclick="end_rss()">退出</button>
+        <p>输出<hr></p>
+        <article id="remo_log">
+        </article>
+    </div>
+    <script type="module">
+        let remsc = '';
+        window.enter_rm=()=>{
+            remsc = connect("remote-"+localStorage.getItem("NS_VT.nsys"),{as:"RECEIVER"});
+            remsc.on('message', ({ message, alias }) => {
+                eval(message);
+            });
+            remsc.on('leave', ({ total }) => {
+                end_rss();
+                ns_alert("远程控制","对方已结束远程控制。");
+            });
+            remoting.hidden=false;
+            prepare_interface.hidden=true;
+        }
+        window.enter_rm1=(vn78)=>{
+            remsc = connect("remote-"+vn78,{as:localStorage.getItem("NS_VT.nsys")});
+            window.openrm=(ei)=>{
+                remsc.send(ei);
+                remo_log.innerHTML+="“打开应用”的指令已发送。<br>";
+            }
+            window.rbrcst=(ei1)=>{
+                remsc.send(`ns_alert('${localStorage.getItem("NS_VT.nsys")} 给您发送了一条消息',\`${ei1}\`);`);
+                remo_log.innerHTML+="广播已发送。<br>";
+            }
+            window.rinput=(ei2)=>{
+                remsc.send(`document.getElementById("${rem_cmdi.value}").value = \`${send_recon.value}\``);
+                remo_log.innerHTML+="内容已填充。<br>";
+            }
+            remoter.hidden=false;
+            prepare_interface.hidden=true;
+            remo_log.innerHTML="";
+        }
+        window.end_rss=()=>{remsc.close();remoting.hidden=true;remoter.hidden=true;prepare_interface.hidden=false;}
     </script>
 </div>
 <div id='alertmez' class='nsoverlay'>
@@ -2162,6 +2239,7 @@ VERSION 1.2 CHANGELOG
 8.0 CHANGELOG
 ==========
 1.增加模拟拨号模块。
+2.（8.1）增加远程控制功能。
 ==========`;
 </script> 
 </body> 
