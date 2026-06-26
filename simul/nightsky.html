@@ -35,7 +35,7 @@ body
         }
 button,input[type=submit] 
 { 
-    background:linear-gradient(gray,black); 
+    background:linear-gradient(black,rgb(50,50,50),black); 
     height:30px; 
     min-width:100px; 
     font-family:Roboto,Helvetica; 
@@ -43,13 +43,11 @@ button,input[type=submit]
     font-size:14px; 
     border-radius:5px; 
     border-width:0px; 
-    box-shadow:1px 1px 0px 1px gray; 
+    box-shadow:0px 0px 1px 1px rgb(70,70,70);
 } 
 button:hover,input[type=submit]:hover 
 { 
-    background:linear-gradient(cyan,white); 
-    color:black; 
-    box-shadow:1px 1px 0px 1px rgba(91,78,13,0); 
+    background:#069999;
 } 
 button:active 
 { 
@@ -62,7 +60,8 @@ button:active
 input 
 { 
     border:2px solid gray; 
-    background:linear-gradient(white,#ccc); 
+    background:linear-gradient(black,rgb(50,50,50),black); 
+	color:white;
     font-size:20px; 
     font-family:Roboto,Helvetica; 
     outline:none; 
@@ -72,7 +71,7 @@ input
 input:focus 
 { 
     border:2px solid orange; 
-    background:white; 
+    background:black; 
 } 
 textarea 
 { 
@@ -90,8 +89,8 @@ textarea:focus
 } 
 select 
 { 
-    border:2px solid gray; 
-    background:linear-gradient(gray,black); 
+    border:1px solid gray; 
+    background:linear-gradient(black,rgb(50,50,50),black); 
     border-radius:0px; 
     font-size:14px; 
     font-family:Roboto,Helvetica; 
@@ -100,7 +99,7 @@ select
     width:100px; 
     height:30px; 
 } 
-select:hover{border:2px solid orange;} 
+select:hover{border:1px solid orange;} 
 select:active{background:black;} 
 option{background: black;color:white}
 option:hover{background: orange;color:black;}
@@ -225,13 +224,13 @@ else
     <div class="ns-icon"><i class="bi bi-browser-chrome" onclick="topmost('nsbrow');$('#nsbrow').effect('slide',500);"></i><br>浏览器</div> 
     <div class="ns-icon"><i class="bi bi-filetype-txt" onclick="topmost('nsedit');$('#nsedit').effect('slide',500);ns_filecontext.value=CREDITS;ns_filename.value='CREDITS.TXT';"></i><br>CREDITS.TXT</div> 
     <br> 
-    <div style="margin-top:12px;border:2px solid white;border-radius:5px;background: linear-gradient(to right,rgb(0,0,50),rgb(0,0,120));padding: 10px;color:white;word-wrap: break-word;" id="tips_card"> 
+    <div style="margin-top:12px;box-shadow:0px 3px 3px 3px black;border-radius:5px;background: radial-gradient(rgb(50,50,50),rgb(30,30,30));padding: 10px;color:white;word-wrap: break-word;" id="tips_card"> 
         <h1>欢迎使用NightSky</h1> 
         TIPS:<b id="tips_show">NightSky是一个Hello-Programming制作的网页版伪系统，相比同系列的Vek，此“系统”更适合移动端设备、触屏设备使用。</b> 
         <br> <br>
         <button onclick="next_tip();">下一条</button>  第<strong id='tipcount' style='color:#ccc'>1/5</strong>条
     </div> 
-    <div style="margin-top:12px;border:2px solid white;border-radius:5px;background: linear-gradient(to right,rgb(0,0,50),rgb(0,0,120));padding: 10px;color:white;word-wrap: break-word;height:100px;overflow:auto;" id="upd_news" hidden>
+    <div style="margin-top:12px;box-shadow:0px 3px 3px 3px black;border-radius:5px;background: radial-gradient(rgb(50,50,50),rgb(30,30,30));padding: 10px;color:white;word-wrap: break-word;" id="upd_news" hidden>
     <script>
     function loadhot(){
         if(localStorage.getItem("HOT_CONTENT.nsys") == "true"){
