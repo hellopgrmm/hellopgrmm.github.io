@@ -2088,7 +2088,7 @@ function t_checkc()
         var total_ts = ((Date.now()-t_timer)/1000).toFixed(0);
         var prac_spd = t_prarea.value.length*(60/total_ts);
         t_prarea.disabled = true;
-        alert(`练习完成，耗时${total_ts}秒，平均打字速度：${prac_spd.toFixed(0)}字/分。`);
+        ns_alert("打字练字 提示",`练习完成。<br>耗时${total_ts}秒<br>平均打字速度：${prac_spd.toFixed(0)}字/分`);
         clearInterval(gotype);
         t_prui.hidden=true;
         t_mainui.hidden=false;
