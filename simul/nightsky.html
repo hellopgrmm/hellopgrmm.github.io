@@ -799,6 +799,7 @@ function checkPasswordSafe(password) {
 		<div class="ns-icon"><i class="bi bi-telephone" onclick="$('#nsmore').fadeOut(300);topmost('nstelefon');$('#nstelefon').effect('slide',500);"></i><br>电话</div> 
 		<div class="ns-icon"><i class="bi bi-broadcast" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/radio.html','收音机');"></i><br>收音机</div>
 		<div class="ns-icon"><i class="bi bi-cast" onclick="$('#nsmore').fadeOut(300);topmost('nsremote');$('#nsremote').effect('slide',500);"></i><br>远程控制NightSky</div> 
+		<div class="ns-icon"><i class="bi bi-keyboard" onclick="$('#nsmore').fadeOut(300);topmost('nstypepractise');$('#nstypepractise').effect('slide',500);"></i><br>打字练习</div> 
          <h2>实用(需联网)</h2>
         <div class="ns-icon"><i class="bi bi-file-word-fill" onclick="$('#nsmore').fadeOut(300);topmost('apiranden');$('#apiranden').effect('slide',500);fetch_rde()"></i><br>每日英语单词</div> 
         <div class="ns-icon"><i class="bi bi-moisture" onclick="$('#nsmore').fadeOut(300);topmost('apioilprice');$('#apioilprice').effect('slide',500);fetch_oilp()"></i><br>油价查询</div> 
@@ -2003,6 +2004,171 @@ var di_rcv;
         }
         window.end_rss=()=>{remsc.close();remoting.hidden=true;remoter.hidden=true;prepare_interface.hidden=false;}
     </script>
+</div>
+<div class='window' id='nstypepractise'>
+<div class='nstit'>打字练习 版本1</div>
+<div id='t_mainui'>
+<h2>打字练习</h2>
+选择练习模式 <select id='rs_pcm'>
+<option value=0>中文短句</option>
+<option value=1>中文长句</option>
+<option value=2>中文文章</option>
+<option value=3>英文单词</option>
+<option value=4>英文句子</option>
+<option value=5>字母大小写、数字、符号混打</option>
+<option value=6>中文生僻字练习</option>
+<option value=7>文言文练习</option>
+<option value=8>自由练习(内容自定义)</option>
+</select>
+<button onclick='t_stpr()'>进入练习</button>
+</div>
+<div id='t_prui' hidden>
+<h2>打字练习(模式：<a id='t_mode'></a>)</h2>
+<p>练习内容</p>
+<textarea id='t_prtxt' style='width:90%;height:100px;' oninput='prtxte=t_prtxt.value;t_eftt.innerText=t_prtxt.value;' placeholder='自定义欲练习的内容。'></textarea><br><br>
+<div style='width:calc(90% - 5px);height:100px;border:1px solid gray;padding:5px;overflow:auto;' id='t_eftt'>此处是练习指示器，显示打字练习过程中出现的错字和完成程度。</div>
+颜色标记说明：<font color='green'>正确</font> <font color='red'>错误</font> <span>未完成部分</span>
+<br><b id='st_sign'>等待练习。</b>
+<p>练习区域</p>
+<textarea id='t_prarea' style='width:90%;height:100px;' placeholder='点击“开始”后，输入正确的文字练习。' oninput='t_practs()' disabled></textarea>
+<br><button onclick='t_start_practise()'>开始</button>
+<button onclick='t_prui.hidden=true;t_mainui.hidden=false;clearInterval(gotype);'>放弃练习</button>
+<script>
+var t_sttim = 0;
+var prtxte = '';
+var t_timer = 0;
+var practise_mode = ['中文短句','中文长句','中文文章','英文单词','英文句子','无规律字符混打','中文生僻字','文言文','自由练习'];
+
+var CN_SHORT_SENTENCE_EXAMPLE = "中国汉字是中华文明艺术的瑰宝。";
+var CN_LONG_SENTENCE_EXAMPLE = "迎接满堂的笑语欢歌，四海宾朋八方来客，共同抒怀我们火热的生活。迎接大地的万象更新，草木竞发生机勃勃，我们期盼新一轮的耕耘和收获。迎接今宵的万家灯火，家人围坐，天伦之乐，最难忘这一刻的团聚和欢乐。";
+var CN_ARTICLE_EXAMPLE = `1961年，一位叫Max Mathews的计算机工程师，成功让一台IBM 7094电脑“说”出人话，“唱”出歌声，他通过编程使这台计算机唱出了歌曲《Daisy Bell》，尽管在今天看来，它的歌声几乎粗糙难辨，但在当时，这是一件让无数在场工作人员都激动的事情。
+在这之前，Mathews编写了一个叫MUSIC的程序用于制作音乐，但他很快就发现了问题——这台IBM 7094运行速度如同龟爬，播放一首17秒的音乐，却花了快一个小时。所以他运用DAC数字信号转换器和磁带机连接，将计算机发出的音乐信号写入磁带里面，这样就可以用正常的速度播放了。同时他还用了其他复杂的装置来简单模拟人的发声过程。
+1961年一个普通的上午，这台机器唱出了世界上第一首由计算机合成的、带人声的歌曲。“Daisy,Daisy.Give me your answer do,I'm half crazy,all for the love of you...”，模糊的电子音在磁带机内回响，这让他无比兴奋。IBM 7094合成歌声的成功，打开了计算机语音合成技术的大门。`;
+var EN_WORDS = `Common words:
+distance,number,hardware,background,console,prepare,memory,radio,block,network,machine,screen,display,signal
+Important countries:
+the People's Republic of China,the United State,Russia,the United Kingdom of Great Britain and Northern Ireland,Australia,India,Thailand,Germany,Korean,Japan`;
+var EN_SENTENCE = `Life was like a box of chocolates,you never know what you are gonna get.
+Everything that kills me makes me feel alive.
+Rome was not built in a day.`;
+var t_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890!?;@#/()";
+function gen_random_chars()
+{
+    var g_r = '';
+    for(var g = 0;g <= 10;g++)
+    {
+        g_r+=t_chars[(Math.floor(Math.random() * t_chars.length) + 0)];
+    }
+    return g_r;
+}
+var CN_COMPLEX_CHARACTER = "龍龖龘 水沝淼 火炏焱燚 魃魈魁鬾魑魅魍魉 茕茕孑立 沆瀣一气 踽踽独行 醍醐灌顶 绵绵瓜瓞 奉为圭臬 龙行龘龘 犄角旮旯 娉婷袅娜 涕泗滂沱 呶呶不休 不稂不莠 卬 咄嗟 蹀躞 耄耋 饕餮 囹圄 蘡薁 觊觎 龃龉 狖轭鼯轩 怙恶不悛 其靁虺虺 腌臜孑孓 陟罚臧否 针砭时弊 鳞次栉比 一张一翕";
+var OLD_CN = "永和九年，岁在癸丑，暮春之初，会于会稽山阴之兰亭，修禊事也。群贤毕至，少长咸集。此地有崇山峻岭，茂林修竹，又有清流激湍，映带左右，引以为流觞曲水，列坐其次。虽无丝竹管弦之盛，一觞一咏，亦足以畅叙幽情。是日也，天朗气清，惠风和畅。仰观宇宙之大，俯察品类之盛，所以游目骋怀，足以极视听之娱，信可乐也。夫人之相与，俯仰一世。或取诸怀抱，悟言一室之内。或因寄所托，放浪形骸之外。虽趣舍万殊，静躁不同，当其欣于所遇，暂得于己，快然自足，不知老之将至。及其所之既倦，情随事迁，感慨系之矣。向之所欣，俯仰之间，已为陈迹，犹不能不以之兴怀，况修短随化，终期于尽！古人云，死生亦大矣。岂不痛哉！每览昔人兴感之由，若合一契，未尝不临文嗟悼，不能喻之于怀。固知一死生为虚诞，齐彭殇为妄作。后之视今，亦犹今之视昔，悲夫！故列叙时人录其所述虽世殊事异。";
+var gotype = null;
+function t_start_practise()
+{
+    t_timer = Date.now();
+    t_prarea.disabled = false;
+    t_prarea.value = '';
+    t_prarea.focus();
+    gotype = setInterval("t_show_s()",500);
+}
+function t_show_s()
+{
+    var i_total_ts = ((Date.now()-t_timer)/1000).toFixed(0);
+    var i_prac_spd = t_prarea.value.length*(60/i_total_ts);
+    st_sign.innerHTML = `已耗时${i_total_ts}秒，${t_typo_count}个错误，平均速度：${i_prac_spd.toFixed(0)}字/分。`;
+}
+var t_typo_count = 0;
+function t_checkc()
+{
+    t_typo_count = 0;
+    var tnn = prtxte.split('');
+    if(prtxte == t_prarea.value)
+    {
+        var total_ts = ((Date.now()-t_timer)/1000).toFixed(0);
+        var prac_spd = t_prarea.value.length*(60/total_ts);
+        t_prarea.disabled = true;
+        alert(`练习完成，耗时${total_ts}秒，平均打字速度：${prac_spd.toFixed(0)}字/分。`);
+        clearInterval(gotype);
+        t_prui.hidden=true;
+        t_mainui.hidden=false;
+    }
+    for(var type = 0;type < tnn.length;type++)
+    {
+        if(type >= t_prarea.value.length){
+            tnn[type] = "<span>"+prtxte[type]+"</span>";
+        }
+        else if(prtxte[type]==t_prarea.value[type])
+        {
+            tnn[type] = "<font color='green'>"+prtxte[type]+"</font>";
+        }
+        else
+        {
+            tnn[type] = "<font color='red'>"+prtxte[type]+"</font>";
+            t_typo_count++;
+        }
+    }
+    t_eftt.innerHTML = tnn.join('');
+}
+function t_practs()
+{
+    t_checkc();    
+}
+function t_stpr()
+{
+    t_prui.hidden = false;
+    t_mainui.hidden = true;
+    t_mode.innerHTML = practise_mode[rs_pcm.value];
+    if(rs_pcm.value==8)
+    {
+        t_prtxt.hidden = false;
+        t_eftt.innerText = "";
+    }
+    else
+    {
+        t_prtxt.hidden = true;
+        switch(Number(rs_pcm.value))
+        {
+            case 0:
+                prtxte=CN_SHORT_SENTENCE_EXAMPLE;
+                t_eftt.innerText=prtxte;
+                break;
+            case 1:
+                prtxte=CN_LONG_SENTENCE_EXAMPLE;
+                t_eftt.innerText=prtxte;
+                break;
+            case 2:
+                prtxte=CN_ARTICLE_EXAMPLE;
+                t_eftt.innerText=prtxte;
+                break;
+            case 3:
+                prtxte=EN_WORDS;
+                t_eftt.innerText=prtxte;
+                break;
+            case 4:
+                prtxte=EN_SENTENCE;
+                t_eftt.innerText=prtxte;
+                break;
+            case 5:
+                prtxte=gen_random_chars();
+                t_eftt.innerText=prtxte;
+                break;
+            case 6:
+                prtxte=CN_COMPLEX_CHARACTER;
+                t_eftt.innerText=prtxte;
+                break;
+            case 7:
+                prtxte=OLD_CN;
+                t_eftt.innerText=prtxte;
+                break;
+            default:
+                alert("练习模式出错，请重试。");
+                break;
+        }
+    }
+}
+</script>
+</div>
 </div>
 <div id='alertmez' class='nsoverlay'>
 <div style='border:1px solid white;background:black;width:70%;padding:5px;padding-top:5px;padding-bottom:5px' id="mezcont">
