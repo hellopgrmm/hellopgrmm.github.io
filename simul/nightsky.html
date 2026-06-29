@@ -306,7 +306,7 @@ else
             timeshow_line1.innerHTML = now.getHours().toString().padStart(2,'0')+":";
             timeshow_line2.innerHTML = now.getMinutes().toString().padStart(2,'0');
             timeshow_line3.innerHTML = ": "+now.getSeconds().toString().padStart(2,'0');
-            timeshow_line4.innerHTML = `${now.getFullYear()}年${now.getMonth()}月${now.getDate()}日`;
+            timeshow_line4.innerHTML = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
         }
         fetch("https://v2.xxapi.cn/api/yiyan?type=poetry")
             .then(res => res.json())
