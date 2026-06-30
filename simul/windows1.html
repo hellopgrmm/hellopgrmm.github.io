@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Windows 1.0</title>
+<style>
+@font-face
+{
+    font-family: vgados;
+    src:url(https://unpkg.com/xp.css@0.2.6/dist/PerfectDOSVGA437Win.woff2);
+}
+body
+{
+    background: black;
+    font-family: vgados,monospace;
+    color:white;
+}
+button
+{ 
+    background:linear-gradient(black,rgb(50,50,50),black); 
+    height:30px; 
+    min-width:100px; 
+    font-family:Roboto,Helvetica; 
+    color:white; 
+    font-size:14px; 
+    border-radius:5px; 
+    border-width:0px; 
+    box-shadow:0px 0px 1px 1px rgb(70,70,70);
+} 
+button:hover 
+{ 
+    background:#069999;
+} 
+</style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/v86@0.5.419/build/libv86.js"></script>
+<script>
+window.onload = function()
+{
+    var emulator = window.emulator = new V86({
+        wasm_path: "https://cdn.jsdelivr.net/npm/v86@0.5.419/build/v86.wasm",
+        memory_size: 32 * 1024 * 1024,
+        vga_memory_size: 2 * 1024 * 1024,
+        screen_container: document.getElementById("windows1"),
+        fda: {
+            url: "https://hellopgrmm.github.io/Secrets/windows1-fda.img",
+        },
+        bios: {
+            url: "https://cdn.jsdelivr.net/npm/v86-system@0.5.0/assets/seabios.bin",
+        },
+        vga_bios: {
+            url: "https://cdn.jsdelivr.net/npm/v86-system@0.5.0/assets/vgabios.bin",
+        },
+        debug_level: 1,
+        autostart: true,
+    });
+    emulator.bus.register("download-progress", function(loaded)
+    {
+        vmstate.innerHTML=`${loaded.loaded} Bytes Loaded.`;
+    });
+    emulator.bus.register("emulator-loaded", function()
+    {
+        vm_mono.value = win1canvas.style.height;
+    });
+}
+</script>
+<p id="vmstate"></p>
+<p>调整虚拟机大小(宽度)：<input type="range" id="vm_mono" oninput="win1canvas.style.height=vm_mono.value+'px';win1canvas.style.width='auto';" min=100 max=700 value=700 /></p><button onclick="emulator.stop();windows1.hidden = true;">关机</button> <button onclick="emulator.run();windows1.hidden = false;">开机</button> <button onclick="emulator.restart()">重新启动</button> <button onclick="windows1.requestFullscreen();">全屏</button>
+<div id="windows1" contenteditable>
+    <div style="white-space:pre;font:20px vgados,monospace;line-height:21px;"></div>
+    <canvas style="display:none;" id="win1canvas"></canvas>
+</div>
+</body>
+</html>
