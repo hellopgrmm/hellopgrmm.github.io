@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Linux</title>
+    <style>
+        @font-face
+        {
+            font-family: vgados;
+            src:url(https://unpkg.com/xp.css@0.2.6/dist/PerfectDOSVGA437Win.woff2);
+        }
+        body
+        {
+            background: black;
+            font-family: vgados,monospace;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/v86@0.5.419/build/libv86.js"></script>
+<script>
+window.onload = function()
+{
+    var emulator = window.emulator = new V86({
+        wasm_path: "https://cdn.jsdelivr.net/npm/v86@0.5.419/build/v86.wasm",
+        memory_size: 32 * 1024 * 1024,
+        vga_memory_size: 2 * 1024 * 1024,
+        screen_container: document.getElementById("linux_s"),
+        cdrom: {
+            url: "https://hellopgrmm.github.io/Secrets/linux.iso",
+        },
+        bios: {
+            url: "https://cdn.jsdelivr.net/npm/v86-system@0.5.0/assets/seabios.bin",
+        },
+        vga_bios: {
+            url: "https://cdn.jsdelivr.net/npm/v86-system@0.5.0/assets/vgabios.bin",
+        },
+        debug_level: 1,
+        autostart: true,
+    });
+    emulator.bus.register("download-progress", function(loaded)
+    {
+        vmstate.innerHTML=`${loaded.loaded} KB Loaded.`;
+    });
+}
+</script>
+<p id="vmstate"></p>
+<div id="linux_s">
+    <div style="white-space:pre;font:20px vgados,monospace;line-height:21px;"></div>
+    <canvas style="display:none"></canvas>
+</div>
+</body>
+</html>
