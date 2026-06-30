@@ -42,7 +42,7 @@ window.onload = function()
     });
     emulator.bus.register("download-progress", function(loaded)
     {
-        vmstate.innerHTML=`${loaded.loaded} KB Loaded.`;
+        vmstate.innerHTML=`${loaded.loaded} Bytes Loaded.`;
     });
 }
 </script>
