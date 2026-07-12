@@ -19,6 +19,7 @@ body
 	font-family: Ubuntu;
 	background: black;
 	color:white;
+	touch-action:none;
 }
 button
 { 
@@ -82,7 +83,7 @@ input:focus
 }
 </style>
 <h1 style="text-shadow: 3px 3px 5px gray;font-size: 50px;font-style: italic;"><font color="cyan">威</font><font color="yellow">8</font><font color="lightgreen">6</font></h1><hr>
-<div id="vit86" style="position:absolute;vertical-align: top;position: absolute;height: calc(100% - 160px);width:calc(100% - 277px);border: 1px solid white;right:5px;padding: 5px;">
+<div id="vit86" style="position:absolute;vertical-align: top;position: absolute;height: calc(100% - 160px);width:calc(100% - 277px);border: 1px solid white;right:5px;padding: 5px;overflow:auto">
 	<div id="welcome">
 	<h1>欢迎来到威86</h1>
 	<p>这是一个能在浏览器上运行的虚拟机，支持运行多种远古/轻量级操作系统。你可以在左侧的菜单栏里选择一个操作系统来体验。</p>
@@ -146,7 +147,7 @@ var emulator = window.emulator = new V86({
 		</script>
 	</div>
 </div>
-<div id="syslist" style="width:250px;height:calc(100% - 150px);border:1px solid white;position: absolute;">
+<div id="syslist" style="width:250px;height:calc(100% - 150px);border:1px solid white;position: absolute;overflow:auto">
 	<div style="background: #069999;padding: 5px;width:calc(100% - 10px);position: relative;left:0px;top:0px;">虚拟机</div>
 	<div style="padding: 3px;">
 		<div class="showsl"><a onclick="syslist.style.display='none';vit86.hidden=false;">[返回]</a></div>
@@ -155,7 +156,7 @@ var emulator = window.emulator = new V86({
 			<summary>知名系统</summary>
 			<ul>
 				<li style="color:yellow" onclick="location.href='?sys=windows1-fda&type=floppy'">Windows 1.0</li>
-				<li onclick="location.href='?sys=f12&type=floppy'">FreeDOS 1.2(内含中文输入法)</li>
+				<li onclick="location.href='?sys=f12&type=floppy'">FreeDOS 1.2(内含中文输入法UCDOS)</li>
 				<li onclick="location.href='?sys=msdos71&type=floppy'">MS-DOS 7.1</li>
 				<li onclick="location.href='?sys=linux&type=cdrom'">Linux</li>
 			</ul>
