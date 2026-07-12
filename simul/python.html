@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Python</title>
+	<script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/ayu-dark.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/hint/show-hint.css">
+	<link id='nsfontst' rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto Sans SC:wght@400;700&display=swap">
+	<script src='https://hellopgrmm.github.io/codes/jquery-3.6.3.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/hint/show-hint.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/hint/anyword-hint.min.js"></script>
+</head>
+<body>
+<style>
+body
+{
+	font-family:'Noto Sans SC',sans-serif;
+	color:white;
+	background: black;
+	display: none;
+}
+button
+{ 
+    background:linear-gradient(black,rgb(50,50,50),black); 
+    height:30px; 
+    min-width:100px; 
+    font-family:Ubuntu,sans-serif; 
+    color:white; 
+    font-size:14px; 
+    border-radius:5px; 
+    border-width:0px; 
+    box-shadow:0px 0px 1px 1px rgb(70,70,70);
+} 
+button:active 
+{ 
+    background:black; 
+    color:#ccc; 
+    margin-top:1px; 
+    margin-left:1px; 
+    box-shadow:0px 0px 0px 0px gray; 
+} 
+button:hover 
+{ 
+    background:#069999;
+} 
+.rtext
+{
+	color: white;
+	transition:0.3s background;
+}
+.rtext:hover
+{
+	background:#069999;
+}
+input 
+{ 
+    border:2px solid gray; 
+    background:linear-gradient(black,rgb(50,50,50),black); 
+	color:white;
+    font-size:20px; 
+    font-family:Roboto,Helvetica; 
+    outline:none; 
+    outline-color:orange; 
+    outline-width:3px; 
+} 
+input:focus 
+{ 
+    border:2px solid orange; 
+    background:black; 
+} 
+.CodeMirror {
+  font-size: 16px; 
+  font-family:'Noto Sans SC',sans-serif;
+  position: absolute;
+  left:0px;
+  top:30px;
+  height:calc(100% - 30px);
+  width:100% !important;
+}
+.CodeMirror-hint{
+    font-size:16px;
+    font-family:'Noto Sans SC',sans-serif;
+}
+</style>
+<div style="background: linear-gradient(rgb(30,30,30),rgb(50,50,50));position: absolute;top:0px;left:0px;word-spacing:20px;width: 100%;height:30px">
+	<input id="filename" placeholder="输入文件名(不需要输入py)" /> <a class="rtext" onclick="localStorage.setItem(filename.value+'.py',editor.getValue());pystatus.innerHTML='保存成功。';">保存</a>
+	<a class="rtext" onclick="editor.setValue('');filename.value='';">新建</a>
+	<a class="rtext" onclick="open_py()">打开</a>
+	<a class="rtext" onclick="runpy()">运行</a>
+	<a class="rtext" onclick="pipm.hidden=false;">PiP</a>
+	<span id="pipm" hidden><input id="pippack" placeholder="包名"/> <a class="rtext" onclick="install_pip()">安装</a> <a class="rtext" onclick="pipm.hidden=true">关闭</a></span>
+	<a id="pystatus"></a>
+</div>
+<textarea id="pcm"></textarea>
+<div id="selectfile" style="padding: 5px;background: black;position: fixed;left: 0px;top:0px;height:100%;width:calc(100% - 5px);z-index: 9178;" hidden>
+	<a>选择Python代码文件</a>
+	<div id="filelist" style="height: 70%;width: 80%;overflow: auto;">
+	</div>
+	<button onclick="$('#selectfile').fadeOut(500)">取消</button>
+	<script>
+		var filelist = document.getElementById("filelist");
+		function open_py()
+		{
+			filelist.innerHTML='';
+			for(var i = 0;i < localStorage.length;i++)
+			{
+				if(localStorage.key(i).toLowerCase().endsWith(".py"))
+				{
+					filelist.innerHTML+="<a class='rtext' onclick='filename.value=\""+localStorage.key(i)+"\";editor.setValue(localStorage.getItem(\""+localStorage.key(i)+"\"));$(\"#selectfile\").fadeOut(500);'>"+localStorage.key(i)+"</a><br>";
+				}
+				else
+				{
+					continue;
+				}
+			}
+			$('#selectfile').fadeIn(500);
+		}
+	</script>
+</div>
+<div id="idle" style="padding: 5px;background: black;position: fixed;left: 0px;top:0px;height:100%;width:calc(100% - 5px);z-index: 9179;overflow: auto;" hidden>
+	<button onclick="$('#idle').fadeOut(500)">关闭</button>
+	<br>
+	<article id="outres"></article>
+</div>
+<script>
+var pystatus = document.getElementById("pystatus");
+var outres = document.getElementById('outres');
+$("body").fadeIn(1000);
+  var editor = CodeMirror.fromTextArea(document.getElementById('pcm') ,{
+    mode: 'python',
+    lineNumbers: true,
+    theme: 'ayu-dark',
+    lineWrapping: true,
+    hintOptions:{ 
+        completeSingle:false,
+    },
+   onBlur: function(){editor.save()}         
+  });
+editor.on("keypress",function () {
+    editor.showHint();
+});
+var py = null;
+async function initpy() {
+	pystatus.innerText = "正在加载Python环境，请稍后...";
+    pyodide = await loadPyodide({
+        stdout: (text) => outres.innerText += text+"\n",
+        stderr: (text) => outres.innerText += "环境加载错误T^T "+text+"\n"
+    });
+    pystatus.innerText = "Python环境加载完成。";
+}
+initpy();
+async function runpy()
+{
+	outres.innerText='';
+	var pyc = editor.getValue();
+	try
+	{
+		$("#idle").fadeIn(500);
+		await pyodide.runPythonAsync(pyc);
+	}
+	catch(e)
+	{
+		$("#idle").fadeIn(500);
+		outres.innerText = e;
+	}
+}
+async function install_pip()
+{
+	pystatus.innerText = '开始安装第三方库'+document.getElementById('pippack').value+'，请稍等片刻...';
+	await pyodide.loadPackage(document.getElementById('pippack').value);
+	pystatus.innerText = '安装完成，现在您可以用import来导入。';
+}
+</script>
+</body>
+</html>
