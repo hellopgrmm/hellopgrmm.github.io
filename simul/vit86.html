@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>威86 | 浏览器上的虚拟机</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap">
+	<script src="https://cdn.jsdelivr.net/npm/v86@0.5.419/build/libv86.js"></script>
+</head>
+<body>
+<style>
+@font-face
+{
+    font-family: vgados;
+    src:url(https://unpkg.com/xp.css@0.2.6/dist/PerfectDOSVGA437Win.woff2);
+}
+body
+{
+	font-family: Ubuntu;
+	background: black;
+	color:white;
+}
+button
+{ 
+    background:linear-gradient(black,rgb(50,50,50),black); 
+    height:30px; 
+    min-width:100px; 
+    font-family:Ubuntu,sans-serif; 
+    color:white; 
+    font-size:14px; 
+    border-radius:5px; 
+    border-width:0px; 
+    box-shadow:0px 0px 1px 1px rgb(70,70,70);
+} 
+button:active 
+{ 
+    background:black; 
+    color:#ccc; 
+    margin-top:1px; 
+    margin-left:1px; 
+    box-shadow:0px 0px 0px 0px gray; 
+} 
+button:hover 
+{ 
+    background:#069999;
+} 
+input 
+{ 
+    border:2px solid gray; 
+    background:linear-gradient(white,#ccc); 
+    font-size:20px; 
+    font-family:Ubuntu,sans-serif; 
+    outline:none; 
+    outline-color:orange; 
+    outline-width:3px; 
+} 
+input:focus 
+{ 
+    border:2px solid orange; 
+    background:white; 
+} 
+.showsl
+{
+	display: none;
+}
+@media only screen and (max-width : 725px){
+	#syslist{
+    	display:none;
+    	width:97% !important;
+	}
+	#vit86
+	{
+		width:97% !important;
+		position: absolute;
+		left:0px;
+		overflow: auto;
+	}
+	.showsl
+	{
+		display: block;
+	}
+}
+</style>
+<h1 style="text-shadow: 3px 3px 5px gray;font-size: 50px;font-style: italic;"><font color="cyan">威</font><font color="yellow">8</font><font color="lightgreen">6</font></h1><hr>
+<div id="vit86" style="position:absolute;vertical-align: top;position: absolute;height: calc(100% - 160px);width:calc(100% - 277px);border: 1px solid white;right:5px;padding: 5px;">
+	<div id="welcome">
+	<h1>欢迎来到威86</h1>
+	<p>这是一个能在浏览器上运行的虚拟机，支持运行多种远古/轻量级操作系统。你可以在左侧的菜单栏里选择一个操作系统来体验。</p>
+	<div class="showsl"><button onclick="document.getElementById('syslist').style.display='block';vit86.hidden=true;">显示虚拟机列表</button></div>
+	<p>本网页基于V86制作而成。V86是一个能在网页上运行的x86虚拟机模拟器，1比1仿真模拟i386硬件配置，能运行一些32位操作系统。不需要安装任何软件，也不需要登录就能使用，大幅度减少资源占用，而且还不占内存，适合怀旧。</p>
+	<p>V86不是伪系统模拟，而是运行操作系统本身（系统执行一条CPU指令，V86逐条翻译、全程模拟运算；系统读写硬盘端口，V86操作内存里的镜像；系统输出图形到VGA显存，V86直接渲染到网页，所有硬件协议、中断、IO全是标准兼容。操作系统拿到的就是一台标准的x86硬件接口，根本就不知道自己其实是在浏览器上跑）。所以你在本网页体验到的所有系统，都是把真实镜像挂在上面的。</p>
+	<h1>如果你也想要做这样的项目...</h1>
+	实现V86虚拟机并不困难，下面是一个简单的JavaScript代码，前提是你先要在html中引入v86的js。
+	<pre style="white-space:pre-wrap;">
+		<code>
+var emulator = window.emulator = new V86({
+    wasm_path: "https://cdn.jsdelivr.net/npm/v86@0.5.419/build/v86.wasm",
+    memory_size: 32 * 1024 * 1024, //内存大小根据情况调整，以字节为单位，下同。
+    vga_memory_size: 2 * 1024 * 1024,
+    screen_container: document.getElementById("screen"), //屏幕容器，类型要求是canvas。
+    hda: { //img一般是hda、fda，iso一般是cdrom。
+        url:'path/to/your/system', //映像源文件，注意跨域问题。
+    },
+    bios: {
+        url: "https://cdn.jsdelivr.net/npm/v86-system@0.5.0/assets/seabios.bin",
+    },
+    vga_bios: {
+        url: "https://cdn.jsdelivr.net/npm/v86-system@0.5.0/assets/vgabios.bin",
+    },
+    autostart: true //自动开机
+});
+		</code>
+	</pre>
+  <p>发明V86的人真是个天才[doge]</p>
+	</div>
+	<div id="main86" style="height:100%;width:100%;overflow:auto" hidden>
+		<a href="?target=home" style="text-decoration: none;color:yellow">[返回主页]</a>
+		<p id="v86_prog">请稍后...</p>
+		<p>点击虚拟机屏幕任意处锁定鼠标。</p>
+		<button onclick="emulator.restart()">重启虚拟机</button> <button onclick="screen1.requestFullscreen();">全屏</button> <button onclick="if(this.innerHTML=='打开键盘'){init_v86key(1);v86key.hidden=false;this.innerHTML='关闭键盘';}else{v86key.innerHTML='';v86key.hidden=true;this.innerHTML='打开键盘';}">打开键盘</button>
+		<p>虚拟机屏幕太大？调整宽度：<input type="range" value=700 max=700 min=100 oninput="screenc.style.height = this.value+'px';screenc.style.width='auto';scpx.innerHTML = this.value"/> <a id="scpx">700</a>像素</p>
+		<div id="screen1">
+    		<div style="white-space:pre;font:16px vgados,monospace;line-height:16px;"></div>
+    		<canvas style="display:none;" id="screenc"></canvas>
+		</div>
+		<div id="v86key" style="position:fixed;bottom:0px;left:0px;background: rgba(0,0,0,0.5);width: 100%;z-index: 9999;" hidden>
+		</div>
+		<script>
+			function init_v86key(lu) {
+				v86key.innerHTML='';
+				var chars = ['0123456789','qwertyuiop[]{}','asdfghjkl;\'\\','zxcvbnm,./','?!~|{}']
+				var Uchars = ['0123456789','QWERTYUIOP[]{}','ASDFGHJKL;\'\\','ZXCVBNM,./','?!~|{}']
+				var cs = '';
+				if(lu == 1) cs=chars;
+				else if(lu == 2) cs=Uchars;
+				for(var i = 0;i < cs.length;i++)
+				{
+					for(var j = 0;j < cs[i].length;j++)
+					{
+						v86key.innerHTML+=`<button style="height:30px;min-width:30px" onclick="emulator.keyboard_send_text('${cs[i][j]}')">${cs[i][j]}</button>`;
+					}
+					v86key.innerHTML+=`<br>`;
+				}
+				v86key.innerHTML+=`<button onclick="emulator.keyboard_send_text(' ')">空格</button><button onclick="emulator.keyboard_send_text('\\n')">Enter</button><button onclick="emulator.keyboard_send_text('\\b')">Backspace</button><button onclick="init_v86key(2)">切换大写</button><button onclick="init_v86key(1)">切换小写</button>`;
+			}
+		</script>
+	</div>
+</div>
+<div id="syslist" style="width:250px;height:calc(100% - 150px);border:1px solid white;position: absolute;">
+	<div style="background: #069999;padding: 5px;width:calc(100% - 10px);position: relative;left:0px;top:0px;">虚拟机</div>
+	<div style="padding: 3px;">
+		<div class="showsl"><a onclick="syslist.style.display='none';vit86.hidden=false;">[返回]</a></div>
+		<font color="gray">单击任意操作系统名称，进入虚拟机体验。（注：标黄色字的是图形化系统）</font>
+		<details>
+			<summary>知名系统</summary>
+			<ul>
+				<li style="color:yellow" onclick="location.href='?sys=windows1-fda&type=floppy'">Windows 1.0</li>
+				<li onclick="location.href='?sys=f12&type=floppy'">FreeDOS 1.2(内含中文输入法)</li>
+				<li onclick="location.href='?sys=msdos71&type=floppy'">MS-DOS 7.1</li>
+				<li onclick="location.href='?sys=linux&type=cdrom'">Linux</li>
+			</ul>
+		</details>
+		<details>
+			<summary>网友自制系统</summary>
+			<ul>
+				<li style="color:yellow" onclick="location.href='?sys=30dayos&type=floppy'">30DayOS</li>
+				<li style="color:yellow" onclick="location.href='?sys=haribote&type=floppy'">HariboteOS(自制，基于30DayOS)</li>
+				<li onclick="location.href='?sys=ts001&type=floppy'">H-OS(自制)</li>
+				<li style="color:yellow" onclick="location.href='?sys=kolibrios&type=floppy'">KolibriOS</li>
+			</ul>
+		</details>
+		除标有“自制”的操作系统外，其它系统源文件均收集自网络，本站只做编译处理。本网页在电脑/平板上体验更佳。
+	</div>
+	<hr>
+	<a id="desc">Copyright&copy;Hello-Programming 2026</a>
+</div>
+<script>
+var size_dict = {'windows1-fda':'1440','f12':'24576','linux':'5534','30dayos':'1440','haribote':'1440','kolibrios':'1440','ts001':'1','msdos71':'16384'};
+var desc_dict = {
+	'windows1-fda':'Windows 1.0是微软公司发布的初代Windows系统，基于MS-DOS。',
+	'f12':`FreeDOS是一款运行于IBM PC兼容机的开源操作系统，由Jim Hall等人于1994年发起开发，旨在提供开源的MS-DOS替代方案，兼容exe和dos的其它组件。这个是FreeDOS 1.2，额外安装了UCDOS中文输入法。<button onclick="emulator.keyboard_send_text('CD UCDOS\\nUCDOS\\n')">点此快速启动UCDOS</button>`,
+	'linux':'Linux是一种开源、免费、纯净且可以自由定制的操作系统，特别适合用于云服务、网站服务器等。',
+	'30dayos':'30DayOS是来自书籍《30天自制操作系统》里的范例系统，此处是最终成品的提取。可用指令：calc、walk、lines、mmlplay、dir、cls、mem、sosu、gview、tview、star1、color、color2、type.',
+	'haribote':'30DayOS的衍生版',
+	'ts001':'纯汇编自制的极简命令行。',
+	'kolibrios':'KolibriOS是一个轻量级的图形化操作系统，不仅体积极小，还内置各种小游戏和编辑器，并且具有完善的文件系统。',
+	'msdos71':'微软开发的DOS系统，这个是精简版。(如果开机画面过后没显示提示符，按一下回车应该就有了)'
+}
+function parseurl(url)
+{
+	if(url.includes("?")){
+    	var url_arr = {};
+    	var urt1 = url.split('?');
+    	var urt2 = urt1[1].split('&');
+    	for(var url_s = 0;url_s < urt2.length;url_s++)
+    	{
+        	url_arr[urt2[url_s].split('=')[0]] = urt2[url_s].split('=')[1];
+    	}
+    	return url_arr;
+	}
+	else
+	{
+		return 0;
+	}
+}
+function load_vm_floppy(stuff)
+{
+    var emulator = window.emulator = new V86({
+        wasm_path: "https://cdn.jsdelivr.net/npm/v86@0.5.419/build/v86.wasm",
+        memory_size: 32 * 1024 * 1024,
+        vga_memory_size: 2 * 1024 * 1024,
+        screen_container: document.getElementById("screen1"),
+        fda: {
+            url:'https://hellopgrmm.github.io/Secrets/'+stuff+'.img',
+        },
+        bios: {
+            url: "https://cdn.jsdelivr.net/npm/v86-system@0.5.0/assets/seabios.bin",
+        },
+        vga_bios: {
+            url: "https://cdn.jsdelivr.net/npm/v86-system@0.5.0/assets/vgabios.bin",
+        },
+        debug_level: 1,
+        autostart: true,
+    });
+    emulator.bus.register("download-progress", function(loaded)
+    {
+        v86_prog.innerHTML=`已加载${(loaded.loaded / 1024).toFixed(0)} KB/${size_dict[stuff]} KB。`;
+    });
+    emulator.bus.register("emulator-loaded", function()
+    {
+        v86_prog.innerHTML = '';
+        screenc.style.width="95%";
+        screenc.style.height="auto";
+    });
+}
+function load_vm_floppyhda(stuff3)
+{
+    var emulator = window.emulator = new V86({
+        wasm_path: "https://cdn.jsdelivr.net/npm/v86@0.5.419/build/v86.wasm",
+        memory_size: 32 * 1024 * 1024,
+        vga_memory_size: 2 * 1024 * 1024,
+        screen_container: document.getElementById("screen1"),
+        hda: {
+            url:'https://hellopgrmm.github.io/Secrets/'+stuff3+'.img',
+        },
+        bios: {
+            url: "https://cdn.jsdelivr.net/npm/v86-system@0.5.0/assets/seabios.bin",
+        },
+        vga_bios: {
+            url: "https://cdn.jsdelivr.net/npm/v86-system@0.5.0/assets/vgabios.bin",
+        },
+        debug_level: 1,
+        autostart: true,
+    });
+    emulator.bus.register("download-progress", function(loaded)
+    {
+        v86_prog.innerHTML=`已加载${(loaded.loaded / 1024).toFixed(0)} KB/${size_dict[stuff3]} KB。`;
+    });
+    emulator.bus.register("emulator-loaded", function()
+    {
+        v86_prog.innerHTML = '';
+        screenc.style.width="95%";
+        screenc.style.height="auto";
+    });
+}
+function load_vm_cdrom(stuff2)
+{
+    var emulator = window.emulator = new V86({
+        wasm_path: "https://cdn.jsdelivr.net/npm/v86@0.5.419/build/v86.wasm",
+        memory_size: 32 * 1024 * 1024,
+        vga_memory_size: 2 * 1024 * 1024,
+        screen_container: document.getElementById("screen1"),
+        cdrom: {
+            url:'https://hellopgrmm.github.io/Secrets/'+stuff2+'.iso',
+        },
+        bios: {
+            url: "https://cdn.jsdelivr.net/npm/v86-system@0.5.0/assets/seabios.bin",
+        },
+        vga_bios: {
+            url: "https://cdn.jsdelivr.net/npm/v86-system@0.5.0/assets/vgabios.bin",
+        },
+        debug_level: 1,
+        autostart: true,
+    });
+    emulator.bus.register("download-progress", function(loaded)
+    {
+        v86_prog.innerHTML=`已加载${(loaded.loaded / 1024).toFixed(0)} KB/${size_dict[stuff2]} KB。`;
+    });
+    emulator.bus.register("emulator-loaded", function()
+    {
+        v86_prog.innerHTML = '';
+        screenc.style.width="95%";
+        screenc.style.height="auto";
+    });
+}
+var sys_filename = parseurl(location.href)["sys"];
+var sys_filetype = parseurl(location.href)["type"];
+if(sys_filename)
+{
+	welcome.hidden = true;
+	main86.hidden = false;
+	desc.innerHTML = '<h3>简介</h3>'+desc_dict[sys_filename];
+	if(sys_filename == "f12") load_vm_floppyhda(sys_filename);
+	else if(sys_filename == "msdos71") load_vm_floppyhda(sys_filename);
+	else if(sys_filetype == "floppy") load_vm_floppy(sys_filename);
+	else if(sys_filetype == "cdrom") load_vm_cdrom(sys_filename);
+}
+else
+{
+	console.log("No system loaded,please select one.");
+}
+screenc.addEventListener('click', () => {
+  screenc.requestPointerLock = screenc.requestPointerLock || 
+                              screenc.mozRequestPointerLock || 
+                              screenc.webkitRequestPointerLock;
+  screenc.requestPointerLock();
+});
+</script>
+</body>
+</html>
