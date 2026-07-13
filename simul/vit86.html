@@ -6,6 +6,7 @@
 	<title>威86 | 浏览器上的虚拟机</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap">
 	<script src="https://cdn.jsdelivr.net/npm/v86@0.5.419/build/libv86.js"></script>
+	<script defer src="https://events.vercount.one/js"></script>
 </head>
 <body>
 <style>
@@ -83,7 +84,7 @@ input:focus
 }
 </style>
 <h1 style="text-shadow: 3px 3px 5px gray;font-size: 50px;font-style: italic;"><font color="cyan">威</font><font color="yellow">8</font><font color="lightgreen">6</font></h1><hr>
-<div id="vit86" style="position:absolute;vertical-align: top;position: absolute;height: calc(100% - 160px);width:calc(100% - 277px);border: 1px solid white;right:5px;padding: 5px;overflow:auto">
+<div id="vit86" style="position:absolute;vertical-align: top;position: absolute;height: calc(100% - 160px);width:calc(100% - 277px);border: 1px solid white;right:5px;padding: 5px;overflow:auto;touch-action:none;">
 	<div id="welcome">
 	<h1>欢迎来到威86</h1>
 	<p>这是一个能在浏览器上运行的虚拟机，支持运行多种远古/轻量级操作系统。你可以在左侧的菜单栏里选择一个操作系统来体验。</p>
@@ -174,6 +175,8 @@ var emulator = window.emulator = new V86({
 	</div>
 	<hr>
 	<a id="desc">Copyright&copy;Hello-Programming 2026</a>
+	<br>
+	访问量：<span id="vercount_value_page_pv">加载中...</span>（禁止恶意刷访问量）
 </div>
 <script>
 var size_dict = {'windows1-fda':'1440','f12':'24576','linux':'5534','30dayos':'1440','haribote':'1440','kolibrios':'1440','ts001':'1','msdos71':'16384'};
