@@ -21,17 +21,17 @@ body
     background-size:100%;
 	touch-action:none;
 } 
-		body::-webkit-scrollbar-track {
+        ::-webkit-scrollbar-track {
              background: rgba(0,0,0,0.1);
         }
-        body::-webkit-scrollbar-thumb {
-            background: rgba(70,70,70,0.5);
+        ::-webkit-scrollbar-thumb {
+            background: rgba(100,100,100,0.5);
         }
-        body::-webkit-scrollbar-thumb:hover {
-            background: rgba(70,70,70,0.8);
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(100,100,100,0.8);
         }
-        body::-webkit-scrollbar {
-            width: 5px;
+        ::-webkit-scrollbar {
+            width: 8px;
             height: 5px;
         }
 button,input[type=submit] 
@@ -181,9 +181,10 @@ input[type=checkbox]
     color:white;
     overflow:auto;
 }
+.cess{margin-right: 5px;}
 .cess:hover{color:orange;}
-.nscard{background:linear-gradient(black,rgb(30,30,30));width:95%;color:white;font-size:20px;padding-top: 10px;padding-bottom: 10px;padding-left:10px;border:1px solid gray;}
-.nscard:hover{background: #069999;}
+.nscard{background:linear-gradient(black,rgb(30,30,30));width:95%;color:white;font-size:20px;padding-top: 10px;padding-bottom: 10px;padding-left:10px;border:1px solid gray;margin-bottom: 3px;border-radius: 5px}
+.nscard:hover{background: #06999977;}
 #director{background:linear-gradient(rgb(30,30,30),rgb(50,50,50),rgb(30,30,30));width:100%;text-align:center;position:fixed;z-index:2026;bottom:0px;left:0px;padding-top:5px;padding-bottom:5px;}
 .casd{padding-top: 5px;padding-bottom: 5px;} 
 .casd:hover{background: #069999;} 
@@ -255,10 +256,25 @@ else
     </script> 
     </div> 
     <!--More applications-->
-    <div class="ns-icon"><i class="bi bi-dash-circle-fill" style="position: absolute;bottom:10px;left:48%;" onclick="topmost('nsmore');$('#nsmore').effect('slide',500);"><br><a style="font-size: 16px;color:white;font-style: normal;">更多程序</a></i></div> 
+        <div style="display:flex;justify-content:center;width:100%;">
+    <div id="ns_more_block" style="position: absolute;bottom:0px;box-shadow:0px 3px 3px 3px black;border-radius:5px;background: radial-gradient(rgb(50,50,50),rgb(30,30,30));padding: 10px;color:white;word-wrap: break-word;" onclick="topmost('nsmore');$('#nsmore').effect('slide',500);"><i class="bi bi-grid-3x3-gap-fill"> <a style="font-size: 20px;color:white;font-style: normal;">更多程序</a></i></div></div> 
 </div> 
 <!--导航栏-->
-<div id='director'><i class="bi bi-house cess" onclick='$(".window").slideUp(400);' style='font-size:30px;color:white'></i> <i class="bi bi-lock cess" onclick="$('.window').fadeOut();$('.desktop').fadeOut();$('.lock_interface').fadeIn();" style='font-size:30px;color:white'></i></div>
+<div id='director'><i class="bi bi-image cess" onclick='make_screenshot();' style='font-size:30px;color:white'></i> <i class="bi bi-house cess" onclick='$(".window").slideUp(400);' style='font-size:30px;color:white'></i> <i class="bi bi-lock cess" onclick="$('.window').fadeOut();$('.desktop').fadeOut();$('.lock_interface').fadeIn();" style='font-size:30px;color:white'></i></div>
+<script>
+    async function make_screenshot()
+    {
+        const canvas = await html2canvas(document.body, {
+            useCORS:true,
+            scale:window.devicePixelRatio,
+            logging:false
+        });
+        const capd = document.createElement('a');
+        capd.download = `截图${new Date().getTime()}.png`;
+        capd.href = canvas.toDataURL('image/png');
+        capd.click();
+    }
+</script>
 <!--Lock-->
 <div class="lock_interface" style="color:white;text-shadow: 1px 1px 1px black;margin-top: 100px;height:80%;width:100%;" onclick="process_unlock()">
     <div style="margin-left: 30px;" class="cover_lock">
@@ -345,7 +361,16 @@ function readfile(inputentry) {
 <textarea id="ns_filecontext" style="width:95%;height:calc(100% - 150px);margin-left:2%;"></textarea> 
 </div> 
 <div class='window' id='nsbrow'>
-<div class='nstit'> <i style='font-size:16px' class='bi bi-arrow-clockwise cess' onclick='awiframe.src = awiframe.src+"?ns_getmode=refresh";'></i> <input id='browser_addr' style='width:80%;' placeholder='输入网址，点击右箭头访问。不需要加入https或者http。'/> <i class='cess bi bi-arrow-right' onclick='awiframe.src = window.location.protocol+"//"+browser_addr.value;' style='font-size:16px'></i></div>
+<div class='nstit'> <i style='font-size:16px' class='bi bi-arrow-clockwise cess' onclick='awiframe.src = awiframe.src+"#";'>刷新</i> <input id='browser_addr' placeholder='输入网址。'/> <i class='cess bi bi-arrow-right' onclick='if(browmode == 0){awiframe.src = window.location.protocol+"//"+browser_addr.value;}else{awiframe.src=browser_addr.value}' style='font-size:16px'>访问</i> <i style="font-size:16px;" class="bi bi-gear cess" onclick="topmost('browsset');$('#browsset').slideDown();">设置</i></div>
+<div id="browsset" style="padding:5px;width:calc(100% - 12px);border: 1px solid white;position: absolute;right:0px;background: black;" hidden>
+    <p>访问设置</p>
+    输入网址时：<select id="browmode">
+        <option value=0 selected>根据环境自动填充前缀</option>
+        <option value=1>手动输入前缀</option>
+    </select>
+    <p>如果选择了自动填充前缀，那么当NightSky在本地环境运行时，浏览器只能访问本地文件，因此建议选择“手动输入前缀”。</p>
+    <button onclick="$('#browsset').slideUp()">关闭</button>
+</div>
 <iframe style='width:100%;height:calc(100% - 45px);border-width:0px;' id='awiframe'></iframe>
 </div>
 <div class='window' id='nswebwatch'>
@@ -2415,4 +2440,5 @@ VERSION 1.2 CHANGELOG
 ==========`;
 </script> 
 </body> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </html>
