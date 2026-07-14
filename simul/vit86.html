@@ -171,6 +171,12 @@ var emulator = window.emulator = new V86({
 				<li style="color:yellow" onclick="location.href='?sys=kolibrios&type=floppy'">KolibriOS</li>
 			</ul>
 		</details>
+		<details>
+			<summary>古董软件</summary>
+			<ul>
+				<li style="color:yellow" onclick="location.href='?sys=vbdos&type=floppy'">VB1.0 for DOS</li>
+			</ul>
+		</details>
 		除标有“自制”的操作系统外，其它系统源文件均收集自网络，本站只做编译处理。本网页在电脑/平板上体验更佳。
 	</div>
 	<hr>
@@ -179,7 +185,7 @@ var emulator = window.emulator = new V86({
 	访问量：<span id="vercount_value_page_pv">加载中...</span>（禁止恶意刷访问量）
 </div>
 <script>
-var size_dict = {'windows1-fda':'1440','f12':'24576','linux':'5534','30dayos':'1440','haribote':'1440','kolibrios':'1440','ts001':'1','msdos71':'16384'};
+var size_dict = {'windows1-fda':'1440','f12':'24576','linux':'5534','30dayos':'1440','haribote':'1440','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384'};
 var desc_dict = {
 	'windows1-fda':'Windows 1.0是微软公司发布的初代Windows系统，基于MS-DOS。',
 	'f12':`FreeDOS是一款运行于IBM PC兼容机的开源操作系统，由Jim Hall等人于1994年发起开发，旨在提供开源的MS-DOS替代方案，兼容exe和dos的其它组件。这个是FreeDOS 1.2，额外安装了UCDOS中文输入法。<button onclick="emulator.keyboard_send_text('CD UCDOS\\nUCDOS\\n')">点此快速启动UCDOS</button>`,
@@ -188,7 +194,8 @@ var desc_dict = {
 	'haribote':'30DayOS的衍生版',
 	'ts001':'纯汇编自制的极简命令行。',
 	'kolibrios':'KolibriOS是一个轻量级的图形化操作系统，不仅体积极小，还内置各种小游戏和编辑器，并且具有完善的文件系统。',
-	'msdos71':'微软开发的DOS系统，这个是精简版。(如果开机画面过后没显示提示符，按一下回车应该就有了)'
+	'msdos71':'微软开发的DOS系统，这个是精简版。(如果开机画面过后没显示提示符，按一下回车应该就有了)',
+	'vbdos':'Visual Basic 1.0 for DOS是微软在1992年开发的适用于DOS系统的事件驱动编程语言和集成开发环境，旨在简化WINDOWS软件开发（通过拖拽控件的方式和图形化界面来开发）。'
 }
 function parseurl(url)
 {
@@ -305,7 +312,7 @@ if(sys_filename)
 	main86.hidden = false;
 	desc.innerHTML = '<h3>简介</h3>'+desc_dict[sys_filename];
 	if(sys_filename == "f12") load_vm_floppyhda(sys_filename);
-	else if(sys_filename == "msdos71") load_vm_floppyhda(sys_filename);
+	else if(sys_filename == "msdos71" || sys_filename == "vbdos") load_vm_floppyhda(sys_filename);
 	else if(sys_filetype == "floppy") load_vm_floppy(sys_filename);
 	else if(sys_filetype == "cdrom") load_vm_cdrom(sys_filename);
 }
