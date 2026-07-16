@@ -91,6 +91,22 @@ input:focus
 	<div class="showsl"><button onclick="document.getElementById('syslist').style.display='block';vit86.hidden=true;">显示虚拟机列表</button></div>
 	<p>本网页基于V86制作而成。V86是一个能在网页上运行的x86虚拟机模拟器，1比1仿真模拟i386硬件配置，能运行一些32位操作系统。不需要安装任何软件，也不需要登录就能使用，大幅度减少资源占用，而且还不占内存，适合怀旧。</p>
 	<p>V86不是伪系统模拟，而是运行操作系统本身（系统执行一条CPU指令，V86逐条翻译、全程模拟运算；系统读写硬盘端口，V86操作内存里的镜像；系统输出图形到VGA显存，V86直接渲染到网页，所有硬件协议、中断、IO全是标准兼容。操作系统拿到的就是一台标准的x86硬件接口，根本就不知道自己其实是在浏览器上跑）。所以你在本网页体验到的所有系统，都是把真实镜像挂在上面的。</p>
+	<h1>留言板</h1>
+<style>
+.tk-submit-action-icon{
+    height:20px;
+}
+</style> 
+<div id="comment"></div>
+<script src="https://hellopgrmm.github.io/tools/twikoo.min.js"></script>
+<script>
+twikoo.init({
+    envId: 'https://cheerful-moonbeam-4f1337.netlify.app/.netlify/functions/twikoo',
+    el: '#comment', 
+    path: location.pathname, 
+    lang: 'zh-CN', 
+})
+</script>
 	<h1>如果你也想要做这样的项目...</h1>
 	实现V86虚拟机并不困难，下面是一个简单的JavaScript代码，前提是你先要在html中引入v86的js。
 	<pre style="white-space:pre-wrap;">
@@ -121,7 +137,7 @@ var emulator = window.emulator = new V86({
 		<p>点击虚拟机屏幕任意处锁定鼠标。</p>
 		<button onclick="emulator.restart()">重启虚拟机</button> <button onclick="screen1.requestFullscreen();">全屏</button> <button onclick="if(this.innerHTML=='打开键盘'){init_v86key(1);v86key.hidden=false;this.innerHTML='关闭键盘';}else{v86key.innerHTML='';v86key.hidden=true;this.innerHTML='打开键盘';}">打开键盘</button>
 		<p>虚拟机屏幕太大？调整宽度：<input type="range" value=700 max=700 min=100 oninput="screenc.style.height = this.value+'px';screenc.style.width='auto';scpx.innerHTML = this.value"/> <a id="scpx">700</a>像素</p>
-		<div id="screen1">
+		<div style='touch-action:none' id="screen1">
     		<div style="white-space:pre;font:16px vgados,monospace;line-height:16px;"></div>
     		<canvas style="display:none;" id="screenc"></canvas>
 		</div>
