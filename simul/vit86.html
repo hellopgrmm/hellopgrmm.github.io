@@ -176,6 +176,7 @@ twikoo.init({
 				<li onclick="location.href='?sys=f12&type=floppy'">FreeDOS 1.2(内含中文输入法UCDOS)</li>
 				<li onclick="location.href='?sys=msdos71&type=floppy'">MS-DOS 7.1</li>
 				<li onclick="location.href='?sys=linux&type=cdrom'">Linux</li>
+				<li style="color:yellow" onclick="location.href='?sys=tinycore5&type=cdrom'">TinyCore Linux 5.0.2</li>
 			</ul>
 		</details>
 		<details>
@@ -201,7 +202,7 @@ twikoo.init({
 	访问量：<span id="vercount_value_page_pv">加载中...</span>（禁止恶意刷访问量）
 </div>
 <script>
-var size_dict = {'windows1-fda':'1440','f12':'24576','linux':'5534','30dayos':'1440','haribote':'1440','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384'};
+var size_dict = {'windows1-fda':'1440','f12':'24576','linux':'5534','30dayos':'1440','haribote':'1440','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384','tinycore5','15052'};
 var desc_dict = {
 	'windows1-fda':'Windows 1.0是微软公司发布的初代Windows系统，基于MS-DOS。',
 	'f12':`FreeDOS是一款运行于IBM PC兼容机的开源操作系统，由Jim Hall等人于1994年发起开发，旨在提供开源的MS-DOS替代方案，兼容exe和dos的其它组件。这个是FreeDOS 1.2，额外安装了UCDOS中文输入法。<button onclick="emulator.keyboard_send_text('CD UCDOS\\nUCDOS\\n')">点此快速启动UCDOS</button>`,
@@ -211,7 +212,8 @@ var desc_dict = {
 	'ts001':'纯汇编自制的极简命令行。',
 	'kolibrios':'KolibriOS是一个轻量级的图形化操作系统，不仅体积极小，还内置各种小游戏和编辑器，并且具有完善的文件系统。',
 	'msdos71':'微软开发的DOS系统，这个是精简版。(如果开机画面过后没显示提示符，按一下回车应该就有了)',
-	'vbdos':'Visual Basic 1.0 for DOS是微软在1992年开发的适用于DOS系统的事件驱动编程语言和集成开发环境，旨在简化WINDOWS软件开发（通过拖拽控件的方式和图形化界面来开发）。'
+	'vbdos':'Visual Basic 1.0 for DOS是微软在1992年开发的适用于DOS系统的事件驱动编程语言和集成开发环境，旨在简化WINDOWS软件开发（通过拖拽控件的方式和图形化界面来开发）。',
+	'tinycore5':'一个轻量级Linux桌面发行版，版本5.0.2的镜像大小只有14.7MB。'
 }
 function parseurl(url)
 {
