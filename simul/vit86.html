@@ -83,8 +83,7 @@ input:focus
 	}
 }
 </style>
-<h3 style="text-shadow: 3px 3px 5px gray;font-size: 50px;font-style: italic;"><font color="cyan">威</font><font color="yellow">8</font><font color="lightgreen">6</font></h3><hr>
-<div id="vit86" style="position:absolute;vertical-align: top;position: absolute;height: calc(100% - 80px);width:calc(100% - 277px);border: 1px solid white;right:5px;padding: 5px;overflow:auto;">
+<div id="vit86" style="position:absolute;vertical-align: top;height: 98%;width: calc(100% - 262px);border: 1px solid white;top: 0px;left: 250px;right:5px;padding: 5px;overflow:auto;">
 	<div id="welcome">
 	<h1>欢迎来到威86</h1>
 	<p>这是一个能在浏览器上运行的虚拟机，支持运行多种远古/轻量级操作系统。你可以在左侧的菜单栏里选择一个操作系统来体验。</p>
@@ -120,9 +119,9 @@ var emulator = window.emulator = new V86({
 		<p id="v86_prog">请稍后...</p>
 		<p>点击虚拟机屏幕任意处锁定鼠标。</p>
 		<button onclick="emulator.restart()">重启虚拟机</button> <button onclick="screen1.requestFullscreen();">全屏</button> <button onclick="if(this.innerHTML=='打开键盘'){init_v86key(1);v86key.hidden=false;this.innerHTML='关闭键盘';}else{v86key.innerHTML='';v86key.hidden=true;this.innerHTML='打开键盘';}">打开键盘</button>
-		<p>虚拟机屏幕太大？调整宽度：<input type="range" value=700 max=700 min=100 oninput="screenc.style.height = this.value+'px';screenc.style.width='auto';scpx.innerHTML = this.value"/> <a id="scpx">700</a>像素</p>
+		<p>虚拟机屏幕太大？调整宽度：<input type="range" value=700 max=700 min=100 oninput="screenc.style.height = this.value+'px';screenc.style.width='auto';scpx.innerHTML = this.value"/> <a id="scpx">700</a>像素 更改虚拟机字体（纯文本模式）<select id="vmff" oninput="screenf.style.fontFamily = vmff.value"><option value="dosvga" select>经典DOS字体</option><option value="monospace">Monospace</option><option value="Ubuntu">Ubuntu字体</option><option value="Arial">Arial</option></select></p>
 		<div style='touch-action:none' id="screen1">
-    		<div style="white-space:pre;font:16px vgados,monospace;line-height:16px;"></div>
+    		<div style="white-space:pre;font:16px vgados,monospace;line-height:16px;" id="screenf"></div>
     		<canvas style="display:none;" id="screenc"></canvas>
 		</div>
 			<h1>留言板</h1>
@@ -164,7 +163,7 @@ twikoo.init({
 		</script>
 	</div>
 </div>
-<div id="syslist" style="width:250px;height:calc(100% - 80px);border:1px solid white;position: absolute;overflow:auto">
+<div id="syslist" style="width:250px;height: 99%;top: 0px;left: 0px;border:1px solid white;position: absolute;overflow:auto">
 	<div style="background: #069999;padding: 5px;width:calc(100% - 10px);position: relative;left:0px;top:0px;">虚拟机</div>
 	<div style="padding: 3px;">
 		<div class="showsl"><a onclick="syslist.style.display='none';vit86.hidden=false;">[返回]</a></div>
