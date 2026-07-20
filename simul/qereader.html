@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>NightSky QuickEye Reader</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+	<script src="https://cdn.jsdelivr.net/npm/mammoth@1.4.16/mammoth.browser.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.min.js"></script>
+</head>
+<body>
+<style>
+body
+{
+	background: black;
+	color:white;
+	font-family: Roboto,sans-serif;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(100,100,100,0.5);
+ }
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(100,100,100,0.8);
+}
+::-webkit-scrollbar {
+    width: 8px;
+    height: 5px;
+}
+table
+{
+	border:2px solid white;
+}
+button
+{ 
+    background:linear-gradient(black,rgb(50,50,50),black); 
+    height:30px; 
+    min-width:100px; 
+    font-family:Roboto,sans-serif; 
+    color:white; 
+    font-size:14px; 
+    border-radius:5px; 
+    border-width:0px; 
+    box-shadow:0px 0px 1px 1px rgb(70,70,70);
+} 
+button:active 
+{ 
+    background:black; 
+    color:#ccc; 
+    margin-top:1px; 
+    margin-left:1px; 
+    box-shadow:0px 0px 0px 0px gray; 
+} 
+button:hover 
+{ 
+    background:#069999;
+} 
+input 
+{ 
+    border:1px solid gray; 
+    background:linear-gradient(black,rgb(50,50,50),black); 
+    color:white;
+    font-size:20px; 
+    font-family:Roboto,Helvetica; 
+    outline:none; 
+    outline-color:orange; 
+    outline-width:3px; 
+} 
+input:focus 
+{ 
+    border:1px solid orange; 
+    background:black; 
+} 
+</style>
+<a style="font-size: 30px;">NightSky QuickEye Reader</a>
+<p>打开PDF/PPTX/DOCX文件 <input type="file" id="fi" accept=".docx,.pptx,.pdf"></p>
+<p id="info_display" style="color:orange"></p>
+<div id="docx_container" hidden></div>
+<div id="pdf_control_panel" hidden>第<a id="pdf_pn">0</a>/<a id="pdf_tp">0</a>页 <button onclick="pdf_prev()">上一页</button><button onclick="pdf_next()">下一页</button> <input id="redirect" placeholder="跳转到页码..." type="number"/> <button onclick="render_pdf(Number(document.getElementById('redirect').value));page = Number(document.getElementById('redirect').value);pdf_pn.innerHTML = document.getElementById('redirect').value;">跳转</button></div>
+<canvas id="pdf_container" hidden style="margin-top: 10px;"></canvas>
+<div id="pptx_container" hidden></div>
+<script>
+	const pdfjslib = window['pdfjs-dist/build/pdf'];
+	pdfjslib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.worker.min.js';
+	var docx = document.getElementById("docx_container");
+	var pptx = document.getElementById("pptx_container");
+	var ei = document.getElementById("info_display");
+	var pdfc = document.getElementById("pdf_container");
+	var pdfcp = document.getElementById("pdf_control_panel");
+	var ctx = pdfc.getContext("2d");
+	var page = 0;
+	var pdf = null;
+	async function readdocx(file) {
+		try{
+    		const arrayBuffer = await file.arrayBuffer();
+    		const read_res = await mammoth.convertToHtml({ arrayBuffer });
+    		docx.innerHTML = read_res.value;
+    		docx.hidden = false;
+    		ei.innerHTML = "";
+    	}catch(e){
+    		ei.innerHTML = "发生错误："+e;
+    	}
+	}
+	async function render_pdf(pages)
+	{
+		const ppage = await pdf.getPage(pages);
+		const vp = ppage.getViewport({scale:1.5});
+		pdfc.height = vp.height;
+		pdfc.width = vp.width;
+		await ppage.render({
+			canvasContext: ctx,
+			viewport: vp
+		}).promise;
+	}
+	function pdf_prev()
+	{
+		page--;
+		if(page<1){page = pdf.numPages}
+		render_pdf(page);
+		document.getElementById("pdf_pn").innerHTML = page;
+	}
+	function pdf_next()
+	{
+		page++;
+		if(page>pdf.numPages){page = 1}
+		render_pdf(page);
+		document.getElementById("pdf_pn").innerHTML = page;
+	}
+	async function readpdf(file)
+	{
+		const arrayBuffer = await file.arrayBuffer();
+		const lt = pdfjslib.getDocument(arrayBuffer);
+    	pdf = await lt.promise;
+    	page = 1;
+    	render_pdf(page);
+    	ei.innerHTML = "";
+    	document.getElementById("pdf_tp").innerHTML = pdf.numPages;
+    	document.getElementById("pdf_pn").innerHTML = page;
+    	pdfcp.hidden = false;
+    	pdfc.hidden=false;
+	}
+	fi.addEventListener('change',async (e) => {
+		ei.innerHTML = "读取中，请稍后......";
+		docx.hidden = true;
+		pdfc.hidden = true;
+		pdfcp.hidden = true;
+		pptx.style.display="none";
+      	const file = e.target.files[0];
+      	if (!file) return;
+      	if(file.name.toLowerCase().endsWith(".docx")) readdocx(file);
+      	else if(file.name.toLowerCase().endsWith(".pdf")) readpdf(file);
+      	else if(file.name.toLowerCase().endsWith(".pptx")) readpptx(file);
+    });
+</script>
+<script type="module">
+	import { PPTXViewer } from 'https://cdn.jsdelivr.net/npm/pptx-viewer@0.2.2/+esm';
+	window.readpptx=async (file) => 
+	{
+		const viewer = new PPTXViewer('#pptx_container');
+		await viewer.load(file);
+		pptx.hidden = false;
+		ei.innerHTML = "";
+	}
+</script>
+</body>
+</html>
