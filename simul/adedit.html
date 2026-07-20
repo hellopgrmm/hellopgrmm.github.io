@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>NightSky Advanced Editor</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html-docx-js/dist/html-docx.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+</head>
+<body>
+<style>
+body
+{
+	background:white;
+	color:black;
+	font-family: Roboto,sans-serif;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(100,100,100,0.5);
+ }
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(100,100,100,0.8);
+}
+::-webkit-scrollbar {
+    width: 8px;
+    height: 5px;
+}
+table
+{
+	border:2px solid white;
+}
+button
+{ 
+    background:linear-gradient(#ccc,rgb(150,150,150),#ccc); 
+    height:30px; 
+    min-width:100px; 
+    font-family:Roboto,sans-serif; 
+    color:white; 
+    font-size:14px; 
+    border-radius:5px; 
+    border-width:0px; 
+    box-shadow:0px 0px 1px 1px rgb(70,70,70);
+} 
+button:active 
+{ 
+    background:#ccc;
+    margin-top:1px; 
+    margin-left:1px;
+} 
+button:hover 
+{ 
+    background:#ccc;
+} 
+input 
+{ 
+    border:1px solid gray; 
+    background:linear-gradient(#ccc,rgb(150,150,150),#ccc); 
+    color:white;
+    font-size:20px; 
+    font-family:Roboto,Helvetica; 
+    outline:none; 
+    outline-color:orange; 
+    outline-width:3px; 
+} 
+</style>
+<div style="background:rgba(0,0,255,0.2);padding: 5px;position:relative;left: 0px;top: 0px;width:calc(100% - 5px)">
+    <div style="background:blue;position:absolute;left: 0px;top: 0px;width:100%;text-align: center;color:white;">NightSky高级文本编辑器</div>
+    <p>字体样式（对于被选中）</p>
+    <button onclick='rst(`<strong>${gcs()}</strong>`);'>粗体</button>
+    <button onclick='rst(`<em>${gcs()}</em>`);'>斜体</button>
+    <button onclick='rst(`<h1>${gcs()}</h1>`);'>大标题</button>
+    <button onclick='rst(`<h2>${gcs()}</h2>`);'>二级标题</button>
+    <button onclick='rst(`<h3>${gcs()}</h3>`);'>三级标题</button>
+    <button onclick='rst(`<mark>${gcs()}</mark>`);'>高亮</button>
+    <button onclick='rst(`<sup>${gcs()}</sup>`);'>上标</button>
+    <button onclick='rst(`<sub>${gcs()}</sub>`);'>下标</button>
+    <button onclick='rst(`<code>${gcs()}</code>`);'>代码</button>
+    <button onclick='rst(`<del>${gcs()}</del>`);'>删除线</button>
+    <a>整体样式</a>
+    <button onclick='paper.innerHTML+="<hr>";'>水平线</button>
+    <button onclick='paper.innerHTML+="选中以修改这串普通文本。";'>普通文本</button>
+    <br><br>
+    字体大小：<input type="number" value=16 placeholder="字体大小" id="petu"> 作用域<select id="effects"><option value=1 selected>整体</option><option value=2>仅选中</option></select> <button onclick="if(effects.value == 1){paper.style.fontSize = petu.value+'px'}else if(effects.value == 2){rst('<a style=\'font-size:'+petu.value+'px\'>'+gcs()+'</a>');}">调整</button> <a id="textlen"></a><br>
+    导出文件名：<input id="fn" placeholder="文件名" value="文档"/> <button onclick="pdfgen('paper',fn.value+'.pdf')">导出PDF</button> <button onclick="gendocx('paper',fn.value)">导出DOCX</button>
+</div>
+<div id="paper" contenteditable style="padding:10px;width:calc(100% - 15px);height:100%;margin-top: 5px;"></div>
+<script>
+    function gendocx(ctn,name)
+    {
+        const htmldom = document.getElementById(ctn);
+        const htmlctx = htmldom.innerHTML;
+        const fullexport = `
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <style>
+            table {border-collapse: collapse;}
+            td,th {padding:6px 12px;}
+            </style>
+        </head>
+        <body>
+            ${htmlctx}
+        </body>
+    </html>
+  `;
+        const DOCX_BUFFER = htmlDocx.asBlob(fullexport);
+        saveAs(DOCX_BUFFER,name+".docx");
+    }
+    function pdfgen(contentElement,DownloadElementName){
+        const { jsPDF } = window.jspdf;
+        const content = document.getElementById(contentElement);
+
+        html2canvas(content).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const imgWidth = 210; // A4 width in mm
+            const pageHeight = 295; // A4 height in mm
+            const imgHeight = canvas.height * imgWidth / canvas.width;
+            let heightLeft = imgHeight;
+            let position = 0;
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+            while (heightLeft >= 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+
+            pdf.save(DownloadElementName);
+        });
+    }
+function gcs()
+{
+    var selectionObj = window.getSelection();
+    var selectedText = selectionObj.toString();
+    return selectedText;
+}
+function rst(newText) {
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const selectedText = range.toString();
+        const newNode = document.createTextNode(newText);
+        range.deleteContents();
+        range.insertNode(newNode);
+        paper.innerHTML = paper.innerHTML.replaceAll('&lt;','<').replaceAll('&gt;','>');
+    } else {
+        console.log('You havn\'t selected!');
+    }
+}
+paper.focus();
+function getlength()
+{
+    document.getElementById("textlen").innerHTML = "字数："+paper.innerText.length;
+}
+setInterval(getlength,500);
+</script>
+</body>
+</html>
