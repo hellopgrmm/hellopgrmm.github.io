@@ -194,7 +194,7 @@ input[type=checkbox]
 </style> 
 </head> 
 <body> 
-<div class="status_bar"><i style="color:white;font-size:25px;" class="bi bi-wifi"></i> <i style="color:white;font-size:25px;" class="bi bi-bar-chart-fill"></i> <a style='color:white' id='battery_vald'>100%</a>
+<div class="status_bar"><a id="information_text_banner"></a> <i style="color:white;font-size:25px;" class="bi bi-wifi"></i> <i style="color:white;font-size:25px;" class="bi bi-bar-chart-fill"></i> <a style='color:white' id='battery_vald'>100%</a>
 <div id='battery_fl' style='display:inline-block;border:1px solid #ccc;width:30px;height:15px'>
     <div id='battery_sim' style='width:100%;height:100%;background:#00c21a'></div>
 </div>
@@ -219,7 +219,7 @@ else
 }
 }
     nsbtr();
-</script> <a style="color:#71cfd1" id="timedisplay">--:--</a></div> 
+</script> <a style="color:#71cfd1" id="timedisplay">--:--</a></div> <div id="fps_image" style="color:white;position: absolute;left: 0px;top:0px;padding: 5px;background: rgba(0, 0, 0, 0.5);" hidden><p id="fps_dis2">FPS:0</p><canvas id="fps_canvas"></canvas><p onclick="clearInterval(fpsfps);fps_image.hidden=true;">[关闭]</p></div>
 <div class="desktop"> 
     <div class="ns-icon"><i class="bi bi-folder-fill" onclick="topmost('nsfm');$('#nsfm').effect('slide',500);list_personal()"></i><br>文件</div> 
     <div class="ns-icon"><i class="bi bi-file-text-fill" onclick="topmost('nsedit');$('#nsedit').effect('slide',500);"></i><br>文本编辑器</div> 
@@ -711,6 +711,80 @@ function checkPasswordSafe(password) {
     <button onclick="advancedop.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/高级选项
     <h3>调试</h3>
     <button onclick="topmost('nsjscons');$('#nsjscons').effect('slide',500);">打开JavaScript终端</button>
+    <p><input type="checkbox" id="fps_check" oninput="enable_fps()" /> 显示当前FPS</p>
+    <script>
+    var fps_dis = document.getElementById('information_text_banner');
+    const Fcanvas = document.getElementById('fps_canvas');
+    const Fctx = Fcanvas.getContext('2d');
+    const width = 300;
+    const height = 100;
+    Fcanvas.height = height;
+    Fcanvas.width = width;
+    Fcanvas.style.background = 'black';
+    var fpsxpos = 0;
+    let F_lst = performance.now();
+    var fps_exec = false;
+    function fps_upd() {
+        const now = performance.now();
+        const delta = now - F_lst;
+        F_lst = now;
+        var fps = 0;
+        if (delta > 0) {
+            fps = Math.round(1000 / delta);
+            dfpsdirect(fps);
+            fps_dis.innerHTML = `FPS:${fps}`;
+            document.getElementById("fps_dis2").innerHTML=`FPS:${fps}`;
+        }
+        if(fps_exec){requestAnimationFrame(fps_upd);}else{return 0;}
+    }
+    function drawruler()
+    {
+        Fctx.font = '12px monospace';
+        Fctx.fillStyle = 'white';
+        Fctx.fillText('100 FPS',3,12);
+        Fctx.fillText('80',3,22);
+        Fctx.fillText('60',3,42);
+        Fctx.fillText('40',3,62);
+        Fctx.fillText('20',3,82);
+        Fctx.fillText('0',3,98);
+    }
+    function dfpsdirect(fps) {
+        if(fpsxpos > width){
+            fpsxpos = 0;
+            Fctx.clearRect(0,0,width,height);
+            drawruler();
+        }
+        Fctx.beginPath();
+        Fctx.moveTo(fpsxpos,height);
+        Fctx.lineTo(fpsxpos,height-fps);
+        Fctx.strokeStyle = 'cyan';
+        Fctx.lineWidth = 2;
+        Fctx.stroke();
+        fpsxpos = fpsxpos + 2;
+    }
+    function enable_fps()
+    {
+        if(fps_check.checked){
+            fps_exec=true;
+            drawruler();
+            requestAnimationFrame(fps_upd);
+            ns_alert("提示","FPS已开启，点击状态栏上的FPS信息可以显示趋势图。");
+            fps_dis.setAttribute("onclick","openfpswindow()");
+        }
+        else
+        {
+            fps_exec=false;
+            fps_dis.innerHTML="";
+            fps_dis.removeAttribute("onclick");
+        }
+    }
+    var fpsfps = null;
+    function openfpswindow()
+    {
+        fps_image.hidden=false;
+        fpsfps = setInterval("topmost('fps_image')",100);
+    }
+    </script>
     <h3>自启动项</h3>
     请输入开机自启动项，一行一个。必须是“文件”中的项目。<br>
     <textarea id='jsmedu' placeholder='请输入...' rows=10 cols=30></textarea>
