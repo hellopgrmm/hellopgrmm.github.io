@@ -186,6 +186,7 @@ twikoo.init({
 				<li style="color:yellow" onclick="location.href='?sys=haribote&type=floppy'">HariboteOS(自制，基于30DayOS)</li>
 				<li onclick="location.href='?sys=ts001&type=floppy'">H-OS(自制)</li>
 				<li style="color:yellow" onclick="location.href='?sys=kolibrios&type=floppy'">KolibriOS</li>
+				<li style="color:yellow" onclick="location.href='?sys=mikeos&type=cdrom'">MikeOS</li>
 			</ul>
 		</details>
 		<details>
@@ -205,7 +206,7 @@ twikoo.init({
 	访问量：<span id="vercount_value_page_pv">加载中...</span>（禁止恶意刷访问量）
 </div>
 <script>
-var size_dict = {'windows1-fda':'1440','f12':'24576','linux':'5534','30dayos':'1440','haribote':'1440','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384','tinycore5':'15052','3fp':'14336','cad':'14336','msfs':'14336','w31':'14336'};
+var size_dict = {'windows1-fda':'1440','f12':'24576','linux':'5534','30dayos':'1440','haribote':'1440','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384','tinycore5':'15052','3fp':'14336','cad':'14336','msfs':'14336','w31':'14336','mikeos':'3226'};
 var desc_dict = {
 	'windows1-fda':'Windows 1.0是微软公司发布的初代Windows系统，基于MS-DOS。',
 	'f12':`FreeDOS是一款运行于IBM PC兼容机的开源操作系统，由Jim Hall等人于1994年发起开发，旨在提供开源的MS-DOS替代方案，兼容exe和dos的其它组件。这个是FreeDOS 1.2，额外安装了UCDOS中文输入法。<button onclick="emulator.keyboard_send_text('CD UCDOS\\nUCDOS\\n')">点此快速启动UCDOS</button>`,
@@ -220,7 +221,8 @@ var desc_dict = {
 	'3fp':'3D FloorPlan Designer是一个在DOS系统上运行的3D设计软件，主要用于房屋布局设计，用户可以按照自己的想法设计房屋图纸，该软件还支持3D实时预览功能。',
 	'cad':'DesignCAD 3D是一个DOS时代比较流行的3D建模软件。',
 	'msfs':'非常经典的微软飞行模拟器，这里选取的是4.0版本。',
-	'w31':'经典的windows版本。'
+	'w31':'经典的windows版本。',
+	'mikeos':'MikeOS是一个汇编写的开源教学操作系统，体积小，主要用于向学生演示操作系统运作原理。其源代码每行都做了注释，作教学用途，核心目标是让初学者能看懂代码、理解操作系统怎么控制硬件和管理资源。'
 }
 function parseurl(url)
 {
