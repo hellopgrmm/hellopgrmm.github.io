@@ -145,8 +145,8 @@ twikoo.init({
 		<script>
 			function init_v86key(lu) {
 				v86key.innerHTML='';
-				var chars = ['0123456789','qwertyuiop[]{}','asdfghjkl;\'\\','zxcvbnm,./','?!~|{}']
-				var Uchars = ['0123456789','QWERTYUIOP[]{}','ASDFGHJKL;\'\\','ZXCVBNM,./','?!~|{}']
+				var chars = ['0123456789','qwertyuiop[]{}','asdfghjkl;"\\','zxcvbnm,./','?!~|()']
+				var Uchars = ['0123456789','QWERTYUIOP[]{}','ASDFGHJKL;"\\','ZXCVBNM,./','?!~|()']
 				var cs = '';
 				if(lu == 1) cs=chars;
 				else if(lu == 2) cs=Uchars;
@@ -158,7 +158,8 @@ twikoo.init({
 					}
 					v86key.innerHTML+=`<br>`;
 				}
-				v86key.innerHTML+=`<button onclick="emulator.keyboard_send_text(' ')">空格</button><button onclick="emulator.keyboard_send_text('\\n')">Enter</button><button onclick="emulator.keyboard_send_text('\\b')">Backspace</button><button onclick="init_v86key(2)">切换大写</button><button onclick="init_v86key(1)">切换小写</button>`;
+				v86key.innerHTML+=`<button onclick="emulator.keyboard_send_text(' ')">空格</button><button onclick="emulator.keyboard_send_text('\\n')">Enter</button><button onclick="emulator.keyboard_send_text('\\b')">Backspace</button><button onclick="init_v86key(2)">切换大写</button><button onclick="init_v86key(1)">切换小写</button><br>`;
+				v86key.innerHTML+=`<button onclick="emulator.keyboard_send_scancodes([0x48, 0xC8])">上</button><button onclick="emulator.keyboard_send_scancodes([0x50, 0xD0])">下</button><button onclick="emulator.keyboard_send_scancodes([0x4B, 0xCB])">左</button><button onclick="emulator.keyboard_send_scancodes([0x4D, 0xCD])">右</button><button onclick="emulator.keyboard_send_scancodes([0x0F, 0x8F])">Tab</button><button onclick="emulator.keyboard_send_scancodes([0x01, 0x81])">Esc</button>`;
 			}
 		</script>
 	</div>
