@@ -520,11 +520,12 @@ function readtheme(input) {
         function startglass()
         {
             try{
-            $('.window,.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont').css('background','rgba(255, 255, 255, 0.2)');
-            $('.window,.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont').css('backdrop-filter','blur(10px)');
-            $('.window.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont').css('-webkit-backdrop-filter','blur(10px)');
-            $(".nscard,button,input,textarea,#tips_card,#upd_news,#mezcont").css("border","1px solid rgba(255, 255, 255, 0.3)");
-            $(".nscard,button,input.textarea,#tips_card,#upd_news,#mezcont").css("border-radius","5px");
+            $('.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont,select').css('background','rgba(255, 255, 255, 0.2)');
+			$('.window').css('background','rgba(0,0,0,0.2)');
+            $('.window,.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont,select').css('backdrop-filter','blur(20px)');
+            $('.window.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont,select').css('-webkit-backdrop-filter','blur(20px)');
+            $(".nscard,button,input,textarea,#tips_card,#upd_news,#mezcont,select").css("border","1px solid rgba(255, 255, 255, 0.3)");
+            $(".nscard,button,input.textarea,#tips_card,#upd_news,#mezcont,select").css("border-radius","5px");
             $(".nscard").css("margin-left","5px");
             $(".nscard").css("margin-top","5px");
             $(".nscard").css("transition","margin-left 0.3s");
