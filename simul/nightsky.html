@@ -302,6 +302,10 @@ else
                 if(er.key == 'Enter'){
                     if(MD5(xxpsw.value) == localStorage.getItem('..nsys')){
                         $('.lock_interface').hide();$('.desktop').effect('slide');reinit_window();
+                        if(localStorage.getItem("NS_DOM_FULLSCREEN.nsys"))
+                        {
+                            ns_fullscreen();
+                        }
                         xxpsw.value = '';
                         $('.cover_lock').show();
                         $('.password_in').hide();
@@ -316,6 +320,10 @@ else
             });
         }else{
             $('.lock_interface').hide();$('.desktop').effect('slide');reinit_window();
+            if(localStorage.getItem("NS_DOM_FULLSCREEN.nsys"))
+            {
+                ns_fullscreen();
+            }
         }
     }
         function _timedis()
@@ -382,6 +390,7 @@ function readfile(inputentry) {
     <div class="nstit">设置</div>
     <div style="margin-top: 10px;" id="selectmenu">
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nsgxh.removeAttribute('hidden');"><i class="bi bi-shadows"></i> 个性化</div>
+        <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nsxianshi.removeAttribute('hidden');"><i class="bi bi-pc-display"></i> 显示设置</div>
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nsdyy.removeAttribute('hidden');"><i class="bi bi-translate"></i> 多语言</div>
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);safer.removeAttribute('hidden');"><i class="bi bi-lock-fill"></i> 安全选项</div>
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nscckj.removeAttribute('hidden');calculate_storage();"><i class="bi bi-hdd-stack-fill"></i> 存储空间</div>
@@ -877,6 +886,33 @@ function checkPasswordSafe(password) {
         infos_ff.innerHTML = `模糊度：${blurr.value}% 反色：${ivtt.value}% 灰度：${ggray.value}% 饱和度：${saturate.value}%`;
     }
 </script>
+    </div>
+	<div style="margin-top: 10px;height:80%;overflow:auto;" id="nsxianshi" hidden>
+        <button onclick="nsxianshi.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/显示设置
+        <br>
+        <input type="checkbox" id="fullscreen_set" oninput="if_fullscreen()"> 每次解锁时自动全屏
+        <p style="color:#ccc">当您每次解锁NightSky时，NightSky便会自动全屏，以获得更好的体验。</p>
+        <script>
+            var FS_S = document.getElementById("fullscreen_set");
+        function if_fullscreen(){
+            if(FS_S.checked)
+            {
+                localStorage.setItem("NS_DOM_FULLSCREEN.nsys","Document full screen when unlock.");
+            }
+            else
+            {
+                localStorage.removeItem("NS_DOM_FULLSCREEN.nsys");
+            }
+        }
+            if(localStorage.getItem("NS_DOM_FULLSCREEN.nsys"))
+            {
+                FS_S.checked = true;
+            }
+            else
+            {
+                FS_S.checked = false;
+            }
+        </script>
     </div>
 </div>
 <div class='window' id="nsmore" style="background: rgb(0,0,0,0.9);">
@@ -2451,6 +2487,18 @@ function applytheme(THM_DESC)
         localStorage.setItem("NS_THEME.nsys",THM_DESC);
     }
 }
+async function ns_fullscreen()
+{
+    await document.documentElement.requestFullscreen(); //for chrome
+    await document.documentElement.webkitRequestFullscreen(); //for safari or old chrome
+    reinit_window();
+}
+document.addEventListener('fullscreenchange', ()=>{
+    reinit_window();
+});
+document.addEventListener('webkitfullscreenchange', ()=>{
+    reinit_window();
+});
 var CREDITS = `CREDITS:
 This is a Web System Simulator,called 'NightSky'.It is not a real operating system,just for fun.
 
