@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NightSky Midie Player</title>
+    <link id='nsfontst' rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/html-midi-player@1.5.0"></script>
+</head>
+<body>
+<style>
+    body
+    {
+        background: black;
+        font-family: Roboto;
+        color:white;
+    }
+    midi-player::part(control-panel)
+    {
+        background: black;
+        color:white;
+    }
+    midi-player::part(current-time)
+    {
+        font-family: Roboto;
+        font-size: 25px;
+    }
+    midi-player::part(total-time)
+    {
+        font-family: Roboto;
+        color:gray;
+        font-size: 16px;
+    }
+    midi-player::part(play-button)
+    {
+        background:rgb(50,50,50);
+        color:white;
+    }
+    midi-visualizer svg rect.note {
+        stroke-width:1px;
+        fill:lightgreen;
+    }
+    midi-visualizer svg rect.note[data-instrument="0"]{
+        fill:#069999;
+        stroke:gray;
+    }
+    midi-visualizer svg rect.note[data-instrument="2"]{
+        fill:yellow;
+        stroke:gray;
+    }
+    midi-visualizer svg rect.note[data-is-drum="true"]{
+        fill:orange;
+        stroke:gray;
+    }
+    midi-visualizer svg rect.note.active{
+        fill:white;
+        stroke:gray;
+    }
+</style>
+<h1 class="text">NightSky Midie(Midi播放器)</h1>
+导入MIDI文件：<input type="file" accept=".mid,.midi" id="midifile"/>(MIDI加载会有些慢)<br>
+<midi-player id="midie" src="" sound-font visualizer="#midiviz"></midi-player>
+<midi-visualizer type="piano-roll" id="midiviz"></midi-visualizer>
+<script>
+const midie = document.getElementById("midie");
+document.querySelector('#midifile').onchange = async e => {
+  const file = e.target.files[0];
+  if(!file) return;
+  midie.src = URL.createObjectURL(file);
+}
+</script>
+</body>
+</html>
