@@ -291,7 +291,7 @@ Quikie <em style="color:gray">快捷启动</em>
 <a style="color:gray;font-size:10px">NightSky Quikie 1.0</a>
 </div>
 <!--导航栏-->
-<div id='director'><i class="bi bi-flower1 cess" id="ns_quikie" onclick="topmost('quikie_interface');$('#quikie_interface').fadeIn();" hidden style='font-size:30px;color:white;position: absolute;left:5px;'></i> <i class="bi bi-image cess" onclick='make_screenshot();' style='font-size:30px;color:white'></i> <i class="bi bi-house cess" onclick='$(".window").slideUp(400);' style='font-size:30px;color:white'></i> <i class="bi bi-lock cess" onclick="$('.window').fadeOut();$('.desktop').fadeOut();$('.lock_interface').fadeIn();" style='font-size:30px;color:white'></i></div>
+<div id='director'><i class="bi bi-flower1 cess" id="ns_quikie" onclick="topmost('quikie_interface');$('#quikie_interface').fadeIn();" hidden style='font-size:30px;color:white;position: absolute;left:5px;'></i> <i class="bi bi-image cess" onclick='make_screenshot();' style='font-size:30px;color:white'></i> <i class="bi bi-house cess" onclick='$(".window").slideUp(400);' style='font-size:30px;color:white'></i> <i class="bi bi-lock cess" onclick="$('.window').fadeOut();$('.desktop').fadeOut();$('.lock_interface').fadeIn();document.getElementById('ns_quikie').hidden = true;" style='font-size:30px;color:white'></i></div>
 <script>
     async function make_screenshot()
     {
