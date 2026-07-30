@@ -277,21 +277,21 @@ else
 <div style="position:absolute;border-radius: 10px;border:1px solid rgb(50,50,50);background: rgb(30,30,30);padding: 15px;color:white;box-shadow:rgb(0 0 0 / 50%) 0px 0px 15px 1px;bottom:40px;left:0px;" hidden id="quikie_interface">
 Quikie <em style="color:gray">快捷启动</em>
 <hr style="border-width: 0px;background: rgb(100,100,100);height:1px;">
-<div class="quikie_options" onclick="topmost('nssetting');$('#nssetting').effect('slide',500);">设置</div>
-<div class="quikie_options" onclick="topmost('nsplay');$('#nsplay').effect('slide',500);">NightSky媒体播放器</div>
-<div class="quikie_options" onclick="ns_pagewatcher('https://hellopgrmm.github.io/simul/midie.html','NightSky Midie（MIDI播放器）');">Midi播放器</div>
-<div class="quikie_options" onclick="topmost('nscalc');$('#nscalc').effect('slide',500);">计算器</div>
-<div class="quikie_options" onclick="topmost('nschats');$('#nschats').effect('slide',500);">聊天室</div>
-<div class="quikie_options" onclick="topmost('nstelefon');$('#nstelefon').effect('slide',500);">电话</div>
-<div class="quikie_options" onclick="topmost('nsprompt');$('#nsprompt').effect('slide',500);user_cmd.focus()">命令行</div>
+<div class="quikie_options" onclick="topmost('nssetting');$('#nssetting').effect('slide',500);$('#quikie_interface').fadeOut();">设置</div>
+<div class="quikie_options" onclick="topmost('nsplay');$('#nsplay').effect('slide',500);$('#quikie_interface').fadeOut();">NightSky媒体播放器</div>
+<div class="quikie_options" onclick="ns_pagewatcher('https://hellopgrmm.github.io/simul/midie.html','NightSky Midie（MIDI播放器）');$('#quikie_interface').fadeOut();">Midi播放器</div>
+<div class="quikie_options" onclick="topmost('nscalc');$('#nscalc').effect('slide',500);$('#quikie_interface').fadeOut();">计算器</div>
+<div class="quikie_options" onclick="topmost('nschats');$('#nschats').effect('slide',500);$('#quikie_interface').fadeOut();">聊天室</div>
+<div class="quikie_options" onclick="topmost('nstelefon');$('#nstelefon').effect('slide',500);$('#quikie_interface').fadeOut();">电话</div>
+<div class="quikie_options" onclick="topmost('nsprompt');$('#nsprompt').effect('slide',500);user_cmd.focus();$('#quikie_interface').fadeOut();">命令行</div>
 <hr style="border-width: 0px;background: rgb(100,100,100);height:1px;">
-<div class="quikie_options" onclick="topmost('nswebwatch');$('#nswebwatch').effect('slide',300);"><b style="color:skyblue;">显示上次浏览的网页</b></div>
+<div class="quikie_options" onclick="$('#quikie_interface').fadeOut();topmost('nswebwatch');$('#nswebwatch').effect('slide',300);"><b style="color:skyblue;">显示上次浏览的网页</b></div>
 <div class="quikie_options" onclick="$('#quikie_interface').fadeOut()"><b style="color:rgb(200,100,100)">关闭Quikie</b></div>
 <hr style="border-width: 0px;background: rgb(100,100,100);height:1px;">
 <a style="color:gray;font-size:10px">NightSky Quikie 1.0</a>
 </div>
 <!--导航栏-->
-<div id='director'><i class="bi bi-flower1 cess" id="ns_quikie" onclick="topmost('quikie_interface');$('#quikie_interface').fadeIn();" hidden style='font-size:30px;color:white;position: absolute;left:5px;'></i> <i class="bi bi-image cess" onclick='make_screenshot();' style='font-size:30px;color:white'></i> <i class="bi bi-house cess" onclick='$(".window").slideUp(400);' style='font-size:30px;color:white'></i> <i class="bi bi-lock cess" onclick="$('.window').fadeOut();$('.desktop').fadeOut();$('.lock_interface').fadeIn();document.getElementById('ns_quikie').hidden = true;" style='font-size:30px;color:white'></i></div>
+<div id='director'><i class="bi bi-flower1 cess" id="ns_quikie" onclick="topmost('quikie_interface');$('#quikie_interface').fadeIn();" hidden style='font-size:30px;color:white;position: absolute;left:5px;'></i> <i class="bi bi-image cess" onclick='make_screenshot();' style='font-size:30px;color:white'></i> <i class="bi bi-house cess" onclick='$(".window").slideUp(400);' style='font-size:30px;color:white'></i> <i class="bi bi-lock cess" onclick="$('#quikie_interface').fadeOut();$('.window').fadeOut();$('.desktop').fadeOut();$('.lock_interface').fadeIn();document.getElementById('ns_quikie').hidden = true;" style='font-size:30px;color:white'></i></div>
 <script>
     async function make_screenshot()
     {
