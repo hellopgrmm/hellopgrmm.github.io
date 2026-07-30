@@ -190,6 +190,7 @@ twikoo.init({
 				<li style="color:yellow" onclick="location.href='?sys=30dayos&type=floppy'">30DayOS</li>
 				<li style="color:yellow" onclick="location.href='?sys=haribote&type=floppy'">HariboteOS(自制，基于30DayOS)</li>
 				<li onclick="location.href='?sys=ts001&type=floppy'">H-OS(自制)</li>
+				<li onclick="location.href='?sys=ikun&type=floppy'">KunOS(自制)</li>
 				<li style="color:yellow" onclick="location.href='?sys=kolibrios&type=floppy'">KolibriOS</li>
 				<li style="color:yellow" onclick="location.href='?sys=mikeos&type=cdrom'">MikeOS</li>
 			</ul>
@@ -212,7 +213,7 @@ twikoo.init({
 	访问量：<span id="vercount_value_page_pv">加载中...</span>（禁止恶意刷访问量）
 </div>
 <script>
-var size_dict = {'windows1-fda':'1440','f12':'24576','w31cn':'24576','linux':'5534','30dayos':'1440','haribote':'1440','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384','tinycore5':'15052','msdos71f':'24576','3fp':'14336','cad':'14336','msfs':'14336','w31':'14336','mikeos':'3226','win203':'14336','msdos500':'14336','zzta':'14336'};
+var size_dict = {'windows1-fda':'1440','f12':'24576','ikun':'10','w31cn':'24576','linux':'5534','30dayos':'1440','haribote':'1440','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384','tinycore5':'15052','msdos71f':'24576','3fp':'14336','cad':'14336','msfs':'14336','w31':'14336','mikeos':'3226','win203':'14336','msdos500':'14336','zzta':'14336'};
 var desc_dict = {
 	'windows1-fda':'Windows 1.0是微软公司发布的初代Windows系统，基于MS-DOS。',
 	'f12':`FreeDOS是一款运行于IBM PC兼容机的开源操作系统，由Jim Hall等人于1994年发起开发，旨在提供开源的MS-DOS替代方案，兼容exe和dos的其它组件。这个是FreeDOS 1.2，额外安装了UCDOS中文输入法。<button onclick="emulator.keyboard_send_text('CD UCDOS\\nUCDOS\\n')">点此快速启动UCDOS</button>`,
@@ -233,7 +234,8 @@ var desc_dict = {
 	'win203':'Windows 2.03微软的第二代Windows，这次支持窗口重叠了。',
 	'msdos71f':'这是一个带有Add-Ons包的MS-DOS 7.1，里面有媒体播放器、文件浏览器等。',
 	'zzta':'ZZT是一款DOS平台的解谜游戏。',
-	'w31cn':'微软官方中文版Windows 3.1，里面安装了Visual Basic 1.0。'
+	'w31cn':'微软官方中文版Windows 3.1，里面安装了Visual Basic 1.0。',
+	'ikun':'纯汇编自制的抽象操作系统。'
 }
 function parseurl(url)
 {
