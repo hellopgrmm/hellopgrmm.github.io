@@ -993,6 +993,7 @@ async function Vek_init()
 	$("#desktop").fadeIn(1000);
 	await delay(1005);
 	if(localStorage.getItem('vek.VEK_START_ACTIONS')){eval(localStorage.getItem('vek.VEK_START_ACTIONS'));}else{}
+	vek_window("提示","由于不明因素，Vek的一些图标失效了。<br>这是图床网站的原因，并不影响使用。<br>目前建议您转向最新的伪系统NightSky，<br>NightSky对移动端友好，且功能和可玩性更多。<br>准备好转向NightSky了？<a href='https://hellopgrmm.github.io/simul/nightsky'>立即跳转</a><br>当然，您也可以继续留在Vek，该弹窗不影响使用。");
 }
 function gettime()
 {
