@@ -463,17 +463,18 @@ function readtheme(input) {
 }
 </script>
         <p>预设主题(点击方块即可切换)</p>
-        <div style="background:linear-gradient(gray,black);padding:5px;height:120px;width:120px;display:inline-block;vertical-align:top" onclick="applytheme('restore_default')">
+        <div style="background:linear-gradient(gray,black);padding:5px;height:120px;width:120px;display:inline-block;vertical-align:top" onclick="applytheme('restore_default');localStorage.removeItem('NS_GLASS.nsys')">
             OriSky(默认)
         </div>
-        <div style="background:rgb(50,255,255,0.5);padding:5px;height:120px;width:120px;display:inline-block;vertical-align:top;border:2px solid cyan;color:cyan" onclick="applytheme(THEME_TECHNOLY)">
-            Technoly
+        <div style="background:rgb(255,255,255,0.2);padding:5px;height:120px;width:120px;border:1px solid white;backdrop-filter: blur(5px);-webkit-backdrop-filter:blur(5px);display: inline-block;border-radius: 10px;" onclick="applytheme('restore_default');localStorage.setItem('NS_GLASS.nsys','Glass Effect');startglass();">
+            Glass - 玻璃质感<br>(推荐/最美观)
         </div>
-        <div style="background:black;padding:5px;height:120px;width:120px;display:inline-block;vertical-align:top;border:2px solid white;color:white" onclick="applytheme(THEME_SIMPLEBW)">
-            SimpleBW
+        <div style="background:rgb(50,255,255,0.5);padding:5px;height:120px;width:120px;display:inline-block;vertical-align:top;border:2px solid cyan;color:cyan" onclick="applytheme(THEME_TECHNOLY);localStorage.removeItem('NS_GLASS.nsys')">
+            Technoly - 科技之光
         </div>
-        <h2>字体大小</h2>
-        <input type="range" max=50 value=14 id="kksk" oninput="fontsz.innerHTML = kksk.value+'px';localStorage.setItem('NS_FONTSIZE.nsys',fontsz.innerHTML);document.body.style.fontSize = fontsz.innerHTML;" /> <b id="fontsz">14px</b> <button onclick="localStorage.removeItem('NS_FONTSIZE.nsys');ns_alert('提示','已恢复默认。重启后生效。');">恢复默认</button>
+        <div style="background:black;padding:5px;height:120px;width:120px;display:inline-block;vertical-align:top;border:2px solid white;color:white" onclick="applytheme(THEME_SIMPLEBW);localStorage.removeItem('NS_GLASS.nsys')">
+            SimpleBW - 硬核黑白
+        </div>
         <h2>字体</h2>
         选择系统字体：
         <select id='fontsele' oninput='chsysf(fontsele.value)'>
@@ -551,22 +552,25 @@ function readtheme(input) {
                 bdhot.checked = true;
             }
         </script>
-                <h2>毛玻璃效果(Beta)</h2>
+                <!--<h2>毛玻璃效果(Beta)</h2>
         <p>开启毛玻璃效果之后，所有的窗口背景将会变为透明，这可能会影响观感。</p>
          <button onclick='startglass()'>开启</button><br><br>
          <font color="orange">
             注意：本效果会影响视觉观感，因为模糊+透明的界面亮度高，文字显示可能不清晰。<br>如果觉得观感不适，请重启网页以关闭视觉效果。<br>如果您想要把它作为个性化选项，请在文本编辑器中创建一个内容为"startglass()"的文件，保存后在"设置"->"高级选项"->"自启动项中"写入这个文件名。<br>否则，就需要手动打开。<br>毛玻璃效果最好搭配深色调壁纸，不然太亮了看着不美观。
-         </font>
+         </font>-->
         <script>
         function startglass()
         {
             try{
-            $('.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont,select').css('background','rgba(255, 255, 255, 0.2)');
-			$('.window').css('background','rgba(0,0,0,0.2)');
-            $('.window,.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont,select').css('backdrop-filter','blur(20px)');
-            $('.window.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont,select').css('-webkit-backdrop-filter','blur(20px)');
-            $(".nscard,button,input,textarea,#tips_card,#upd_news,#mezcont,select").css("border","1px solid rgba(255, 255, 255, 0.3)");
-            $(".nscard,button,input.textarea,#tips_card,#upd_news,#mezcont,select").css("border-radius","5px");
+            $('.nscard,button,input,textarea,#mezcont,select,progress').css('background','rgba(255, 255, 255, 0.2)');
+            $('.window,#director,.status_bar,#tips_card,#upd_news').css('background','rgba(0,0,0,0.2)');
+            $('#tips_card,#upd_news').css('box-shadow','0px 0px 0px black');
+            $('#tips_card,#upd_news').css('border-radius','10px');
+            $('.nstit').css('background','linear-gradient(to right,rgba(255,255,255,0.3),rgba(255,255,255,0.1))');
+            $('.window,.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont,select,progress,#director,.nstit,.status_bar').css('backdrop-filter','blur(20px)');
+            $('.window.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont,select,progress,#director,.nstit,.status_bar').css('-webkit-backdrop-filter','blur(20px)');
+            $(".nscard,button,input,textarea,#tips_card,#upd_news,#mezcont,select,progress").css("border","1px solid rgba(255, 255, 255, 0.3)");
+            $(".nscard,button,input.textarea,#tips_card,#upd_news,#mezcont,select,progress").css("border-radius","5px");
             $(".nscard").css("margin-left","5px");
             $(".nscard").css("margin-top","5px");
             $(".nscard").css("transition","margin-left 0.3s");
@@ -2357,6 +2361,7 @@ function t_stpr()
 <script>
 if(localStorage.getItem('NS_WALLPAPER.nsys')){document.body.style.backgroundImage = `url(${localStorage.getItem('NS_WALLPAPER.nsys')})`;}else{}
 if(localStorage.getItem('NS_WALLPAPER2.nsys')){document.body.style.background = `${localStorage.getItem('NS_WALLPAPER2.nsys')}`;}else{}
+if(localStorage.getItem('NS_GLASS.nsys')){startglass();}else{}
 if(localStorage.getItem('NS_STARTUP_OP.nsys')){var medu_s = localStorage.getItem('NS_STARTUP_OP.nsys').split('\n');for(var mee = 0;mee < medu_s.length;mee++){eval(localStorage.getItem(medu_s[mee]));}jsmedu.value=localStorage.getItem('NS_STARTUP_OP.nsys');}else{}
 if(localStorage.getItem('NS_FONTSIZE.nsys')){document.body.style.fontSize = localStorage.getItem('NS_FONTSIZE.nsys');}else{}
 if(localStorage.getItem('NS_THEME.nsys')){applytheme(localStorage.getItem('NS_THEME.nsys'));}else{}
