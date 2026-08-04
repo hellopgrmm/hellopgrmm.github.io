@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Windows 95</title>
+    <link id="nsfontst" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto Sans SC:wght@400;700&amp;display=swap">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+  </head>
+  <body>
+    <style>
+      body
+      {
+        font-family:Roboto,sans-serif;
+        background:black;
+        color:white;
+      }
+    </style>
+    <h1>Windows 95</h1>
+    <p>这是一个在线的Windows 95模拟器，基于Emularity实现。镜像是从Internet Archive上收集的精简版，仅有4MB，可以运行一些小游戏（可能会有点卡顿）。</p>
+    <p>如果你在体验过程中遇到死机问题，可以刷新网页重试。</p>
+    <p>Copyright &copy; Hello-Programming 2026 <a href="vit86.html" style="text-decoration:none;color:yellow">[返回 威86]</a></p>
+    <canvas id="canvas95"></canvas>
+    <script src="https://hellopgrmm.github.io/tools/es6-promise.js"></script>
+    <script src="https://hellopgrmm.github.io/tools/browserfs.min.js"></script>
+    <script src="https://hellopgrmm.github.io/tools/loader.js"></script>
+    <script type="text/javascript">
+      var emulator = new Emulator(
+        document.querySelector("#canvas95"),
+        null,
+        new DosBoxLoader(
+          DosBoxLoader.emulatorJS("https://hellopgrmm.github.io/dosbox-sync.js"),
+          DosBoxLoader.mountZip("c",
+            DosBoxLoader.fetchFile("Windows 95镜像","https://hellopgrmm.github.io/Secrets/micro95.zip")
+          ),
+          DosBoxLoader.startExe("AUTOEXEC.BAT") ,
+        )
+      );
+      emulator.start();
+    </script>
+  </body>
+</html>
