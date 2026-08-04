@@ -1,0 +1,91 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Drabox Simple Game</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+<style>
+    ::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.1);
+    }
+    ::-webkit-scrollbar-thumb {
+       background: rgba(100,100,100,0.5);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(100,100,100,0.8);
+    }
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 5px;
+    }
+	body
+	{
+		background:linear-gradient(to right,#2d3386,#420c6e,#093d05);
+		color:white;
+		font-family: Roboto;
+	}
+	#information_bar
+	{
+		background: rgba(255,255,255,0.2);
+		backdrop-filter: blur(10px);
+		position: fixed;
+		left:0px;
+		top:0px;
+		padding: 5px;
+		width:calc(100% - 5px);
+		z-index:9999;
+	}
+</style>
+</head>
+<body>
+<div id="information_bar">
+	DraBox · 无聊的小游戏 | Copyright &copy; Hello-Programming 2026<br>
+	<a id="scoredis" style="font-size: 40px;color:skyblue;">0</a>
+	<a id="hwdis" style="font-size: 40px;color:yellow;">0</a>
+</div>
+<div id="box114514" style="position:relative;display:flex;width:100px;height:100px;border-radius:5px;background:radial-gradient(rgb(50,50,50),rgb(30,30,30));justify-content:center;align-items:center;left:80px;top:100px;box-shadow:0px 3px 3px 3px black;"><a>拖拽<br>*(^_^)*</a></div>
+<div id="goal1919810" style="position:relative;display:flex;width:30px;height:30px;border-radius:5px;background:orange;justify-content:center;align-items:center;"></div>
+<script>
+var score = 0;
+interact('#box114514').draggable({
+  modifiers: [interact.modifiers.restrictRect({restriction:'parent',endOnly:true})],
+  listeners:{
+    move(event){
+      let x = (parseFloat(event.target.dataset.x) || 0) + event.dx;
+      let y = (parseFloat(event.target.dataset.y) || 0) + event.dy;
+      event.target.style.transform = `translate(${x}px, ${y}px)`;
+      Object.assign(event.target.dataset,{x,y});
+    }
+  }
+});
+function pzjc(elem1,elem2) {
+    const rect1 = elem1.getBoundingClientRect();
+    const rect2 = elem2.getBoundingClientRect();
+    return !(
+        rect1.right < rect2.left || 
+        rect1.left > rect2.right || 
+        rect1.bottom < rect2.top || 
+        rect1.top > rect2.bottom
+    );
+}
+function movegoal(elem3)
+{
+	const ww = window.innerWidth - 500;
+    const wh = window.innerHeight - 500;
+    elem3.style.transform = `translate(${Math.random() * (ww - elem3.offsetWidth)}px,${Math.random() * (wh - elem3.offsetHeight)}px)`;
+}
+var box114514 = document.getElementById("box114514");
+function sethw()
+{
+	box114514.style.height=`${100+score*3}px`;
+	box114514.style.width=`${100+score*3}px`;
+}
+function updatesc(){
+	scoredis.innerHTML = score;
+	hwdis.innerHTML = box114514.style.height.replace("px","");
+}
+setInterval("if(pzjc(box114514,goal1919810)){movegoal(goal1919810);score++;sethw()}updatesc()",1);
+</script>
+</body>
+</html>
