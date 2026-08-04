@@ -24,6 +24,7 @@
 		background:linear-gradient(to right,#2d3386,#420c6e,#093d05);
 		color:white;
 		font-family: Roboto;
+		touch-action:none;
 	}
 	#information_bar
 	{
@@ -78,8 +79,8 @@ function movegoal(elem3)
 var box114514 = document.getElementById("box114514");
 function sethw()
 {
-	box114514.style.height=`${100+score*3}px`;
-	box114514.style.width=`${100+score*3}px`;
+	box114514.style.height=`${100+score*2}px`;
+	box114514.style.width=`${100+score*2}px`;
 }
 function updatesc(){
 	scoredis.innerHTML = score;
