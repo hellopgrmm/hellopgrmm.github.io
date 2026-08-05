@@ -41,7 +41,7 @@
 </head>
 <body>
 <div id="information_bar">
-	DraBox · 无聊的小游戏 | Copyright &copy; Hello-Programming 2026<br>
+	DraBox · 无聊的小游戏 | Copyright&copy;Hello-Programming 2026<br>
 	<a id="scoredis" style="font-size: 40px;color:skyblue;">0</a>
 	<a id="hwdis" style="font-size: 40px;color:yellow;">0</a>
 </div>
@@ -72,15 +72,15 @@ function pzjc(elem1,elem2) {
 }
 function movegoal(elem3)
 {
-	const ww = window.innerWidth - 500;
-    const wh = window.innerHeight - 500;
+	const ww = window.innerWidth;
+    const wh = window.innerHeight;
     elem3.style.transform = `translate(${Math.random() * (ww - elem3.offsetWidth)}px,${Math.random() * (wh - elem3.offsetHeight)}px)`;
 }
 var box114514 = document.getElementById("box114514");
 function sethw()
 {
-	box114514.style.height=`${100+score*2}px`;
-	box114514.style.width=`${100+score*2}px`;
+	box114514.style.height=`${100+score}px`;
+	box114514.style.width=`${100+score}px`;
 }
 function updatesc(){
 	scoredis.innerHTML = score;
