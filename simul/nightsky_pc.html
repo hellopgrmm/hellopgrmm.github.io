@@ -1,0 +1,2754 @@
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>NightSky</title> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css"/>
+    <link id='nsfontst' rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js"></script>
+    <script defer src="https://events.vercount.one/js"></script>
+    <script src="https://hellopgrmm.github.io/tools/md5.js"></script>
+<style> 
+/*it looks like old system ui*/ 
+body 
+{ 
+    font-family:Roboto,Helvetica; 
+    background:linear-gradient(to right,#1a5d7f,#0c6963,#597709); 
+    background-size:100%;
+    touch-action:none;
+} 
+        ::-webkit-scrollbar-track {
+             background: rgba(0,0,0,0.0);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(100,100,100,0.5);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(100,100,100,0.8);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 5px;
+        }
+button,input[type=submit] 
+{ 
+    background:linear-gradient(black,rgb(50,50,50),black); 
+    height:30px; 
+    min-width:100px; 
+    font-family:Roboto,Helvetica; 
+    color:white; 
+    font-size:14px; 
+    border-radius:5px; 
+    border-width:0px; 
+    box-shadow:0px 0px 1px 1px rgb(70,70,70);
+} 
+button:hover,input[type=submit]:hover 
+{ 
+    background:#06999977;
+} 
+button:active 
+{ 
+    background:black; 
+    color:#ccc; 
+    margin-top:1px; 
+    margin-left:1px; 
+    box-shadow:0px 0px 0px 0px gray; 
+} 
+input 
+{ 
+    border:1px solid gray; 
+    background:linear-gradient(black,rgb(50,50,50),black); 
+    color:white;
+    font-size:20px; 
+    font-family:Roboto,Helvetica; 
+    outline:none; 
+    border-radius:3px;
+    margin-bottom:5px;
+} 
+input:focus 
+{ 
+    border:1px solid orange; 
+    background:black; 
+} 
+textarea 
+{ 
+    border:1px solid gray; 
+    font-size:14px; 
+    background:black;
+    color:white;
+    font-family:Roboto,Helvetica; 
+    outline:none; 
+    border-radius:3px; 
+} 
+textarea:focus 
+{ 
+    border-color:orange; 
+} 
+select 
+{ 
+    border:1px solid gray; 
+    background:linear-gradient(black,rgb(50,50,50),black); 
+    border-radius:0px; 
+    font-size:14px; 
+    font-family:Roboto,Helvetica; 
+    outline:none; 
+    color:white; 
+    width:100px; 
+    height:30px; 
+} 
+select:hover{border:1px solid orange;} 
+select:active{background:black;} 
+option{background: black;color:white}
+option:hover{background: orange;color:black;}
+progress{ 
+  width:200px; 
+  height:30px; 
+  appearance:none; 
+  border-width:2px; 
+  border-color:black gray black gray; 
+  background:linear-gradient(gray,black); 
+} 
+progress::-webkit-progress-bar { 
+    border:2px solid black; 
+    background:linear-gradient(gray,black); 
+} 
+progress::-webkit-progress-value { 
+    background:linear-gradient(yellow,orange); 
+} 
+progress::-moz-progress-bar { 
+    border:2px solid black; 
+    background:linear-gradient(gray,black); 
+} 
+input[type=checkbox] 
+{ 
+    width: 20px; 
+    height: 30px; 
+    font-size:14px;
+    accent-color:orange; 
+} 
+.bi{font-size:40px;color:#ccc;} 
+.status_bar 
+{ 
+    background: linear-gradient(black,rgb(30,30,30)); 
+    width:calc(100% - 3px); 
+    font-size:20px; 
+    position: absolute; 
+    top:0px; 
+    left:0px; 
+    text-align: right; 
+    color:white;
+    padding-right:3px;
+} 
+.desktop 
+{ 
+    padding:10px; 
+    padding-right: 10px; 
+    padding-bottom: 10px; 
+    position: absolute; 
+    top:30px;
+    height: 85%; 
+    width:calc(100% - 40px); 
+} 
+.bitb:hover
+{
+    color:rgba(255,255,255,0.3);
+}
+.ns-icon 
+{ 
+    padding:5px; 
+    color:white; 
+    text-shadow:1px 1px 2px black; 
+    text-align: center; 
+    border-radius: 5px; 
+    display: inline-block; 
+    width:80px; 
+    word-wrap: break-word; 
+} 
+.ns-icon:hover 
+{ 
+    background: rgba(255,255,255,0.3); 
+} 
+.window 
+{ 
+    background:black; 
+    color:white;
+    position:absolute !important; 
+    top:10%;
+    left:10%;
+    height:50%;
+    width:50%; 
+    display:none; 
+    color:white;
+    overflow-y:auto;
+    overflow-x:hidden;
+    border-radius: 10px;
+    box-shadow:0px 0px 25px 0px black;
+}
+.morewindow 
+{ 
+    background: black; 
+    color:white;
+    position: absolute; 
+    top:30px; 
+    left:0px; 
+    width:100%; 
+    display: none; 
+    color:white;
+    overflow:auto;
+}
+.cess{margin-right: 5px;}
+.cess:hover{color:orange;}
+.nscard{background:linear-gradient(black,rgb(30,30,30));width:95%;color:white;font-size:20px;padding-top: 10px;padding-bottom: 10px;padding-left:10px;border:1px solid gray;margin-bottom: 3px;border-radius: 5px}
+.nscard:hover{background: #06999977;}
+#director{background:linear-gradient(rgb(30,30,30),rgb(50,50,50),rgb(30,30,30));width:100%;text-align:center;position:fixed;z-index:2026;bottom:0px;left:0px;padding-top:5px;padding-bottom:5px;}
+.casd{padding-top: 5px;padding-bottom: 5px;} 
+.casd:hover{background: #069999;} 
+.nstit{background:linear-gradient(rgb(70,70,70),rgb(30,30,30),rgb(70,70,70));color:white;font-size:20px;width:calc(100% - 15px);padding-top:10px;padding-bottom:10px;padding-left:10px;padding-right:10px;}
+.nsconta{background:rgb(70,70,70);box-shadow:2px 2px 2px 2px black;max-width:500px;padding-top:5px;padding-bottom:5px;margin:0 auto;position:relative;color:white;top:30%;padding:3px;}
+.nsoverlay{background:rgba(0,0,0,0.5);z-index:9999;position:fixed;left:0px;top:0px;height:100%;width:100%;color:white;display:none;justify-content:center;align-items:center;}
+</style> 
+</head> 
+<body> 
+<div class="status_bar"><a id="information_text_banner"></a> <i style="color:white;font-size:25px;" class="bi bi-wifi"></i> <i style="color:white;font-size:25px;" class="bi bi-bar-chart-fill"></i> <a style='color:white' id='battery_vald'>100%</a>
+<div id='battery_fl' style='display:inline-block;border:1px solid #ccc;width:30px;height:15px'>
+    <div id='battery_sim' style='width:100%;height:100%;background:#00c21a'></div>
+</div>
+<script>
+function nsbtr(){
+const crt = new Date();
+var crt_btr = (100-((Number(crt.getHours())*60+Number(crt.getMinutes()))/(24*60)*100)).toFixed(0)+'%';
+battery_sim.style.width=crt_btr;
+battery_vald.innerText=crt_btr;
+var ctr_btr = Number(crt_btr.replace('%',''));
+if(ctr_btr<=10)
+{
+    battery_sim.style.background='red';
+}
+else if(ctr_btr<=20)
+{
+    battery_sim.style.background='#cf7c00';
+}
+else
+{
+    battery_sim.style.background='#00c21a';
+}
+}
+    nsbtr();
+</script> <a style="color:#71cfd1" id="timedisplay">--:--</a></div> <div id="fps_image" style="color:white;position: absolute;left: 0px;top:0px;padding: 5px;background: rgba(0, 0, 0, 0.5);" hidden><p id="fps_dis2">FPS:0</p><canvas id="fps_canvas"></canvas><p onclick="clearInterval(fpsfps);fps_image.hidden=true;">[关闭]</p></div>
+<div class="desktop"> 
+    <div class="ns-icon"><i class="bi bi-folder-fill" onclick="topmost('nsfm');$('#nsfm').effect('slide',500);list_personal()"></i><br>文件</div> 
+    <div class="ns-icon"><i class="bi bi-file-text-fill" onclick="topmost('nsedit');$('#nsedit').effect('slide',500);"></i><br>文本编辑器</div> 
+    <div class="ns-icon"><i class="bi bi-browser-chrome" onclick="topmost('nsbrow');$('#nsbrow').effect('slide',500);"></i><br>浏览器</div> 
+    <div class="ns-icon"><i class="bi bi-filetype-txt" onclick="topmost('nsedit');$('#nsedit').effect('slide',500);ns_filecontext.value=CREDITS;ns_filename.value='CREDITS.TXT';"></i><br>CREDITS.TXT</div> 
+    <br> 
+    <div style="margin-top:12px;box-shadow:0px 3px 3px 3px black;border-radius:5px;background: radial-gradient(rgb(50,50,50),rgb(30,30,30));padding: 10px;color:white;word-wrap: break-word;" id="tips_card"> 
+        <h1>欢迎使用NightSky 电脑版</h1> 
+        TIPS:<b id="tips_show"> <b style='font-size:30px'>新特性！</b>这是NightSky的PC端发行版，是基于原版NightSky改成的，更加适合电脑端设备。<br>点击“下一条”快速了解详情。</b> 
+        <br> <br>
+        <button onclick="next_tip();">下一条</button>  第<strong id='tipcount' style='color:#ccc'>1/5</strong>条
+    </div> 
+    <div style="margin-top:12px;box-shadow:0px 3px 3px 3px black;border-radius:5px;background: radial-gradient(rgb(50,50,50),rgb(30,30,30));padding: 10px;color:white;word-wrap: break-word;height:100px;overflow:auto;" id="upd_news" hidden>
+    <script>
+    function loadhot(){
+        if(localStorage.getItem("HOT_CONTENT.nsys") == "true"){
+            upd_news.innerHTML="正在加载热搜...";
+            fetch('https://v2.xxapi.cn/api/baiduhot')
+            .then(response => response.json())
+            .then(datas => {
+                upd_news.innerHTML="<h3>百度热搜</h3>";
+                for(var nt = 0;nt < datas.data.length;nt++){
+                    upd_news.innerHTML+=`<p onclick="ns_alert('描述','${datas.data[nt].desc} <button onclick=\\'window.open(\`${datas.data[nt].url}\`);$(\`#alertmez\`).css(\`display\`,\`none\`)\\'>详情</button>');">${datas.data[nt].title} (热度：${datas.data[nt].hot})</p>`;
+                }
+            })
+            .catch(error => upd.news.innerHTML = "加载错误："+error);
+        }
+        else
+        {
+            console.log("Have a nice day.");
+        }
+    }
+    loadhot();
+    </script> 
+    </div> 
+    <!--More applications-->
+    <style>#ns_more_block:hover{scale: 0.9;}</style>
+        <div style="display:flex;justify-content:center;width:100%;">
+    <div id="ns_more_block" style="position: absolute;bottom:0px;box-shadow:0px 3px 3px 3px black;border-radius:5px;background: radial-gradient(rgb(50,50,50),rgb(30,30,30));padding: 10px;color:white;word-wrap: break-word;" onclick="topmost('nsmore');$('#nsmore').effect('slide',500);"><i class="bi bi-grid-3x3-gap-fill"> <a style="font-size: 20px;color:white;font-style: normal;">更多程序</a></i></div></div> 
+</div> 
+<!--Quikie-->
+<style>
+.quikie_options
+{
+    border-radius: 5px;
+    padding: 5px;
+    transition:background 0.3s;
+    min-width:100px;
+}
+.quikie_options:hover
+{
+    background: rgb(70,70,70);
+}
+</style>
+<div style="position:absolute;border-radius: 10px;border:1px solid rgb(50,50,50);background: rgb(30,30,30);padding: 15px;color:white;box-shadow:rgb(0 0 0 / 50%) 0px 0px 15px 1px;bottom:40px;left:0px;" hidden id="quikie_interface">
+Quikie <em style="color:gray">快捷启动</em>
+<hr style="border-width: 0px;background: rgb(100,100,100);height:1px;">
+<div class="quikie_options" onclick="topmost('nssetting');$('#nssetting').effect('slide',500);$('#quikie_interface').fadeOut();">设置</div>
+<div class="quikie_options" onclick="topmost('nsplay');$('#nsplay').effect('slide',500);$('#quikie_interface').fadeOut();">NightSky媒体播放器</div>
+<div class="quikie_options" onclick="ns_pagewatcher('https://hellopgrmm.github.io/simul/midie.html','NightSky Midie（MIDI播放器）');$('#quikie_interface').fadeOut();">Midi播放器</div>
+<div class="quikie_options" onclick="topmost('nscalc');$('#nscalc').effect('slide',500);$('#quikie_interface').fadeOut();">计算器</div>
+<div class="quikie_options" onclick="topmost('nschats');$('#nschats').effect('slide',500);$('#quikie_interface').fadeOut();">聊天室</div>
+<div class="quikie_options" onclick="topmost('nsprompt');$('#nsprompt').effect('slide',500);user_cmd.focus();$('#quikie_interface').fadeOut();">命令行</div>
+<hr style="border-width: 0px;background: rgb(100,100,100);height:1px;">
+<div class="quikie_options" onclick="$('#quikie_interface').fadeOut();topmost('nswebwatch');$('#nswebwatch').effect('slide',300);"><b style="color:skyblue;">显示上次浏览的网页</b></div>
+<div class="quikie_options" onclick="$('#quikie_interface').fadeOut()"><b style="color:rgb(200,100,100)">关闭Quikie</b></div>
+<hr style="border-width: 0px;background: rgb(100,100,100);height:1px;">
+<a style="color:gray;font-size:10px">NightSky Quikie 1.0</a>
+</div>
+<!--导航栏-->
+<div id='director'><i class="bi bi-flower1 cess" id="ns_quikie" onclick="topmost('quikie_interface');$('#quikie_interface').fadeIn();" hidden style='font-size:30px;color:white;position: absolute;left:5px;'></i> <i class="bi bi-image cess" onclick='make_screenshot();' style='font-size:30px;color:white'></i> <i class="bi bi-house cess" onclick='$(".window,.morewindow").slideUp(400);' style='font-size:30px;color:white'></i> <i class="bi bi-lock cess" onclick="$('#quikie_interface').fadeOut();$('.window').fadeOut();$('.desktop').fadeOut();$('.lock_interface').fadeIn();document.getElementById('ns_quikie').hidden = true;" style='font-size:30px;color:white'></i></div>
+<script>
+    async function make_screenshot()
+    {
+        const canvas = await html2canvas(document.body, {
+            useCORS:true,
+            scale:window.devicePixelRatio,
+            logging:false
+        });
+        const capd = document.createElement('a');
+        capd.download = `截图${new Date().getTime()}.png`;
+        capd.href = canvas.toDataURL('image/png');
+        capd.click();
+    }
+</script>
+<!--Lock-->
+<div class="lock_interface" style="color:white;text-shadow: 1px 1px 1px black;margin-top: 100px;height:80%;width:100%;" onclick="process_unlock()">
+    <div style="margin-left: 30px;" class="cover_lock">
+    <a id="timeshow_line1" style="font-size: 70px;">10:</a>
+    <a id="timeshow_line2" style="font-size: 70px;">24</a>
+    <a id="timeshow_line3" style="font-size: 30px;">: 32</a><br><br>
+    <a id="timeshow_line4" style="font-size: 20px;">2018年10月24日</a><br><br>
+    <a id="hitokoto" style="width:80%"></a>
+    <a style="position:absolute;bottom: 100px;left:50px;font-size: 30px;">点击屏幕任意处解锁</a>
+    </div>
+    <div class="password_in" style="justify-content: center;align-items: center;" hidden>
+        <a id="qwq">要进入NightSky，请先输入您的密码。</a><br><br>
+        <input id="xxpsw" type="password"/>
+    </div>
+    <script>
+    $(".desktop").hide();
+    function process_unlock(){
+        if(localStorage.getItem('..nsys')){
+            $('.cover_lock').hide();
+            $('.password_in').show();
+            qwq.innerText="要进入NightSky，请先输入您的密码。";
+            xxpsw.focus();
+            xxpsw.addEventListener('keydown',function(er){
+                if(er.key == 'Enter'){
+                    if(MD5(xxpsw.value) == localStorage.getItem('..nsys')){
+                        $('.lock_interface').hide();$('.desktop').effect('slide');reinit_window();
+                        if(localStorage.getItem("NS_DOM_FULLSCREEN.nsys"))
+                        {
+                            ns_fullscreen();
+                        }
+                        document.getElementById("ns_quikie").hidden = false;
+                        xxpsw.value = '';
+                        $('.cover_lock').show();
+                        $('.password_in').hide();
+                    }
+                    else
+                    {
+                        qwq.innerText = "密码错误。";
+                        xxpsw.value = '';
+                        xxpsw.focus();
+                    }
+                }
+            });
+        }else{
+            $('.lock_interface').hide();$('.desktop').effect('slide');reinit_window();
+            if(localStorage.getItem("NS_DOM_FULLSCREEN.nsys"))
+            {
+                ns_fullscreen();
+            }
+            document.getElementById("ns_quikie").hidden = false;
+        }
+    }
+        function _timedis()
+        {
+            const now = new Date();
+            timeshow_line1.innerHTML = now.getHours().toString().padStart(2,'0')+":";
+            timeshow_line2.innerHTML = now.getMinutes().toString().padStart(2,'0');
+            timeshow_line3.innerHTML = ": "+now.getSeconds().toString().padStart(2,'0');
+            timeshow_line4.innerHTML = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
+        }
+        fetch("https://v2.xxapi.cn/api/yiyan?type=poetry")
+            .then(res => res.json())
+            .then(datas => {hitokoto.innerText = datas.data});
+        setInterval("_timedis()",500);
+    </script>
+</div>
+<div class="window" id="nsfm"> 
+<div class='nstit'>文件管理
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div><br> 
+分类：<button onclick="nssys.setAttribute('hidden',true);nspers.removeAttribute('hidden');list_personal();">个人文件</button> <button onclick="nspers.setAttribute('hidden',true);nssys.removeAttribute('hidden');list_system();">系统文件</button> 导入外部文件<input style="background: black;border-width: 0px;width:100px;" type="file" id="inputentry1"/> <button onclick="readfile('inputentry1');" class='vek_button'>导入</button>
+<script>
+function readfile(inputentry) {
+    const fileinput = document.getElementById(inputentry);
+    if (fileinput.files.length > 0) {
+        const file = fileinput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            //return e.target.result;
+            localStorage.setItem(file.name,e.target.result);
+            list_personal();
+            ns_alert("导入完成",'已导入文件“'+file.name+'”，存于‘个人文件’中。');
+        };
+        reader.readAsText(file, 'UTF-8');
+    } else {
+        ns_alert("导入失败",'So..?你文件呢？');
+    }
+}
+</script>
+<div style='margin-top:10px' id="nspers"></div> 
+<div style='margin-top:10px' id="nssys"></div> 
+</div> 
+<div class="window" id="nsedit"> 
+<div class='nstit'>文本编辑器
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div><br> 
+<input id="ns_filename" placeholder="文件名" /> <button onclick="localStorage.setItem(ns_filename.value,ns_filecontext.value);ns_alert('文件编辑','已保存，请在“文件”->“个人文件”查看。');">保存</button> <br><br> 
+<textarea id="ns_filecontext" style="width:95%;height:calc(100% - 150px);margin-left:2%;"></textarea> 
+</div> 
+<div class='window' id='nsbrow'>
+<div class='nstit'> <i style='font-size:16px' class='bi bi-arrow-clockwise cess' onclick='awiframe.src = awiframe.src+"#";'>刷新</i> <input id='browser_addr' placeholder='输入网址。'/> <i class='cess bi bi-arrow-right' onclick='if(browmode == 0){awiframe.src = window.location.protocol+"//"+browser_addr.value;}else{awiframe.src=browser_addr.value}' style='font-size:16px'>访问</i> <i style="font-size:16px;" class="bi bi-gear cess" onclick="topmost('browsset');$('#browsset').slideDown();">设置</i>
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+<div id="browsset" style="padding:5px;width:calc(100% - 12px);border: 1px solid white;position: absolute;right:0px;background: black;" hidden>
+    <p>访问设置</p>
+    输入网址时：<select id="browmode">
+        <option value=0 selected>根据环境自动填充前缀</option>
+        <option value=1>手动输入前缀</option>
+    </select>
+    <p>如果选择了自动填充前缀，那么当NightSky在本地环境运行时，浏览器只能访问本地文件，因此建议选择“手动输入前缀”。</p>
+    <button onclick="$('#browsset').slideUp()">关闭</button>
+</div>
+<iframe style='width:100%;height:calc(100% - 45px);border-width:0px;' id='awiframe'></iframe>
+</div>
+<div class='window' id='nswebwatch'>
+<div class='nstit'><strong id='pw_tit'>Page Watcher</strong>
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+<iframe style='width:100%;height:calc(100% - 45px);border-width:0px;background: white;' id='pawat'></iframe>
+</div>
+<div class="window" id="nssetting">
+    <div class="nstit">设置
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+    <div style="margin-top: 10px;" id="selectmenu">
+        <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nsgxh.removeAttribute('hidden');"><i class="bi bi-shadows"></i> 个性化</div>
+        <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nsxianshi.removeAttribute('hidden');"><i class="bi bi-pc-display"></i> 显示设置</div>
+        <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nsdyy.removeAttribute('hidden');"><i class="bi bi-translate"></i> 多语言</div>
+        <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);safer.removeAttribute('hidden');"><i class="bi bi-lock-fill"></i> 安全选项</div>
+        <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nscckj.removeAttribute('hidden');calculate_storage();"><i class="bi bi-hdd-stack-fill"></i> 存储空间</div>
+        <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);advancedop.removeAttribute('hidden');"><i class="bi bi-sliders"></i> 高级选项</div>
+        <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);developerop.removeAttribute('hidden');" hidden id="developer_option"><i class="bi bi-braces"></i> 开发人员选项</div>
+        <div class="nscard" onclick="ns_pagewatcher('https://hellopgrmm.github.io/simul/vek_cmb.html','留言板(,,>᎑<,,)')"><i class="bi bi-chat-left-dots-fill"></i> 留言板 ෆ( ˶'ᵕ'˶)ෆ </div>
+        <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);aboutde.removeAttribute('hidden');"><i class="bi bi-info-circle-fill"></i> 关于</div>
+    </div>
+    <div style="margin-top: 10px;height:80%;overflow:auto;" id="nsgxh" hidden>
+        <button onclick="nsgxh.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/个性化
+        <hr>
+        <h2>壁纸</h2>
+        设置壁纸：<input type="file" id="wallpaperi" oninput="img2base64()" style="width:250px;border-width:0px;background: black;" /> <button onclick="localStorage.removeItem('NS_WALLPAPER.nsys');ns_alert('提示','已恢复默认。重启后生效。');">恢复默认</button>
+        <br>预设背景(来源于百度图片，版权归原作者所有)：<br>
+        <img onclick='localStorage.setItem("NS_WALLPAPER.nsys","https://imgsa.baidu.com/forum/wh%3D200%2C90%3B/sign=930a9541c05c1038242bc6c08221bf2a/f6113c34349b033b21ef698113ce36d3d439bdc5.jpg");ns_alert("提示","修改成功，重启生效。");localStorage.removeItem("NS_WALLPAPER2.nsys");' src='https://imgsa.baidu.com/forum/wh%3D200%2C90%3B/sign=930a9541c05c1038242bc6c08221bf2a/f6113c34349b033b21ef698113ce36d3d439bdc5.jpg' width=50 height=50/>
+        <img onclick='localStorage.setItem("NS_WALLPAPER.nsys","https://img.duoyi.com/com/214/pic/PL-83KI8OHbuo.gif");ns_alert("提示","修改成功，重启生效。");localStorage.removeItem("NS_WALLPAPER2.nsys");' src='https://img.duoyi.com/com/214/pic/PL-83KI8OHbuo.gif' width=50 height=50/>
+        <img onclick='localStorage.setItem("NS_WALLPAPER.nsys","https://coze-coding-project.tos.coze.site/coze_storage_7630179118994391040/images/1777885043780_3rzugk_a910f6e8.jpeg?sign=2093245044-7ea9ce52a3-0-e0f0357daedfe9c26288dfb61b25e3b1a0597463448e01625455c046945768bc");ns_alert("提示","修改成功，重启生效。");localStorage.removeItem("NS_WALLPAPER2.nsys");' src='https://coze-coding-project.tos.coze.site/coze_storage_7630179118994391040/images/1777885043780_3rzugk_a910f6e8.jpeg?sign=2093245044-7ea9ce52a3-0-e0f0357daedfe9c26288dfb61b25e3b1a0597463448e01625455c046945768bc' width=50 height=50/>
+         <br><button onclick="ns_alert('随机壁纸',`<img src='https://picsum.photos/1280/720?random=${Math.floor(Math.random() * 20) + 1}' style='height:auto;width:95%;'/><p>请将该图片保存到本地，然后再导入即可。</p>`)">随机壁纸</button>
+        <p>设置纯色壁纸</p>
+        点击按钮取色：<input type="color" id="ns_bgSET" oninput="ns_bgSET_preview.style.background = ns_bgSET.value;ns_bgSET_preview.innerHTML = ns_bgSET.value;"/> <a id="ns_bgSET_preview">颜色预览将会在此处显示。</a> <button onclick="$('body').css('background',ns_bgSET.value);localStorage.setItem('NS_WALLPAPER2.nsys',ns_bgSET.value);localStorage.removeItem('NS_WALLPAPER.nsys');ns_alert('个性化','设置完成，已生效。')">设置</button>
+        <h2>主题</h2>
+        选择主题或导入主题。<input style="background: black;border-width: 0px;width:100px;" type="file" id="inputentry2"/> <button onclick="readtheme('inputentry2');">导入</button>
+<script>
+function readtheme(input) {
+    const fileinput = document.getElementById(input);
+    if (fileinput.files.length > 0) {
+        const file = fileinput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            localStorage.setItem('NS_THEME.nsys',e.target.result);
+            applytheme(e.target.result);
+            ns_alert("导入完成",'已导入。');
+        };
+        reader.readAsText(file, 'UTF-8');
+    } else {
+        ns_alert("导入失败",'导入失败，请确保你选择了文件。');
+    }
+}
+</script>
+        <p>预设主题(点击方块即可切换)</p>
+        <div style="background:linear-gradient(gray,black);padding:5px;height:120px;width:120px;display:inline-block;vertical-align:top" onclick="applytheme('restore_default');localStorage.removeItem('NS_GLASS.nsys')">
+            OriSky(默认)
+        </div>
+        <div style="background:rgb(255,255,255,0.2);padding:5px;height:120px;width:120px;border:1px solid white;backdrop-filter: blur(5px);-webkit-backdrop-filter:blur(5px);display: inline-block;border-radius: 10px;" onclick="applytheme('restore_default');localStorage.setItem('NS_GLASS.nsys','Glass Effect');startglass();ns_alert('设置成功','搭配个好看的壁纸效果更好awa');">
+            Glass - 玻璃质感<br>(推荐/最美观)
+        </div>
+        <div style="background:rgb(50,255,255,0.5);padding:5px;height:120px;width:120px;display:inline-block;vertical-align:top;border:2px solid cyan;color:cyan" onclick="applytheme(THEME_TECHNOLY);localStorage.removeItem('NS_GLASS.nsys')">
+            Technoly - 科技之光
+        </div>
+        <div style="background:black;padding:5px;height:120px;width:120px;display:inline-block;vertical-align:top;border:2px solid white;color:white" onclick="applytheme(THEME_SIMPLEBW);localStorage.removeItem('NS_GLASS.nsys')">
+            SimpleBW - 硬核黑白
+        </div>
+        <h2>字体</h2>
+        选择系统字体：
+        <select id='fontsele' oninput='chsysf(fontsele.value)'>
+        <option value='Roboto'>Roboto(默认)</option>
+        <option value='LXGW WenKai Mono TC'>LXGW WenKai Mono TC(中文字体)</option>
+        <option value='Ma Shan Zheng'>Ma Shan Zheng(中文字体)</option>
+        <option value='Noto Sans SC'>思源(简体中文)(中文字体)</option>
+        <option value='ZCOOL QingKe HuangYou'>黄油体(中文字体)</option>
+        <option value='ZCOOL KuaiLe'>快乐体(中文字体)</option>
+        <option value='Noto Sans TC'>思源黑体(繁体中文)</option>
+        <option value='Noto Serif TC'>思源宋体(繁体中文)</option>
+        <option value='Chiron Hei HK'>细黑体</option>
+        <option value='Coral Pixels'>Coral Pixels</option>
+        <option value='Chivo'>Chivo</option>
+        <option value='Finlandica'>Finlandica</option>
+        <option value='Quicksand'>QuickSand</option>
+        <option value='Comic Sans MS'>Comic Sans MS</option>
+        <option value='monospace'>Monospace</option>
+        <option value='Ubuntu'>Ubuntu</option>
+        <option value='Aleo'>Aleo</option>
+        <option value='Azeret Mono'>Azeret Mono</option>
+        <option value='Pixelify Sans'>Pixelify Sans</option>
+        <option value='Doto'>Doto(像素字体)</option>
+        <option value='VT323'>VT323(DOS字体)</option>
+        </select>
+        <br><br><font color='gray'>字体由Google Fonts提供</font>
+        <script>
+        function chsysf(fontname)
+        {
+            var stylesheet_font = document.getElementById('nsfontst');
+            stylesheet_font.href=`https://fonts.googleapis.com/css2?family=${fontname}:wght@400;700&display=swap`;
+            try{$('button,input,select,body,textarea').css('font-family',fontname);
+            localStorage.setItem("NS_FONT_FAMILY.nsys",fontname);
+            ns_alert('提示','修改完成。');}catch(e){ns_alert('发生了一个错误','很抱歉，我们遇到了一个错误。系统返回的信息如下：<br>'+e+'<br><br>本错误不会影响系统运行，您可以再试一次。如果问题仍然存在，请尝试联系专业人员。<br>Sorry,an error occurred.This error will not affect the system,you can try again later.If the error still exists,please contact technical assistants.');}
+        }
+        function img2base64() {
+            const fileInput = document.getElementById('wallpaperi');
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                const base64String = reader.result;
+                localStorage.setItem('NS_WALLPAPER.nsys',base64String);
+                if(localStorage.getItem('NS_WALLPAPER.nsys')){document.body.style.backgroundImage = `url(${localStorage.getItem('NS_WALLPAPER.nsys')})`;}else{}
+                ns_alert('个性化','更改成功。');
+            };
+            reader.onerror = function (error) {
+                ns_alert('修改错误','发生了一个错误，导致无法完成更改。请稍后再试。<br>Sorry,an error occurred.Please try again later.');
+            };
+        }
+        </script>
+        <h2>桌面小组件</h2>
+        操作引导指示卡片：<input type="checkbox" id="fuycj" oninput='if(fuycj.checked){localStorage.setItem("NS_TIPS_CARD.nsys","HIDE");tips_card.setAttribute("hidden",true);}else{localStorage.removeItem("NS_TIPS_CARD.nsys");tips_card.removeAttribute("hidden");}' /> 隐藏<br>
+        百度热搜卡片：<input type="checkbox" id="bdhot" oninput='if(bdhot.checked){localStorage.setItem("HOT_CONTENT.nsys","false");upd_news.setAttribute("hidden",true);}else{localStorage.setItem("HOT_CONTENT.nsys","true");upd_news.removeAttribute("hidden");loadhot();}' /> 隐藏
+        <script>
+            if(localStorage.getItem("NS_TIPS_CARD.nsys") == "HIDE")
+            {
+                tips_card.setAttribute('hidden',true);
+                fuycj.checked = true;
+            }
+            else
+            {
+                tips_card.removeAttribute('hidden');
+                fuycj.checked = false;
+            }
+            if(localStorage.getItem("HOT_CONTENT.nsys") == "true")
+            {
+                upd_news.removeAttribute('hidden');
+                bdhot.checked = false;
+                loadhot();
+            }
+            else
+            {
+                upd_news.setAttribute('hidden',true);
+                bdhot.checked = true;
+            }
+        </script>
+                <!--<h2>毛玻璃效果(Beta)</h2>
+        <p>开启毛玻璃效果之后，所有的窗口背景将会变为透明，这可能会影响观感。</p>
+         <button onclick='startglass()'>开启</button><br><br>
+         <font color="orange">
+            注意：本效果会影响视觉观感，因为模糊+透明的界面亮度高，文字显示可能不清晰。<br>如果觉得观感不适，请重启网页以关闭视觉效果。<br>如果您想要把它作为个性化选项，请在文本编辑器中创建一个内容为"startglass()"的文件，保存后在"设置"->"高级选项"->"自启动项中"写入这个文件名。<br>否则，就需要手动打开。<br>毛玻璃效果最好搭配深色调壁纸，不然太亮了看着不美观。
+         </font>-->
+        <script>
+        function startglass()
+        {
+            try{
+            $('.nscard,button,input,textarea,#mezcont,select,progress').css('background','rgba(255, 255, 255, 0.2)');
+            $('.window,.morewindow,#director,.status_bar,#tips_card,#upd_news').css('background','rgba(0,0,0,0.2)');
+            $('#tips_card,#upd_news').css('box-shadow','0px 0px 0px black');
+            $('#tips_card,#upd_news').css('border-radius','10px');
+            $('.nstit').css('background','linear-gradient(to right,rgba(255,255,255,0.3),rgba(255,255,255,0.1))');
+            $('.window,.morewindow,.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont,select,progress,#director,.nstit,.status_bar').css('backdrop-filter','blur(20px)');
+            $('.window,.morewindow,.nscard,button,input,textarea,#tips_card,#upd_news,#mezcont,select,progress,#director,.nstit,.status_bar').css('-webkit-backdrop-filter','blur(20px)');
+            $(".nscard,button,input,textarea,#tips_card,#upd_news,#mezcont,select,progress").css("border","1px solid rgba(255, 255, 255, 0.3)");
+            $(".nscard,button,input.textarea,#tips_card,#upd_news,#mezcont,select,progress").css("border-radius","5px");
+            $(".nscard").css("margin-left","5px");
+            $(".nscard").css("margin-top","5px");
+            $(".nscard").css("transition","margin-left 0.3s");
+            $("button").css("transition","transform 0.3s");
+            $("button").css("box-shadow",'0px 0px 0px 0px white');
+            $(".nscard").hover(
+                function(){$(this).css("margin-left","15px");},
+                function(){$(this).css("margin-left","5px");}
+            );
+            $("button").hover(
+                function(){$(this).css("transform","scale(0.9)");},
+                function(){$(this).css("transform","scale(1)");}
+            );
+            }catch(e)
+            {
+                ns_alert('',e);
+            }
+        }
+        </script>
+    </div>
+    <div style="margin-top: 10px;height:80%;overflow:auto;" id="nsdyy" hidden>
+        <button onclick="nsdyy.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/多语言
+        <div id="translate"><a>请选择一个合适的语言：</a></div><br><script src='https://cdn.staticfile.net/translate.js/3.8.0/translate.js'></script><script>translate.language.setLocal('chinese_simplified');translate.ignore.tag.push('pre');translate.execute();</script>
+    </div>
+    <div style="margin-top: 10px;height:80%;overflow:auto;" id="safer" hidden>
+    <script src="https://hellopgrmm.github.io/tools/md5.js"></script>
+    <button onclick="safer.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/安全
+    <h1>设置锁屏密码</h1>
+    设置密码：<input type="password" id="original_psw" oninput="ispswsafe()" /><br>
+    确认密码：<input type="password" id="cf_psw"/><br>
+    <button onclick="if(original_psw.value==cf_psw.value){localStorage.setItem('..nsys',MD5(cf_psw.value));ns_alert('提示','密码设置完成，<font color=yellow>请牢记您的密码</font>，原密码无法找回，只能删除。');}else{ns_alert('提示','密码不一致，请重新设置。');}original_psw.value='';cf_psw.value='';">设置</button> <button onclick="localStorage.removeItem('..nsys');ns_alert('已关闭','已关闭密码。')">关闭密码</button>
+    <p style="color:orange" id="safetip"></p>
+    <script>
+function checkPasswordSafe(password) {
+  // 1. 空值/长度太短直接不安全
+  if (!password || password.length < 6) {
+    return false;
+  }
+
+  // 2. 检测纯重复字符：如 888888、aaaaa、bbbbbb
+  const repeatReg = /^(.)\1+$/;
+  if (repeatReg.test(password)) {
+    return false;
+  }
+
+  // 3. 检测纯数字连续递增/递减：123456、987654
+  const numReg = /^\d+$/;
+  if (numReg.test(password)) {
+    let isIncrement = true; // 递增
+    let isDecrement = true; // 递减
+    for (let i = 1; i < password.length; i++) {
+      const prev = parseInt(password[i - 1]);
+      const curr = parseInt(password[i]);
+      if (curr !== prev + 1) isIncrement = false;
+      if (curr !== prev - 1) isDecrement = false;
+    }
+    if (isIncrement || isDecrement) {
+      return false;
+    }
+  }
+
+  // 4. 检测字母连续顺序：abcd、dcba、abcdef
+  const letterReg = /^[a-zA-Z]+$/;
+  if (letterReg.test(password)) {
+    const lowerPwd = password.toLowerCase();
+    let isLetterIncrement = true;
+    let isLetterDecrement = true;
+    for (let i = 1; i < lowerPwd.length; i++) {
+      const prev = lowerPwd.charCodeAt(i - 1);
+      const curr = lowerPwd.charCodeAt(i);
+      if (curr !== prev + 1) isLetterIncrement = false;
+      if (curr !== prev - 1) isLetterDecrement = false;
+    }
+    if (isLetterIncrement || isLetterDecrement) {
+      return false;
+    }
+  }
+
+  // 5. 检测键盘连续顺序（最常用弱密码）：asdfgh、qwert、zxcvb
+  const keyboardRows = [
+    'qwertyuiop',
+    'asdfghjkl',
+    'zxcvbnm'
+  ];
+  const lowerPwd = password.toLowerCase();
+  let isKeyboardSequence = false;
+
+  // 遍历每一行键盘布局
+  for (const row of keyboardRows) {
+    // 正向连续匹配
+    if (row.includes(lowerPwd)) {
+      isKeyboardSequence = true;
+      break;
+    }
+    // 反向连续匹配（poiuytrewq）
+    const reverseRow = row.split('').reverse().join('');
+    if (reverseRow.includes(lowerPwd)) {
+      isKeyboardSequence = true;
+      break;
+    }
+  }
+
+  if (isKeyboardSequence) {
+    return false;
+  }
+
+  // 所有弱密码规则都不满足 → 安全
+  return true;
+}
+        function ispswsafe()
+        {
+            if(checkPasswordSafe(original_psw.value))
+            {
+                safetip.innerHTML = "";
+            }
+            else if(original_psw.value=="")
+            {
+                safetip.innerHTML="";
+            }
+            else
+            {
+                safetip.innerHTML="您所设置的密码不安全，他人可能会轻易猜到密码，建议更改密码（不改也行）。<br>像有规律的数字、字母（例如abcdefg、123456/88888）都是不安全密码。";
+            }
+        }
+    </script>
+    </div>
+    <div style="margin-top: 10px;height:80%;overflow:auto;" id="nscckj" hidden>
+        <button onclick="nscckj.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/存储空间<br>
+        <div style='margin-top:20px;padding:5px;background:rgb(40,40,40);'>
+        <h3>存储空间</h3>
+        <progress style="width:80%;margin-left:10px;" id="storage_c" max=80000></progress><br>
+        <br>
+        个人文件占比<font color="#ccc" id="nns1">0</font> MB，系统文件占比<font color="#ccc" id="nns2">0</font> MB，共80MB。<br>（80M够了，谁没事会把网页当系统用）
+        </div>
+        <br>
+        <button onclick='clear_temp()'>清除缓存</button> 
+        <a id='bruzne'></a>
+        <script>
+            async function calculate_storage()
+            {
+                //fake storage calc
+                //of course,the real MB calc is:stor/1024/1024,not stor/1024(it's KB)
+                var sys_str = 0;
+                var pers_str = 0;
+                var total_str = 0;
+                for(var i = 0;i < localStorage.length;i++)
+                {
+                    if(localStorage.key(i).endsWith('.nsys'))
+                    {
+                        sys_str+=localStorage.getItem(localStorage.key(i)).length;
+                    }
+                    else
+                    {
+                        pers_str+=localStorage.getItem(localStorage.key(i)).length;
+                    }
+                }
+                total_str = pers_str+sys_str/1024;
+                sys_str = sys_str/1024;
+                pers_str = pers_str/1024;
+                nns1.innerHTML = pers_str.toFixed(1);
+                nns2.innerHTML = sys_str.toFixed(1);
+                storage_c.value = total_str;
+            }
+            async function clear_temp()
+            {
+                for(var b = 0;b < localStorage.length;b++)
+                {
+                    if(localStorage.key(b).includes('hash_'))
+                    {
+                        localStorage.removeItem(localStorage.key(b));
+                        bruzne.innerHTML = "正在删除缓存文件:"+localStorage.key(b);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                    await delay(1);
+                }
+                bruzne.innerHTML = "已完成清理，请退出并重新进入本页面刷新内存。";
+            }
+        </script>
+    </div>
+    <div style="margin-top: 10px;height:80%;overflow:auto;" id="advancedop" hidden>
+    <button onclick="advancedop.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/高级选项
+    <h3>调试</h3>
+    <button onclick="topmost('nsjscons');$('#nsjscons').effect('slide',500);">打开JavaScript终端</button>
+    <p><input type="checkbox" id="fps_check" oninput="enable_fps()" /> 显示当前FPS</p>
+    <script>
+    var fps_dis = document.getElementById('information_text_banner');
+    const Fcanvas = document.getElementById('fps_canvas');
+    const Fctx = Fcanvas.getContext('2d');
+    const width = 300;
+    const height = 100;
+    Fcanvas.height = height;
+    Fcanvas.width = width;
+    Fcanvas.style.background = 'black';
+    var fpsxpos = 0;
+    let F_lst = performance.now();
+    var fps_exec = false;
+    function fps_upd() {
+        const now = performance.now();
+        const delta = now - F_lst;
+        F_lst = now;
+        var fps = 0;
+        if (delta > 0) {
+            fps = Math.round(1000 / delta);
+            dfpsdirect(fps);
+            fps_dis.innerHTML = `FPS:${fps}`;
+            document.getElementById("fps_dis2").innerHTML=`FPS:${fps}`;
+        }
+        if(fps_exec){requestAnimationFrame(fps_upd);}else{return 0;}
+    }
+    function drawruler()
+    {
+        Fctx.font = '12px monospace';
+        Fctx.fillStyle = 'white';
+        Fctx.fillText('100 FPS',3,12);
+        Fctx.fillText('80',3,22);
+        Fctx.fillText('60',3,42);
+        Fctx.fillText('40',3,62);
+        Fctx.fillText('20',3,82);
+        Fctx.fillText('0',3,98);
+    }
+    function dfpsdirect(fps) {
+        if(fpsxpos > width){
+            fpsxpos = 0;
+            Fctx.clearRect(0,0,width,height);
+            drawruler();
+        }
+        Fctx.beginPath();
+        Fctx.moveTo(fpsxpos,height);
+        Fctx.lineTo(fpsxpos,height-fps);
+        Fctx.strokeStyle = 'cyan';
+        Fctx.lineWidth = 2;
+        Fctx.stroke();
+        fpsxpos = fpsxpos + 2;
+    }
+    function enable_fps()
+    {
+        if(fps_check.checked){
+            fps_exec=true;
+            drawruler();
+            requestAnimationFrame(fps_upd);
+            ns_alert("提示","FPS已开启，点击状态栏上的FPS信息可以显示趋势图。");
+            fps_dis.setAttribute("onclick","openfpswindow()");
+        }
+        else
+        {
+            fps_exec=false;
+            fps_dis.innerHTML="";
+            fps_dis.removeAttribute("onclick");
+        }
+    }
+    var fpsfps = null;
+    function openfpswindow()
+    {
+        fps_image.hidden=false;
+        fpsfps = setInterval("topmost('fps_image')",100);
+    }
+    </script>
+    <h3>自启动项</h3>
+    请输入开机自启动项，一行一个。必须是“文件”中的项目。<br>
+    <textarea id='jsmedu' placeholder='请输入...' rows=10 cols=30></textarea>
+    <br><button onclick='localStorage.setItem("NS_STARTUP_OP.nsys",jsmedu.value);ns_alert("开机自启","写入完成，。")'>写入</button>
+    <!--<h3>自适应选项</h3>
+    当网页尺寸发生明显变化时，就会出现窗口显示异常，此时请点击“自适应”重新调整。
+    <br><button onclick="reinit_window()">自适应</button>-->
+    </div>
+    <div style="margin-top: 10px;height:80%;overflow:auto;" id="aboutde" hidden>
+    <button onclick="aboutde.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/关于
+    <br>
+    <div style='margin-top:15px' onclick='rickroll_c()' class='nscard'>
+    <a style='font-size:25px'>NightSky版本</a><br>
+    <font color='gray'>8.1</font>
+    <script>var rickroll_clc = 0;function rickroll_c(){rickroll_clc++;if(rickroll_clc > 5){rickroll_clc = 0;ns_alert('你被骗了','<video src="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4" id="rickroll_video" controls="" height="80%" width="98%"></video>');rickroll_video.play()}}</script>
+    </div>
+    <div style='margin-top:15px' class='nscard'>
+    <a style='font-size:25px'>PC端版本</a><br>
+    <font color='gray'>1.0 Beta</font>
+    </div>
+    <div class='nscard' style="word-wrap: break-word;" onclick='opendeve()'>
+    <a style='font-size:25px'>具体信息</a><br>
+    <font color='gray'>NightSky_PCWSU.20260805.0322.BOV8.1_PCV1.0B_OWLLYUG_18_HELLOPGRMM</font>
+    <script>var deve_clc = 0;function opendeve(){deve_clc++;if(deve_clc > 5){ns_alert("开发者模式","您已进入开发者模式（调试模式）。");developer_option.removeAttribute('hidden');}}</script>
+    </div>
+    <div class='nscard'>
+    <a style='font-size:25px'>User Agent</a><br>
+    <font id='useragentinfo' color='gray'>未知</font>
+    <script>useragentinfo.innerText = navigator.userAgent;</script>
+    </div>
+    <div class='nscard'>
+    <a style='font-size:25px'>实际运行平台</a><br>
+    <font id='platns' color='gray'>未知</font>
+    <script>platns.innerText = navigator.platform;</script>
+    </div>
+    <div class='nscard'>
+    <a style='font-size:25px'>虚拟号码</a><br>
+    <font id='vtelna' color='gray'>未知</font>
+    </div>
+    <div class='nscard'>
+    <a style='font-size:25px'>首选语言</a><br>
+    <font id='localip' color='gray'>未知</font>
+    <script>localip.innerText = navigator.language;</script>
+    </div>
+    <div class='nscard'>
+    <a style='font-size:25px'>游客访问量（26.5.4开始计数）</a><br>
+    <span id="vercount_value_page_pv">加载中...</span>（禁止恶意刷访问量）
+    </div>
+    <div class='nscard'>
+    <a style='font-size:25px'>逻辑CPU核心数</a><br>
+    <font id='cpuc' color='gray'>未知</font>
+    <script>cpuc.innerText = navigator.hardwareConcurrency;</script>
+    </div>
+    <div class='nscard'>
+    <a style='font-size:25px'>设备最大触控点数</a><br>
+    <font id='pointc' color='gray'>未知</font>
+    <script>pointc.innerText = navigator.maxTouchPoints;</script>
+    </div>
+    </div>
+    <div style="margin-top: 10px;height:80%;overflow:auto;" id="developerop" hidden>
+        <button onclick="developerop.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/开发人员选项
+        <h3>显示</h3>
+        <p>状态栏 <button onclick="$('.status_bar').hide()">隐藏</button><button onclick="$('.status_bar').show()">显示</button></p>
+        <p>导航栏 <button onclick="$('#director').hide()">隐藏</button><button onclick="$('#director').show()">显示</button></p>
+        <p>窗口 Opacity 数值 <input type="range" id="win_opa" max=100 value=100 oninput="$('.window').css('opacity',win_opa.value/100);opa_va_w.innerHTML=win_opa.value/100"> <a id="opa_va_w">1.0</a></p>
+        <p>控件CSS调整</p>
+        选择元素：<select id="element_dom">
+            <option value='button'>Button</option>
+            <option value='input'>Input</option>
+            <option value='textarea'>textarea</option>
+            <option value='.window'>.Window</option>
+            <option value='.status_bar'>.status_bar</option>
+            <option value='#director'>#director</option>
+            <option value='body'>body</option>
+            <option value='.bi'>Icon Color</option>
+        </select><br>
+        <p>属性：<input type="text" id="attr_btn"/></p>
+        <p>值：<input type="text" id="val_btn"/></p>
+        <button onclick="$(element_dom.value).css(attr_btn.value,val_btn.value)">修改</button>
+        <h3>其他CSS选项</h3>
+        Filters:<br>
+模糊(Blur) <input max=50 type="range" id="blurr" value=0 oninput="enableeffect();"/><br>
+反色(Invert) <input max=100 type="range" id="ivtt" value=0 oninput="enableeffect();"/><br>
+灰度(Gray) <input max=100 type="range" id="ggray" value=0 oninput="enableeffect();"/><br>
+饱和度(Saturate) <input type="range" max=500 id="saturate" value=100 oninput="enableeffect();"/><br>
+<a id="infos_ff"></a>
+<script>
+    infos_ff.innerHTML = `模糊度：${blurr.value}% 反色：${ivtt.value}% 灰度：${ggray.value}% 饱和度：${saturate.value}%`;
+    function enableeffect()
+    {
+        document.body.style.filter = `blur(${blurr.value}px) invert(${ivtt.value}%) grayscale(${ggray.value}%) saturate(${saturate.value}%`;
+        document.body.style.backdropFilter = `blur(${blurr.value}px) invert(${ivtt.value}%) grayscale(${ggray.value}%) saturate(${saturate.value}%`;
+        infos_ff.innerHTML = `模糊度：${blurr.value}% 反色：${ivtt.value}% 灰度：${ggray.value}% 饱和度：${saturate.value}%`;
+    }
+</script>
+    </div>
+    <div style="margin-top: 10px;height:80%;overflow:auto;" id="nsxianshi" hidden>
+        <button onclick="nsxianshi.setAttribute('hidden',true);selectmenu.removeAttribute('hidden');">返回</button> 设置/显示设置
+        <br>
+        <input type="checkbox" id="fullscreen_set" oninput="if_fullscreen()"> 每次解锁时自动全屏
+        <p style="color:#ccc">当您每次解锁NightSky时，NightSky便会自动全屏，以获得更好的体验。</p>
+        <script>
+            var FS_S = document.getElementById("fullscreen_set");
+        function if_fullscreen(){
+            if(FS_S.checked)
+            {
+                localStorage.setItem("NS_DOM_FULLSCREEN.nsys","Document full screen when unlock.");
+            }
+            else
+            {
+                localStorage.removeItem("NS_DOM_FULLSCREEN.nsys");
+            }
+        }
+            if(localStorage.getItem("NS_DOM_FULLSCREEN.nsys"))
+            {
+                FS_S.checked = true;
+            }
+            else
+            {
+                FS_S.checked = false;
+            }
+        </script>
+    </div>
+</div>
+<div class='morewindow' id="nsmore" style="background: rgb(0,0,0,0.9);">
+    <div style="position: absolute;top:10px;left:10px;">
+        <h2>更多应用 <i onclick="$('#nsmore').slideUp()" style="position: absolute;right: 10px;" class="bitb bi-x-square"></i></h2>
+        <div class="ns-icon"><i class="bi bi-gear-fill" onclick="$('#nsmore').fadeOut(300);topmost('nssetting');$('#nssetting').effect('slide',500);"></i><br>设置</div> 
+        <div class="ns-icon"><i class="bi bi-boombox-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/tools/bpro.html','ByteBeat');"></i><br>ByteBeat</div> 
+        <div class="ns-icon"><i class="bi bi-controller" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://98.js.org/programs/pinball/space-cadet.html','Space Cadet Pinball');"></i><br>Pinball</div> 
+        <div class="ns-icon"><i class="bi bi-file-earmark-music-fill" onclick="$('#nsmore').fadeOut(300);topmost('nsplay');$('#nsplay').effect('slide',500);"></i><br>NightSky 媒体播放器</div> 
+        <div class="ns-icon"><i class="bi bi-music-note" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/midie.html','NightSky Midie（MIDI播放器）');"></i><br>Midi播放器</div>
+        <div class="ns-icon"><i class="bi bi-palette-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://jspaint.app','画图');"></i><br>画图</div> 
+        <div class="ns-icon"><i class="bi bi-wifi" onclick="$('#nsmore').fadeOut(300);topmost('nsping');$('#nsping').effect('slide',500);"></i><br>PING</div> 
+        <div class="ns-icon"><i class="bi bi-globe-asia-australia-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/G.html','重力模拟');"></i><br>重力模拟</div> 
+        <div class="ns-icon"><i class="bi bi-arrow-up-left-circle" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/drawcircle.html','挑战画圆-你是人形圆规吗');"></i><br>游戏：画圆挑战</div>
+        <div class="ns-icon"><i class="bi bi-translate" onclick="$('#nsmore').fadeOut(300);topmost('translateapp');$('#translateapp').effect('slide',500);"></i><br>翻译</div> 
+        <div class="ns-icon"><i class="bi bi-device-ssd-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/lem','Lyric Effect Maker');"></i><br>Lyric Maker</div>
+        <div class="ns-icon"><i class="bi bi-code-slash" onclick="$('#nsmore').fadeOut(300);topmost('codemirror');$('#codemirror').effect('slide',500);init_codemirror();"></i><br>CodeMirror</div> 
+        <div class="ns-icon"><i class="bi bi-camera2" onclick="$('#nsmore').fadeOut(300);topmost('nsCAM');$('#nsCAM').effect('slide',500);startcam();"></i><br>相机</div> 
+        <div class="ns-icon"><i class="bi bi-geo-alt-fill" onclick="$('#nsmore').fadeOut(300);topmost('nslocation');$('#nslocation').effect('slide',500);dingwei();"></i><br>当前定位</div> 
+        <div class="ns-icon"><i class="bi bi-terminal" onclick="$('#nsmore').fadeOut(300);topmost('nsprompt');$('#nsprompt').effect('slide',500);user_cmd.focus()"></i><br>命令行</div> 
+        <div class="ns-icon"><i class="bi bi-chat-left" onclick="$('#nsmore').fadeOut(300);topmost('nschats');$('#nschats').effect('slide',500);"></i><br>在线聊天室</div> 
+        <div class="ns-icon"><i class="bi bi-terminal-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/dosbox.html','DosBox');"></i><br>DosBox</div>
+        <div class="ns-icon"><i class="bi bi-broadcast" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/radio.html','收音机');"></i><br>收音机</div>
+        <div class="ns-icon"><i class="bi bi-cast" onclick="$('#nsmore').fadeOut(300);topmost('nsremote');$('#nsremote').effect('slide',500);"></i><br>远程控制NightSky</div> 
+        <div class="ns-icon"><i class="bi bi-keyboard" onclick="$('#nsmore').fadeOut(300);topmost('nstypepractise');$('#nstypepractise').effect('slide',500);"></i><br>打字练习</div> 
+        <div class="ns-icon"><i class="bi bi-box" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/vit86.html','威86');"></i><br>威86虚拟机</div> 
+        <div class="ns-icon"><i class="bi bi-filetype-py" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/python.html','Python');"></i><br>Python</div> 
+        <div class="ns-icon"><i class="bi bi-eyeglasses" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/qereader.html','NightSky QuickEye Reader文档阅读器');"></i><br>QuickEye文档阅读器</div> 
+        <div class="ns-icon"><i class="bi bi-pen" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/adedit.html','NightSky高级编辑器');"></i><br>高级文本编辑器</div>
+        <div class="ns-icon"><i class="bi bi-box2-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/drabox.html','DraBox');"></i><br>DraBox</div>
+         <h2>实用(需联网)</h2>
+        <div class="ns-icon"><i class="bi bi-file-word-fill" onclick="$('#nsmore').fadeOut(300);topmost('apiranden');$('#apiranden').effect('slide',500);fetch_rde()"></i><br>每日英语单词</div> 
+        <div class="ns-icon"><i class="bi bi-moisture" onclick="$('#nsmore').fadeOut(300);topmost('apioilprice');$('#apioilprice').effect('slide',500);fetch_oilp()"></i><br>油价查询</div> 
+        <div class="ns-icon"><i class="bi bi-car-front-fill" onclick="$('#nsmore').fadeOut(300);topmost('apijiakao');$('#apijiakao').effect('slide',500);"></i><br>随机驾考题目</div> 
+        <div class="ns-icon"><i class="bi bi-car-front" onclick="$('#nsmore').fadeOut(300);topmost('apicarprice');$('#apicarprice').effect('slide',500);"></i><br>车辆价格查询</div> 
+        <div class="ns-icon"><i class="bi bi-robot" onclick="$('#nsmore').fadeOut(300);topmost('apibot');$('#apibot').effect('slide',500);"></i><br>智娃</div> 
+        <div class="ns-icon"><i class="bi bi-bandaid" onclick="$('#nsmore').fadeOut(300);topmost('apidisease');$('#apidisease').effect('slide',500);"></i><br>常见疾病查询</div> 
+        <p style="color:gray">实用工具基于API接口xxapi.cn。</p>
+        <h2>效率和娱乐</h2>
+        <div class="ns-icon"><i class="bi bi-card-text" onclick="$('#nsmore').fadeOut(300);topmost('apiocr');$('#apiocr').effect('slide',500);init_tesseract()"></i><br>OCR文字识别</div> 
+        <div class="ns-icon"><i class="bi bi-calculator" onclick="$('#nsmore').fadeOut(300);topmost('nscalc');$('#nscalc').effect('slide',500);"></i><br>计算器</div> 
+        <div class="ns-icon"><i class="bi bi-calculator-fill" onclick="$('#nsmore').fadeOut(300);topmost('nscalch');$('#nscalch').effect('slide',500);"></i><br>汇率计算器</div> 
+        <div class="ns-icon"><i class="bi bi-bullseye" onclick="$('#nsmore').fadeOut(300);topmost('nsquick');$('#nsquick').effect('slide',500);"></i><br>反应力测试</div> 
+        <div class="ns-icon"><i class="bi bi-asterisk" onclick="$('#nsmore').fadeOut(300);topmost('nsbrain');$('#nsbrain').effect('slide',500);"></i><br>最强大脑：速算</div>
+        <div class="ns-icon"><i class="bi bi-mic-fill" onclick="$('#nsmore').fadeOut(300);topmost('nss2t');$('#nss2t').effect('slide',500);"></i><br>语音转文字</div>
+    </div>
+</div>
+<div class="window" id="nsping">
+    <div class="nstit">PING
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+    网址：<input placeholder="如：baidu.com" id="ns_pingv"/> <br>包数：<input id="package_c" value="5"/> <button onclick="startping(ns_pingv.value,package_c.value)">开始</button>
+<div id="PINGresult" style="height:90%;width:95%;overflow: auto;left:5px;"></div>
+<script>
+    var packets = 0;
+        function PING(target) {
+            const startTime = Date.now();
+            const url = `https://${target}/?t=${startTime}`;
+
+            fetch(url, { method: 'HEAD', mode: 'no-cors', timeout: 5000 })
+                .then(response => {
+                    const endTime = Date.now();
+                    const delay = endTime - startTime;
+                    PINGresult.innerHTML+=target+"的答复："+delay+"ms延迟.<br>";
+                    packets++;
+                })
+                .catch(error => {
+                    const endTime = Date.now();
+                    const delay = endTime - startTime;
+                    PINGresult.innerHTML+=target+"：无法接收。<br>";
+                });
+        }
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function startping(sourcea,timesy)
+        {
+            packets = 0;
+            for(var i = 0;i < timesy;i++)
+            {
+                PING(sourcea);
+                await delay(1000);
+            }
+            PINGresult.innerHTML+=sourcea+"："+packets+"个请求已接收，"+eval(`${timesy}-${packets}`)+"个请求未接收。丢包率："+eval(`(${timesy}-${packets})/${timesy}*100`)+"%<br>";
+        }
+</script>
+</div>
+<div id="nsplay" class="window">
+    <div class="nstit">NightSky Media Player
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+    <center style='font-size:25px;' id='playtitle'>待播放...</center><br>
+    <video id="videoPlayer" style="height:48%;"></video><br>
+    <center>
+    选择文件以播放：<input type="file" id="fileInput" style="background: black;border-width: 0px;"/><br><br>
+    </center>
+    <progress id="playprog" value=0 style="width:100%"></progress>
+    <br><br>
+    <center>
+    <button onclick="totaltime.innerHTML = formattSeconds(videoPlayer.duration.toFixed(0));playprog.max = videoPlayer.duration.toFixed(0);videoPlayer.play()">播放</button> 
+    <button onclick="videoPlayer.pause()">暂停</button> 
+    <select id="play_rate" oninput="videoPlayer.playbackRate = play_rate.value;">
+        <option value="0.5">0.5 x</option>
+        <option value="1.0" selected>1.0 x</option>
+        <option value="1.5">1.5 x</option>
+        <option value="2.5">2.0 x</option>
+        <option value="10.0">10.0 x (满级)</option>
+    </select> <button onclick='topmost("biubiu");biubiu.style.display = "block";'>在线收听</button>
+    <a style='font-size:23px' id='playertimer'>00:00</a><font color='gray'>/<a id='totaltime'>00:00</a></font>
+    <div id='biubiu' class='nsoverlay'>
+    <div class='nsconta'>
+    在线收听。<br>点击歌名即可收听。<br>
+    <div style='border:1px solid white;height:60px;overflow:auto;' id='musicLink'>
+    <a onclick="playtitle.innerText = '花海 - 周杰伦';videoPlayer.src = 'https://www.joy127.com/url/147503.mp3';biubiu.style.display = 'none';totaltime.innerHTML = formattSeconds(videoPlayer.duration.toFixed(0));">花海 - 周杰伦</a><br>
+    <a onclick="playtitle.innerText = 'Ngẫu Hứng - Hoaprox';videoPlayer.src = 'https://www.joy127.com/url/149649.mp3';biubiu.style.display = 'none';totaltime.innerHTML = formattSeconds(videoPlayer.duration.toFixed(0));">Ngẫu Hứng - Hoaprox</a><br>
+    </div>
+    <br>
+    <button onclick="biubiu.style.display = 'none';">关闭</button>
+    </div>
+    <script>
+var jsonmusic = [];
+function H_fetchJson(path){
+fetch(path)
+  .then(response => response.json())
+  .then(data => {
+    for(var a in data)
+    {
+        jsonmusic.push(a)
+        jsonmusic.push(data[a]);
+    }
+    for(var m = 0;m < jsonmusic.length;m = m+2)
+    {
+        document.getElementById("musicLink").innerHTML += `<a onclick="playtitle.innerText = '${jsonmusic[m]}';videoPlayer.src = '${jsonmusic[m+1]}';biubiu.style.display = 'none';totaltime.innerHTML = formattSeconds(videoPlayer.duration.toFixed(0));">${jsonmusic[m]}</a><br>`;
+    }
+  })
+  .catch(error => console.error(error));
+}
+H_fetchJson("https://hellopgrmm.github.io/simul/musicData.json");
+    </script>
+    </div>
+    <script>
+    $('#videoPlayer').css('width',$('.status_bar').css('width'));
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        var videoPlayer = document.getElementById('videoPlayer');
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                videoPlayer.src = e.target.result;
+                videoPlayer.load();
+            };
+            reader.readAsDataURL(file);
+            playprog.value = 0;
+            playtitle.innerText = file.name;
+    });
+function formattSeconds(seconds) {
+    const isNegative = seconds < 0;
+    const absSeconds = Math.abs(seconds);
+    const minutes = Math.floor(absSeconds / 60);
+    const remainingSeconds = absSeconds % 60;
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(Math.floor(remainingSeconds)).padStart(2, '0');
+    const result = `${formattedMinutes}:${formattedSeconds}`;
+    return isNegative ? `-${result}` : result;
+}
+    function upd_p()
+    {
+        playprog.value = videoPlayer.currentTime;
+        playertimer.innerHTML = formattSeconds(videoPlayer.currentTime.toFixed(0));
+    }
+    setInterval("upd_p()",300);
+    </script>
+</center>
+</div>
+<div class='window' id='nsjscons'>
+<div class='nstit'>JavaScript Console
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+<input placeholder='Please input the JS Code(enter=execute)' style='width:98%' id='jscmd'/><br>
+Preset functions:<br><ul><li>ns_alert(title,contents): Show a dialog window with a 'close' button.</li><li>ns_pagewatcher(url,title): Open a webpage on new window.</li></ul>
+<div style='width:100%;height:60%;overflow:auto' id='jsouts'>
+</div>
+<script>
+jscmd.addEventListener('keydown',function(ev){
+    if(ev.key == 'Enter')
+    {
+        try{jsouts.innerHTML += `<font color='lightgreen'>[User]</font>${jscmd.value}<br><font color='yellow'>[JavaScript]</font>${eval(jscmd.value)}<br>`;}catch(e){jsouts.innerHTML += `<font color='lightgreen'>[User]</font>${jscmd.value}<br><font color='orange'>[JavaScript Error]</font>${e}<br>`;}
+        jscmd.value = '';
+    }
+});
+</script>
+</div>
+<div id="translateapp" class="window">
+<div class="nstit">翻译
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+<textarea style="width:80%;margin-top: 10px;height:50px;" id="original_text" placeholder="输入原文"></textarea><br>
+<br>把 <select id="orlang">
+    <option value="chinese_simplified">中文简体</option>
+    <option value="chinese_traditional">中文繁体</option>
+    <option value="english">英文</option>
+    <option value="vietnamese">越南语</option>
+    <option value="russian">俄语</option>
+    <option value="japanese">日语</option>
+</select> 翻译成 <select id="goallang">
+    <option value="chinese_simplified">中文简体</option>
+    <option value="chinese_traditional">中文繁体</option>
+    <option value="english" selected>英文</option>
+    <option value="vietnamese">越南语</option>
+    <option value="russian">俄语</option>
+    <option value="japanese">日语</option>
+</select> <button onclick="start_translate()">翻译</button> <button onclick="original_text.value='北京欢迎你，为你开天辟地。流动中的魅力充满着朝气。\n北京欢迎你，在太阳下分享呼吸。在黄土地刷新奇迹！';">示例文本</button><br><br><a id="trans_res">翻译结果将会显示在此处。</a>
+<script>
+    function start_translate()
+    {
+        try{
+            trans_res.innerHTML = "翻译中，请稍后...";
+            translate.request.translateText({from:orlang.value,to:goallang.value,texts:original_text.value}, function(data){
+                trans_res.innerText = data.text[0];
+            });
+        }catch(e){
+            ns_alert("无法翻译","翻译失败。以下是可能的原因：<br>1.网络未连接/中途断网<br>2.接口自身问题，只需要重试。<br>3.若以上都不是，那么接口返回的信息如下：<br>"+e);
+        }
+    }
+</script>
+</div>
+<div id="codemirror" class="window">
+    <div class="nstit">CodeMirror
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+    <input id="savedfn" placeholder="文件名" /> <button onclick="save_cm_v()">保存</button>
+    <br><br>
+    <textarea cols=0 rows=0 id="mirrorinterface"></textarea>
+    <p id="loadstate">正在加载CodeMirror组件...(0/4)</p>
+    <script>
+    var editor;
+    var cm_isloaded = false;
+    async function init_codemirror(){
+        if(cm_isloaded == true)
+        {
+            return 0;//避免重复加载弄乱网页
+        }
+        mirrorinterface.style.display = "none";
+        var script = document.createElement('script');script.src = 'https://cdn.staticfile.org/codemirror/6.65.7/mode/htmlmixed/htmlmixed.min.js';document.head.appendChild(script);
+        loadstate.innerHTML = "正在加载CodeMirror组件...(1/4)";
+        var script2 = document.createElement('script');script2.src = 'https://cdn.staticfile.org/codemirror/6.65.7/mode/xml/xml.min.js';document.head.appendChild(script2);
+        loadstate.innerHTML = "正在加载CodeMirror组件...(2/4)";
+        var script3 = document.createElement('script');script3.src = 'https://cdn.staticfile.org/codemirror/6.65.7/mode/css/css.min.js';document.head.appendChild(script3);
+        loadstate.innerHTML = "正在加载CodeMirror组件...(3/4)";
+        var script4 = document.createElement('script');script4.src = 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/javascript/javascript.min.js';document.head.appendChild(script4);
+        loadstate.innerHTML = "正在加载CodeMirror组件...(4/4)";
+        mirrorinterface.style.display = "";
+        await delay(1000);
+        editor = CodeMirror.fromTextArea(document.getElementById('mirrorinterface') ,{
+            mode:"htmlmixed",
+            lineWrapping: true
+        });
+        loadstate.style.display="none";
+        editor.setSize('100%','85%');
+        editor.setOption("fontSize","20px");
+        $(".CodeMirror").css("font-family",localStorage.getItem('NS_FONT_FAMILY.nsys'));
+        $(".CodeMirror").css("font-size","20px");
+        cm_isloaded = true;
+    }
+    function save_cm_v()
+    {
+        localStorage.setItem(savedfn.value,editor.getValue());ns_alert('消息','已保存。');
+    }
+    </script>
+</div>
+<div class='window' id='apiranden'>
+<div class='nstit'>每日英语单词
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+<div id='randendis'></div>
+<script>
+function fetch_rde()
+{
+    fetch('https://v2.xxapi.cn/api/randomenglishwords')
+    .then(response => response.json())
+    .then(datas => {
+        randendis.innerHTML = `<center><h1>${datas.data.word}</h1><font color='gray'>${datas.data.translations[0].pos}.</font>${datas.data.translations[0].tran_cn}<br><h2>发音音频：</h2>美式：${datas.data.usphone} <audio src='${datas.data.usspeech}' id='en_uss'></audio><button onclick='en_uss.play()'>播放</button><br>英式：${datas.data.ukphone} <audio src='${datas.data.ukspeech}' id='en_uks'></audio><button onclick='en_uks.play()'>播放</button></center>`;
+    })
+    .catch(error => ns_alert('Error:', error));
+}
+</script>
+</div>
+<div class='window' id='apioilprice'>
+<div class='nstit'>油价查询
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+<font color="orange">*注：仅支持查询部分地区。<br>支持地区：北京,上海,江苏,天津,重庆,江西,辽宁,安徽,内蒙古,福建,宁夏,甘肃,青海,广东,山东,广西,山西,贵州,陕西,海南,四川,河北,西藏,河南,新疆,黑龙江,吉林,云南,湖北,浙江,湖南</font>
+<div id='oilpricedis'></div>
+<script>
+function fetch_oilp()
+{
+    oilpricedis.innerHTML = "加载中...";
+    fetch('https://v2.xxapi.cn/api/oilPrice')
+    .then(response => response.json())
+    .then(datas => {
+        oilpricedis.innerHTML = "";
+        for(var oil = 0;oil < datas.data.length;oil++){
+            oilpricedis.innerHTML += `<h3>${oil+1}.${datas.data[oil].regionName}</h3>最后更新时间：${datas.data[oil].date}
+        <br>
+        <ul>
+            <li>N0：${datas.data[oil].n0}元/升</li>
+            <li>N92：${datas.data[oil].n92}元/升</li>
+            <li>N95：${datas.data[oil].n95}元/升</li>
+            <li>N98：${datas.data[oil].n98}元/升</li>
+        </ul>
+        <hr>`;
+        }
+    })
+    .catch(error => ns_alert('Error:', error));
+}
+</script>
+</div>
+<div class='window' id='apijiakao'>
+<div class='nstit'>随机驾考题目
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+<button onclick="fetch_jk(1)">科目1</button>
+<button onclick="fetch_jk(4)">科目4</button>
+<div id='jiakaodis'></div>
+<script>
+function fetch_jk(subject)
+{
+    jiakaodis.innerHTML = "加载中...";
+    fetch('https://v2.xxapi.cn/api/jiakao?subject='+subject)
+    .then(response => response.json())
+    .then(datas => {
+            jiakaodis.innerHTML = `
+<h1>章节：${datas.data.chapter}</h1>
+${datas.data.question}<br><br>
+            `;
+        if(datas.data.pic)
+        {
+            jiakaodis.innerHTML+=`<img src="${datas.data.pic}" style="height:100px;width:auto"/><br>`;
+        }
+        if(datas.data.option1)
+        {
+            jiakaodis.innerHTML+=`${datas.data.option1}<br>${datas.data.option2}<br>${datas.data.option3}<br>${datas.data.option4}`;
+        }
+            jiakaodis.innerHTML += `
+<p>答案：<font color="cyan">${datas.data.answer}</font><br>解释：<font color="yellow">${datas.data.explain}</font></p>`;
+    })
+    .catch(error => ns_alert('Error:', error));
+}
+</script>
+</div>
+<div class='window' id='apicarprice'>
+<div class='nstit'>车价查询
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+<input placeholder="输入型号，例如：小米SU7" id="cartype"/> <button onclick="if(cartype.value){fetch_carp(cartype.value);}else{ns_alert('','请输入具体的型号。');}">查询</button>
+<div id='carpricedis'></div>
+<script>
+function fetch_carp(cartype)
+{
+    carpricedis.innerHTML = "加载中...";
+    fetch('https://v2.xxapi.cn/api/carprice?search='+cartype)
+    .then(response => response.json())
+    .then(datas => {
+        carpricedis.innerHTML = "";
+        for(var car = 0;car < datas.data.length;car++){
+            carpricedis.innerHTML += `<h2>${datas.data[car].brand_name} ${datas.data[car].car_name}</h2>
+            <img src="${datas.data[car].cover_url}" style="height:100px;width:auto;"/><br><br>
+            经销商价格：${datas.data[car].dealer_price}<br>价格：${datas.data[car].price}<br>
+        <hr>`;
+        }
+    })
+    .catch(error => ns_alert('错误', '并未查询到相关信息。'));
+}
+</script>
+</div>
+<div class='window' id='apibot'>
+<div class='nstit'>智娃
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+<div id='botter' style="padding: 5px;height:85%;width:90%;overflow: auto;">
+    <font color="gray">
+    备注：“智娃”是由北京光年无限科技有限公司研发并备案的生成式人工智能服务，主要面向儿童群体提供智能对话与教育陪伴功能，基于开源预训练大模型架构（TuringMM），补充亿级 token 数据与百万级精标对话数据进行训练 。被称为“儿童版ChatGPT”。</font><br>
+</div>
+<input placeholder="输入消息" id="botmsg" style="width:95%"/>
+<script>
+function fetch_bot(botmsg)
+{
+    botter.innerHTML+=`<font color="cyan"><b>用户</b> ${gettime_1()}</font>
+        <blockquote>${botmsg}</blockquote>
+    `;
+    fetch('https://v2.xxapi.cn/api/turing?msg='+botmsg)
+    .then(response => response.json())
+    .then(datas => {
+        botter.innerHTML+=`
+        <font color="yellow"><b>智娃</b> ${gettime_1()}</font>
+        <blockquote>${datas.data}</blockquote>
+    `;
+        document.getElementById('botter').scrollTop = document.getElementById('botter').scrollHeight;
+        document.getElementById('botmsg').value = "";
+    })
+    .catch(error => ns_alert('错误', error));
+}
+botmsg.addEventListener('keydown',function(ee){
+    if(ee.key == "Enter")
+    {
+        fetch_bot(botmsg.value);
+    }
+});
+</script>
+</div>
+<div class="window" id="apidisease">
+<div class="nstit">常见疾病查询
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+<input id="disease_name" placeholder="请输入疾病名称"/> <button onclick="fetxh_disease(disease_name.value)">查询</button>
+<br>常见：<button onclick="fetxh_disease('流行性感冒')">流行性感冒</button> <button onclick="fetxh_disease('哮喘')">哮喘</button> <button onclick="fetxh_disease('支气管炎')">支气管炎</button> <button onclick="fetxh_disease('过敏')">过敏</button>
+<br>注：输入疾病名称时，请注意表述完整（“流感”->“流行性感冒”）。<br>
+<div id="disdis" style="line-height: 30px;font-size: 20px;">
+</div>
+<script>
+    function fetxh_disease(names)
+    {
+        disdis.innerHTML= "请稍后...";
+        fetch('https://v2.xxapi.cn/api/disease?word='+names)
+        .then(response => response.json())
+        .then(datas => {
+            disdis.innerHTML=`
+                <font color="gray">查询信息仅供参考，请根据自身实际情况，咨询专业医生，即时就诊，健康第一。</font>
+                <p><b>疾病名称：</b> ${datas.data[0].name}</p>
+                <p><b>患病概率：</b> ${datas.data[0].get_prob}</p>
+                <p><b>医保：</b> ${datas.data[0].yibao_status}</p>
+                <p><b>传播途径：</b> ${datas.data[0].get_way}</p>
+                <p><b>病情描述：</b> ${datas.data[0].desc}</p>
+                <h3>可能的患病原因</h3>
+                ${datas.data[0].cause.replaceAll("\n","<br>")}
+                <h3>并发症</h3>
+                ${datas.data[0].acompany}
+                <h3>科室</h3>
+                ${datas.data[0].cure_department}
+                <h3>检查项目</h3>
+                ${datas.data[0].check}
+                <h3>治疗</h3>
+                ${datas.data[0].cost_money}，治疗持续时间约${datas.data[0].cure_lasttime}，治疗方式有${datas.data[0].cure_way}，有${datas.data[0].cured_prob}的概率可以治疗成功。
+                <h3>推荐药物</h3><ul>`;
+                for(var de = 0;de < datas.data[0].recommand_drug.length;de++)
+                {
+                    disdis.innerHTML += `<li>${datas.data[0].recommand_drug[de]}</li>`;
+                }
+                disdis.innerHTML += `</ul><h3>药物详情</h3><ul>`;
+                for(var de1 = 0;de1 < datas.data[0].drug_detail.length;de1++)
+                {
+                    disdis.innerHTML += `<li>${datas.data[0].drug_detail[de1]}</li>`;
+                }
+                disdis.innerHTML += `</ul>`;
+        })
+        .catch(error => ns_alert('错误','未查询到相关信息。'));
+    }
+</script>
+</div>
+<div id="apiocr" class="window">
+    <div class="nstit">OCR文字识别
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+    <h2>选择图片以开始识别</h2>
+    <input id="ocr_image" style="background:black" type="file" accept="image/*"/>
+    选择模式：
+    <select id="tsr_mode">
+        <option value="chi_sim" selected>中文(简体)</option>
+        <option value="chi_tra">中文(繁体)</option>
+        <option value="chi_sim+eng">中英混合(简体中文)</option>
+        <option value="chi_tra+eng">中英混合(繁体中文)</option>
+        <option value="eng">英文</option>
+    </select>
+    <button id="ocrbtn" onclick="start_tesseract();">开始提取文字</button>
+    <p id="status_ocr"></p>
+    <div id="final_tsr" style="width:80%;height:300px;border:1px solid gray;overflow: auto;">
+    </div>
+    <br><br><img style="width:auto;height:270px;" id="preview_image"/>
+    <script>
+        var TESSERACT_ = false;
+        function init_tesseract()
+        {
+            if(TESSERACT_==false){
+                status_ocr.innerHTML="加载必要组件中";
+                var TSR = document.createElement('script');
+                TSR.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
+                status_ocr.innerHTML="";
+                document.head.appendChild(TSR);
+                status_ocr.innerHTML="加载完成";
+                TESSERACT_=true;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        let ocrim = null;
+        ocr_image.addEventListener('change',e=>{
+            const file = e.target.files[0];
+            if(!file)return;
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function(){
+                ocrim = this.result;
+                preview_image.src=this.result;
+                final_tsr.innerHTML = '';
+            }
+        })
+        async function start_tesseract()
+        {
+            ocrbtn.disabled = true;
+            status_ocr.innerHTML = "正在加载OCR语言包，请稍后...";
+            var tsr_r = await Tesseract.recognize(
+                ocrim,
+                tsr_mode.value,
+                {
+                    logger:lo=>{
+                        status_ocr.innerHTML = `识别中。<br>${(lo.progress*100).toFixed(0)}% <progress max=100 value=${(lo.progress*100).toFixed(0)}></progress>`;
+                    }
+                }
+            );
+            if(tsr_mode.value == "chi_sim"||tsr_mode.value == "chi_tra"){
+                final_tsr.innerText=tsr_r.data.text.replaceAll(" ","");
+            }else{
+                final_tsr.innerText=tsr_r.data.text;
+            }
+            console.log(tsr_r);
+            status_ocr.innerHTML = "已完成识别。";
+            ocrbtn.disabled = false;
+        }
+    </script>
+</div>
+<div id="nscalc" class="window">
+<div class="nstit">计算器
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+<div id="number_display" style="height:80px;width:95%;text-align:right;font-size: 50px;"></div>
+<div id="fffkeyboard">
+</div>
+<button style="height:70px;width:70px;font-size:30px;background: linear-gradient(rgb(50,0,0),rgb(100,0,0));" onclick="number_display.innerText=''">AC</button>
+<script>
+    var numbers = ['789+','456-','123*','0.=/'];
+function loadcalc(){
+    for(var line = 0;line<numbers.length;line++)
+    {
+        for(var ale = 0;ale<numbers[line].length;ale++)
+        {
+            if(numbers[line][ale]=="=")
+            {
+                document.getElementById("fffkeyboard").innerHTML+=`<button style="height:70px;width:70px;font-size:30px;" onclick="number_display.innerText=eval(number_display.innerText)">${numbers[line][ale]}</button> `;
+            }
+            else{
+                document.getElementById("fffkeyboard").innerHTML+=`<button style="height:70px;width:70px;font-size:30px;" onclick="number_display.innerText+='${numbers[line][ale]}'">${numbers[line][ale]}</button> `;
+            }
+        }
+        document.getElementById("fffkeyboard").innerHTML+="<br><br>";
+    }
+}
+loadcalc();
+</script>
+</div>
+<div class="window" id="nscalch">
+    <div class="nstit">汇率计算器(实时更新)
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+    <input id="ordin" placeholder="输入金额"/><br>
+    把
+    <select id="from_mo">
+        <option value="CNY" selected>人民币(CNY)</option>
+        <option value="USD">美元(USD)</option>
+        <option value="JPY">日元(JPY)</option>
+        <option value="GBP">英镑(GBP)</option>
+        <option value="EUR">欧元(EUR)</option>
+    </select>
+    换成
+    <select id="to_mo">
+        <option value="CNY">人民币(CNY)</option>
+        <option value="USD" selected>美元(USD)</option>
+        <option value="JPY">日元(JPY)</option>
+        <option value="GBP">英镑(GBP)</option>
+        <option value="EUR">欧元(EUR)</option>
+    </select>
+    <p style="font-size: 45px;" id="exres"></p>
+    <button onclick="exchange()">转换</button>
+    <script>
+        function exchange()
+        {
+            fetch('https://v2.xxapi.cn/api/exchange?from='+from_mo.value+'&to='+to_mo.value+'&amount='+ordin.value+'&key=95f6d55aa8c44ae5')
+            .then(res => res.json())
+            .then(datas => {
+                var date = new Date(datas.data.update_at);
+                exres.innerHTML = ordin.value+" "+from_mo.value+"≈ "+datas.data.result.toFixed(2)+" "+to_mo.value+"<br>更新时间："+date.toLocaleString();
+            })
+        }
+    </script>
+</div>
+<div id="nsquick" class="window">
+    <div class="nstit">反应力测试
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+    <div id="brodyagu"><h1>反应力测试</h1> 当页面变为蓝色时，迅速点击屏幕。 <br><button onclick="startfyl()">开始测试</button></div>
+    <div id="brodyagua" onclick="processfyl()" style="position: absolute;height:calc(100% - 35px);width:100%;top:35px;background: black;"></div>
+    <script>
+        $("#brodyagua").hide();
+        var nema;
+        async function startfyl()
+        {
+            $("#brodyagu").hide();
+            $("#brodyagua").show();
+            $("#brodyagua").css('background','black');
+            brodyagua.innerHTML = "<h1>等待...</h1>";
+            var del = Math.floor(Math.random() * 7) + 1;
+            console.log(del);
+            await delay(del*1000);
+            $("#brodyagua").css('background','#069999');
+            nema = Date.now();
+            brodyagua.innerHTML="<h1>点击屏幕！</h1>";
+        }
+        function processfyl()
+        {
+            if(brodyagua.style.background=="black")
+            {
+                ns_alert("测试失败","测试失败，不能作弊噢*(^_^)*");
+                $("#brodyagua").hide();$("#brodyagu").show();
+                $("#brodyagua").css('background','black');
+            }
+            else if(brodyagua.style.background=="rgb(6, 153, 153)"){
+                brodyagua.style.background = "rgb(1,1,1)";
+                brodyagua.innerHTML = `<center><p style="font-size:40px;">${Date.now()-nema} ms</p><p>评价标准(x=反应速度)：<br>≤100：够快<br>100&lt;x&lt;400：普通水平<br>400&lt;x&lt;500：稍慢<br>&gt;500：太慢了</p><br><button onclick='$("#brodyagua").hide();$("#brodyagu").show();'>返回</button></center>`;
+            }
+        }
+    </script>
+</div>
+<div id="nsbrain" class="window">
+    <div class="nstit">最强大脑：速算(加法)
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+    运算位数：
+    <select id="quicksuan">
+        <option value=0>1位数</option>
+        <option value=1>2位数</option>
+        <option value=2>3位数</option>
+        <option value=3>4位数</option>
+        <option value=4>5位数</option>
+    </select>
+    速度：
+    <select id="quick_speed">
+        <option value=0.1>0.1s</option>
+        <option value=0.3 selected>0.3s</option>
+        <option value=0.4>0.4s</option>
+        <option value=0.5>0.5s</option>
+        <option value=0.7>0.7s</option>
+        <option value=1>1s</option>
+    </select>
+    <select id="quick_cc">
+        <option value=10>10</option>
+        <option value=20 selected>20</option>
+        <option value=50>50</option>
+        <option value=70>70</option>
+        <option value=100>100</option>
+    </select>笔
+    <button onclick="start_quick()">开始</button>
+    <style>
+#displayerqqq {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    height:calc(100% - 100px);
+    width:100%;
+}
+    </style>
+    <div id="displayerqqq">
+        等待...
+    </div>
+    <script>
+        async function start_quick()
+        {
+            var final_resur = 0;
+            displayerqqq.innerHTML="3";
+            await delay(1000);
+            displayerqqq.innerHTML="2";
+            await delay(1000);
+            displayerqqq.innerHTML="1";
+            await delay(1000);
+            displayerqqq.innerHTML="开始";
+            await delay(600);
+            for(var nsd = 0;nsd <= quick_cc.value;nsd++)
+            {
+                var rsd=Math.floor(Math.random() * (9*(10**quicksuan.value))) + 1*(10**quicksuan.value);
+                displayerqqq.innerHTML=rsd;
+                final_resur+=rsd;
+                console.log(final_resur);
+                await delay(quick_speed.value*1000);
+            }
+            await delay(quick_speed.value*1000);
+            console.log(final_resur);
+            displayerqqq.innerHTML=`
+                <h1 style="color:yellow;font-size:50px;">写下答案！</h1>
+                <input id="detect_n"/>
+                <button onclick="scnj(${final_resur});">提交</button>
+            `;
+            detect_n.focus();
+        }
+        function scnj(k)
+        {
+            if(detect_n.value==k){displayerqqq.innerHTML='<h1 style="color:lightgreen;font-size:52px;">正确！<br>就是'+k+'！</h1>';}else{displayerqqq.innerHTML='<h1 style="color:orange;font-size:52px;">错误！<br>正确答案：'+k+'</h1>';}
+        }
+    </script>
+</div>
+<div id="nsCAM" class="window">
+<div class="nstit">相机
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+<div id='cammain' style='display:inline-block;width:75%;height:100%;'>
+<video id="cam" style='width:100%' autoplay muted playsinline></video>
+<a id='brightness' style='background:black;position:absolute;top:15px;left:15px'>亮度: 0 LUX</a><br>
+<a id='datetime' style='background:black;position:absolute;top:45px;left:15px'>2018/10/24 09:36:12</a>
+<canvas hidden id="canvas"></canvas>
+</div>
+<div id='cammenu' style='display:inline-block;width:20%;height:100%;vertical-align:top;'>
+<button onclick='take_photo()'>拍照</button><br><br>
+<button id='recc' onclick='rec()'>录像</button><br><br>
+<button onclick='srec()'>停止录像</button>
+<p>录像帧率(FPS)：<input type='text' id='fpsin' value='25'/></p>
+<select id='notacam' oninput='startcam()'>
+<option selected value='environment'>后置摄像头</option>
+<option value='user'>前置摄像头</option>
+</select>
+<p>(可选)添加标题字幕(为保证显示完整，字不要打太多)</p>
+<input type='text' id='titletext' placeholder='请输入...'/>
+</div>
+<script>
+var RTC = document.createElement('script');
+RTC.src = 'https://cdn.webrtc-experiment.com/RecordRTC.js';
+document.head.appendChild(RTC);
+var stream = null;
+const ctx = canvas.getContext('2d')
+async function startcam()
+{
+    try{
+        if(stream){
+            stream.getTracks().forEach(track => track.stop())
+        }
+        stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode:  notacam.value},
+            audio: true
+        })
+        cam.srcObject = stream;
+        canvas.height = cam.offsetHeight;
+        canvas.width = cam.offsetWidth;
+        detbn();
+        window.addEventListener('devicelight', e => {
+            brightness.innerText = Math.round(e.value)
+        })
+    }catch(e){
+        ns_alert('无法获取摄像头','摄像头权限获取失败，请退出后再重试。（您有可能拒绝了权限，请开启。）<br>请放心，本网页不会上传您的照片，因为该网页不具备上传功能。<br>如果您的设备没有摄像头，请接入摄像头或者换设备。');
+    }
+}
+function detbn() {
+    try{
+        if (!stream) return;
+        ctx.drawImage(cam, 0, 0, canvas.width, canvas.height);
+        ctx.font = '16px Arial';
+        ctx.fillStyle = 'yellow';
+        const imgd = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imgd.data;
+        let brightness = 0;
+        const step = 8;
+        for (let i = 0; i < data.length; i += 4 * step) {
+            const r = data[i];
+            const g = data[i+1];
+            const b = data[i+2];
+            brightness += 0.299*r + 0.587*g + 0.114*b;
+        }
+        const count = data.length / (4 * step);
+        const finall = Math.round(brightness / count);
+        document.getElementById('brightness').innerText = '亮度: '+finall+' LUX';
+        document.getElementById('datetime').innerText = getcdt();
+        ctx.fillText(`${datetime.innerText}`,15,17);
+        ctx.fillText(`${document.getElementById('brightness').innerText}`,15,34);
+        ctx.font = '25px Arial';
+        ctx.fillStyle = 'green';
+        ctx.fillText(document.getElementById('titletext').value,canvas.width/2-titletext.value.length*8,canvas.height-50);
+        requestAnimationFrame(detbn);
+    }catch(e){console.log(e);}
+}
+function getcdt()
+{
+    var da = new Date();
+    return `${da.getFullYear()}/${(da.getMonth()+1).toString().padStart(2,'0')}/${da.getDate().toString().padStart(2,'0')} ${da.getHours().toString().padStart(2,'0')}:${da.getMinutes().toString().padStart(2,'0')}:${da.getSeconds().toString().padStart(2,'0')}`;
+}
+function take_photo()
+{
+    const finalimg = canvas.toDataURL('image/png');
+    const a = document.createElement('a');
+    a.href = finalimg;
+    a.download = `NS_PHT${Date.now()}.png`;
+    a.click();
+}
+var recorder=null;
+function rec() {
+    var stream = canvas.captureStream(fpsin.value);
+    recorder = RecordRTC(stream, {
+        type: 'video',
+        mimeType: 'video/mp4'
+    });
+    recorder.startRecording();
+    recc.disabled = true;
+}
+function srec() {
+    try{
+        recorder.stopRecording(function() {
+            var blob = recorder.getBlob();
+            var vidurl = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = vidurl;
+            a.download = `NS_VID_${Date.now()}.mp4`;
+            a.click();
+            recc.disabled = false;
+        });
+    }catch(e){
+        ns_alert('出错',e);
+    }
+}
+</script>
+</div>
+<div id='nss2t' class="window">
+<div class="nstit">语音转文字
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+<h1>语音转文字</h1>
+<p>语音转文字在特定场景中是一种很重要的工具，尤其是在会议或者演讲中用到，当需要记录重要发言时，就需要用到语音转文字。</p>
+<button id="stabtn" onclick="start_s2t()">开始录音&识别</button> <button onclick="stop_s2t()">停止识别</button> 选择识别语言：
+<select id="rec_lang">
+    <option value="zh-CN">中文</option>
+    <option value="en-US">英文</option>
+</select>
+<button onclick="correct_text()">自动修正(识别完后建议点这个)</button>
+<div id="s2t_res" style="width:80%;height:300px;font-size: 23px;border:2px solid gray;overflow: auto;">
+</div>
+<p id="s2t_stbar"></p>
+<script>
+    const speech2t = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition = null;
+    function INIT_S()
+    {
+        if(!speech2t){
+            ns_alert('不支持识别','抱歉，当前浏览器不支持语音识别，请更换主流浏览器（如Chrome，Edge，Safari）。');
+            return;
+        }
+        recognition = new speech2t();
+        recognition.lang = rec_lang.value;
+        recognition.continuous = true;
+        recognition.interimResults = true;
+    }
+    function start_s2t()
+    {
+        s2t_res.innerText = '';
+        if(!recognition){INIT_S();}
+        recognition.start();
+        stabtn.disabled = true;
+        stabtn.innerHTML="正在识别";
+        recognition.onresult = function(e){
+            let text = '\n';
+            for(let i=e.resultIndex; i<e.results.length; i++){
+                text += e.results[i][0].transcript;
+            }
+            s2t_res.innerText += text;
+        }
+        recognition.onerror = function(e){
+            ns_alert('识别出错，信息如下：',e.error+'<br>刷新网页或许能解决问题');
+            stabtn.value="开始录音&识别";
+        }
+    }
+    function stop_s2t()
+    {
+        if(recognition){
+            recognition.stop();
+            stabtn.value="开始录音&识别";
+            stabtn.disabled = false;
+        }
+    }
+    async function correct_text()
+    {
+        s2t_stbar.innerHTML = 'ChatGPT修正文本中，请稍等。';
+        const response = await fetch('https://text.pollinations.ai/以下是一段语音识别的文字输出，请对其进行修正（去除未识别完的文字残留、修正识别错误的地方、加标点符号等等），不需要进行解释说明或者加入其它无关的话（比如：“以下是修正的文本...”，不要出现这类话），也不要更改原文的意思。以便能进行直接嵌入。识别输出如下：'+s2t_res.innerHTML);
+        const gptcc = await response.text();
+        s2t_res.innerText = gptcc;
+        s2t_stbar.innerHTML = '修正完成。';
+    }
+</script>
+</div>
+<div id="nslocation" class="window">
+    <div class="nstit">当前定位
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+    <p style="font-size: 30px;" id="geolocation"></p>
+    请勿轻易向他人分享您的当前位置！
+    <script>
+        function dingwei()
+        {
+            fetch('https://api.txu.cc/api/ip')
+            .then(res => res.json())
+            .then(datas => {
+                geolocation.innerText = `所在地区：${datas.data.address.replaceAll('/','-')}
+                
+                经纬度：`;
+                if(datas.data.longitude>0)
+                {
+                    geolocation.innerText+=`东经${datas.data.longitude}°，`
+                }
+                else if(datas.data.longitude<0)
+                {
+                    geolocation.innerText+=`西经${datas.data.longitude}°，`
+                }
+                else
+                {
+                    geolocation.innerText+=`${datas.data.longitude}°，`
+                }
+
+
+                if(datas.data.latitude>0)
+                {
+                    geolocation.innerText+=`北纬${datas.data.latitude}°。`
+                }
+                else if(datas.data.latitude<0)
+                {
+                    geolocation.innerText+=`南纬${datas.data.latitude}°。`
+                }
+                else
+                {
+                    geolocation.innerText+=`${datas.data.latitude}°。`
+                }
+            });
+        }
+    </script>
+</div>
+<div id='nsprompt' class='window'>
+<div class='nstit'>Command Prompt
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+<div id='ns_cmd_dis'>
+NightSky Terminal version:0.1.260529. [SIMULATE]e webpage/TC<br>
+Copyright &copy; Hello-Programming 2026<br>
+Type 'HELP' to get the guide
+</div>
+<a id='plat'>~root</a> <input id='user_cmd' style='border-width:0px;outline:none;background:black;width:75%;color:white;font-size:16px;padding:0px;'/>
+<script>
+var CMD = document.getElementById('ns_cmd_dis');
+plat.innerText = navigator.platform+'~root#]';
+async function E_U_C(commands,elu)
+{
+    var help = `NightSky Terminal Guide:
+PRINT [Text]:Display texts on the screen.
+WRITE [Content]=>[File Name]:Create a file named[File Name] and write [Content] to it.
+FLIST:List all user files.
+DELET [N]:Delete [N].
+FREAD [File]:Get the contents of [File].
+EXCJS [Code]:Execute JavaScript code.
+TUIWD [Title]:[Content]:[CallBack] :Create a window.
+COLOR [COLOR]:Set terminal color.
+SETBG [COLOR]:Set terminal background color.
+USRAG:Get user-agents.
+CLEAR:Clear all contents on the screen.
+FETCH [url]:Fetch something from [url].`;
+    var cmd = commands.toLowerCase();
+    if(cmd.length>6){
+        var acmd = commands.substr(6,cmd.length);
+    }
+    if(!cmd){elu.innerHTML+='';return 0;}
+    else if(cmd == 'help') elu.innerText+='\n'+help;
+    else if(cmd.startsWith('print ')) elu.innerHTML+='<br>'+acmd;
+    else if(cmd.startsWith('write ')){var tmp1 = acmd;localStorage.setItem(tmp1.split('=>')[1],tmp1.split('=>')[0]);elu.innerHTML+='<br>File wrote successfully.';}
+    else if(cmd.startsWith('fread ')) elu.innerHTML+='<br>'+localStorage.getItem(acmd);
+    else if(cmd.startsWith('delet ')){localStorage.removeItem(acmd);elu.innerHTML+='<br>Item deleted.';}
+    else if(cmd == 'flist'){for(var fp = 0;fp < localStorage.length;fp++){elu.innerText+='\n'+localStorage.key(fp);}}
+    else if(cmd.startsWith('excjs ')) elu.innerHTML+='<br>'+eval(acmd);
+    else if(cmd.startsWith('color ')) elu.style.color=acmd;
+    else if(cmd.startsWith('setbg ')) elu.style.background=acmd;
+    else if(cmd=='usrag') elu.innerHTML+='<br>'+navigator.userAgent;
+    else if(cmd=='clear') elu.innerHTML='';
+    else if(cmd.startsWith('fetch ')){
+        var resp = await fetch(acmd);
+        var resp1 = await resp.text();
+        elu.innerText+='\n'+resp1;
+    }
+    else if(cmd.startsWith('tuiwd ')){var tmp2 = acmd;var window_bdy = `<div style='color:white;padding:3px;background:navy;border:1px solid white;'>${tmp2.split(':')[0]}<hr>${tmp2.split(':')[1]}<hr><center><a onclick='eval(\`${tmp2.split(":")[2]}\`)'>[OK]</a></center></div>`;elu.innerHTML+=window_bdy;}
+    else{elu.innerHTML+='<br>Invalid command: '+commands}
+}
+user_cmd.addEventListener('keydown',function(ek){
+    if(ek.key == 'Enter')
+    {
+        CMD.innerHTML+=`<br>${plat.innerHTML} ${user_cmd.value}`;
+        E_U_C(user_cmd.value,CMD);
+        nsprompt.scrollTop=nsprompt.scrollHeight;
+        user_cmd.value = '';
+    }
+});
+</script>
+</div>
+<div id="nschats" class="window">
+    <div class="nstit">在线聊天室 版本1 <a id="room_fnum"></a>
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+    <div id="preset_set">
+        <h1>在线聊天室</h1>
+        <p>输入以下必要信息，即可创建/加入聊天。</p>
+        <p>创建房间号(可自定义) <input id="room_n"/></p>
+        <p>自定义昵称 <input id="room_nick"/></p>
+        <button onclick="start_wss()">进入</button>
+        <p style="color:gray">
+            操作指引：<br>
+            [创建房间]<br>
+            1.自定义一个房间号，并且输入名称。<br>
+            2.点击进入，即可进入空聊天室。<br>
+            [加入房间]<br>
+            1.邀请其他人，告诉您设定的房间号。
+            <br>2.让他人输入您的房间号，即可进入。（双方之间的房间号必须相同，否则互相收不到消息）
+            <br>本聊天室基于WebSocket技术实现，不会保存用户聊天记录，请手动复制导出。本聊天室适用于临时/应急场景，不要当成主力应用使用。
+        </p>
+    </div>
+    <div id="main_cr" hidden>
+        <div id="cr_clog" style="width:95%;height:80%;overflow:auto;">
+            <font color="gray">注：在线人数统计可能不准确，但不影响聊天。</font><br>
+        </div>
+        <div style="display:flex;align-items: center;"><textarea style="width:70%;height:50px" id="cr_msg" placeholder="输入信息，Ctrl+Shift换行。"></textarea> <button style="margin-left: 5px;" onclick="wss_send()">发送</button> <button style="margin-left: 5px;" onclick='end_ssn();preset_set.removeAttribute("hidden");main_cr.setAttribute("hidden",true);room_fnum.innerHTML = "";'>离开聊天室</button></div>
+    </div>
+    <script type="module">
+import { connect } from 'https://cdn.jsdelivr.net/npm/itty-sockets@0.9.3/+esm';
+window.connect = connect;
+window.start_wss=() => {
+    preset_set.setAttribute("hidden",true);
+    main_cr.removeAttribute("hidden");
+    room_fnum.innerHTML = "(房间号："+room_n.value+")";
+    const socket=connect(room_n.value,{as:room_nick.value});
+    socket.on('message', ({ message, alias }) => {
+        cr_clog.innerHTML+=`<div style="width:calc(100% - 5px);padding:5px;"><font color="yellow">${alias}</font> <font color="gray">${gettime_1()}</font><blockquote>${message}</blockquote></div>`;
+        //document.getElementById('cr_clog').scrollTop = document.getElementById('cr_clog').scrollHeight;
+const elem = document.getElementById('cr_clog');
+elem.offsetHeight;
+elem.scrollTop = elem.scrollHeight;
+    });
+socket.on('join', ({ alias,total }) => {
+   cr_clog.innerHTML+=`<font color="lightgreen">${alias}加入了房间。(${total}人在线)</font><br>`;
+   document.getElementById('cr_clog').scrollTop = document.getElementById('cr_clog').scrollHeight;
+});
+socket.on('leave', ({ alias,total }) => {
+  cr_clog.innerHTML+=`<font color="orange">${alias}离开了房间。(${total}人在线)</font><br>`;
+    document.getElementById('cr_clog').scrollTop = document.getElementById('cr_clog').scrollHeight;
+});
+    window.wss_send=() => {
+      socket.send(cr_msg.value);
+      cr_clog.innerHTML+=`<div style="width:calc(100% - 5px);padding:5px;background:rgb(50,50,50);"><font color="cyan">${room_nick.value} </font> <font color="gray">${gettime_1()}</font><blockquote>${cr_msg.value}</blockquote></div>`;
+      cr_msg.value = "";
+      document.getElementById('cr_clog').scrollTop = document.getElementById('cr_clog').scrollHeight;
+    }
+    window.end_ssn=()=>{
+        socket.close();
+        cr_clog.innerHTML="<font color='gray'>注：在线人数统计可能不准确，但不影响聊天。</font><br>";
+    }
+}
+cr_msg.addEventListener("keydown",function(me){
+    if(me.key == "Enter")
+    {
+        wss_send();
+    }
+});
+    </script>
+</div>
+
+<div id="nsremote" class="window">
+    <div class="nstit">远程控制NightSky 版本1
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+    <div id="prepare_interface">
+        <h1>远程控制</h1>
+        <p>注：只能远程控制打开NightSky的网页，不能控制真实机器。</p>
+        <h2>远控端登录</h2>
+        输入接收方的虚拟号码：<input id="receiver_vn"/>
+        <button onclick="enter_rm1(receiver_vn.value)">开始远程控制</button>
+        <h2>接收方登录</h2>
+        <p>如果对方已经准备好远程控制你的设备，请点击下方按钮。</p>
+        <button onclick="enter_rm()">已被远控，接受远程申请</button>
+        <p>（自己的虚拟号码在“设置->关于”查看）</p>
+    </div>
+    <div id="remoting" hidden><h1>远程控制中...</h1><button onclick="end_rss()">退出</button></div>
+    <div id="remoter" hidden>
+        <h1>远程操作</h1>
+        打开应用 <select id="rem_cmd">
+            <option value="topmost('nsfm');$('#nsfm').effect('slide',500);list_personal()">文件管理器</option>
+            <option value="topmost('nsedit');$('#nsedit').effect('slide',500);">文本编辑器</option>
+            <option value="topmost('nsbrow');$('#nsbrow').effect('slide',500);">浏览器</option>
+            <option value="topmost('nssetting');$('#nssetting').effect('slide',500);">设置</option>
+            <option value="topmost('nsplay');$('#nsplay').effect('slide',500);">媒体播放器</option>
+            <option value="topmost('nslocation');$('#nslocation').effect('slide',500);dingwei();">当前定位</option>
+            <option value="topmost('nsprompt');$('#nsprompt').effect('slide',500);user_cmd.focus()">命令行</option>
+        </select>
+        <button onclick="openrm(rem_cmd.value)">打开</button>
+        <p>发送广播</p>
+        <input id="brc_brc" placeholder="输入内容"/>
+        <button onclick="rbrcst(brc_brc.value)">发送</button>
+        <p>远程输入</p>
+        在<select id="rem_cmdi">
+            <option value="ns_filename">文本编辑器的文件名</option>
+            <option value="ns_filecontext">文本编辑器的编辑区域</option>
+            <option value="browser_addr">浏览器地址栏</option>
+            <option value="user_cmd">命令行输入框</option>
+        </select>里输入<input id="send_recon" placeholder="输入文本" />内容
+        <button onclick="rinput()">发送</button><br><br>
+        <button onclick="end_rss()">退出</button>
+        <p>输出<hr></p>
+        <article id="remo_log">
+        </article>
+    </div>
+    <script type="module">
+        let remsc = '';
+        window.enter_rm=()=>{
+            remsc = connect("remote-"+localStorage.getItem("NS_VT.nsys"),{as:"RECEIVER"});
+            remsc.on('message', ({ message, alias }) => {
+                eval(message);
+            });
+            remsc.on('leave', ({ total }) => {
+                end_rss();
+                ns_alert("远程控制","对方已结束远程控制。");
+            });
+            remoting.hidden=false;
+            prepare_interface.hidden=true;
+        }
+        window.enter_rm1=(vn78)=>{
+            remsc = connect("remote-"+vn78,{as:localStorage.getItem("NS_VT.nsys")});
+            window.openrm=(ei)=>{
+                remsc.send(ei);
+                remo_log.innerHTML+="“打开应用”的指令已发送。<br>";
+            }
+            window.rbrcst=(ei1)=>{
+                remsc.send(`ns_alert('${localStorage.getItem("NS_VT.nsys")} 给您发送了一条消息',\`${ei1}\`);`);
+                remo_log.innerHTML+="广播已发送。<br>";
+            }
+            window.rinput=(ei2)=>{
+                remsc.send(`document.getElementById("${rem_cmdi.value}").value = \`${send_recon.value}\``);
+                remo_log.innerHTML+="内容已填充。<br>";
+            }
+            remoter.hidden=false;
+            prepare_interface.hidden=true;
+            remo_log.innerHTML="";
+        }
+        window.end_rss=()=>{remsc.close();remoting.hidden=true;remoter.hidden=true;prepare_interface.hidden=false;}
+    </script>
+</div>
+<div class='window' id='nstypepractise'>
+<div class='nstit'>打字练习 版本1
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+</div>
+<div id='t_mainui'>
+<h2>打字练习</h2>
+选择练习模式 <select id='rs_pcm'>
+<option value=0>中文短句</option>
+<option value=1>中文长句</option>
+<option value=2>中文文章</option>
+<option value=3>英文单词</option>
+<option value=4>英文句子</option>
+<option value=5>字母大小写、数字、符号混打</option>
+<option value=6>中文生僻字练习</option>
+<option value=7>文言文练习</option>
+<option value=8>自由练习(内容自定义)</option>
+</select>
+<button onclick='t_stpr()'>进入练习</button>
+</div>
+<div id='t_prui' hidden>
+<h2>打字练习(模式：<a id='t_mode'></a>)</h2>
+<p>练习内容</p>
+<textarea id='t_prtxt' style='width:90%;height:100px;' oninput='prtxte=t_prtxt.value;t_eftt.innerText=t_prtxt.value;' placeholder='自定义欲练习的内容。'></textarea><br><br>
+<div style='width:calc(90% - 5px);height:100px;border:1px solid gray;padding:5px;overflow:auto;' id='t_eftt'>此处是练习指示器，显示打字练习过程中出现的错字和完成程度。</div>
+颜色标记说明：<font color='green'>正确</font> <font color='red'>错误</font> <span>未完成部分</span>
+<br><b id='st_sign'>等待练习。</b>
+<p>练习区域</p>
+<textarea id='t_prarea' style='width:90%;height:100px;' placeholder='点击“开始”后，输入正确的文字练习。' oninput='t_practs()' disabled></textarea>
+<br><button onclick='t_start_practise()'>开始</button>
+<button onclick='t_prui.hidden=true;t_mainui.hidden=false;clearInterval(gotype);'>放弃练习</button>
+<script>
+var t_sttim = 0;
+var prtxte = '';
+var t_timer = 0;
+var practise_mode = ['中文短句','中文长句','中文文章','英文单词','英文句子','无规律字符混打','中文生僻字','文言文','自由练习'];
+
+var CN_SHORT_SENTENCE_EXAMPLE = "中国汉字是中华文明艺术的瑰宝。";
+var CN_LONG_SENTENCE_EXAMPLE = "迎接满堂的笑语欢歌，四海宾朋八方来客，共同抒怀我们火热的生活。迎接大地的万象更新，草木竞发生机勃勃，我们期盼新一轮的耕耘和收获。迎接今宵的万家灯火，家人围坐，天伦之乐，最难忘这一刻的团聚和欢乐。";
+var CN_ARTICLE_EXAMPLE = `1961年，一位叫Max Mathews的计算机工程师，成功让一台IBM 7094电脑“说”出人话，“唱”出歌声，他通过编程使这台计算机唱出了歌曲《Daisy Bell》，尽管在今天看来，它的歌声几乎粗糙难辨，但在当时，这是一件让无数在场工作人员都激动的事情。
+在这之前，Mathews编写了一个叫MUSIC的程序用于制作音乐，但他很快就发现了问题——这台IBM 7094运行速度如同龟爬，播放一首17秒的音乐，却花了快一个小时。所以他运用DAC数字信号转换器和磁带机连接，将计算机发出的音乐信号写入磁带里面，这样就可以用正常的速度播放了。同时他还用了其他复杂的装置来简单模拟人的发声过程。
+1961年一个普通的上午，这台机器唱出了世界上第一首由计算机合成的、带人声的歌曲。“Daisy,Daisy.Give me your answer do,I'm half crazy,all for the love of you...”，模糊的电子音在磁带机内回响，这让他无比兴奋。IBM 7094合成歌声的成功，打开了计算机语音合成技术的大门。`;
+var EN_WORDS = `Common words:
+distance,number,hardware,background,console,prepare,memory,radio,block,network,machine,screen,display,signal
+Important countries:
+the People's Republic of China,the United State,Russia,the United Kingdom of Great Britain and Northern Ireland,Australia,India,Thailand,Germany,Korean,Japan`;
+var EN_SENTENCE = `Life was like a box of chocolates,you never know what you are gonna get.
+Everything that kills me makes me feel alive.
+Rome was not built in a day.`;
+var t_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890!?;@#/()";
+function gen_random_chars()
+{
+    var g_r = '';
+    for(var g = 0;g <= 10;g++)
+    {
+        g_r+=t_chars[(Math.floor(Math.random() * t_chars.length) + 0)];
+    }
+    return g_r;
+}
+var CN_COMPLEX_CHARACTER = "龍龖龘 水沝淼 火炏焱燚 魃魈魁鬾魑魅魍魉 茕茕孑立 沆瀣一气 踽踽独行 醍醐灌顶 绵绵瓜瓞 奉为圭臬 龙行龘龘 犄角旮旯 娉婷袅娜 涕泗滂沱 呶呶不休 不稂不莠 卬 咄嗟 蹀躞 耄耋 饕餮 囹圄 蘡薁 觊觎 龃龉 狖轭鼯轩 怙恶不悛 其靁虺虺 腌臜孑孓 陟罚臧否 针砭时弊 鳞次栉比 一张一翕";
+var OLD_CN = "永和九年，岁在癸丑，暮春之初，会于会稽山阴之兰亭，修禊事也。群贤毕至，少长咸集。此地有崇山峻岭，茂林修竹，又有清流激湍，映带左右，引以为流觞曲水，列坐其次。虽无丝竹管弦之盛，一觞一咏，亦足以畅叙幽情。是日也，天朗气清，惠风和畅。仰观宇宙之大，俯察品类之盛，所以游目骋怀，足以极视听之娱，信可乐也。夫人之相与，俯仰一世。或取诸怀抱，悟言一室之内。或因寄所托，放浪形骸之外。虽趣舍万殊，静躁不同，当其欣于所遇，暂得于己，快然自足，不知老之将至。及其所之既倦，情随事迁，感慨系之矣。向之所欣，俯仰之间，已为陈迹，犹不能不以之兴怀，况修短随化，终期于尽！古人云，死生亦大矣。岂不痛哉！每览昔人兴感之由，若合一契，未尝不临文嗟悼，不能喻之于怀。固知一死生为虚诞，齐彭殇为妄作。后之视今，亦犹今之视昔，悲夫！故列叙时人录其所述虽世殊事异。";
+var gotype = null;
+function t_start_practise()
+{
+    t_timer = Date.now();
+    t_prarea.disabled = false;
+    t_prarea.value = '';
+    t_prarea.focus();
+    gotype = setInterval("t_show_s()",500);
+}
+function t_show_s()
+{
+    var i_total_ts = ((Date.now()-t_timer)/1000).toFixed(0);
+    var i_prac_spd = t_prarea.value.length*(60/i_total_ts);
+    st_sign.innerHTML = `已耗时${i_total_ts}秒，${t_typo_count}个错误，平均速度：${i_prac_spd.toFixed(0)}字/分。`;
+}
+var t_typo_count = 0;
+function t_checkc()
+{
+    t_typo_count = 0;
+    var tnn = prtxte.split('');
+    if(prtxte == t_prarea.value)
+    {
+        var total_ts = ((Date.now()-t_timer)/1000).toFixed(0);
+        var prac_spd = t_prarea.value.length*(60/total_ts);
+        t_prarea.disabled = true;
+        ns_alert("打字练字 提示",`练习完成。<br>耗时${total_ts}秒<br>平均打字速度：${prac_spd.toFixed(0)}字/分`);
+        clearInterval(gotype);
+        t_prui.hidden=true;
+        t_mainui.hidden=false;
+    }
+    for(var type = 0;type < tnn.length;type++)
+    {
+        if(type >= t_prarea.value.length){
+            tnn[type] = "<span>"+prtxte[type]+"</span>";
+        }
+        else if(prtxte[type]==t_prarea.value[type])
+        {
+            tnn[type] = "<font color='green'>"+prtxte[type]+"</font>";
+        }
+        else
+        {
+            tnn[type] = "<font color='red'>"+prtxte[type]+"</font>";
+            t_typo_count++;
+        }
+    }
+    t_eftt.innerHTML = tnn.join('');
+}
+function t_practs()
+{
+    t_checkc();    
+}
+function t_stpr()
+{
+    t_prui.hidden = false;
+    t_mainui.hidden = true;
+    t_mode.innerHTML = practise_mode[rs_pcm.value];
+    if(rs_pcm.value==8)
+    {
+        t_prtxt.hidden = false;
+        t_eftt.innerText = "";
+    }
+    else
+    {
+        t_prtxt.hidden = true;
+        switch(Number(rs_pcm.value))
+        {
+            case 0:
+                prtxte=CN_SHORT_SENTENCE_EXAMPLE;
+                t_eftt.innerText=prtxte;
+                break;
+            case 1:
+                prtxte=CN_LONG_SENTENCE_EXAMPLE;
+                t_eftt.innerText=prtxte;
+                break;
+            case 2:
+                prtxte=CN_ARTICLE_EXAMPLE;
+                t_eftt.innerText=prtxte;
+                break;
+            case 3:
+                prtxte=EN_WORDS;
+                t_eftt.innerText=prtxte;
+                break;
+            case 4:
+                prtxte=EN_SENTENCE;
+                t_eftt.innerText=prtxte;
+                break;
+            case 5:
+                prtxte=gen_random_chars();
+                t_eftt.innerText=prtxte;
+                break;
+            case 6:
+                prtxte=CN_COMPLEX_CHARACTER;
+                t_eftt.innerText=prtxte;
+                break;
+            case 7:
+                prtxte=OLD_CN;
+                t_eftt.innerText=prtxte;
+                break;
+            default:
+                alert("练习模式出错，请重试。");
+                break;
+        }
+    }
+}
+</script>
+</div>
+</div>
+<div id='alertmez' class='nsoverlay'>
+<div style='border:1px solid white;background:black;width:70%;padding:5px;padding-top:5px;padding-bottom:5px' id="mezcont">
+<a id='alert_title'>Alert</a>
+<hr>
+<a id='alert_ctn'>Contents</a>
+<hr>
+<button onclick='$("#alertmez").css("display","none")'>关闭</button>
+</div>
+</div>
+<script>
+if(localStorage.getItem('NS_WALLPAPER.nsys')){document.body.style.backgroundImage = `url(${localStorage.getItem('NS_WALLPAPER.nsys')})`;}else{}
+if(localStorage.getItem('NS_WALLPAPER2.nsys')){document.body.style.background = `${localStorage.getItem('NS_WALLPAPER2.nsys')}`;}else{}
+if(localStorage.getItem('NS_GLASS.nsys')){startglass();}else{}
+if(localStorage.getItem('NS_STARTUP_OP.nsys')){var medu_s = localStorage.getItem('NS_STARTUP_OP.nsys').split('\n');for(var mee = 0;mee < medu_s.length;mee++){eval(localStorage.getItem(medu_s[mee]));}jsmedu.value=localStorage.getItem('NS_STARTUP_OP.nsys');}else{}
+if(localStorage.getItem('NS_FONTSIZE.nsys')){document.body.style.fontSize = localStorage.getItem('NS_FONTSIZE.nsys');}else{}
+if(localStorage.getItem('NS_THEME.nsys')){applytheme(localStorage.getItem('NS_THEME.nsys'));}else{}
+if(localStorage.getItem('NS_FONT_FAMILY.nsys')){
+var Astylesheet_font = document.getElementById('nsfontst');
+Astylesheet_font.href=`https://fonts.googleapis.com/css2?family=${localStorage.getItem('NS_FONT_FAMILY.nsys')}:wght@400;700&display=swap`;
+$('button,input,select,body,textarea').css('font-family',localStorage.getItem('NS_FONT_FAMILY.nsys'));}else{}
+var EVENT_CLICKED_WINDOW_ID = null;
+$(function(){
+    $(".window").draggable();
+    $(".window").resizable();
+    $(".window").on("click",function(){
+        EVENT_CLICKED_WINDOW_ID = $(this).attr("id");
+        topmost(EVENT_CLICKED_WINDOW_ID);
+        topmost("alertmez");
+        console.log("window clicked");
+    });
+});
+function reinit_window(){
+    var body_h = Number($('body').css('height').replace('px',''))
+    var director_h = Number($('#director').css('height').replace('px',''));
+    var statbar_h = Number($('.status_bar').css('height').replace('px',''));
+    $('.morewindow').css('height',`${body_h-director_h-statbar_h+7}px`);
+    $('.morewindow').css('top',`${statbar_h}px`);
+    return 0;
+}
+function request_max()
+{
+    console.log("Request object:"+EVENT_CLICKED_WINDOW_ID);
+    var body_h = Number($('body').css('height').replace('px',''))
+    var director_h = Number($('#director').css('height').replace('px',''));
+    var statbar_h = Number($('.status_bar').css('height').replace('px',''));
+    $('#'+EVENT_CLICKED_WINDOW_ID).css('height',`${body_h-director_h-statbar_h+7}px`);
+    $('#'+EVENT_CLICKED_WINDOW_ID).css('width',`100%`);
+    $('#'+EVENT_CLICKED_WINDOW_ID).css('top',`${statbar_h}px`);
+    $('#'+EVENT_CLICKED_WINDOW_ID).css('left',`0px`);
+}
+function request_resume_normal()
+{
+    $('#'+EVENT_CLICKED_WINDOW_ID).css('height',`30%`);
+    $('#'+EVENT_CLICKED_WINDOW_ID).css('width',`30%`);
+}
+function request_close_window()
+{
+    $('#'+EVENT_CLICKED_WINDOW_ID).slideUp();
+}
+    reinit_window();
+    var tips = [" <b style='font-size:30px'>新特性！</b>这是NightSky的PC端发行版，是基于原版NightSky改成的，更加适合电脑端设备。<br>点击“下一条”快速了解详情。","这个版本的NightSky支持多任务窗口，您可以同时让多个窗口处于活动状态，也可以随时快速切换窗口。<br>窗口标题栏右侧有三个按钮，从右到左依次是：关闭、最大化、恢复正常大小。当您需要执行这些操作时，双击相应图标。", 
+        "我只是对了窗口部分做了点改动，其使用手感、布局不会有很大变化（只是把模拟电话删了）。", 
+        "NightSky系统在Github开源，可下载源码并自由增删功能。", 
+        "注意：本伪系统不是真正的操作系统，真正的操作系统是能独立运行的，而不是基于一个平台运行。"]; 
+    var tipc = 0; 
+    function next_tip() 
+    { 
+        if(tipc>3){tipc = 0;}else{tipc++;} 
+        tips_show.innerHTML = tips[tipc]; 
+        var tip_count = tipc+1;
+        tipcount.innerHTML = tip_count+'/5';
+    } 
+function topmost(elementId) { 
+    const elements = document.querySelectorAll('*'); 
+    let maxZIndex = 0; 
+    elements.forEach(el => { 
+        const zIndex = parseInt(window.getComputedStyle(el).zIndex); 
+        if (zIndex > maxZIndex) maxZIndex = zIndex; 
+    }); 
+    document.getElementById(elementId).style.zIndex = maxZIndex + 1; 
+} 
+function tpad(num) 
+{ 
+    return num.toString().padStart(2, '0'); 
+} 
+function gettime_1() 
+{ 
+    const currentTime = new Date(); 
+    const hours = currentTime.getHours(); 
+    const minutes = currentTime.getMinutes(); 
+    return tpad(hours)+":"+tpad(minutes); 
+} 
+function ns_alert(alert_titlel,alert_content)
+{
+    topmost('alertmez');
+    alert_title.innerHTML = alert_titlel;
+    alert_ctn.innerHTML = alert_content;
+    $("#alertmez").css("display","flex");
+}
+function ns_pagewatcher(url,title_name)
+{
+    topmost('nswebwatch');
+    $("#nswebwatch").effect('slide',300);
+    pw_tit.innerText = title_name;
+    pawat.src = url;    
+    if(title_name.toLowerCase().endsWith('.html')||title_name.toLowerCase().endsWith('.htm'))
+    {
+        pw_tit.innerHTML+=`<a style='color:yellow' onclick="topmost('codemirror');$('#codemirror').effect('slide',500);editor.setValue(localStorage.getItem('${title_name}'));savedfn.value='${title_name}';"> [用编辑器打开]</a>`;
+    }
+}
+function ns_htmlwatch(lckey)
+{
+    init_codemirror();
+    try
+    {
+        ns_pagewatcher('about:blank',lckey);
+        const htmlctn = pawat.contentWindow.document;
+        htmlctn.write(localStorage.getItem(lckey));
+        htmlctn.close();
+    }catch(e)
+    {
+        ns_alert('网页发生错误','网页返回的信息：<br>'+e);
+    }
+}
+setInterval("timedisplay.innerHTML = gettime_1();nsbtr();",3000); 
+//files 
+function list_personal() 
+{ 
+    nspers.innerHTML =""; 
+    for(var i = 0;i < localStorage.length;i++) 
+    { 
+        if(localStorage.key(i).endsWith(".nsys") || localStorage.key(i).startsWith("hash_")) 
+        { 
+            continue; 
+        }else if(localStorage.key(i).toLowerCase().endsWith(".html")||localStorage.key(i).toLowerCase().endsWith(".htm")){
+            nspers.innerHTML += `<div class="casd"><i class="bi bi-file-text-fill"></i> <div style="display:inline-block;font-size:20px;width:80%;color:yellow;word-wrap:break-word;" onclick="ns_htmlwatch('${localStorage.key(i)}')">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
+        }else if(localStorage.key(i).toLowerCase().endsWith(".js")){
+            nspers.innerHTML += `<div class="casd"><i class="bi bi-file-text-fill"></i> <div style="display:inline-block;font-size:20px;width:80%;color:cyan;word-wrap:break-word;" onclick="eval(localStorage.getItem('${localStorage.key(i)}'))">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
+        }
+        else{ 
+            nspers.innerHTML += `<div class="casd"><i class="bi bi-file-text-fill"></i> <div style="display:inline-block;font-size:20px;width:80%;word-wrap:break-word;" onclick="topmost('nsedit');$('#nsedit').effect('slide',500);ns_filename.value='${localStorage.key(i)}';ns_filecontext.value=localStorage.getItem('${localStorage.key(i)}')">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
+        } 
+    } 
+    if(localStorage.length == 0){nspers.innerHTML = "<center style='font-size:30px'>无文件。<center>"}     
+} 
+function list_system() 
+{ 
+    var syst = 0; 
+    nssys.innerHTML =""; 
+    for(var i = 0;i < localStorage.length;i++) 
+    { 
+        if(localStorage.key(i).endsWith(".nsys") || localStorage.key(i).startsWith("hash_")) 
+        { 
+            nssys.innerHTML += `<div class="casd"><i class="bi bi-file-text-fill"></i> <a style="font-size:20px;word-wrap:break-word;">${localStorage.key(i)} (无权限读取)</a> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_system();" style="width:250px;position:absolute;right:20px;">删除（删除可能影响运行）</button></div>`; 
+            syst++; 
+        }else{ 
+            continue; 
+        } 
+    } 
+    if(syst == 0){nssys.innerHTML = "<center style='font-size:30px'>无文件。<center>"}     
+} 
+var THEME_TECHNOLY = `Y2xhc3M6d2luZG93CmJhY2tncm91bmQ9PiMwRjYwNkMKbmV4dDsKZWxlbWVudDpidXR0b24KYmFja2dyb3VuZD0+cmdiYSg1MCwyNTUsMjU1LDAuNSkKYm9yZGVyPT4xcHggc29saWQgY3lhbgpjb2xvcj0+Y3lhbgpib3JkZXItcmFkaXVzPT4wcHgKaG92ZXI9PmJhY2tncm91bmQ6cmdiYSg1MCwyNTUsMjU1LDAuOCkvYmFja2dyb3VuZDpyZ2JhKDUwLDI1NSwyNTUsMC41KQpib3gtc2hhZG93PT4xcHggMXB4IDFweCAxcHggY3lhbgpuZXh0OwplbGVtZW50OmlucHV0CmJhY2tncm91bmQ9PnJnYmEoNTAsMjU1LDI1NSwwLjUpCmJvcmRlcj0+MXB4IHNvbGlkIGN5YW4KYm9yZGVyLXJhZGl1cz0+MHB4CmNvbG9yPT53aGl0ZQpuZXh0OwplbGVtZW50OnRleHRhcmVhCmJhY2tncm91bmQ9PnJnYmEoNTAsMjU1LDI1NSwwLjUpCmJvcmRlcj0+MXB4IHNvbGlkIGN5YW4KYm9yZGVyLXJhZGl1cz0+MHB4CmNvbG9yPT53aGl0ZQpuZXh0OwppZDp0aXBzX2NhcmQKYmFja2dyb3VuZD0+cmdiYSg1MCwyNTUsMjU1LDAuNSkKYm9yZGVyPT4xcHggc29saWQgY3lhbgpib3JkZXItcmFkaXVzPT4wcHgKYmFja2Ryb3AtZmlsdGVyPT5ibHVyKDVweCkKbmV4dDsKaWQ6dXBkX25ld3MKYmFja2dyb3VuZD0+cmdiYSg1MCwyNTUsMjU1LDAuNSkKYm9yZGVyPT4xcHggc29saWQgY3lhbgpib3JkZXItcmFkaXVzPT4wcHgKYmFja2Ryb3AtZmlsdGVyPT5ibHVyKDVweCkKbmV4dDsKY2xhc3M6bnNjYXJkCmJhY2tncm91bmQ9PnJnYmEoNTAsMjU1LDI1NSwwLjUpCmJvcmRlcj0+MXB4IHNvbGlkIGN5YW4KYm9yZGVyLXJhZGl1cz0+MHB4CmJhY2tkcm9wLWZpbHRlcj0+Ymx1cig1cHgpCmhvdmVyPT5iYWNrZ3JvdW5kOnJnYmEoNTAsMjU1LDI1NSwwLjgpL2JhY2tncm91bmQ6cmdiYSg1MCwyNTUsMjU1LDAuNSk=`;
+var THEME_SIMPLEBW = `Y2xhc3M6d2luZG93CmJhY2tncm91bmQ9PmJsYWNrCm5leHQ7CmVsZW1lbnQ6YnV0dG9uCmJhY2tncm91bmQ9PmJsYWNrCmJvcmRlcj0+MXB4IHNvbGlkIHdoaXRlCmNvbG9yPT53aGl0ZQpib3JkZXItcmFkaXVzPT4wcHgKaG92ZXI9PmJhY2tncm91bmQ6cmdiYSgyNTUsMjU1LDI1NSwwLjgpL2JhY2tncm91bmQ6YmxhY2sKYm94LXNoYWRvdz0+MXB4IDFweCAxcHggMXB4IHdoaXRlCm5leHQ7CmVsZW1lbnQ6aW5wdXQKYmFja2dyb3VuZD0+YmxhY2sKYm9yZGVyPT4xcHggc29saWQgd2hpdGUKYm9yZGVyLXJhZGl1cz0+MHB4CmNvbG9yPT53aGl0ZQpuZXh0OwplbGVtZW50OnRleHRhcmVhCmJhY2tncm91bmQ9PmJsYWNrCmJvcmRlcj0+MXB4IHNvbGlkIHdoaXRlCmJvcmRlci1yYWRpdXM9PjBweApjb2xvcj0+d2hpdGUKbmV4dDsKaWQ6dGlwc19jYXJkCmJhY2tncm91bmQ9PnJnYmEoMjU1LDI1NSwyNTUsMC4wKQpib3JkZXI9PjFweCBzb2xpZCB3aGl0ZQpib3JkZXItcmFkaXVzPT4wcHgKYmFja2Ryb3AtZmlsdGVyPT5ibHVyKDVweCkKbmV4dDsKaWQ6dXBkX25ld3MKYmFja2dyb3VuZD0+cmdiYSgyNTUsMjU1LDI1NSwwLjApCmJvcmRlcj0+MXB4IHNvbGlkIHdoaXRlCmJvcmRlci1yYWRpdXM9PjBweApiYWNrZHJvcC1maWx0ZXI9PmJsdXIoNXB4KQpuZXh0OwpjbGFzczpuc2NhcmQKYmFja2dyb3VuZD0+cmdiYSgyNTUsMjU1LDI1NSwwLjApCmJvcmRlcj0+MXB4IHNvbGlkIHdoaXRlCmJvcmRlci1yYWRpdXM9PjBweApiYWNrZHJvcC1maWx0ZXI9PmJsdXIoNXB4KQpob3Zlcj0+YmFja2dyb3VuZDpyZ2JhKDI1NSwyNTUsMjU1LDAuOCkvYmFja2dyb3VuZDpibGFjaw==`;
+function parse_theme(description)
+{
+    var JQUERY_CODE = '';
+    var parts = atob(description).toLowerCase().split("\nnext;\n");
+    var temp0 = [];
+    var elname = "";
+    for(var temp1 = 0;temp1<parts.length;temp1++)
+    {
+        temp0 = parts[temp1].split("\n");
+        if(temp0[0].startsWith("element:")) elname=`$("${temp0[0].split(":")[1]}")`;
+        else if(temp0[0].startsWith("id:")) elname=`$("#${temp0[0].split(":")[1]}")`;
+        else if(temp0[0].startsWith("class:")) elname=`$(".${temp0[0].split(":")[1]}")`;
+        for(var temp2 = 1;temp2<temp0.length;temp2++)
+        {
+            var attr = temp0[temp2].split("=>")[0];
+            var val = temp0[temp2].split("=>")[1];
+            if(attr == "hover")
+            {
+                JQUERY_CODE+=`${elname}.hover(
+    function(){$(this).css("${val.split('/')[0].split(':')[0]}","${val.split('/')[0].split(':')[1]}");},
+    function(){$(this).css("${val.split('/')[1].split(':')[0]}","${val.split('/')[1].split(':')[1]}");}
+);\n`;
+            }
+            else
+            {
+                JQUERY_CODE+=`${elname}.css("${attr}","${val}");\n`;
+            }
+        }
+    }
+    return JQUERY_CODE;
+}
+function applytheme(THM_DESC)
+{
+    if(THM_DESC == "restore_default")
+    {
+        localStorage.removeItem("NS_THEME.nsys");
+        ns_alert("主题","已恢复默认，重启生效。");
+    }
+    else
+    {
+        console.log(parse_theme(THM_DESC));
+        eval(parse_theme(THM_DESC));
+        localStorage.setItem("NS_THEME.nsys",THM_DESC);
+    }
+}
+async function ns_fullscreen()
+{
+    await document.documentElement.requestFullscreen(); //for chrome
+    await document.documentElement.webkitRequestFullscreen(); //for safari or old chrome
+    reinit_window();
+}
+document.addEventListener('fullscreenchange', ()=>{
+    reinit_window();
+});
+document.addEventListener('webkitfullscreenchange', ()=>{
+    reinit_window();
+});
+var CREDITS = `CREDITS:
+This is a Web System Simulator,called 'NightSky'.It is not a real operating system,just for fun.
+
+In this webpage,I had use some 3rd-party projects,here is the list:
+
+==========
+Animation:JQueryUI(https://jqueryui.com/)
+Icons:Bootstrap Icons(https://icons.getbootstrap.com/)
+==========
+
+I hope you can have fun!😉If you are interested in this project,please visit my github:https://github.com/hellopgrmm/hellopgrmm.github.io/tree/main/simul
+
+VERSION 1.2 CHANGELOG
+==========
+1.Added "Translate";
+2.Now you can import local files to this webpage.
+==========
+1.3 CHANGELOG
+==========
+1.Added "Lyric Effect Maker".
+2.Fixed some problems.
+==========
+1.8 CHANGELOG
+==========
+1.Added "CodeMirror" Code Editor.
+2.Added Comment-Board.
+3.Added an appearance setting.
+4.Added something in Advance Settings.
+==========
+2.0 CHANGELOG
+==========
+1.Added Glass Effect
+2.Fixed some problems
+==========
+3.1,3.2 CHANGELOG
+==========
+1.Add some useful apps.
+==========
+5.0 CHANGELOG
+==========
+1.增加锁屏界面
+2.增加了一个功能
+==========
+6.1 CHANGELOG
+==========
+1.新增了5个功能。
+==========
+7.0 CHANGELOG
+==========
+1.新增了4个功能。分别是：相机、定位、开发者模式、语音识别。
+2.(7.1)新增主题功能。
+3.（7.3版本）增加命令行。
+4.(7.4)修改了状态栏样式和新增纯色背景设置。
+5.修复了命令行的输入问题。
+6.更换电量显示模式
+7.(7.5)增加wss聊天室
+==========
+8.0 CHANGELOG
+==========
+1.增加模拟拨号模块。
+2.（8.1）增加远程控制功能。
+3.2026年7月12日加入v86虚拟机和python运行功能。
+==========`;
+</script> 
+</body> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</html>
