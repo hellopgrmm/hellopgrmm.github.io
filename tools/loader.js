@@ -1507,7 +1507,7 @@ var Module = null;
 
      var textDivElt = document.createElement("div");
      textDivElt.classList = ["emularity-v86-screen-text"];
-     textDivElt.style = "font-size:14px;font-family:monospace;line-height:14px;white-space:pre;";
+     textDivElt.style = "font-size:14px;font-family:Liberation Mono,DejaVu Sans Mono,Courier New,monospace;line-height:14px;white-space:pre;";
      var canvasElt = document.createElement("canvas");
      canvasElt.classList = ["emularity-v86-screen-canvas"];
      canvasElt.style = "display:none;";
