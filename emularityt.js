@@ -1800,11 +1800,11 @@ var Module = null;
      // whatever it's current css dimensions are; this isn't likely to be
      // the same size that dosbox/jsmame will set it to, but it avoids
      // the case where the size was left at the default 300x150
-     if (!canvas.hasAttribute("width")) {
+     /*if (!canvas.hasAttribute("width")) {
        var style = getComputedStyle(canvas);
        canvas.width = parseInt(style.width, 10);
        canvas.height = parseInt(style.height, 10);
-     }
+     }*/
 
      this.setScale = function(_scale) {
        console.warn("setScale method is deprecated; use the BaseLoader.scale method instead");
