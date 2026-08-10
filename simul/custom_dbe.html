@@ -1,0 +1,94 @@
+<meta charset="utf-8">
+<body>
+<title>自定义DosBox模拟器</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto Sans SC:wght@400;700&display=swap">
+<style>
+body
+{
+  background:black;
+  color:white;
+  font-family: "Noto Sans SC",sans-serif,monospace;
+}
+button,input[type=submit] 
+{ 
+    background:linear-gradient(black,rgb(50,50,50),black); 
+    height:30px; 
+    min-width:100px; 
+    font-family:Roboto,Helvetica; 
+    color:white; 
+    font-size:14px; 
+    border-radius:5px; 
+    border-width:0px; 
+    box-shadow:0px 0px 1px 1px rgb(70,70,70);
+} 
+button:hover,input[type=submit]:hover 
+{ 
+    background:#06999977;
+} 
+button:active 
+{ 
+    background:black; 
+    color:#ccc; 
+    margin-top:1px; 
+    margin-left:1px; 
+    box-shadow:0px 0px 0px 0px gray; 
+} 
+input 
+{ 
+    border:1px solid gray; 
+    background:linear-gradient(black,rgb(50,50,50),black); 
+    color:white;
+    font-size:20px; 
+    font-family:Roboto,Helvetica; 
+    outline:none; 
+    border-radius:3px;
+    margin-bottom:5px;
+} 
+input:focus 
+{ 
+    border:1px solid orange; 
+    background:black; 
+} 
+</style>
+<h1>自定义模拟器</h1>
+<p>上传一个压缩包，然后启动DosBox虚拟机(=・ω・=)</p>
+<p>Copyright &copy; Hello-Programming 2026 <a href="vit86.html" style="color:yellow;text-decoration: none;">[返回 威86]</a></p>
+<script type="text/javascript" src="https://hellopgrmm.github.io/tools/es6-promise.js"></script>
+<script type="text/javascript" src="https://hellopgrmm.github.io/tools/browserfs.min.js"></script>
+<script type="text/javascript" src="https://hellopgrmm.github.io/tools/loader.js"></script>
+<canvas id="dosbox"></canvas><br>
+上传压缩包文件 <input type="file" id="zipfile" accept=".zip"/><br>
+自动执行文件路径（可留空） <input type="text" id="autoexecbat"/><br>
+<button onclick="launchdosbox(archive,autoexecbat.value)" id="launchbtn">启动DosBox</button>
+<p>没有文件么？试试以下软件（点击软件名就能用了啦）<br>
+  <a onclick="archive = preset_softwares[0];autoexecbat.value = 'zzt-full/ZZT.EXE';launchbtn.click()">[ZZT 解谜游戏]</a>
+  <br>
+  <a onclick="archive = preset_softwares[1];autoexecbat.value = 'AUTOEXEC.BAT';launchbtn.click()">[DosMid]</a>
+</p>
+<script>
+var preset_softwares = [
+  "https://hellopgrmm.github.io/simul/zzt-full.zip",
+  "https://hellopgrmm.github.io/simul/dosmid98.zip"
+];
+var archive = null;
+function launchdosbox(archive_name,autoexec){
+  var emulator = new Emulator(
+    document.getElementById("dosbox"),
+    null,
+    new DosBoxLoader(
+      DosBoxLoader.emulatorJS("https://hellopgrmm.github.io/dosbox-sync.js"),
+      DosBoxLoader.nativeResolution(640,480),
+      DosBoxLoader.mountZip("c",
+        DosBoxLoader.fetchFile("Zip Archive",archive_name)
+      ),
+      DosBoxLoader.startExe(autoexec) 
+    )
+  );
+  emulator.start({waitAfterDownloading:true});
+}
+document.querySelector('#zipfile').onchange = async e => {
+  const file = e.target.files[0];
+  if(!file) return;
+  archive = URL.createObjectURL(file);
+}
+</script>
