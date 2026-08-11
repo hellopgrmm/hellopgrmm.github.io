@@ -50,16 +50,17 @@ input:focus
     background:black; 
 } 
 </style>
-<h1>自定义模拟器</h1>
+<h1>Dos Lab|虚拟机实验室</h1>
 <p>上传一个压缩包，然后启动DosBox虚拟机(=・ω・=)</p>
 <p>Copyright &copy; Hello-Programming 2026 <a href="vit86.html" style="color:yellow;text-decoration: none;">[返回 威86]</a></p>
 <script type="text/javascript" src="https://hellopgrmm.github.io/tools/es6-promise.js"></script>
 <script type="text/javascript" src="https://hellopgrmm.github.io/tools/browserfs.min.js"></script>
 <script type="text/javascript" src="https://hellopgrmm.github.io/tools/loader.js"></script>
-<canvas id="dosbox"></canvas><br>
+<canvas id="dosbox"></canvas>
+<br>
 上传压缩包文件 <input type="file" id="zipfile" accept=".zip"/><br>
 自动执行文件路径（可留空） <input type="text" id="autoexecbat"/><br>
-<button onclick="launchdosbox(archive,autoexecbat.value)" id="launchbtn">启动DosBox</button>
+<button onclick="launchdosbox(archive,autoexecbat.value)" id="launchbtn">启动DosBox</button> <button onclick="dosbox.requestFullscreen();">全屏</button>
 <p>没有文件么？试试以下软件（点击软件名就能用了啦）<br>
   <a onclick="archive = preset_softwares[0];autoexecbat.value = 'zzt-full/ZZT.EXE';launchbtn.click()">[ZZT 解谜游戏]</a>
   <br>
