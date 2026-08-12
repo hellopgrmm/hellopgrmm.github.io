@@ -402,7 +402,7 @@ function readfile(inputentry) {
 <textarea id="ns_filecontext" style="width:95%;height:calc(100% - 150px);margin-left:2%;"></textarea> 
 </div> 
 <div class='window' id='nsbrow'>
-<div class='nstit'> <i style='font-size:16px' class='bi bi-arrow-clockwise cess' onclick='awiframe.src = awiframe.src+"#";'>刷新</i> <input id='browser_addr' placeholder='输入网址。'/> <i class='cess bi bi-arrow-right' onclick='if(browmode == 0){awiframe.src = window.location.protocol+"//"+browser_addr.value;}else{awiframe.src=browser_addr.value}' style='font-size:16px'>访问</i> <i style="font-size:16px;" class="bi bi-gear cess" onclick="topmost('browsset');$('#browsset').slideDown();">设置</i></div>
+<div class='nstit'> <i style='font-size:16px' class='bi bi-arrow-clockwise cess' onclick='awiframe.src = awiframe.src+"#";'>刷新</i> <input id='browser_addr' placeholder='输入网址。'/> <i class='cess bi bi-arrow-right' onclick='if(browmode == 0){awiframe.src = window.location.protocol+"//"+browser_addr.value;}else{awiframe.src=browser_addr.value}' style='font-size:16px'>访问</i> <i style='font-size:16px' class='bi bi-bank cess' onclick='awiframe.src = "START_PAGE.html";'>起始页</i> <i style="font-size:16px;" class="bi bi-gear cess" onclick="topmost('browsset');$('#browsset').slideDown();">设置</i></div>
 <div id="browsset" style="padding:5px;width:calc(100% - 12px);border: 1px solid white;position: absolute;right:0px;background: black;" hidden>
     <p>访问设置</p>
     输入网址时：<select id="browmode">
@@ -412,7 +412,7 @@ function readfile(inputentry) {
     <p>如果选择了自动填充前缀，那么当NightSky在本地环境运行时，浏览器只能访问本地文件，因此建议选择“手动输入前缀”。</p>
     <button onclick="$('#browsset').slideUp()">关闭</button>
 </div>
-<iframe style='width:100%;height:calc(100% - 45px);border-width:0px;' id='awiframe'></iframe>
+<iframe style='width:100%;height:calc(100% - 45px);border-width:0px;' id='awiframe' src="START_PAGE.html"></iframe>
 </div>
 <div class='window' id='nswebwatch'>
 <div class='nstit'><i class='cess bi bi-arrow-left' style='font-size:16px' onclick='$("#nswebwatch").fadeOut(300)'></i> <strong id='pw_tit'>Page Watcher</strong></div>
