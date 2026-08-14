@@ -1048,6 +1048,7 @@ function checkPasswordSafe(password) {
         <div class="ns-icon"><i class="bi bi-car-front" onclick="$('#nsmore').fadeOut(300);topmost('apicarprice');$('#apicarprice').effect('slide',500);"></i><br>车辆价格查询</div> 
         <div class="ns-icon"><i class="bi bi-robot" onclick="$('#nsmore').fadeOut(300);topmost('apibot');$('#apibot').effect('slide',500);"></i><br>智娃</div> 
         <div class="ns-icon"><i class="bi bi-bandaid" onclick="$('#nsmore').fadeOut(300);topmost('apidisease');$('#apidisease').effect('slide',500);"></i><br>常见疾病查询</div> 
+        <div class="ns-icon"><i class="bi bi-cloud" onclick="$('#nsmore').fadeOut(300);topmost('apiweather');$('#apiweather').effect('slide',500);fetch_weatherinfo();"></i><br>天气预报</div> 
         <p style="color:gray">实用工具基于API接口xxapi.cn。</p>
         <h2>效率和娱乐</h2>
         <div class="ns-icon"><i class="bi bi-card-text" onclick="$('#nsmore').fadeOut(300);topmost('apiocr');$('#apiocr').effect('slide',500);init_tesseract()"></i><br>OCR文字识别</div> 
@@ -2464,6 +2465,57 @@ function t_stpr()
 }
 </script>
 </div>
+</div>
+<div id="apiweather" class="window">
+    <div class="nstit">天气预报
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+    </div>
+    <div id="winfoc" style="margin-left:10px;margin-top:10px;">
+        加载中，请稍后...
+    </div>
+    <script>
+        async function fetch_weatherinfo()
+        {
+            var winfoc = document.getElementById("winfoc");
+            var latitude_ = 0;
+            var longitude_ = 0;
+            var wres = null;
+            winfoc.innerHTML = "正在获取数据。<br><a style='color:yellow'>位置信息(1/2)</a><br>天气信息";
+            await fetch("https://api.ip.sb/geoip")
+            .then(resp => resp.json())
+            .then(lalod => {
+                latitude_ = lalod.latitude;
+                longitude_ = lalod.longitude;
+            })
+            var pl = null;
+            winfoc.innerHTML = "正在获取数据。<br><a style='color:yellow'>位置信息(2/2)</a><br>天气信息";
+            await fetch('https://api.txu.cc/api/ip')
+            .then(r => r.json())
+            .then(id => pl = id.data.address.replaceAll("/"," "))
+            winfoc.innerHTML = "获取数据中，请稍后<br>位置信息<br><a style='color:yellow'>天气信息</a>";
+            await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude_}&longitude=${longitude_}&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m`)
+            .then(resp => resp.json())
+            .then(wd => {
+                wres = wd;
+            })
+            winfoc.innerHTML = "数据获取完成，正在解析天气数据...";
+            await delay(500);
+            var current_tmp = wres.current.temperature_2m;
+            var current_winds = wres.current.wind_speed_10m;
+            var current_humidity = wres.hourly.relative_humidity_2m;
+            var TUNIT = wres.current_units.temperature_2m;
+            var WUNIT = wres.current_units.wind_speed_10m;
+            var HUNIT = wres.hourly_units.relative_humidity_2m;
+            var TL = wres.hourly.temperature_2m;
+            winfoc.innerHTML = `<a style="font-size:30px">${pl}</a><h1>${current_tmp}${TUNIT}</h1>温度最高<a style="font-size:26px">${Math.max(...TL)}${TUNIT}</a>、最低<a style="font-size:26px">${Math.min(...TL)}${TUNIT}</a>，风速：<a style="font-size:26px">${current_winds}${WUNIT}</a>。<br>湿度最高<a style="font-size:26px">${Math.max(...current_humidity)}${HUNIT}</a>，最低<a style="font-size:26px">${Math.min(...current_humidity)}${HUNIT}</a>。`;
+        }
+    </script>
 </div>
 <div id='alertmez' class='nsoverlay'>
 <div style='border:1px solid white;background:black;width:70%;padding:5px;padding-top:5px;padding-bottom:5px' id="mezcont">
