@@ -90,7 +90,7 @@ textarea:focus
 select 
 { 
     border:1px solid gray; 
-    background:    background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50)); 
+    background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50)); 
     border-radius:0px; 
     font-size:14px; 
     font-family:Roboto,Helvetica; 
@@ -308,7 +308,7 @@ Quikie <em style="color:gray">快捷启动</em>
 <a style="color:gray;font-size:10px">NightSky Quikie 1.0</a>
 </div>
 <!--导航栏-->
-<div id='director'><i class="bi bi-flower1 cess" id="ns_quikie" onclick="topmost('quikie_interface');$('#quikie_interface').fadeIn();" hidden style='font-size:30px;color:white;position: absolute;left:5px;'></i> <i class="bi bi-image cess" onclick='make_screenshot();' style='font-size:30px;color:white'></i> <i class="bi bi-house cess" onclick='$(".window,.morewindow").slideUp(400);' style='font-size:30px;color:white'></i> <i class="bi bi-lock cess" onclick="$('#quikie_interface').fadeOut();$('.window').fadeOut();$('.desktop').fadeOut();$('.lock_interface').fadeIn();document.getElementById('ns_quikie').hidden = true;" style='font-size:30px;color:white'></i></div>
+<div id='director'><i class="bi bi-flower1 cess" id="ns_quikie" onclick="topmost('quikie_interface');$('#quikie_interface').fadeIn();" hidden style='font-size:30px;color:white;position: absolute;left:5px;'></i> <i class="bi bi-image cess" onclick='make_screenshot();' style='font-size:30px;color:white'></i> <i class="bi bi-house cess" onclick='$(".window,.morewindow").slideUp(400);' style='font-size:30px;color:white'></i> <i class="bi bi-lock cess" onclick="$('#quikie_interface').fadeOut();$('.window').fadeOut();$('.desktop').fadeOut();$('#nsmore').fadeOut();$('.lock_interface').fadeIn();document.getElementById('ns_quikie').hidden = true;" style='font-size:30px;color:white'></i></div>
 <script>
     async function make_screenshot()
     {
