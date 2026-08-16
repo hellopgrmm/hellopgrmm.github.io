@@ -36,7 +36,7 @@ body
         }
 button,input[type=submit] 
 { 
-    background:linear-gradient(black,rgb(50,50,50),black); 
+    background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50)); 
     height:30px; 
     min-width:100px; 
     font-family:Roboto,Helvetica; 
@@ -61,7 +61,7 @@ button:active
 input 
 { 
     border:1px solid gray; 
-    background:linear-gradient(black,rgb(50,50,50),black); 
+    background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50)); 
 	color:white;
     font-size:20px; 
     font-family:Roboto,Helvetica; 
@@ -91,7 +91,7 @@ textarea:focus
 select 
 { 
     border:1px solid gray; 
-    background:linear-gradient(black,rgb(50,50,50),black); 
+    background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50)); 
     border-radius:0px; 
     font-size:14px; 
     font-family:Roboto,Helvetica; 
@@ -183,7 +183,7 @@ input[type=checkbox]
 }
 .cess{margin-right: 5px;}
 .cess:hover{color:orange;}
-.nscard{background:linear-gradient(black,rgb(30,30,30));width:95%;color:white;font-size:20px;padding-top: 10px;padding-bottom: 10px;padding-left:10px;border:1px solid gray;margin-bottom: 3px;border-radius: 5px}
+.nscard{background:linear-gradient(rgb(30,30,30),black,rgb(30,30,30));width:95%;color:white;font-size:20px;padding-top: 10px;padding-bottom: 10px;padding-left:10px;border:1px solid gray;margin-bottom:8px;border-radius: 5px}
 .nscard:hover{background:linear-gradient(#1f6f70,#06999977,#1f6f70);}
 #director{background:linear-gradient(rgb(30,30,30),rgb(50,50,50),rgb(30,30,30));width:100%;text-align:center;position:fixed;z-index:2026;bottom:0px;left:0px;padding-top:5px;padding-bottom:5px;}
 .casd{padding-top: 5px;padding-bottom: 5px;} 
@@ -258,7 +258,7 @@ else
     <!--More applications-->
 	<style>#ns_more_block:hover{scale: 0.9;}</style>
         <div style="display:flex;justify-content:center;width:100%;">
-    <div id="ns_more_block" style="position: absolute;bottom:0px;box-shadow:0px 3px 3px 3px black;border-radius:5px;background: radial-gradient(rgb(50,50,50),rgb(30,30,30));padding: 10px;color:white;word-wrap: break-word;" onclick="topmost('nsmore');$('#nsmore').effect('slide',500);"><i class="bi bi-grid-3x3-gap-fill"> <a style="font-size: 20px;color:white;font-style: normal;">更多程序</a></i></div></div> 
+    <div id="ns_more_block" style="position: absolute;bottom:0px;box-shadow:0px 3px 3px 3px black;border-radius:5px;background: radial-gradient(rgb(50,50,50),rgb(30,30,30));padding: 10px;color:white;word-wrap: break-word;" onclick="topmost('nsmore');$('#nsmore').effect('slide',500);refreshapplist();"><i class="bi bi-grid-3x3-gap-fill"> <a style="font-size: 20px;color:white;font-style: normal;">更多程序</a></i></div></div> 
 </div> 
 <!--Quikie-->
 <style>
@@ -980,6 +980,9 @@ function checkPasswordSafe(password) {
 		<div class="ns-icon"><i class="bi bi-eyeglasses" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/qereader.html','NightSky QuickEye Reader文档阅读器');"></i><br>QuickEye文档阅读器</div> 
 		<div class="ns-icon"><i class="bi bi-pen" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/adedit.html','NightSky高级编辑器');"></i><br>高级文本编辑器</div>
 		<div class="ns-icon"><i class="bi bi-box2-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/drabox.html','DraBox');"></i><br>DraBox</div>
+	    <h2>其它应用</h2>
+        <div class="ns-icon"><i class="bi bi-boxes" onclick="$('#nsmore').fadeOut(300);topmost('nsmarket');$('#nsmarket').effect('slide',500);"></i><br>应用下载和管理</div>
+        <span id="installedapp"></span> 
          <h2>实用(需联网)</h2>
         <div class="ns-icon"><i class="bi bi-file-word-fill" onclick="$('#nsmore').fadeOut(300);topmost('apiranden');$('#apiranden').effect('slide',500);fetch_rde()"></i><br>每日英语单词</div> 
         <div class="ns-icon"><i class="bi bi-moisture" onclick="$('#nsmore').fadeOut(300);topmost('apioilprice');$('#apioilprice').effect('slide',500);fetch_oilp()"></i><br>油价查询</div> 
@@ -2393,6 +2396,116 @@ function t_stpr()
             winfoc.innerHTML = `<a style="font-size:30px">${pl}</a><h1>${current_tmp}${TUNIT}</h1>温度最高<a style="font-size:26px">${Math.max(...TL)}${TUNIT}</a>、最低<a style="font-size:26px">${Math.min(...TL)}${TUNIT}</a>，风速：<a style="font-size:26px">${current_winds}${WUNIT}</a>。<br>湿度最高<a style="font-size:26px">${Math.max(...current_humidity)}${HUNIT}</a>，最低<a style="font-size:26px">${Math.min(...current_humidity)}${HUNIT}</a>。`;
         }
     </script>
+</div>
+<div id="nsmarket" class="window">
+    <div class="nstit">应用下载和管理</div>
+
+    <div id="NMmainpage" style="padding: 10px;">
+    <h1>Application Download and Manage</h1>
+    <p>本功能还处于开发测试阶段，功能并不太完善，版本1a62531。</p>
+    <div class="nscard" onclick="NMmainpage.hidden = true;market_page.hidden = false;fetchaal()">
+        <a style="font-size:30px">应用市场</a>
+        <br>
+        <font color="gray">从网络上获取可供下载的应用列表</font>
+    </div>
+    <div class="nscard" onclick="NMmainpage.hidden = true;appmanage_page.hidden = false;get_applist();">
+        <a style="font-size:30px">应用管理</a>
+        <br>
+        <font color="gray">查看或删除应用程序</font>
+    </div>
+    </div>
+    <div id="appmanage_page" hidden>
+        应用下载和管理/应用管理 <button onclick="NMmainpage.hidden = false;appmanage_page.hidden = true;">返回</button>
+        <hr>
+        <p>应用列表</p>
+        <div id="manageapplist">
+        </div>
+    </div>
+    <div id="market_page" hidden>
+        应用下载和管理/应用市场 <button onclick="NMmainpage.hidden = false;market_page.hidden = true;">返回</button>
+        <hr>
+        <div id="aalaal">
+            正在获取相关数据，请稍后...
+        </div>
+        <script>
+            async function fetchaal()
+            {
+                var randomiconlist = ["android2","rainbow","wrench-adjustable","yelp","boxes"];
+                var appdata = null;
+                await fetch("https://hellopgrmm.github.io/simul/market/aal.json")
+                .then(ar => ar.json())
+                .then(ad => appdata = ad)
+                aalaal.innerHTML = "";
+                Object.keys(appdata.NS_ANAI).forEach(akey => {
+                    aalaal.innerHTML += `
+                        <div class="nscard">
+                            <i class="bi bi-${randomiconlist[(Math.floor(Math.random() * randomiconlist.length) + 0)]}"></i> <a style="font-size:30px">${akey}</a>
+                            <p style="color:gray">开发者：${appdata.NS_ANAI[akey].split("<SPL>")[0]}</p>
+                            <p style="color:gray">概述：${appdata.NS_ANAI[akey].split("<SPL>")[1]}</p>
+                            <button onclick="download_app('${akey}')">下载</button>
+                        </div>
+                    `;
+                });
+            }
+            var appheader = "<!--Standard Document Header--><meta charset=\"UTF-8\">";
+            var appheader2 = "<!--Standard Document Header--><meta charset=\"Big5\">";
+            var appstyletheme = "<style>body{background:black;color:white;font-family:sans-serif;}::-webkit-scrollbar-track {             background: rgba(0,0,0,0.1);        }        ::-webkit-scrollbar-thumb {            background: rgba(100,100,100,0.5);        }        ::-webkit-scrollbar-thumb:hover {            background: rgba(100,100,100,0.8);        }        ::-webkit-scrollbar {            width: 8px;            height: 5px;        }button,input[type=submit] {     background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50));     height:30px;     min-width:100px;     font-family:Roboto,Helvetica;     color:white;     font-size:14px;     border-radius:5px;     border-width:0px;     box-shadow:0px 0px 1px 1px rgb(70,70,70);} button:hover,input[type=submit]:hover {     background:linear-gradient(#069999,#066f68,#069999);} button:active {     background:black;     color:#ccc;     margin-top:1px;     margin-left:1px;     box-shadow:0px 0px 0px 0px gray; } input {     border:1px solid gray;     background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50));     color:white;    font-size:20px;     font-family:Roboto,Helvetica;     outline:none;     border-radius:3px;    margin-bottom:5px;} input:focus {     border:1px solid orange;     background:black; } textarea {     border:1px solid gray;     font-size:14px;     background:black;    color:white;    font-family:Roboto,Helvetica;     outline:none;     border-radius:3px; } textarea:focus {     border-color:orange; } select {     border:1px solid gray;     background:linear-gradient(black,rgb(50,50,50),black);     border-radius:0px;     font-size:14px;     font-family:Roboto,Helvetica;     outline:none;     color:white;     width:100px;     height:30px; } select:hover{border:1px solid orange;} select:active{background:black;} option{background: black;color:white}option:hover{background: orange;color:black;}progress{   width:200px;   height:30px;   appearance:none;   border-width:2px;   border-color:black gray black gray;   background:linear-gradient(gray,black); } progress::-webkit-progress-bar {     border:2px solid black;     background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50)); } progress::-webkit-progress-value {     background:linear-gradient(#069999,#066f68,#069999); } progress::-moz-progress-bar {     border:2px solid black;     background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50)); } input[type=checkbox] {     width: 20px;     height: 30px;     font-size:14px;    accent-color:orange; } </style>";
+            var appmodule = "<!--NightSky Registered Module-->";
+            async function download_app(appname)
+            {
+                var pname = "com.nightsky.package."+appname+".nsys";
+                ns_alert("下载中","正在下载“"+appname+"”，请稍后。<br>包名："+pname);
+                var originalc = null;
+                const fetchsource = await fetch("https://hellopgrmm.github.io/simul/market/fsource/"+appname+".html")
+                const fetchresponz = await fetchsource.text();
+                localStorage.setItem(pname,fetchresponz.replaceAll("<Encoding>UTF-8</Encoding>",appheader).replaceAll("<Encoding>Big5</Encoding>",appheader2).replaceAll("<UseNightSkyTheme></UseNightSkyTheme>",appstyletheme).replaceAll("<NRegister>NightSkyStandardModule</NRegister>",appmodule));
+            if(localStorage.getItem("NS_APPLIST.nsys")){
+                if(localStorage.getItem("NS_APPLIST.nsys").includes(pname))
+                {
+                    ns_alert("应用已下载","这个应用已经下载过了啦");
+                }
+                else
+                {
+                    originalc = localStorage.getItem("NS_APPLIST.nsys");
+                    localStorage.setItem("NS_APPLIST.nsys",originalc+pname+"/"+appname+",");
+                    ns_alert("下载完成","下载完成，现在可在“更多程序”中找到。");
+                    refreshapplist();
+                }
+            }else{
+                localStorage.setItem("NS_APPLIST.nsys",pname+"/"+appname+",");               
+                ns_alert("下载完成","下载完成，现在可在“更多程序”中找到。");
+                refreshapplist();
+            }
+
+            }
+        function refreshapplist()
+        {
+            var installedapp = document.getElementById("installedapp");
+            if(!localStorage.getItem("NS_APPLIST.nsys")){installedapp.innerHTML = "";return;}
+                var mezu = localStorage.getItem("NS_APPLIST.nsys");
+                console.log(localStorage.getItem("NS_APPLIST.nsys"));
+                var kay = mezu.split(",");
+                installedapp.innerHTML = "";
+                for(var al = 0;al < kay.length;al++)
+                {
+                    if(!kay[al]) continue;
+                    installedapp.innerHTML += `<div class="ns-icon"><i class="bi bi-boxes" onclick="$('#nsmore').fadeOut(300);ns_htmlwatch('${kay[al].split("/")[0]}');pw_tit.innerHTML = '${kay[al].split("/")[1]}';"></i><br>${kay[al].split("/")[1]}</div>`;
+                }
+        }
+        function get_applist(){
+            var MAL = document.getElementById("manageapplist");
+            if(!localStorage.getItem("NS_APPLIST.nsys")){MAL.innerHTML = "<p style='color:gray'>目前没有安装任何应用。</p>";return;}
+                var mezu2 = localStorage.getItem("NS_APPLIST.nsys");
+                var kay2 = mezu2.split(",");
+                MAL.innerHTML = "";
+                for(var al2 = 0;al2 < kay2.length;al2++)
+                {
+                    if(!kay2[al2]) continue;
+                    MAL.innerHTML += `<div class="nscard">应用名称<br><a style="font-size:30px">${kay2[al2].split("/")[1]}</a><br>操作：<button onclick="$('#nsmore').fadeOut(300);ns_htmlwatch('${kay2[al2].split("/")[0]}');pw_tit.innerHTML = '${kay2[al2].split("/")[1]}';">打开</button> <button onclick="localStorage.setItem('NS_APPLIST.nsys',localStorage.getItem('NS_APPLIST.nsys').replaceAll('com.nightsky.package.${kay2[al2].split("/")[1]}.nsys/${kay2[al2].split("/")[1]},',''));localStorage.removeItem('com.nightsky.package.${kay2[al2].split("/")[1]}.nsys');get_applist();ns_alert('提示','卸载完成。')">卸载</button></div>`;
+                }
+        }
+        </script>
+    </div>
 </div>
 <div id='alertmez' class='nsoverlay'>
 <div style='border:1px solid white;background:black;width:70%;padding:5px;padding-top:5px;padding-bottom:5px' id="mezcont">
