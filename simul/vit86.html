@@ -66,7 +66,7 @@ input:focus
 	display: none;
 }
 @media only screen and (max-width : 725px){
-	#syslist{
+	#list{
     	display:none;
     	width:97% !important;
 	}
@@ -87,7 +87,7 @@ input:focus
 	<div id="welcome">
 	<h1>欢迎来到威86</h1>
 	<p>这是一个能在浏览器上运行的虚拟机，支持运行多种远古/轻量级操作系统。你可以在左侧的菜单栏里选择一个操作系统来体验。</p>
-	<div class="showsl"><button onclick="document.getElementById('syslist').style.display='block';vit86.hidden=true;">显示虚拟机列表</button></div>
+	<div class="showsl"><button onclick="document.getElementById('list').style.display='block';vit86.hidden=true;">显示虚拟机列表</button></div>
 	<p>本网页基于V86制作而成。V86是一个能在网页上运行的x86虚拟机模拟器，1比1仿真模拟i386硬件配置，能运行一些32位操作系统。不需要安装任何软件，也不需要登录就能使用，大幅度减少资源占用，而且还不占内存，适合怀旧。</p>
 	<p>V86不是伪系统模拟，而是运行操作系统本身（系统执行一条CPU指令，V86逐条翻译、全程模拟运算；系统读写硬盘端口，V86操作内存里的镜像；系统输出图形到VGA显存，V86直接渲染到网页，所有硬件协议、中断、IO全是标准兼容。操作系统拿到的就是一台标准的x86硬件接口，根本就不知道自己其实是在浏览器上跑）。所以你在本网页体验到的所有系统，都是把真实镜像挂在上面的。</p>
 	<h1>如果你也想要做这样的项目...</h1>
@@ -358,7 +358,7 @@ var sys_filetype = parseurl(location.href)["type"];
 function captures()
 {
 	var clink = document.createElement('a');
-    clink.download = `${system_filetype} ${system_filename} capture.png`;
+    clink.download = `${sys_filetype} ${sys_filename} capture.png`;
     clink.href = emulator.screen_make_screenshot().src;
     clink.click();
 }
