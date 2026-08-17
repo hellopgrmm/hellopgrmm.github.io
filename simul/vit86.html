@@ -119,7 +119,7 @@ var emulator = window.emulator = new V86({
 		<p id="v86_prog">请稍后...</p>
 		<p>点击虚拟机屏幕任意处锁定鼠标。</p>
 		<button onclick="emulator.restart()">重启虚拟机</button> <button onclick="screen1.requestFullscreen();">全屏</button> <button onclick="captures()">截图</button> <button onclick="if(this.innerHTML=='打开键盘'){init_v86key(1);v86key.hidden=false;this.innerHTML='关闭键盘';}else{v86key.innerHTML='';v86key.hidden=true;this.innerHTML='打开键盘';}">打开键盘</button>
-		<p>虚拟机屏幕太大？调整宽度：<input type="range" value=700 max=700 min=100 oninput="screenc.style.height = this.value+'px';screenc.style.width='auto';scpx.innerHTML = this.value"/> <a id="scpx">700</a>像素 更改虚拟机字体（纯文本模式）<select id="vmff" oninput="screenf.style.fontFamily = vmff.value"><option value="vgados" select>经典DOS字体</option><option value="monospace">Monospace</option><option value="ui-monospace,Consolas">Consolas</option><option value="Ubuntu">Ubuntu字体</option><option value="Arial">Arial</option></select></p>
+		<p>虚拟机屏幕太大？调整宽度：<input type="range" value=700 max=1024 min=100 oninput="screenc.style.height = this.value+'px';screenc.style.width='auto';scpx.innerHTML = this.value"/> <a id="scpx">700</a>像素 更改虚拟机字体（纯文本模式）<select id="vmff" oninput="screenf.style.fontFamily = vmff.value"><option value="vgados" select>经典DOS字体</option><option value="monospace">Monospace</option><option value="ui-monospace,Consolas">Consolas</option><option value="Ubuntu">Ubuntu字体</option><option value="Arial">Arial</option></select></p>
 		<div style='touch-action:none' id="screen1">
     		<div style="white-space:pre;font:16px vgados,monospace;line-height:16px;" id="screenf"></div>
     		<canvas style="display:none;" id="screenc"></canvas>
@@ -175,7 +175,7 @@ twikoo.init({
 				<li style="color:yellow" onclick="location.href='?sys=windows1-fda&type=floppy'">Windows 1.0</li>
 				<li style="color:yellow" onclick="location.href='?sys=win203&type=hda'">Windows 2.03</li>
 				<li style="color:yellow" onclick="location.href='?sys=w31&type=hda'">Windows 3.1</li>
-				<li style="color:yellow" onclick="location.href='?sys=w31cn&type=hda'">Windows 3.1（中文版，21MB）</li>
+				<li style="color:yellow" onclick="location.href='?sys=w31cn&type=hda'">Windows 3.1（中文版）</li>
 				<li style="color:yellow" onclick="location.href='windows95.html'">Windows 95(极限精简)</li>
 				<li onclick="location.href='?sys=f12&type=hda'">FreeDOS 1.2(内含中文输入法UCDOS)</li>
 				<li onclick="location.href='?sys=msdos500&type=hda'">MS-DOS 5.00（完整版）</li>
@@ -211,7 +211,7 @@ twikoo.init({
 		</details>
 		除标有“自制”的操作系统外，其它系统源文件均收集自网络，本站只做编译处理。本网页在电脑/平板上体验更佳。
 		<br>
-		<button onclick="window.open('custom_dbe.html')">自定义模拟器</button>
+		<button onclick="window.open('custom_dbe.html')">自定义模拟器(里面有其它软件)</button>
 	</div>
 	<hr>
 	<a id="desc">Copyright&copy;Hello-Programming 2026</a>
@@ -240,7 +240,7 @@ var desc_dict = {
 	'win203':'Windows 2.03微软的第二代Windows，这次支持窗口重叠了。',
 	'msdos71f':'这是一个带有Add-Ons包的MS-DOS 7.1，里面有媒体播放器、文件浏览器等。',
 	'zzta':'ZZT是一款DOS平台的解谜游戏。',
-	'w31cn':'微软官方中文版Windows 3.1，里面安装了Visual Basic 1.0。',
+	'w31cn':'微软官方中文版Windows 3.1，里面安装了Visual Basic 1.0和早期Microsoft Word。',
 	'ikun':'纯汇编自制的抽象操作系统。',
 	'borlandcpp':'非常经典的C/C++编辑器，是当年无数初学者学习C语言的首选软件。',
 	'biosos':'B站网友“啥也不会的bibi”制作的图形化操作系统，详见：www.bilibili.com/video/BV1XKRfBREwp/',
