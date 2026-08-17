@@ -118,7 +118,7 @@ var emulator = window.emulator = new V86({
 		<a href="?target=home" style="text-decoration: none;color:yellow">[返回主页]</a>
 		<p id="v86_prog">请稍后...</p>
 		<p>点击虚拟机屏幕任意处锁定鼠标。</p>
-		<button onclick="emulator.restart()">重启虚拟机</button> <button onclick="screen1.requestFullscreen();">全屏</button> <button onclick="if(this.innerHTML=='打开键盘'){init_v86key(1);v86key.hidden=false;this.innerHTML='关闭键盘';}else{v86key.innerHTML='';v86key.hidden=true;this.innerHTML='打开键盘';}">打开键盘</button>
+		<button onclick="emulator.restart()">重启虚拟机</button> <button onclick="screen1.requestFullscreen();">全屏</button> <button onclick="captures()">截图</button> <button onclick="if(this.innerHTML=='打开键盘'){init_v86key(1);v86key.hidden=false;this.innerHTML='关闭键盘';}else{v86key.innerHTML='';v86key.hidden=true;this.innerHTML='打开键盘';}">打开键盘</button>
 		<p>虚拟机屏幕太大？调整宽度：<input type="range" value=700 max=700 min=100 oninput="screenc.style.height = this.value+'px';screenc.style.width='auto';scpx.innerHTML = this.value"/> <a id="scpx">700</a>像素 更改虚拟机字体（纯文本模式）<select id="vmff" oninput="screenf.style.fontFamily = vmff.value"><option value="vgados" select>经典DOS字体</option><option value="monospace">Monospace</option><option value="ui-monospace,Consolas">Consolas</option><option value="Ubuntu">Ubuntu字体</option><option value="Arial">Arial</option></select></p>
 		<div style='touch-action:none' id="screen1">
     		<div style="white-space:pre;font:16px vgados,monospace;line-height:16px;" id="screenf"></div>
@@ -328,7 +328,7 @@ function load_vm_cdrom(stuff2)
     var emulator = window.emulator = new V86({
         wasm_path: "https://cdn.jsdelivr.net/npm/v86@0.5.419/build/v86.wasm",
         memory_size: 80 * 1024 * 1024,
-        vga_memory_size: 2 * 1024 * 1024,
+        vga_memory_size: 20 * 1024 * 1024,
         screen_container: document.getElementById("screen1"),
         cdrom: {
             url:'https://hellopgrmm.github.io/Secrets/'+stuff2+'.iso',
@@ -355,6 +355,13 @@ function load_vm_cdrom(stuff2)
 }
 var sys_filename = parseurl(location.href)["sys"];
 var sys_filetype = parseurl(location.href)["type"];
+function captures()
+{
+	var clink = document.createElement('a');
+    clink.download = `${system_filetype} ${system_filename} capture.png`;
+    clink.href = emulator.screen_make_screenshot().src;
+    clink.click();
+}
 if(sys_filename)
 {
 	welcome.hidden = true;
