@@ -174,6 +174,7 @@ twikoo.init({
 			<ul>
 				<li style="color:yellow" onclick="location.href='?sys=windows1-fda&type=floppy'">Windows 1.0</li>
 				<li style="color:yellow" onclick="location.href='?sys=win203&type=hda'">Windows 2.03</li>
+				<li style="color:yellow" onclick="location.href='?sys=windows3&type=hda'">Windows 3.0</li>
 				<li style="color:yellow" onclick="location.href='?sys=w31&type=hda'">Windows 3.1</li>
 				<li style="color:yellow" onclick="location.href='?sys=w31cn&type=hda'">Windows 3.1（中文版）</li>
 				<li style="color:yellow" onclick="location.href='windows95.html'">Windows 95(极限精简)</li>
@@ -207,6 +208,7 @@ twikoo.init({
 				<li style="color:yellow" onclick="location.href='?sys=msfs&type=hda'">微软模拟飞行4.0</li>
 				<li style="color:yellow" onclick="location.href='?sys=zzta&type=hda'">ZZT（解谜游戏）</li>
 				<li style="color:yellow" onclick="location.href='?sys=borlandcpp&type=hda'">Borland C++</li>
+				<li style="color:yellow" onclick="location.href='?sys=simcity&type=hda'">SimCity(模拟城市)</li>
 			</ul>
 		</details>
 		除标有“自制”的操作系统外，其它系统源文件均收集自网络，本站只做编译处理。本网页在电脑/平板上体验更佳。
@@ -219,7 +221,7 @@ twikoo.init({
 	访问量：<span id="vercount_value_page_pv">加载中...</span>（禁止恶意刷访问量）
 </div>
 <script>
-var size_dict = {'windows1-fda':'1440','f12':'24576','ikun':'10','neo-os-2':'22835','biosos':'1440','w31cn':'24576','linux':'5534','30dayos':'1440','haribote':'1440','borlandcpp':'18432','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384','tinycore5':'15052','msdos71f':'24576','3fp':'14336','cad':'14336','msfs':'14336','w31':'14336','mikeos':'3226','win203':'14336','msdos500':'14336','zzta':'14336'};
+var size_dict = {'windows1-fda':'1440','f12':'24576','ikun':'10','neo-os-2':'22835','simcity':'14336','windows3':'15360','biosos':'1440','w31cn':'24576','linux':'5534','30dayos':'1440','haribote':'1440','borlandcpp':'18432','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384','tinycore5':'15052','msdos71f':'24576','3fp':'14336','cad':'14336','msfs':'14336','w31':'14336','mikeos':'3226','win203':'14336','msdos500':'14336','zzta':'14336'};
 var desc_dict = {
 	'windows1-fda':'Windows 1.0是微软公司发布的初代Windows系统，基于MS-DOS。',
 	'f12':`FreeDOS是一款运行于IBM PC兼容机的开源操作系统，由Jim Hall等人于1994年发起开发，旨在提供开源的MS-DOS替代方案，兼容exe和dos的其它组件。这个是FreeDOS 1.2，额外安装了UCDOS中文输入法。<button onclick="emulator.keyboard_send_text('CD UCDOS\\nUCDOS\\n')">点此快速启动UCDOS</button>`,
@@ -244,6 +246,8 @@ var desc_dict = {
 	'ikun':'纯汇编自制的抽象操作系统。',
 	'borlandcpp':'非常经典的C/C++编辑器，是当年无数初学者学习C语言的首选软件。',
 	'biosos':'B站网友“啥也不会的bibi”制作的图形化操作系统，详见：www.bilibili.com/video/BV1XKRfBREwp/',
+	'simcity':'一个模拟城市游戏（收集自Winworld PC），在这个游戏里面，玩家的身份是市长，负责筹划、建设等工作。',
+	'windows3':'Microsoft Windows 3.0是微软在1990年发布的操作系统，是系列中首个获得商业成功的版本，标志着个人计算机操作系统从命令行向图形界面的重大转变。',
 	'neo-os-2':`B站UP主<a href="https://space.bilibili.com/2009275394">芒辰Official</a>制作的图形化操作系统，支持多媒体、文件系统（FAT32/VFS）、命令行等。（密码：root）<br><button onclick="emulator.keyboard_send_text('root\\n')">点此快速登录</button>`
 }
 function parseurl(url)
