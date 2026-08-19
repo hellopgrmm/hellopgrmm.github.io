@@ -172,11 +172,10 @@ twikoo.init({
 		<details>
 			<summary>知名系统</summary>
 			<ul>
-				<li onclick="location.href='?sys=unixv7&type=floppy'">Unix V7</li>
 				<li style="color:yellow" onclick="location.href='?sys=windows1-fda&type=floppy'">Windows 1.0</li>
 				<li style="color:yellow" onclick="location.href='?sys=win203&type=hda'">Windows 2.03</li>
 				<li style="color:yellow" onclick="location.href='?sys=windows3&type=hda'">Windows 3.0</li>
-				<!--<li style="color:yellow" onclick="location.href='?sys=w31&type=hda'">Windows 3.1</li>-->
+				<li style="color:yellow" onclick="location.href='?sys=w31&type=hda'">Windows 3.1</li>
 				<li style="color:yellow" onclick="location.href='?sys=w31cn&type=hda'">Windows 3.1中文版</li>
 				<li style="color:yellow" onclick="location.href='?sys=31cn_sound&type=hda'">Windows 3.1中文版（带声音）</li>
 				<li style="color:yellow" onclick="location.href='windows95.html'">Windows 95(极限精简)</li>
@@ -223,9 +222,8 @@ twikoo.init({
 	访问量：<span id="vercount_value_page_pv">加载中...</span>（禁止恶意刷访问量）
 </div>
 <script>
-var size_dict = {'unixv7':'7168','windows1-fda':'1440','f12':'24576','ikun':'10','neo-os-2':'22835','simcity':'14336','windows3':'15360','biosos':'1440','w31cn':'24576','31cn_sound':'24576','linux':'5534','30dayos':'1440','haribote':'1440','borlandcpp':'18432','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384','tinycore5':'15052','msdos71f':'24576','3fp':'14336','cad':'14336','msfs':'14336','w31':'14336','mikeos':'3226','win203':'14336','msdos500':'14336','zzta':'14336'};
+var size_dict = {'windows1-fda':'1440','f12':'24576','ikun':'10','neo-os-2':'22835','simcity':'14336','windows3':'15360','biosos':'1440','w31cn':'24576','31cn_sound':'24576','linux':'5534','30dayos':'1440','haribote':'1440','borlandcpp':'18432','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384','tinycore5':'15052','msdos71f':'24576','3fp':'14336','cad':'14336','msfs':'14336','w31':'14336','mikeos':'3226','win203':'14336','msdos500':'14336','zzta':'14336'};
 var desc_dict = {
-	'unixv7':'Unix V7(Nordier移植版)',
 	'windows1-fda':'Windows 1.0是微软公司发布的初代Windows系统，基于MS-DOS。',
 	'f12':`FreeDOS是一款运行于IBM PC兼容机的开源操作系统，由Jim Hall等人于1994年发起开发，旨在提供开源的MS-DOS替代方案，兼容exe和dos的其它组件。这个是FreeDOS 1.2，额外安装了UCDOS中文输入法。<button onclick="emulator.keyboard_send_text('CD UCDOS\\nUCDOS\\n')">点此快速启动UCDOS</button>`,
 	'linux':'Linux是一种开源、免费、纯净且可以自由定制的操作系统，特别适合用于云服务、网站服务器等。',
