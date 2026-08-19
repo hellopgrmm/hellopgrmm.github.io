@@ -2595,7 +2595,7 @@ function t_stpr()
                 for(var al2 = 0;al2 < kay2.length;al2++)
                 {
                     if(!kay2[al2]) continue;
-                    MAL.innerHTML += `<div class="nscard">应用名称<br><a style="font-size:30px">${kay2[al2].split("/")[1]}</a><br>操作：<button onclick="$('#nsmore').fadeOut(300);ns_htmlwatch('${kay2[al2].split("/")[0]}');pw_tit.innerHTML = '${kay2[al2].split("/")[1]}';">打开</button> <button onclick="localStorage.setItem('NS_APPLIST.nsys',localStorage.getItem('NS_APPLIST.nsys').replaceAll('com.nightsky.package.${kay2[al2].split("/")[1]}.nsys/${kay2[al2].split("/")[1]},',''));localStorage.removeItem('com.nightsky.package.${kay2[al2].split("/")[1]}.nsys');get_applist();ns_alert('提示','卸载完成。')">卸载</button></div>`;
+                    MAL.innerHTML += `<div class="nscard">应用名称<br><a style="font-size:30px">${kay2[al2].split("/")[1]}</a><p style="color:gray">包名：${kay2[al2].split("/")[0]}</p>操作：<button onclick="$('#nsmore').fadeOut(300);ns_htmlwatch('${kay2[al2].split("/")[0]}');pw_tit.innerHTML = '${kay2[al2].split("/")[1]}';">打开</button> <button onclick="localStorage.setItem('NS_APPLIST.nsys',localStorage.getItem('NS_APPLIST.nsys').replaceAll('${kay2[al2].split("/")[0]}/${kay2[al2].split("/")[1]},',''));localStorage.removeItem('com.nightsky.package.${kay2[al2].split("/")[1]}.nsys');get_applist();ns_alert('提示','卸载完成。')">卸载</button></div>`;
                 }
         }
         </script>
@@ -2704,9 +2704,9 @@ function list_personal()
         { 
             continue; 
         }else if(localStorage.key(i).toLowerCase().endsWith(".html")||localStorage.key(i).toLowerCase().endsWith(".htm")){
-            nspers.innerHTML += `<div class="casd"><i class="bi bi-file-filetype-html"></i> <div style="display:inline-block;font-size:20px;width:80%;color:yellow;word-wrap:break-word;" onclick="ns_htmlwatch('${localStorage.key(i)}')">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
+            nspers.innerHTML += `<div class="casd"><i class="bi bi-filetype-html"></i> <div style="display:inline-block;font-size:20px;width:80%;color:yellow;word-wrap:break-word;" onclick="ns_htmlwatch('${localStorage.key(i)}')">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
         }else if(localStorage.key(i).toLowerCase().endsWith(".js")){
-            nspers.innerHTML += `<div class="casd"><i class="bi bi-file-javascript"></i> <div style="display:inline-block;font-size:20px;width:80%;color:cyan;word-wrap:break-word;" onclick="eval(localStorage.getItem('${localStorage.key(i)}'))">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
+            nspers.innerHTML += `<div class="casd"><i class="bi bi-javascript"></i> <div style="display:inline-block;font-size:20px;width:80%;color:cyan;word-wrap:break-word;" onclick="eval(localStorage.getItem('${localStorage.key(i)}'))">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
         }else if(localStorage.key(i).toLowerCase().endsWith(".nsp")){
             nspers.innerHTML += `<div class="casd"><i class="bi bi-box-seam"></i> <div style="display:inline-block;font-size:20px;width:80%;color:#53c251;word-wrap:break-word;" onclick="installnsp('${localStorage.key(i)}')">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
         }
