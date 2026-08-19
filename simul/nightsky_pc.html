@@ -2544,6 +2544,11 @@ function t_stpr()
         <br>
         <font color="gray">查看或删除应用程序</font>
     </div>
+    <div class="nscard" onclick="NMmainpage.hidden = true;thirdpartyapp.hidden = false;get_3rd();">
+        <a style="font-size:30px">NSP管理</a>
+        <br>
+        <font color="gray">查看、安装第三方应用包</font>
+    </div>
     </div>
     <div id="appmanage_page" hidden>
         应用下载和管理/应用管理 <button onclick="NMmainpage.hidden = false;appmanage_page.hidden = true;">返回</button>
@@ -2551,6 +2556,67 @@ function t_stpr()
         <p>应用列表</p>
         <div id="manageapplist">
         </div>
+    </div>
+    <div id="thirdpartyapp" hidden>
+        应用下载和管理/NSP管理 <button onclick="NMmainpage.hidden = false;thirdpartyapp.hidden = true;">返回</button>
+        <hr>
+        <p>本地NSP安装包
+            <br>
+            <a style="color:orange">如果你不知道该应用的来源或功能，请谨慎考虑或不要安装，这可能会使NightSky无法正常工作。</a>
+        </p>
+        <p id="nspcount">共发现0个安装包。</p>
+        <div id="nsplist">
+            <p style="color:gray">没有搜索到任何.NSP文件，请从文件->导入外部文件添加NSP包（通常是以.NSP为后缀）。</p>
+        </div>
+        <script>
+            function parse_ac(acon)
+            {
+                var total = acon.split("---");
+                var metzu = total[0].split("\n");
+                var package_name = metzu[0].replaceAll("[PACKNAME]","").replaceAll(" ","").replaceAll("\r","");
+                var author = metzu[1].replaceAll("[AUTHOR]","").replaceAll("\r","");
+                var version = metzu[2].replaceAll("[VERSION]","").replaceAll("\r","");
+                var displayname = metzu[3].replaceAll("[DISNAME]","").replaceAll("\r","");
+                var BC = total[1];
+                var tad = {"DISNAME":displayname,"PACKNAME":package_name,"AUTHOR":author,"VERSION":version,"BC":BC};
+                return tad;
+            }
+            async function get_3rd()
+            {
+                var nspc = 0;
+                var nsplist = document.getElementById('nsplist');
+                nsplist.innerHTML="正在查找，稍安勿躁。";
+                await delay(1000);
+                nsplist.innerHTML="";
+                for(var z = 0;z < localStorage.length;z++)
+                {
+                    if(localStorage.key(z).endsWith(".nsp"))
+                    {
+                        var temp = localStorage.getItem(localStorage.key(z));
+                        nsplist.innerHTML+=`
+                            <div class="nscard">
+                            <a style="font-size:30px">${parse_ac(temp)["DISNAME"]}</a>
+                            <p style="color:gray">包名：${parse_ac(temp)["PACKNAME"]}</p>
+                            <p style="color:gray">作者：${parse_ac(temp)["AUTHOR"]}</p>
+                            <p style="color:gray">版本：${parse_ac(temp)["VERSION"]}</p>
+                            <p>操作：<button onclick="installnsp('${localStorage.key(z)}')">安装</button></p>
+                            </div>
+                        `;
+                        nspc++;
+                    }else{
+                        continue;
+                    }
+                }
+                if(nspc == 0)
+                {
+                    nsplist.innerHTML = `<p style="color:gray">没有搜索到任何.NSP文件，请从文件->导入外部文件添加NSP包（通常是以.NSP为后缀）。</p>`;
+                }
+                else
+                {
+                    document.getElementById("nspcount").innerHTML = "共发现"+nspc+"个安装包。";
+                }
+            }
+        </script>
     </div>
     <div id="market_page" hidden>
         应用下载和管理/应用市场 <button onclick="NMmainpage.hidden = false;market_page.hidden = true;">返回</button>
@@ -2609,6 +2675,34 @@ function t_stpr()
             }
 
             }
+            function installnsp(nspname)
+            {
+                try{
+                var nspcc = localStorage.getItem(nspname);
+                ns_alert("下载中","正在下载“"+parse_ac(nspcc)["DISNAME"]+"”，请稍后。<br>包名："+parse_ac(nspcc)["PACKNAME"]);
+                localStorage.setItem(parse_ac(nspcc)["PACKNAME"],parse_ac(nspcc)["BC"].replaceAll("<Encoding>UTF-8</Encoding>",appheader).replaceAll("<Encoding>Big5</Encoding>",appheader2).replaceAll("<UseNightSkyTheme></UseNightSkyTheme>",appstyletheme).replaceAll("<NRegister>NightSkyStandardModule</NRegister>",appmodule));
+            if(localStorage.getItem("NS_APPLIST.nsys")){
+                if(localStorage.getItem("NS_APPLIST.nsys").includes(parse_ac(nspcc)["PACKNAME"]))
+                {
+                    ns_alert("应用已下载","这个应用已经下载过了啦<br>如果这个安装包是另外一个版本，请删除原来的版本再执行本操作哦。");
+                }
+                else
+                {
+                    zoriginalc = localStorage.getItem("NS_APPLIST.nsys");
+                    localStorage.setItem("NS_APPLIST.nsys",zoriginalc+parse_ac(nspcc)["PACKNAME"]+"/"+parse_ac(nspcc)["DISNAME"]+",");
+                    ns_alert("下载完成","下载完成，现在可在“更多程序”中找到。");
+                    refreshapplist();
+                }
+            }else{
+                localStorage.setItem("NS_APPLIST.nsys",parse_ac(nspcc)["PACKNAME"]+"/"+parse_ac(nspcc)["DISNAME"]+",");               
+                ns_alert("下载完成","下载完成，现在可在“更多程序”中找到。");
+                refreshapplist();
+            }
+                }catch(aer)
+                {
+                    ns_alert("安装中断","不是一个有效格式的NSP文件，该安装包可能已经损坏。");
+                }
+            }
         function refreshapplist()
         {
             var installedapp = document.getElementById("installedapp");
@@ -2632,7 +2726,7 @@ function t_stpr()
                 for(var al2 = 0;al2 < kay2.length;al2++)
                 {
                     if(!kay2[al2]) continue;
-                    MAL.innerHTML += `<div class="nscard">应用名称<br><a style="font-size:30px">${kay2[al2].split("/")[1]}</a><br>操作：<button onclick="$('#nsmore').fadeOut(300);ns_htmlwatch('${kay2[al2].split("/")[0]}');pw_tit.innerHTML = '${kay2[al2].split("/")[1]}';">打开</button> <button onclick="localStorage.setItem('NS_APPLIST.nsys',localStorage.getItem('NS_APPLIST.nsys').replaceAll('com.nightsky.package.${kay2[al2].split("/")[1]}.nsys/${kay2[al2].split("/")[1]},',''));localStorage.removeItem('com.nightsky.package.${kay2[al2].split("/")[1]}.nsys');get_applist();ns_alert('提示','卸载完成。')">卸载</button></div>`;
+                    MAL.innerHTML += `<div class="nscard">应用名称<br><a style="font-size:30px">${kay2[al2].split("/")[1]}</a><p style="color:gray">包名：${kay2[al2].split("/")[0]}</p>操作：<button onclick="$('#nsmore').fadeOut(300);ns_htmlwatch('${kay2[al2].split("/")[0]}');pw_tit.innerHTML = '${kay2[al2].split("/")[1]}';">打开</button> <button onclick="localStorage.setItem('NS_APPLIST.nsys',localStorage.getItem('NS_APPLIST.nsys').replaceAll('${kay2[al2].split("/")[0]}/${kay2[al2].split("/")[1]},',''));localStorage.removeItem('com.nightsky.package.${kay2[al2].split("/")[1]}.nsys');get_applist();ns_alert('提示','卸载完成。')">卸载</button></div>`;
                 }
         }
         </script>
@@ -2773,9 +2867,11 @@ function list_personal()
         { 
             continue; 
         }else if(localStorage.key(i).toLowerCase().endsWith(".html")||localStorage.key(i).toLowerCase().endsWith(".htm")){
-            nspers.innerHTML += `<div class="casd"><i class="bi bi-file-text-fill"></i> <div style="display:inline-block;font-size:20px;width:80%;color:yellow;word-wrap:break-word;" onclick="ns_htmlwatch('${localStorage.key(i)}')">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
+            nspers.innerHTML += `<div class="casd"><i class="bi bi-filetype-html"></i> <div style="display:inline-block;font-size:20px;width:80%;color:yellow;word-wrap:break-word;" onclick="ns_htmlwatch('${localStorage.key(i)}')">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
         }else if(localStorage.key(i).toLowerCase().endsWith(".js")){
-            nspers.innerHTML += `<div class="casd"><i class="bi bi-file-text-fill"></i> <div style="display:inline-block;font-size:20px;width:80%;color:cyan;word-wrap:break-word;" onclick="eval(localStorage.getItem('${localStorage.key(i)}'))">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
+            nspers.innerHTML += `<div class="casd"><i class="bi bi-javascript"></i> <div style="display:inline-block;font-size:20px;width:80%;color:cyan;word-wrap:break-word;" onclick="eval(localStorage.getItem('${localStorage.key(i)}'))">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
+        }else if(localStorage.key(i).toLowerCase().endsWith(".nsp")){
+            nspers.innerHTML += `<div class="casd"><i class="bi bi-box-seam"></i> <div style="display:inline-block;font-size:20px;width:80%;color:#53c251;word-wrap:break-word;" onclick="installnsp('${localStorage.key(i)}')">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
         }
         else{ 
             nspers.innerHTML += `<div class="casd"><i class="bi bi-file-text-fill"></i> <div style="display:inline-block;font-size:20px;width:80%;word-wrap:break-word;" onclick="topmost('nsedit');$('#nsedit').effect('slide',500);ns_filename.value='${localStorage.key(i)}';ns_filecontext.value=localStorage.getItem('${localStorage.key(i)}')">${localStorage.key(i)}</div> <button onclick="localStorage.removeItem('${localStorage.key(i)}');ns_alert('提示','删除成功，文件列表已刷新。');list_personal();" style="position:absolute;right:20px;">删除文件</button></div>`; 
