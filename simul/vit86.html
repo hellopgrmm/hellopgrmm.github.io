@@ -66,7 +66,7 @@ input:focus
 	display: none;
 }
 @media only screen and (max-width : 725px){
-	#list{
+	#syslist{
     	display:none;
     	width:97% !important;
 	}
@@ -87,7 +87,7 @@ input:focus
 	<div id="welcome">
 	<h1>欢迎来到威86</h1>
 	<p>这是一个能在浏览器上运行的虚拟机，支持运行多种远古/轻量级操作系统。你可以在左侧的菜单栏里选择一个操作系统来体验。</p>
-	<div class="showsl"><button onclick="document.getElementById('list').style.display='block';vit86.hidden=true;">显示虚拟机列表</button></div>
+	<div class="showsl"><button onclick="document.getElementById('syslist').style.display='block';vit86.hidden=true;">显示虚拟机列表</button></div>
 	<p>本网页基于V86制作而成。V86是一个能在网页上运行的x86虚拟机模拟器，1比1仿真模拟i386硬件配置，能运行一些32位操作系统。不需要安装任何软件，也不需要登录就能使用，大幅度减少资源占用，而且还不占内存，适合怀旧。</p>
 	<p>V86不是伪系统模拟，而是运行操作系统本身（系统执行一条CPU指令，V86逐条翻译、全程模拟运算；系统读写硬盘端口，V86操作内存里的镜像；系统输出图形到VGA显存，V86直接渲染到网页，所有硬件协议、中断、IO全是标准兼容。操作系统拿到的就是一台标准的x86硬件接口，根本就不知道自己其实是在浏览器上跑）。所以你在本网页体验到的所有系统，都是把真实镜像挂在上面的。</p>
 	<h1>如果你也想要做这样的项目...</h1>
@@ -172,6 +172,7 @@ twikoo.init({
 		<details>
 			<summary>知名系统</summary>
 			<ul>
+				<li onclick="location.href='?sys=unixv7&type=floppy'">Unix V7</li>
 				<li style="color:yellow" onclick="location.href='?sys=windows1-fda&type=floppy'">Windows 1.0</li>
 				<li style="color:yellow" onclick="location.href='?sys=win203&type=hda'">Windows 2.03</li>
 				<li style="color:yellow" onclick="location.href='?sys=windows3&type=hda'">Windows 3.0</li>
@@ -222,8 +223,9 @@ twikoo.init({
 	访问量：<span id="vercount_value_page_pv">加载中...</span>（禁止恶意刷访问量）
 </div>
 <script>
-var size_dict = {'windows1-fda':'1440','f12':'24576','ikun':'10','neo-os-2':'22835','simcity':'14336','windows3':'15360','biosos':'1440','w31cn':'24576','31cn_sound':'24576','linux':'5534','30dayos':'1440','haribote':'1440','borlandcpp':'18432','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384','tinycore5':'15052','msdos71f':'24576','3fp':'14336','cad':'14336','msfs':'14336','w31':'14336','mikeos':'3226','win203':'14336','msdos500':'14336','zzta':'14336'};
+var size_dict = {'unixv7':'7168','windows1-fda':'1440','f12':'24576','ikun':'10','neo-os-2':'22835','simcity':'14336','windows3':'15360','biosos':'1440','w31cn':'24576','31cn_sound':'24576','linux':'5534','30dayos':'1440','haribote':'1440','borlandcpp':'18432','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384','tinycore5':'15052','msdos71f':'24576','3fp':'14336','cad':'14336','msfs':'14336','w31':'14336','mikeos':'3226','win203':'14336','msdos500':'14336','zzta':'14336'};
 var desc_dict = {
+	'unixv7':'Unix V7(Nordier移植版)',
 	'windows1-fda':'Windows 1.0是微软公司发布的初代Windows系统，基于MS-DOS。',
 	'f12':`FreeDOS是一款运行于IBM PC兼容机的开源操作系统，由Jim Hall等人于1994年发起开发，旨在提供开源的MS-DOS替代方案，兼容exe和dos的其它组件。这个是FreeDOS 1.2，额外安装了UCDOS中文输入法。<button onclick="emulator.keyboard_send_text('CD UCDOS\\nUCDOS\\n')">点此快速启动UCDOS</button>`,
 	'linux':'Linux是一种开源、免费、纯净且可以自由定制的操作系统，特别适合用于云服务、网站服务器等。',
