@@ -2342,7 +2342,7 @@ var Module = null;
      var drawsplash = function () {
        canvas.setAttribute('moz-opaque', '');
        if (!splash.splashimg.src) {
-         splash.splashimg.src = "logo/emularity_color_small.png";
+         splash.splashimg.src = "https://hellopgrmm.github.io/tools/logo/emularity_color_small.png";
        }
      };
 
