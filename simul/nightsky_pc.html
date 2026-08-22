@@ -1061,6 +1061,7 @@ function checkPasswordSafe(password) {
         <div class="ns-icon"><i class="bi bi-bullseye" onclick="$('#nsmore').fadeOut(300);topmost('nsquick');$('#nsquick').effect('slide',500);"></i><br>反应力测试</div> 
         <div class="ns-icon"><i class="bi bi-asterisk" onclick="$('#nsmore').fadeOut(300);topmost('nsbrain');$('#nsbrain').effect('slide',500);"></i><br>最强大脑：速算</div>
         <div class="ns-icon"><i class="bi bi-mic-fill" onclick="$('#nsmore').fadeOut(300);topmost('nss2t');$('#nss2t').effect('slide',500);"></i><br>语音转文字</div>
+        <div class="ns-icon"><i class="bi bi-music-player" onclick="$('#nsmore').fadeOut(300);topmost('nselectricpiano');$('#nselectricpiano').effect('slide',500);"></i><br>电子琴</div>
     </div>
 </div>
 <div class="window" id="nsping">
@@ -2732,6 +2733,122 @@ function t_stpr()
         }
         </script>
     </div>
+</div>
+<div id="nselectricpiano" class="window">
+    <div class="nstit">电子琴
+<!--Window ToolBar-->
+<span style="word-spacing: 5px;position: absolute;right:15px;">
+<i class="bitb bi-dash-square" onclick='request_resume_normal()' title="恢复正常大小"></i>
+<i class="bitb bi-fullscreen" onclick='request_max()' title="最大化"></i>
+<i class="bitb bi-x-square" onclick='request_close_window();' title="关闭当前窗口"></i>
+</span>
+<!--Window ToolBar End-->
+    </div>
+<div id="epmainpage">
+    <div class="nscard" onclick="epmainpage.hidden = true;eppianoui.hidden = false">自由演奏</div>
+    <div class="nscard" onclick="epmainpage.hidden = true;epplayerui.hidden = false">导入歌曲</div>
+</div>
+<div id="eppianoui" hidden>
+    电子钢琴/自由演奏<button onclick="eppianoui.hidden = true;epmainpage.hidden = false;">返回</button>
+    <hr>
+    <button style="height:150px;min-width:20px;" onclick="playnote('1',2)">Do(1)</button>
+    <button style="height:150px;min-width:20px;" onclick="playnote('2',2)">Re(2)</button>
+    <button style="height:150px;min-width:20px;" onclick="playnote('3',2)">Mi(3)</button>
+    <button style="height:150px;min-width:20px;" onclick="playnote('4',2)">Fa(4)</button>
+    <button style="height:150px;min-width:20px;" onclick="playnote('5',2)">Sol(5)</button>
+    <button style="height:150px;min-width:20px;" onclick="playnote('6',2)">La(6)</button>
+    <button style="height:150px;min-width:20px;" onclick="playnote('7',2)">Si(7)</button>
+    <br><br>
+    <button style="height:150px;min-width:20px;" onclick="playnote('1!',2)">Do!(1)</button>
+    <button style="height:150px;min-width:20px;" onclick="playnote('2!',2)">Re!(2)</button>
+    <button style="height:150px;min-width:20px;" onclick="playnote('3!',2)">Mi!(3)</button>
+    <button style="height:150px;min-width:20px;" onclick="playnote('4!',2)">Fa!(4)</button>
+    <button style="height:150px;min-width:20px;" onclick="playnote('5!',2)">Sol!(5)</button>
+    <button style="height:150px;min-width:20px;" onclick="playnote('6!',2)">La!(6)</button>
+    <button style="height:150px;min-width:20px;" onclick="playnote('7!',2)">Si!(7)</button>
+</div>
+<div id="epplayerui" hidden>
+    电子钢琴/导入歌曲<button onclick="epplayerui.hidden = true;epmainpage.hidden = false;">返回</button>
+    <hr>
+    <textarea style="width:80%;height:100px;" id="songcode" placeholder="粘贴或编写歌曲代码。"></textarea>
+    <br><button onclick="parseandplay(songcode.value)">播放</button> <progress id="epsongprog" max=100 value=0></progress>
+    <div id="epoutscreen" style="width:80%;height:300px;overflow:auto;border:2px solid white;border-color:gray #ccc #ccc gray;padding:5px;background: black;color:lightgreen;white-space: pre-wrap;margin-top:10px;"></div>
+</div>
+<script>
+var freqlist = {
+    "1":261.63,
+    "2":293.66,
+    "3":329.63,
+    "4":349.23,
+    "5":392,
+    "6":440,
+    "7":493.88,
+    "1!":523.25,
+    "2!":587.33,
+    "3!":659.25,
+    "4!":698.46,
+    "5!":783.99,
+    "6!":880,
+    "7!":987.77
+};
+function playnote(note,duration)
+{
+    var audioctx = new (window.AudioContext||window.webkitAudioContext)();
+    aosc = audioctx.createOscillator();
+    again = audioctx.createGain();
+    aosc.type = "triangle";
+    aosc.frequency.value = freqlist[note];
+    again.gain.value = 0.2;
+    again.gain.setValueAtTime(0.4,audioctx.currentTime);
+    again.gain.exponentialRampToValueAtTime(0.001,audioctx.currentTime+duration);
+    aosc.connect(again);
+    again.connect(audioctx.destination);
+    aosc.start();
+    aosc.stop(audioctx.currentTime+duration);
+}
+function countchar(char,rawstring)
+{
+    const rreg = new RegExp(char,'g');
+    const beu = rawstring.match(rreg);
+    return beu?beu.length:0;
+}
+function epwriteout(context)
+{
+    document.getElementById("epoutscreen").innerText += context;
+    document.getElementById("epoutscreen").scrollTop = document.getElementById("epoutscreen").scrollHeight;
+}
+function epcls()
+{
+    document.getElementById("epoutscreen").innerText = "";
+}
+async function parseandplay(songcode)
+{
+    var epsongprog = document.getElementById("epsongprog")
+    epsongprog.value = 0;
+    epcls();
+    var songnotes = songcode.split(" ");
+    for(var note = 0;note < songnotes.length;note++)
+    {
+        var tempnote = songnotes[note];
+        if(tempnote == ".")
+        {
+            await delay(500);
+        }
+        else
+        {
+            try{
+            var rawnote = tempnote.replaceAll("a","").replaceAll("l","");
+            epwriteout(`Play note:${rawnote},freq=${freqlist[rawnote]}Hz,index=${note+1}/${songnotes.length}(${((note+1)/songnotes.length*100).toFixed(0)}%)\n`);
+            epsongprog.value = ((note+1)/songnotes.length*100).toFixed(0);
+            playnote(rawnote,1.5+Number(countchar("a",tempnote))+Number(countchar("l",tempnote))*3);
+            var delaysymc = Number(countchar("a",tempnote))+Number(countchar("l",tempnote))*2;
+            if(delaysymc == 0) delaysymc = 1;
+                await delay(delaysymc*200);
+            }catch(e){epwriteout(`Undefined note symbol.Index=${note+1}/${songnotes.length}(${((note+1)/songnotes.length*100).toFixed(0)}%)\n`);}
+        }
+    }
+}
+</script>
 </div>
 <div id='alertmez' class='nsoverlay'>
 <div style='border:1px solid white;background:black;width:70%;padding:5px;padding-top:5px;padding-bottom:5px' id="mezcont">
