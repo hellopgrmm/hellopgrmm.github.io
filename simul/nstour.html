@@ -1,0 +1,449 @@
+<html> 
+<head>
+<meta charset='utf-8'>
+<title>NightSky漫游</title> 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto Sans SC:wght@400;700&display=swap"> 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+</head> 
+<body> 
+<style> 
+    body{ 
+        background: black; 
+        font-family:"Noto Sans SC",sans-serif; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        color:white; 
+        overflow: hidden; 
+    } 
+    #bgcanvas { 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 100vw; 
+        height: 100vh; 
+        z-index: -999; 
+        pointer-events: none; 
+        opacity: 0.7; 
+    } 
+        ::-webkit-scrollbar-track { 
+             background: rgba(0,0,0,0.1); 
+        } 
+        ::-webkit-scrollbar-thumb { 
+            background: rgba(100,100,100,0.5); 
+        } 
+        ::-webkit-scrollbar-thumb:hover { 
+            background: rgba(100,100,100,0.8); 
+        } 
+        ::-webkit-scrollbar { 
+            width: 8px; 
+            height: 5px; 
+        } 
+    .infobar 
+    { 
+        position:absolute; 
+        box-shadow:0px 3px 3px 3px black; 
+        border-radius:5px; 
+        background: radial-gradient(rgb(50,50,50),rgb(30,30,30)); 
+        padding: 10px; 
+        padding-left: 20px; 
+        color:white; 
+        word-wrap:break-word; 
+        text-align: center; 
+    } 
+    #fer1{ 
+        animation-name: fadein; 
+        animation-duration:2s; 
+    } 
+    @keyframes fadein 
+    { 
+        0%{opacity: 0} 
+        100%{opacity: 1} 
+    } 
+    pre,code
+    {
+        font-family:'Noto Sans SC',monospace;
+    }
+/*NightSky经典老UI*/ 
+button,input[type=submit]  
+{  
+    background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50));  
+    height:30px;  
+    min-width:100px;  
+    font-family:"Noto Sans SC",Helvetica;  
+    color:white;  
+    font-size:14px;  
+    border-radius:5px;  
+    border-width:0px;  
+    box-shadow:0px 0px 1px 1px rgb(70,70,70); 
+}  
+button:hover,input[type=submit]:hover  
+{  
+    background:linear-gradient(#069999,#066f68,#069999); 
+}  
+button:active  
+{  
+    background:black;  
+    color:#ccc;  
+    margin-top:1px;  
+    margin-left:1px;  
+    box-shadow:0px 0px 0px 0px gray;  
+}  
+input  
+{  
+    border:1px solid gray;  
+    background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50));  
+    color:white; 
+    font-size:20px;  
+    font-family:"Noto Sans SC",Helvetica;  
+    outline:none;  
+    border-radius:3px; 
+    margin-bottom:5px; 
+}  
+input:focus  
+{  
+    border:1px solid orange;  
+    background:black;  
+}  
+textarea  
+{  
+    border:1px solid gray;  
+    font-size:14px;  
+    background:black; 
+    color:white; 
+    font-family:"Noto Sans SC",Helvetica;  
+    outline:none;  
+    border-radius:3px;  
+}  
+textarea:focus  
+{  
+    border-color:orange;  
+}  
+select  
+{  
+    border:1px solid gray;  
+    background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50));  
+    border-radius:0px;  
+    font-size:14px;  
+    font-family:"Noto Sans SC",Helvetica;  
+    outline:none;  
+    color:white;  
+    width:100px;  
+    height:30px;  
+}  
+select:hover{border:1px solid orange;}  
+select:active{background:black;}  
+option{background: black;color:white} 
+option:hover{background: orange;color:black;} 
+progress{  
+  width:200px;  
+  height:30px;  
+  appearance:none;  
+  border-width:2px;  
+  border-color:black gray black gray;  
+  background:linear-gradient(gray,black);  
+}  
+progress::-webkit-progress-bar {  
+    border:2px solid black;  
+    background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50));  
+}  
+progress::-webkit-progress-value {  
+    background:linear-gradient(#069999,#066f68,#069999);  
+}  
+progress::-moz-progress-bar {  
+    border:2px solid black;  
+    background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50));  
+}  
+input[type=checkbox]  
+{  
+    width: 20px;  
+    height: 30px;  
+    font-size:14px; 
+    accent-color:orange;  
+}  
+.nscard{background:linear-gradient(rgb(30,30,30),black,rgb(30,30,30));width:95%;color:white;font-size:20px;padding-top: 10px;padding-bottom: 10px;padding-left:10px;border:1px solid gray;margin-bottom:8px;border-radius: 5px} 
+.nscard:hover{background:linear-gradient(#1f6f70,#06999977,#1f6f70);} 
+</style> 
+<canvas id="bgcanvas"></canvas> 
+<div class="infobar" id="fer1"> 
+    <h1>欢迎使用NightSky</h1> 
+    <p>亲爱的朋友，在这里由衷感谢您选择了NightSky。</p> 
+    <p>NightSky是一个小巧、轻量、偏向实用性的伪系统，移动端和电脑端共同适配。</p> 
+    <p>在NightSky里，您可以享受“开箱即用”般的体验。</p> 
+    <p>NightSky预装各种实用小工具，</p> 
+    <p>得心应手、快捷便利、轻松自如。</p> 
+    <p>总地来说，它宛如一个掌上工具箱，</p> 
+    <p>整洁而小巧、安静而低调。</p> 
+    <p>单击“下一栏”继续</p> 
+    <button onclick="$('#fer1').fadeOut(500);topmost('fer2');$('#fer2').fadeIn(500)">下一栏</button> 
+</div> 
+<div class="infobar" id="fer2" hidden> 
+    <h2>NightSky拥有以下特点：</h2> 
+    <p><strong style="font-size:30px">轻</strong>：轻量简约、麻雀虽小、五脏俱全。</p> 
+    <p><strong style="font-size:30px">快</strong>：更快速度、干扰全无、操控自如。</p> 
+    <p><strong style="font-size:30px">稳</strong>：稳定流畅、工作娱乐、两两相宜。</p> 
+    <p>单击“下一栏”继续</p> 
+    <button onclick="$('#fer2').fadeOut(500);topmost('fer3');$('#fer3').fadeIn(500)">下一栏</button> 
+</div> 
+<div class="infobar" id="fer3" hidden> 
+    <p>接下来是一个简单的引导界面，助您更快上手NightSky的基本操作结构。</p> 
+    <p>单击“下一栏”继续</p> 
+    <button onclick="$('#fer3').fadeOut(500);topmost('fer4');$('#fer4').fadeIn(500)">下一栏</button> 
+</div> 
+<div style="position: absolute;top:0px;left:0px;width:calc(100% - 10px);height:calc(100% - 10px);padding: 10px;" id="fer4" hidden> 
+    <h3>NightSky 漫游 · 引导</h3> 
+    <div id="contents" style='height:80%;overflow:auto'> 
+    <p>单击任一卡片，进入对应章节，浏览相关内容。</p> 
+    <div onclick="contents.hidden = true;chapter1.hidden=false;" class="nscard">一、基础操作</div> 
+    <div onclick="contents.hidden = true;chapter2.hidden=false;" class="nscard">二、命令行</div> 
+    <div onclick="contents.hidden = true;chapter3.hidden=false;" class="nscard">三、个性化</div> 
+    <div onclick="contents.hidden = true;chapter4.hidden=false;" class="nscard">四、第三方应用</div> 
+    <div onclick="contents.hidden = true;chapter5.hidden=false;" class="nscard">五、开源说明</div> 
+    <p>NightSky • 夜空｜遥望满天繁星</p>
+    <strong>主打一个硬核！</strong>
+    <p><strong>与众不同，极简掌控，低调使用。<br>Copyright&copy;Hello-Programming 2023-2026</strong></p>
+    </div> 
+    <div id="chapter1" style="overflow: auto;height:80%;" hidden> 
+        <h1>一、基础操作</h1> 
+        <button onclick="contents.hidden = false;chapter1.hidden=true;">返回目录</button> 
+        <p>当你进入NightSky时，第一眼看见的是锁屏界面。（如图1.1所示）</p> 
+        <img src="https://s41.ax1x.com/2026/08/21/pmzZlGD.jpg" style="height:200px;width:auto"/><br> 
+        <a>图1.1 锁屏界面</a> 
+        <p>单击屏幕任意处即可解锁，进入桌面。</p> 
+        <p>NightSky底部为“导航栏”，在导航栏内，你可以快速将NightSky切换至不同页面。</p> 
+        <p>导航栏总共有四个图标（如图1.2），这些图标所对应的功能分别是：Quikie快捷启动栏、截图、关闭所有窗口（返回桌面）、锁屏。其中，Quikie快捷启动栏的图标只有在解锁NightSky后才会出现，当你点击“锁屏”图标后，左侧的Quikie图标便会隐藏。</p> 
+        <img src="https://s41.ax1x.com/2026/08/21/pmzZGMd.jpg" style="height:50px;width:auto"/><br> 
+        <a>图1.2 导航栏</a> 
+        <h3>使用Quikie</h3> 
+        <p>Quikie，中文名“捷哥”。是NightSky中的快速启动菜单，里面是一些可能会高频使用的应用。当你在“更多程序”页面内一时看不到这个程序在何处，Quikie或许会辅助到你。<br>Quikie有一个“显示上次浏览的网页”选项，这并不是打开浏览器。当NightSky内置应用进行网页浏览调用时，这个选项就有用处了。当你关闭了网页浏览窗口，过段时间后又想再次打开时，你就无需再按原来的方式重新进入，而使网页刷新丢失数据。你只需要单击左下角打开Quikie，点击“显示上次浏览的网页”选项即可打开该网页。尤其是在浏览HTML文件时，它的作用会更加明显。</p> 
+        <h3>移动端窗口适配</h3> 
+        <p>有时候你会遇到这样一种情况：当浏览器窗口尺寸发生变化时，NightSky的窗口却没有随其变化。解决方案也很简单，重新解锁NightSky即可。如果你不想重新解锁，可以进入“设置”（在更多程序或Quikie内）->“高级选项”->“自适应选项”->单击按钮“自适应”即可。</p> 
+        <h3>虚拟号码</h3> 
+        <p>如果你是第一次启动NightSky，那么系统会给你随机分配一个虚拟号码，通常是6~7位数。自己的虚拟号码可以在“设置”->“关于”中找到。<br>除非你清除所有数据，否则NightSky的虚拟号码不会改变。NightSky的虚拟号码可用于跨设备需求（如电话、远程控制）。</p> 
+    </div> 
+    <div id="chapter2" style="overflow: auto;height:80%;" hidden> 
+        <h1>二、命令行</h1> 
+        <button onclick="contents.hidden = false;chapter2.hidden=true;">返回目录</button> 
+        <p>NightSky有一个命令行，位于“更多程序”内。打开便是提示符界面，你可以输入命令来对NightSky进行一些操作，命令不区分大小写。</p> 
+        <p>你也可以在命令行中用“HELP”查看可用命令，这里作详细阐述。</p> 
+        <h2>命令概述</h2> 
+        <table border=2 style="border-color:white"> 
+            <tr><td>命令</td><td>概述</td><td>示例用法</td></tr> 
+            <tr><td>PRINT [文字]</td><td>把[文字]输出到控制台。</td><td>PRINT 黄鹤断矶头，故人今在否？</td></tr> 
+            <tr><td>WRITE [内容]=>[文件名]</td><td>写入文件，文件名是[文件名]，文件内容为[内容]。</td><td>WRITE You got it, bro!=>Nice.txt</td></tr> 
+            <tr><td>FLIST</td><td>列出本机上的所有文件。</td><td>FLIST</td></tr> 
+            <tr><td>DELET [文件名]</td><td>删除名为[文件名]的文件。</td><td>DELET Nice.txt</td></tr> 
+            <tr><td>FREAD [文件名]</td><td>读取文件名为[文件名]的文件内容。</td><td>FREAD Nice.txt</td></tr> 
+            <tr><td>EXCJS [代码]</td><td>执行JavaScript代码。</td><td>EXCJS alert("Sup!");</td></tr> 
+            <tr><td>TUIWD [标题]:[内容]:[代码]</td><td>创建一个窗口并输出到控制台，带有标题、内容和一个“OK”按钮，点击按钮时会执行设定好的JavaScript代码。</td><td>TUIWD Hello NightSky:Hey bro!:alert("Sup!");</td></tr> 
+            <tr><td>COLOR [色值]</td><td>更改命令行的字体颜色。</td><td>COLOR #069999</td></tr> 
+            <tr><td>SETBG [色值]</td><td>更改命令行的背景颜色。</td><td>SETBG #06999977</td></tr> 
+            <tr><td>USRAG</td><td>输出用户代理字串（User-Agent）。</td><td>USRAG</td></tr> 
+            <tr><td>FETCH [链接地址]</td><td>爬取某一个网页的源内容（但可能会有跨域问题导致无法爬取）</td><td>FETCH https://example.com/</td></tr> 
+        </table> 
+    </div> 
+    <div id="chapter3" style="overflow: auto;height:80%;" hidden> 
+        <h1>三、个性化</h1> 
+        <button onclick="contents.hidden = false;chapter3.hidden=true;">返回目录</button> 
+        <p>NightSky的个性化功能允许用户自定义主题，这里讲述如何制作自己的NightSky主题。</p> 
+        <p><strong>提醒：如果你不熟悉CSS（就是Web开发中常用的样式设计），请跳过本章节，因为里面的内容可能会有点难懂（对于普通用户来说）。</strong></p> 
+        <p>如何制作NightSky主题？其实也并不困难（对于熟悉CSS的人），一个NightSky主题文件没有固定后缀名，可以导入txt或者其他纯文本文件，只要格式符合、能成功解析便可。NightSky的主题编写基本格式如下：</p> 
+        <pre> 
+            <code> 
+元素类型:元素类名 
+属性=>值 
+next; 
+元素类型:元素类名 
+属性=>值 
+next; 
+元素类型:元素类名 
+属性=>值 
+            </code> 
+        </pre> 
+        <p>元素类型指的是class、id和element，element指的是HTML标签（比如h1、h2、video），元素类名指的是该HTML元素中设定的标识符。例如：当HTML元素中设定了属性id="myowndiv"那么写法就是“id:myowndiv”；如果是class="window"，那么写法就是“class:window”；如果是要调整HTML标签元素的样式，比如重构&lt;h1&gt;的样式，写法就是“element:h1”。属性和值与CSS对应。但对于hover属性，写法就是“hover=>hover后属性:值/hover前属性:值”，示例：hover=>background:rgba(50,255,255,0.8)/background:rgba(50,255,255,0.5)<br>编写主题代码时，不要出现分号或任何无效换行，因为这有可能会导致主题解析错误，编写后请把整个主题代码进行Base64处理。</p> 
+        <h2>NightSky各组件CSS性质对照表</h2> 
+        <table border=2 style="border-color:white"> 
+            <tr><td>元素类型</td><td>元素类名</td></tr> 
+            <tr><td>window</td><td>class</td></tr> 
+            <tr><td>button</td><td>element</td></tr> 
+            <tr><td>input</td><td>element</td></tr> 
+            <tr><td>select</td><td>element</td></tr> 
+            <tr><td>progress</td><td>element</td></tr> 
+            <tr><td>tips_card（操作引导指示卡片）</td><td>id</td></tr> 
+            <tr><td>upd_news（百度热搜卡片）</td><td>id</td></tr> 
+            <tr><td>nscard（NightSky普通卡片）</td><td>class</td></tr>             
+        </table> 
+        <h3>示例主题代码（选自NightSky预设主题之Technoly）</h3> 
+        <pre> 
+            <code> 
+class:window 
+background=>#0F606C 
+next; 
+element:button 
+background=>rgba(50,255,255,0.5) 
+border=>1px solid cyan 
+color=>cyan 
+border-radius=>0px 
+hover=>background:rgba(50,255,255,0.8)/background:rgba(50,255,255,0.5) 
+box-shadow=>1px 1px 1px 1px cyan 
+next; 
+element:input 
+background=>rgba(50,255,255,0.5) 
+border=>1px solid cyan 
+border-radius=>0px 
+color=>white 
+next; 
+element:textarea 
+background=>rgba(50,255,255,0.5) 
+border=>1px solid cyan 
+border-radius=>0px 
+color=>white 
+next; 
+id:tips_card 
+background=>rgba(50,255,255,0.5) 
+border=>1px solid cyan 
+border-radius=>0px 
+backdrop-filter=>blur(5px) 
+next; 
+id:upd_news 
+background=>rgba(50,255,255,0.5) 
+border=>1px solid cyan 
+border-radius=>0px 
+backdrop-filter=>blur(5px) 
+next; 
+class:nscard 
+background=>rgba(50,255,255,0.5) 
+border=>1px solid cyan 
+border-radius=>0px 
+backdrop-filter=>blur(5px) 
+hover=>background:rgba(50,255,255,0.8)/background:rgba(50,255,255,0.5) 
+            </code> 
+        </pre> 
+    </div> 
+    <div id="chapter4" style="overflow: auto;height:80%;" hidden> 
+        <h1>四、第三方应用</h1> 
+        <button onclick="contents.hidden = false;chapter4.hidden=true;">返回目录</button> 
+        <p>NightSky允许用户自定义第三方应用(后缀为.NSP的文件，即NightSky第三方应用安装包)。当你需要安装第三方应用时，既可以在更多程序中的“应用下载与管理”中操作，也可以在文件管理器内操作。</p> 
+        <p><strong>提醒：如果你不熟悉Web开发，请跳过本章节，因为里面的内容可能会有点难懂（对于普通用户来说，第三第四章都有一点复杂）。</strong></p> 
+        <p>给NightSky编写第三方应用不算太难（对于熟悉HTML的），以下是一个简单的示例。</p> 
+        <pre> 
+            <code> 
+[PACKNAME]com.nightsky.package.myownproject.nsys 
+[AUTHOR]Jeff 
+[VERSION]1.0 
+[DISNAME]My Own Project 
+--- 
+&lt;Encoding&gt;UTF-8&lt;/Encoding&gt; 
+&lt;UseNightSkyTheme&gt;&lt;/UseNightSkyTheme&gt; 
+&lt;h1&gt;Test project&lt;/h1&gt; 
+&lt;button&gt;Button&lt;/button&gt;&lt;br&gt; 
+&lt;input placeholder="input"/&gt;&lt;br&gt; 
+            </code> 
+        </pre> 
+        <p>NSP文件的开头必须要按顺序填写以下信息：包名、作者、版本、应用名称。在应用必要信息部分不要包含任何无效空行，然后用分隔线“---”隔开，上面是必要信息，下面是应用主体HTML代码。填写格式如下：<br>[PACKNAME]com.nightsky.package.包名称.nsys<br> 
+            [AUTHOR]作者名，可包含空格。<br> 
+            [VERSION]版本号<br> 
+            [DISNAME]应用名，可包含空格。<br>---<br>&lt;Encoding&gt;UTF-8&lt;/Encoding&gt;<br>&lt;UseNightSkyTheme&gt;&lt;/UseNightSkyTheme&gt;<br>……应用主体部分……</p> 
+        <p>HTML应用主体的一些解释（区分大小写）</p> 
+        <P>&lt;Encoding&gt;UTF-8&lt;/Encoding&gt; 设置UTF-8编码，支持编码：UTF-8和Big5。</P> 
+        <P>&lt;UseNightSkyTheme&gt;&lt;/UseNightSkyTheme&gt; 使用NightSky默认UI样式。</P> 
+        <p>编写完NightSky应用后把它保存为.NSP文件，一个NightSky第三方程序就完成了。</p>
+        <h2>安装外部第三方应用</h2>
+        <p>在NightSky中打开“文件”->“导入外部文件”导入你的.NSP文件到系统内，接着打开“更多程序”->应用下载与管理->NSP管理->找到你想要安装的NSP包，单击“安装”按钮就可以了啦。更方便的方法：在文件管理器里点击相应NSP包就能直接安装（不过这样子看不到具体信息）。</p>
+    </div> 
+    <div id="chapter5" style="overflow: auto;height:80%;" hidden> 
+        <h1>五、开源说明</h1> 
+        <button onclick="contents.hidden = false;chapter5.hidden=true;">返回目录</button> 
+        <p>NightSky是一个轻量级、多功能的伪系统，它也是一个开源的项目。你可以随时下载NightSky的源代码进行研究学习，也可以对其进行任意的修改和增删，不受任何限制，完全自由定制。</p> 
+        <p><strong>如果你想把自己定制的NightSky发布到网络，记得标记原创（任意形式）除此之外没有另外的要求。</strong></p>
+        <p>NightSky的相关Github仓库：https://github.com/hellopgrmm/hellopgrmm.github.io/blob/main/simul/nightsky.html</p> 
+        <p>https://github.com/hellopgrmm/hellopgrmm.github.io/blob/main/simul/nightsky_pc.html</p> 
+        <p>（一个是手机版源码，一个是电脑版源码）</p> 
+        <p>如果你在使用过程中遇到问题，可在“设置”->“留言板”中反馈或者联系我的邮箱：qwqexplorer@163.com。</p> 
+        <p>爱你哦~( ˶'ᵕ'˶)ෆ</p>
+    </div> 
+</div> 
+<script> 
+//从fcode.pages.dev复制过来的粒子特效 
+const canvas = document.getElementById('bgcanvas'); 
+const ctx = canvas.getContext('2d'); 
+let w, h; 
+let particleList = []; 
+function resizeCanvas() { 
+    w = canvas.width = window.innerWidth; 
+    h = canvas.height = window.innerHeight; 
+} 
+resizeCanvas(); 
+window.addEventListener('resize', resizeCanvas); 
+class Particle { 
+    constructor() { 
+        this.x = Math.random() * w; 
+        this.y = Math.random() * h; 
+        this.r = Math.random() * 1.8 + 0.6; 
+        this.vx = (Math.random() - 0.5) * 0.35; 
+        this.vy = (Math.random() - 0.5) * 0.35; 
+        this.color = "#069999"; 
+    } 
+    move() { 
+        this.x += this.vx; 
+        this.y += this.vy; 
+        if(this.x < 0 || this.x > w) this.vx *= -1; 
+        if(this.y < 0 || this.y > h) this.vy *= -1; 
+    } 
+    draw() { 
+        ctx.fillStyle = this.color; 
+        ctx.beginPath(); 
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2); 
+        ctx.fill(); 
+    } 
+} 
+function createParticles() { 
+    particleList = []; 
+    for(let i = 0; i < 75; i++) { 
+        particleList.push(new Particle()); 
+    } 
+} 
+createParticles(); 
+function drawLine() { 
+    for(let i = 0; i < particleList.length; i++) { 
+        for(let j = i + 1; j < particleList.length; j++) { 
+            const p1 = particleList[i]; 
+            const p2 = particleList[j]; 
+            const dx = p1.x - p2.x; 
+            const dy = p1.y - p2.y; 
+            const dist = Math.sqrt(dx*dx + dy*dy); 
+            if(dist < 90) { 
+                ctx.strokeStyle = `rgba(96,165,250,${0.18 - dist/500})`; 
+                ctx.lineWidth = 0.4; 
+                ctx.beginPath(); 
+                ctx.moveTo(p1.x, p1.y); 
+                ctx.lineTo(p2.x, p2.y); 
+                ctx.stroke(); 
+            } 
+        } 
+    } 
+} 
+function renderLoop() { 
+    ctx.clearRect(0,0,w,h); 
+    for(let p of particleList) { 
+        p.move(); 
+        p.draw(); 
+    } 
+    drawLine(); 
+    requestAnimationFrame(renderLoop); 
+} 
+renderLoop(); 
+</script> 
+<script type="text/javascript"> 
+function topmost(elementId) {  
+    const elements = document.querySelectorAll('*');  
+    let maxZIndex = 0;  
+    elements.forEach(el => {  
+        const zIndex = parseInt(window.getComputedStyle(el).zIndex);  
+        if (zIndex > maxZIndex) maxZIndex = zIndex;  
+    });  
+    document.getElementById(elementId).style.zIndex = maxZIndex + 1;  
+} 
+</script> 
+</body> 
+</html>
