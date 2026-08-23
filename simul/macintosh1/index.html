@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Macintosh System 1.0</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+</head>
+<body>
+<style>
+  body
+  {
+    background: black;
+    color:white;
+    font-family: Roboto,sans-serif;
+    text-align: center;
+  }
+button,input[type=submit] 
+{ 
+    background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50)); 
+    height:30px; 
+    min-width:100px; 
+    font-family:Roboto,Helvetica; 
+    color:white; 
+    font-size:14px; 
+    border-radius:5px; 
+    border-width:0px; 
+    box-shadow:0px 0px 1px 1px rgb(70,70,70);
+} 
+button:hover,input[type=submit]:hover 
+{ 
+    background:linear-gradient(#069999,#066f68,#069999);
+} 
+button:active 
+{ 
+    background:black; 
+    color:#ccc; 
+    margin-top:1px; 
+    margin-left:1px; 
+    box-shadow:0px 0px 0px 0px gray; 
+} 
+</style>
+<h1>Macintosh System 1.0</h1>
+<p>Macintosh System 1.0为苹果公司于1984年推出的操作系统，是全球第一个成功商用的图形化操作系统，也是经典MacOS系列的开端，在PC发展历史上具有重要意义，为后续MacOS奠定了基础。</p>
+<p>模拟机型：Macintosh 128K <button onclick="document.getElementById('macscreen').requestFullscreen()">全屏</button></p>
+<canvas id="macscreen"></canvas>
+<script type="text/javascript" src="es6-promise.js"></script>
+<script type="text/javascript" src="browserfs.min.js"></script>
+<script type="text/javascript" src="loader.js"></script>
+<script type="text/javascript">
+  var mac = new Emulator(document.getElementById("macscreen"),
+        null,
+        new NP2Loader(NP2Loader.emulatorJS("minivmac.js"),
+          NP2Loader.emulatorWASM("minivmac.wasm"),
+          NP2Loader.nativeResolution(640, 400),
+          NP2Loader.mountZip("minivmac",
+            NP2Loader.fetchFile("ROM文件",
+              "vmac.zip")),
+          NP2Loader.mountZip("macintosh",
+            NP2Loader.fetchFile("镜像",
+              "macintosh.zip")),
+          NP2Loader.extraArgs("/emulator/macintosh/test6.dsk")
+        ));       
+        mac.start({ waitAfterDownloading: true });
+    </script>
+</body>
+</html>
