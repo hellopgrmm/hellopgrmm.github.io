@@ -189,9 +189,11 @@ twikoo.init({
 		</details>
 		<details>
 			<summary>老Mac系列</summary>
+			<ul>
 			<li style="color:yellow" onclick="location.href='macintosh1'">Macintosh System 1.0</li>
 			<li style="color:yellow" onclick="location.href='macintosh1/mac607cn.html'">Macintosh System 6.0.7(中文版)</li>
 			<li style="color:yellow" onclick="location.href='macintosh1/mac71cn.html'">Macintosh System 7.1(中文版)</li>
+			</ul>
 		</details>
 		<details>
 			<summary>网友自制系统</summary>
@@ -204,6 +206,7 @@ twikoo.init({
 				<li style="color:yellow" onclick="location.href='?sys=mikeos&type=cdrom'">MikeOS</li>
 				<li style="color:yellow" onclick="location.href='?sys=biosos&type=floppy'">BiOS</li>
 				<li style="color:yellow" onclick="location.href='?sys=neo-os-2&type=cdrom'">NeoOS</li>
+				<li onclick="location.href='?sys=persiancat&type=cdrom'">PersianCat</li>
 			</ul>
 		</details>
 		<details>
@@ -229,7 +232,7 @@ twikoo.init({
 	访问量：<span id="vercount_value_page_pv">加载中...</span>（禁止恶意刷访问量）
 </div>
 <script>
-var size_dict = {'windows1-fda':'1440','f12':'24576','ikun':'10','neo-os-2':'22835','simcity':'14336','btc':'14436','windows3':'15360','biosos':'1440','w31cn':'24576','31cn_sound':'24576','linux':'5534','30dayos':'1440','haribote':'1440','borlandcpp':'18432','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384','tinycore5':'15052','msdos71f':'24576','3fp':'14336','cad':'14336','msfs':'14336','w31':'14336','mikeos':'3226','win203':'14336','msdos500':'14336','zzta':'14336'};
+var size_dict = {'persiancat':'1792','windows1-fda':'1440','f12':'24576','ikun':'10','neo-os-2':'22835','simcity':'14336','btc':'14436','windows3':'15360','biosos':'1440','w31cn':'24576','31cn_sound':'24576','linux':'5534','30dayos':'1440','haribote':'1440','borlandcpp':'18432','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384','tinycore5':'15052','msdos71f':'24576','3fp':'14336','cad':'14336','msfs':'14336','w31':'14336','mikeos':'3226','win203':'14336','msdos500':'14336','zzta':'14336'};
 var desc_dict = {
 	'windows1-fda':'Windows 1.0是微软公司发布的初代Windows系统，基于MS-DOS。',
 	'f12':`FreeDOS是一款运行于IBM PC兼容机的开源操作系统，由Jim Hall等人于1994年发起开发，旨在提供开源的MS-DOS替代方案，兼容exe和dos的其它组件。这个是FreeDOS 1.2，额外安装了UCDOS中文输入法。<button onclick="emulator.keyboard_send_text('CD UCDOS\\nUCDOS\\n')">点此快速启动UCDOS</button>`,
@@ -258,6 +261,7 @@ var desc_dict = {
 	'31cn_sound':'装了声卡的Windows 3.1',
 	'windows3':'Microsoft Windows 3.0是微软在1990年发布的操作系统，是系列中首个获得商业成功的版本，标志着个人计算机操作系统从命令行向图形界面的重大转变。',
 	'btc':'Borland Turbo C是一个C语言编程软件，运行于DOS平台。',
+	'persiancat':'B站UP主<a href="https://space.bilibili.com/3546591591925954">91长安雪</a>制作的操作系统，目前还不太完善，这个是不稳定版本。',
 	'neo-os-2':`B站UP主<a href="https://space.bilibili.com/2009275394">芒辰Official</a>制作的图形化操作系统，支持多媒体、文件系统（FAT32/VFS）、命令行等。（密码：root）<br><button onclick="emulator.keyboard_send_text('root\\n')">点此快速登录</button>`
 }
 function parseurl(url)
