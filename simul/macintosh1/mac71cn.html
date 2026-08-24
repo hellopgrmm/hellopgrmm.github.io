@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Macintosh System 7.1</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  <script src="https://cdn.webrtc-experiment.com/RecordRTC.js"></script>
+</head>
+<body>
+<style>
+  body
+  {
+    background: black;
+    color:white;
+    font-family: Roboto,sans-serif;
+    text-align: center;
+  }
+button,input[type=submit] 
+{ 
+    background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50)); 
+    height:30px; 
+    min-width:100px; 
+    font-family:Roboto,Helvetica; 
+    color:white; 
+    font-size:14px; 
+    border-radius:5px; 
+    border-width:0px; 
+    box-shadow:0px 0px 1px 1px rgb(70,70,70);
+} 
+button:hover,input[type=submit]:hover 
+{ 
+    background:linear-gradient(#069999,#066f68,#069999);
+} 
+button:active 
+{ 
+    background:black; 
+    color:#ccc; 
+    margin-top:1px; 
+    margin-left:1px; 
+    box-shadow:0px 0px 0px 0px gray; 
+} 
+</style>
+<h1>Macintosh System 7.1中文版</h1>
+<p>Macintosh System 7.1为苹果公司于1993年推出的操作系统，这个是中文版+彩色GUI。</p>
+<p><button onclick="document.getElementById('macscreen').requestFullscreen()">全屏</button> <button onclick="captures()">截图</button> <button onclick="if(this.innerHTML == '录屏'){screenrec();this.innerHTML = '停止&下载';}else{stoprec();this.innerHTML = '录屏';}">录屏</button></p>
+<canvas id="macscreen"></canvas>
+<script type="text/javascript" src="es6-promise.js"></script>
+<script type="text/javascript" src="browserfs.min.js"></script>
+<script type="text/javascript" src="loader.js"></script>
+<script type="text/javascript">
+  var mac = new Emulator(document.getElementById("macscreen"),
+        null,
+        new NP2Loader(NP2Loader.emulatorJS("minivmacII.js"),
+          NP2Loader.emulatorWASM("minivmacII.wasm"),
+          NP2Loader.nativeResolution(640, 400),
+          NP2Loader.mountZip("minivmac",
+            NP2Loader.fetchFile("ROM文件",
+              "macii.zip")),
+          NP2Loader.mountZip("disks",
+            NP2Loader.fetchFile("镜像",
+              "mac71cn.zip")),
+          NP2Loader.extraArgs("/emulator/disks/mac71cn.dsk")
+        ));       
+        mac.start({waitAfterDownloading:true});
+  function captures()
+  {
+    var clink = document.createElement('a');
+    clink.download = `截图.png`;
+    clink.href = document.getElementById("macscreen").toDataURL('image/png');
+    clink.click();
+  }
+</script>
+<script>
+var recorder = null;
+function screenrec() {
+    var stream = document.getElementById("macscreen").captureStream(30);
+    recorder = RecordRTC(stream,{
+        type:'video',
+        mimeType:'video/mp4'
+    });
+    recorder.startRecording();
+}
+function stoprec() {
+    try{
+        recorder.stopRecording(function() {
+            var blob = recorder.getBlob();
+            var vidurl = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = vidurl;
+            a.download = `虚拟机录屏${Date.now()}.mp4`;
+            a.click();
+        });
+    }catch(e){
+        alert('发生错误T^T\n'+e);
+    }
+}
+</script>
+</body>
+</html>
