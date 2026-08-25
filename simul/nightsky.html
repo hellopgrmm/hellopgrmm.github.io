@@ -1001,6 +1001,27 @@ function checkPasswordSafe(password) {
                 FS_S.checked = false;
             }
         </script>
+		<h3>设置光标图案</h3>
+        选择一张图片作为光标图案： <input type="file" id="curssetfile" oninput="setcursor()" /> <button onclick="localStorage.removeItem('NS_CURSOR.nsys');ns_alert('设置/显示设置','已恢复默认，该设置将会在设备重启后生效。')">恢复默认</button>
+        <p><strong>注：仅电脑端有效。</strong></p>
+        <script>
+        function setcursor() {
+            const fileinput1 = document.getElementById('curssetfile');
+            const file1 = fileinput1.files[0];
+            const reader1 = new FileReader();
+            reader1.readAsDataURL(file1);
+            reader1.onload = function () {
+                const base64String1 = reader1.result;
+                localStorage.setItem('NS_CURSOR.nsys',base64String1);
+                if(localStorage.getItem('NS_CURSOR.nsys')){document.body.style.cursor = `url(${localStorage.getItem('NS_CURSOR.nsys')}),auto`;}else{}
+                
+                ns_alert('设置/显示设置','更改成功。');
+            };
+            reader1.onerror = function (error) {
+                ns_alert('设置/显示设置','对不起，无法完成此操作。<br>详细错误信息：'+error);
+            };
+        }
+        </script>
     </div>
 </div>
 <div class='window' id="nsmore" style="background: rgb(0,0,0,0.9);">
@@ -2782,6 +2803,7 @@ if(localStorage.getItem('NS_FONT_FAMILY.nsys')){
 var Astylesheet_font = document.getElementById('nsfontst');
 Astylesheet_font.href=`https://fonts.googleapis.com/css2?family=${localStorage.getItem('NS_FONT_FAMILY.nsys')}:wght@400;700&display=swap`;
 $('button,input,select,body,textarea').css('font-family',localStorage.getItem('NS_FONT_FAMILY.nsys'));}else{}
+if(localStorage.getItem('NS_CURSOR.nsys')){document.body.style.cursor = `url(${localStorage.getItem('NS_CURSOR.nsys')}),auto`;}else{}
 function reinit_window(){
     var body_h = Number($('body').css('height').replace('px',''))
     var director_h = Number($('#director').css('height').replace('px',''));
