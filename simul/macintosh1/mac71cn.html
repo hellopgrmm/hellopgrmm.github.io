@@ -42,9 +42,19 @@ button:active
 } 
 </style>
 <h1>Macintosh System 7.1中文版</h1>
-<p>Macintosh System 7.1为苹果公司于1993年推出的操作系统，这个是中文版+彩色GUI。</p>
+<p>Macintosh System 7.1为苹果公司于1993年推出的操作系统，这个是中文版+彩色GUI，里面还装了Microsoft Word 4.0。</p>
 <p><button onclick="document.getElementById('macscreen').requestFullscreen()">全屏</button> <button onclick="captures()">截图</button> <button onclick="if(this.innerHTML == '录屏'){screenrec();this.innerHTML = '停止&下载';}else{stoprec();this.innerHTML = '录屏';}">录屏</button></p>
 <canvas id="macscreen"></canvas>
+<div id="comment" style="text-align:left"></div>
+<script src="https://hellopgrmm.github.io/tools/twikoo.min.js"></script>
+<script>
+twikoo.init({
+    envId: 'https://cheerful-moonbeam-4f1337.netlify.app/.netlify/functions/twikoo',
+    el: '#comment', 
+    path: location.pathname, 
+    lang: 'zh-CN', 
+})
+</script>
 <script type="text/javascript" src="es6-promise.js"></script>
 <script type="text/javascript" src="browserfs.min.js"></script>
 <script type="text/javascript" src="loader.js"></script>
