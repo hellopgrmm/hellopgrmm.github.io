@@ -422,6 +422,57 @@ function readfile(inputentry) {
 <div class="window" id="nssetting">
     <div class="nstit">设置</div>
     <div style="margin-top: 10px;" id="selectmenu">
+		<table style="color:white"><tr><td><i class="bi bi-people-fill" id="profilecolor" style="font-size:50px;"></i></td><td><a style="font-size: 30px;" id="nightskyuinfo">夜空</a></td></tr></table>
+        <p>ID(虚拟号码)：<a id="vndiszone">无法识别</a></p>
+        <p>操作：<button onclick="$('#changeuui').slideDown()">更改用户名</button> <button onclick="$('#changepcui').slideDown()">更改头像颜色</button></p>
+        <p id="changeuui" hidden>输入新用户名 <input id="usernameset" placeholder="用户名"/> <button onclick="confirmchangeusername();u_takeeffect();">确认修改</button> <br> <button onclick="usernameset.value = getrandomname()">随机生成</button> <button onclick="localStorage.removeItem('NS_USERNAMEINFO.nsys');u_takeeffect();ns_alert('更改用户名','已恢复默认。');">恢复默认</button> <button onclick="$('#changeuui').slideUp()">关闭</button></p>
+        <p id="changepcui" hidden>修改账户头像颜色 <input id="profilecolorset" type="color"/> <button onclick="localStorage.setItem('NS_USERPROFILE_COLOR.nsys',profilecolorset.value);u_takeeffect();ns_alert('更改账户头像颜色','修改完成。');">确认修改</button> <button onclick="localStorage.removeItem('NS_USERPROFILE_COLOR.nsys');u_takeeffect();ns_alert('更改账户头像颜色','已恢复默认。');">恢复默认</button> <button onclick="$('#changepcui').slideUp()">关闭</button><br><strong>注：有一些老版本浏览器可能不支持颜色选择功能。</strong></p>
+        <script>
+            var characterslist = "风雪花落镜月舟涯星辰灵墨静雅明思梅";
+            function getrandomname()
+            {
+                var gunmu = "";
+                for(var user = 0;user < 7;user++)
+                {
+                    gunmu+=characterslist[Math.floor(Math.random()*characterslist.length)]
+                }
+                return gunmu;
+            }
+            function confirmchangeusername()
+            {
+                localStorage.setItem("NS_USERNAMEINFO.nsys",document.getElementById('usernameset').value);
+                ns_alert("更改用户名","用户名更改完成。");
+            }
+            function u_takeeffect()
+            {
+                var nsui = document.getElementById("nightskyuinfo");
+                if(localStorage.getItem("NS_USERNAMEINFO.nsys"))
+                {
+                    nsui.innerHTML = localStorage.getItem("NS_USERNAMEINFO.nsys");
+                }
+                else
+                {
+                    nsui.innerHTML = "夜空";
+                    return 0;
+                }
+                var nspc = document.getElementById("profilecolor");
+                if(localStorage.getItem("NS_USERNAMEINFO.nsys"))
+                {
+                    nspc.style.color = localStorage.getItem("NS_USERPROFILE_COLOR.nsys");
+                }
+                else
+                {
+                    nspc.style.color = "white";
+                    return 0;
+                }
+            }
+            function displayvirtualnumber()
+            {
+                vndiszone.innerHTML = localStorage.getItem("NS_VT.nsys");
+            }
+            u_takeeffect();
+            displayvirtualnumber();
+        </script>
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nsgxh.removeAttribute('hidden');"><i class="bi bi-shadows"></i> 个性化</div>
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nsxianshi.removeAttribute('hidden');"><i class="bi bi-pc-display"></i> 显示设置</div>
         <div class="nscard" onclick="selectmenu.setAttribute('hidden',true);nsdyy.removeAttribute('hidden');"><i class="bi bi-translate"></i> 多语言</div>
@@ -970,7 +1021,7 @@ function checkPasswordSafe(password) {
         <div class="ns-icon"><i class="bi bi-camera2" onclick="$('#nsmore').fadeOut(300);topmost('nsCAM');$('#nsCAM').effect('slide',500);startcam();"></i><br>相机</div> 
         <div class="ns-icon"><i class="bi bi-geo-alt-fill" onclick="$('#nsmore').fadeOut(300);topmost('nslocation');$('#nslocation').effect('slide',500);dingwei();"></i><br>当前定位</div> 
         <div class="ns-icon"><i class="bi bi-terminal" onclick="$('#nsmore').fadeOut(300);topmost('nsprompt');$('#nsprompt').effect('slide',500);user_cmd.focus()"></i><br>命令行</div> 
-        <div class="ns-icon"><i class="bi bi-chat-left" onclick="$('#nsmore').fadeOut(300);topmost('nschats');$('#nschats').effect('slide',500);"></i><br>在线聊天室</div> 
+        <div class="ns-icon"><i class="bi bi-chat-left" onclick="$('#nsmore').fadeOut(300);topmost('nschats');$('#nschats').effect('slide',500);room_nick.value = nightskyuinfo.innerHTML;"></i><br>在线聊天室</div> 
 		<div class="ns-icon"><i class="bi bi-terminal-fill" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/dosbox.html','DosBox');"></i><br>DosBox</div>
 		<div class="ns-icon"><i class="bi bi-telephone" onclick="$('#nsmore').fadeOut(300);topmost('nstelefon');$('#nstelefon').effect('slide',500);"></i><br>电话</div> 
 		<div class="ns-icon"><i class="bi bi-broadcast" onclick="$('#nsmore').fadeOut(300);ns_pagewatcher('https://hellopgrmm.github.io/simul/radio.html','收音机');"></i><br>收音机</div>
@@ -2035,8 +2086,8 @@ cr_msg.addEventListener("keydown",function(me){
     <div style="background: linear-gradient(#288fc3,#296b9e);height:100px;width:100px;" id="dial_si"><i style="color:white" class="bi bi-telephone-inbound-fill
 "></i></div><p style="font-size: 30px;">未知号码</p>
     <div style="margin-top: 50px;">
-    <button onclick="ns_alert('电话','暂不支持该功能。')" style="background: linear-gradient(rgb(0,200,0),green);height:75px;width:210px;font-size: 30px;position: absolute;right:5px;">接听</button>
-    <button onclick="dial_s();" style="background: linear-gradient(red,rgb(200,0,0));height:75px;width:210px;font-size: 30px;position: absolute;left:5px;">拒绝</button>
+    <button onclick="ns_alert('电话','暂不支持该功能。')" style="background: linear-gradient(rgb(0,200,0),green);width:166px;font-size: 30px;position: absolute;right:5px;height:121px;"><i style="font-size: 50px;" class="bi-telephone-fill"></i><br>接听</button>
+    <button onclick="dial_s();" style="background: linear-gradient(red,rgb(200,0,0));width:166px;height:121px;font-size: 30px;position: absolute;left:5px;"><i style="font-size: 50px;" class="bi-telephone-x-fill"></i><br>拒绝</button>
     </div>
     </center>
 </div>
