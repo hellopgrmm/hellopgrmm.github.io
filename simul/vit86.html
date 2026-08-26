@@ -118,7 +118,7 @@ var emulator = window.emulator = new V86({
 		<a href="?target=home" style="text-decoration: none;color:yellow">[返回主页]</a>
 		<p id="v86_prog">请稍后...</p>
 		<p>点击虚拟机屏幕任意处锁定鼠标。</p>
-		<button onclick="emulator.restart()">重启虚拟机</button> <button onclick="screen1.requestFullscreen();">全屏</button> <button onclick="captures()">截图</button> <button onclick="if(this.innerHTML=='打开键盘'){init_v86key(1);v86key.hidden=false;this.innerHTML='关闭键盘';}else{v86key.innerHTML='';v86key.hidden=true;this.innerHTML='打开键盘';}">打开键盘</button>
+		<button onclick="emulator.restart()">重启虚拟机</button> <button onclick="screenc.style.height = (window.screen.height-200)+'px';screenc.style.width = 'auto';screen1.requestFullscreen();">全屏</button> <button onclick="captures()">截图</button> <button onclick="if(this.innerHTML=='打开键盘'){init_v86key(1);v86key.hidden=false;this.innerHTML='关闭键盘';}else{v86key.innerHTML='';v86key.hidden=true;this.innerHTML='打开键盘';}">打开键盘</button>
 		<p>虚拟机屏幕太大？调整宽度：<input type="range" value=700 max=1024 min=100 oninput="screenc.style.height = this.value+'px';screenc.style.width='auto';scpx.innerHTML = this.value"/> <a id="scpx">700</a>像素 更改虚拟机字体（纯文本模式）<select id="vmff" oninput="screenf.style.fontFamily = vmff.value"><option value="vgados" select>经典DOS字体</option><option value="monospace">Monospace</option><option value="ui-monospace,Consolas">Consolas</option><option value="Ubuntu">Ubuntu字体</option><option value="Arial">Arial</option></select></p>
 		<div style='touch-action:none' id="screen1">
     		<div style="white-space:pre;font:16px vgados,monospace;line-height:16px;" id="screenf"></div>
@@ -179,6 +179,7 @@ twikoo.init({
 				<li style="color:yellow" onclick="location.href='?sys=w31cn&type=hda'">Windows 3.1中文版</li>
 				<li style="color:yellow" onclick="location.href='?sys=31cn_sound&type=hda'">Windows 3.1中文版（带声音）</li>
 				<li style="color:yellow" onclick="location.href='windows95.html'">Windows 95(极限精简)</li>
+				<li style="color:yellow" onclick="location.href='?sys=wince&type=hda'">Windows CE 3.00</li>
 				<li onclick="location.href='?sys=f12&type=hda'">FreeDOS 1.2(内含中文输入法UCDOS)</li>
 				<li onclick="location.href='?sys=msdos500&type=hda'">MS-DOS 5.00（完整版）</li>
 				<li onclick="location.href='?sys=msdos71&type=hda'">MS-DOS 7.1</li>
@@ -232,7 +233,7 @@ twikoo.init({
 	访问量：<span id="vercount_value_page_pv">加载中...</span>（禁止恶意刷访问量）
 </div>
 <script>
-var size_dict = {'persiancat':'1792','windows1-fda':'1440','f12':'24576','ikun':'10','neo-os-2':'22835','simcity':'14336','btc':'14436','windows3':'15360','biosos':'1440','w31cn':'24576','31cn_sound':'24576','linux':'5534','30dayos':'1440','haribote':'1440','borlandcpp':'18432','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384','tinycore5':'15052','msdos71f':'24576','3fp':'14336','cad':'14336','msfs':'14336','w31':'14336','mikeos':'3226','win203':'14336','msdos500':'14336','zzta':'14336'};
+var size_dict = {'persiancat':'1792','windows1-fda':'1440','wince':'15360','f12':'24576','ikun':'10','neo-os-2':'22835','simcity':'14336','btc':'14436','windows3':'15360','biosos':'1440','w31cn':'24576','31cn_sound':'24576','linux':'5534','30dayos':'1440','haribote':'1440','borlandcpp':'18432','kolibrios':'1440','ts001':'1','msdos71':'16384','vbdos':'16384','tinycore5':'15052','msdos71f':'24576','3fp':'14336','cad':'14336','msfs':'14336','w31':'14336','mikeos':'3226','win203':'14336','msdos500':'14336','zzta':'14336'};
 var desc_dict = {
 	'windows1-fda':'Windows 1.0是微软公司发布的初代Windows系统，基于MS-DOS。',
 	'f12':`FreeDOS是一款运行于IBM PC兼容机的开源操作系统，由Jim Hall等人于1994年发起开发，旨在提供开源的MS-DOS替代方案，兼容exe和dos的其它组件。这个是FreeDOS 1.2，额外安装了UCDOS中文输入法。<button onclick="emulator.keyboard_send_text('CD UCDOS\\nUCDOS\\n')">点此快速启动UCDOS</button>`,
@@ -262,6 +263,7 @@ var desc_dict = {
 	'windows3':'Microsoft Windows 3.0是微软在1990年发布的操作系统，是系列中首个获得商业成功的版本，标志着个人计算机操作系统从命令行向图形界面的重大转变。',
 	'btc':'Borland Turbo C是一个C语言编程软件，运行于DOS平台。',
 	'persiancat':'B站UP主<a href="https://space.bilibili.com/3546591591925954">91长安雪</a>制作的操作系统，目前还不太完善，这个是不稳定版本。',
+	'wince':'Windows CE是微软公司开发的32位嵌入式操作系统，主要用于工业自动化、移动终端及消费电子领域，这个是3.00版本。',
 	'neo-os-2':`B站UP主<a href="https://space.bilibili.com/2009275394">芒辰Official</a>制作的图形化操作系统，支持多媒体、文件系统（FAT32/VFS）、命令行等。（密码：root）<br><button onclick="emulator.keyboard_send_text('root\\n')">点此快速登录</button>`
 }
 function parseurl(url)
