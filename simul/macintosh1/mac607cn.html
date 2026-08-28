@@ -42,9 +42,19 @@ button:active
 } 
 </style>
 <h1>Macintosh System 6.07中文版</h1>
-<p>Macintosh System 6.07为苹果公司于1990年推出的操作系统，这个是中文版+彩色GUI。</p>
+<p>Macintosh System 6.07为苹果公司于1990年推出的操作系统，这个是中文版+彩色GUI，我还在里面装了一些软件（包含Word/Excel/Basic等）。</p>
 <p><button onclick="document.getElementById('macscreen').requestFullscreen()">全屏</button> <button onclick="captures()">截图</button> <button onclick="if(this.innerHTML == '录屏'){screenrec();this.innerHTML = '停止&下载';}else{stoprec();this.innerHTML = '录屏';}">录屏</button></p>
 <canvas id="macscreen"></canvas>
+<div id="comment" style="text-align:left"></div>
+<script src="https://hellopgrmm.github.io/tools/twikoo.min.js"></script>
+<script>
+twikoo.init({
+    envId: 'https://cheerful-moonbeam-4f1337.netlify.app/.netlify/functions/twikoo',
+    el: '#comment', 
+    path: location.pathname, 
+    lang: 'zh-CN', 
+})
+</script>
 <script type="text/javascript" src="es6-promise.js"></script>
 <script type="text/javascript" src="browserfs.min.js"></script>
 <script type="text/javascript" src="loader.js"></script>
@@ -58,8 +68,8 @@ button:active
             NP2Loader.fetchFile("ROM文件",
               "macii.zip")),
           NP2Loader.mountZip("mac607cn",
-            NP2Loader.fetchFile("镜像",
-              "mac607cn.zip")),
+            NP2Loader.fetchFile("Macintosh 6.0.7镜像",
+              "macintosh607cn.zip")),
           NP2Loader.extraArgs("/emulator/mac607cn/test6.dsk")
         ));       
         mac.start({waitAfterDownloading:true});
