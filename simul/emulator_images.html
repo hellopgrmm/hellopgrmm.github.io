@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>测试镜像下载</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"/>
+</head>
+<body>
+<style>
+	body
+	{
+		font-family:Roboto,SimHei,SimSun,sans-serif;
+	}
+</style>
+<h1>测试镜像下载专区</h1>
+<a onclick="history.back()" href="#">[返回主页]</a><br>
+<img src="https://s41.ax1x.com/2026/08/29/pnPEDxO.png" style="height:150px;width:auto;"/>
+<img src="testimages/Macintosh.gif" style="height:150px;width:auto;"/>
+<img src="testimages/Windows95.gif" style="height:150px;width:auto;"/>
+<img src="https://s41.ax1x.com/2026/08/24/pnSb0FP.png" style="height:150px;width:auto;"/>
+<img src="https://s41.ax1x.com/2026/08/24/pnSXyhq.png" style="height:150px;width:auto;"/>
+<p>这个页面提供一些现成打包好的HDA镜像，可以直接使用于虚拟机中，镜像会不定时更新。</p>
+<p>注：Macintosh镜像请使用Mini vMac模拟器，这里一并提供（包括其ROM文件），点击相应文件名即可下载。</p>
+<p>友情链接：<a target="_blank" href="https://winworldpc.com/library/applications/platform-macos">适合MacOS平台的老软件</a></p>
+<table border=1 style="width:100%">
+	<tr><td>文件名</td><td>Zip大小</td><td>解压后实际大小</td></tr>
+	<tr><td><a href="testimages/71cn.zip" download="Macintosh 7.1中文版.zip">Macintosh 7.1中文版</a></td><td>20MB</td><td>32MB</td></tr>
+	<tr><td><a href="testimages/607cn.zip" download="Macintosh 6.0.7中文版.zip">Macintosh 6.0.7中文版</a></td><td>984KB</td><td>9.84MB</td></tr>
+	<tr><td><a href="testimages/71en.zip" download="Macintosh 7.1英文版.zip">Macintosh 7.1英文版</a></td><td>2.22MB</td><td>9.8MB</td></tr>
+	<tr><td><a href="https://wwarc.lanzouv.com/iN0Tm457xhzc">Windows 95中文版</a></td><td>48.5MB</td><td>120MB</td></tr>
+	<tr><td><a href="testimages/macemulator.zip" download="Mini vMac模拟器.zip">Mini vMac模拟器（20是128K，26是MacII）</a></td><td>386KB</td><td>659KB</td></tr>
+</table>
+<div id="comment" style="text-align:left"></div>
+<script src="https://hellopgrmm.github.io/tools/twikoo.min.js"></script>
+<script>
+twikoo.init({
+    envId: 'https://cheerful-moonbeam-4f1337.netlify.app/.netlify/functions/twikoo',
+    el: '#comment', 
+    path: location.pathname, 
+    lang: 'zh-CN', 
+})
+</script>
+</body>
+</html>
