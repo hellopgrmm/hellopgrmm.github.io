@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Macintosh虚拟机</title>
+</head>
+<body>
+<style type="text/css">
+  @font-face
+  {
+    font-family: mc;
+    src:url(https://hellopgrmm.github.io/font/mc.otf);
+  }
+  body
+  {
+    background: black;
+    font-family: mc;
+    color:white;
+  }
+  #machine
+  {
+    border:10px solid black;
+    border-color:#ded2ba #d6c6a8 #cebb97 #e7ddcb;
+    border-radius:5px;
+    padding:50px;
+    width:690px;
+    background:#d6c6a8;
+  }
+  #macscreen
+  {
+    border:10px solid black;
+    border-color:#ded2ba #e7ddcb #d6c6a8 #cebb97;
+    border-radius: 5px;
+    padding:10px;
+    background: black;
+  }
+button,input[type=submit] 
+{ 
+    background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50)); 
+    height:30px; 
+    min-width:100px; 
+    font-family:mc,sans-serif; 
+    color:white; 
+    font-size:14px; 
+    border-radius:5px; 
+    border-width:0px; 
+    box-shadow:0px 0px 1px 1px rgb(70,70,70);
+} 
+button:hover,input[type=submit]:hover 
+{ 
+    background:linear-gradient(#069999,#066f68,#069999);
+} 
+button:active 
+{ 
+    background:black; 
+    color:#ccc; 
+    margin-top:1px; 
+    margin-left:1px; 
+    box-shadow:0px 0px 0px 0px gray; 
+} 
+</style>
+<center>
+<div id="machine">
+<canvas id="macscreen" width=640 height=480></canvas>
+</div>
+<div style="margin-top: 10px;">
+<button onclick="document.getElementById('macscreen').requestFullscreen()">全屏</button> <button onclick="captures()">截图</button> <button onclick="if(this.innerHTML == '录屏'){screenrec();this.innerHTML = '停止&下载';}else{stoprec();this.innerHTML = '录屏';}">录屏</button></div></center>
+<div id="comment"></div>
+<script src="https://hellopgrmm.github.io/tools/twikoo.min.js"></script>
+<script>
+twikoo.init({
+    envId: 'https://cheerful-moonbeam-4f1337.netlify.app/.netlify/functions/twikoo',
+    el: '#comment', 
+    path: location.pathname, 
+    lang: 'zh-CN', 
+})
+</script>
+<script src="https://hellopgrmm.github.io/simul/macintosh1/es6-promise.js"></script>
+<script src="https://hellopgrmm.github.io/simul/macintosh1/browserfs.min.js"></script>
+<script src="https://hellopgrmm.github.io/simul/macintosh1/loader.js"></script>
+<script src="https://cdn.webrtc-experiment.com/RecordRTC.js"></script>
+<script>
+function parseurl(url)
+{
+  if(url.includes("?")){
+      var url_arr = {};
+      var urt1 = url.split('?');
+      var urt2 = urt1[1].split('&');
+      for(var url_s = 0;url_s < urt2.length;url_s++)
+      {
+          url_arr[urt2[url_s].split('=')[0]] = urt2[url_s].split('=')[1];
+      }
+      return url_arr;
+  }
+  else
+  {
+    return 0;
+  }
+}
+if(!parseurl(location.href)["disk"])
+{
+  console.log("打开方式不对，需要接入参数disk。");
+}else{
+  loadmac(parseurl(location.href)["disk"]);
+}
+function loadmac(archive_name){
+var mac = new Emulator(document.getElementById("macscreen"),
+        null,
+        new NP2Loader(NP2Loader.emulatorJS("https://hellopgrmm.github.io/simul/macintosh1/minivmacII.js"),
+          NP2Loader.emulatorWASM("https://hellopgrmm.github.io/simul/macintosh1/minivmacII.wasm"),
+          NP2Loader.nativeResolution(640, 400),
+          NP2Loader.mountZip("minivmac",
+            NP2Loader.fetchFile("ROM文件",
+              "https://hellopgrmm.github.io/simul/macintosh1/macii.zip")),
+          NP2Loader.mountZip("disks",
+            NP2Loader.fetchFile("Mac镜像",
+              archive_name+".zip")),
+          NP2Loader.extraArgs("/emulator/disks/71.img")
+        ));       
+        mac.start();
+}
+  function captures()
+  {
+    var clink = document.createElement('a');
+    clink.download = `截图.png`;
+    clink.href = document.getElementById("macscreen").toDataURL('image/png');
+    clink.click();
+  }
+var recorder = null;
+function screenrec() {
+    var stream = document.getElementById("macscreen").captureStream(30);
+    recorder = RecordRTC(stream,{
+        type:'video',
+        mimeType:'video/mp4'
+    });
+    recorder.startRecording();
+}
+function stoprec() {
+    try{
+        recorder.stopRecording(function() {
+            var blob = recorder.getBlob();
+            var vidurl = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = vidurl;
+            a.download = `录屏${Date.now()}.mp4`;
+            a.click();
+        });
+    }catch(e){
+        alert('发生错误T^T\n'+e);
+    }
+}
+</script>
+</body>
+</html>
