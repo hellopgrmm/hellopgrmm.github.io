@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>DOSBOX模拟器</title>
+<script type="text/javascript" src="https://hellopgrmm.github.io/tools/es6-promise.js"></script>
+<script type="text/javascript" src="https://hellopgrmm.github.io/tools/browserfs.min.js"></script>
+<script type="text/javascript" src="https://hellopgrmm.github.io/tools/loader.js"></script>
+<script src="https://cdn.webrtc-experiment.com/RecordRTC.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto Sans SC:wght@400;700&display=swap">
+<style>
+body
+{
+  background:black;
+  color:white;
+  font-family: "Noto Sans SC",sans-serif,monospace;
+}
+button,input[type=submit] 
+{ 
+    background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50)); 
+    height:30px; 
+    min-width:100px; 
+    font-family:Roboto,Helvetica; 
+    color:white; 
+    font-size:14px; 
+    border-radius:5px; 
+    border-width:0px; 
+    box-shadow:0px 0px 1px 1px rgb(70,70,70);
+} 
+button:hover,input[type=submit]:hover 
+{ 
+    background:linear-gradient(#069999,#066f68,#069999);
+} 
+button:active 
+{ 
+    background:black; 
+    color:#ccc; 
+    margin-top:1px; 
+    margin-left:1px; 
+    box-shadow:0px 0px 0px 0px gray; 
+}
+input 
+{ 
+    border:1px solid gray; 
+    background:linear-gradient(rgb(50,50,50),black,rgb(50,50,50)); 
+    color:white;
+    font-size:20px; 
+    font-family:Roboto,Helvetica; 
+    outline:none; 
+    border-radius:3px;
+    margin-bottom:5px;
+} 
+input:focus 
+{ 
+    border:1px solid orange; 
+    background:black; 
+} 
+</style>
+<center>
+<h3>DosBox模拟器</h3>
+<p>PS:电脑端体验更佳，移动端<input placeholder="点此打开键盘"/></p>
+<canvas id="dosbox" style="border:5px solid black;border-color:gray rgb(77,77,77) gray rgb(77,77,77)"></canvas>
+<br>
+<button onclick="dosbox.requestFullscreen();">全屏</button><button onclick="captures()">截图</button> <button onclick="if(this.innerHTML == '录屏'){screenrec();this.innerHTML = '停止&下载';}else{stoprec();this.innerHTML = '录屏';}">录屏</button></center>
+<div id="comment" style="text-align:left"></div>
+<script src="https://hellopgrmm.github.io/tools/twikoo.min.js"></script>
+<script>
+twikoo.init({
+    envId: 'https://cheerful-moonbeam-4f1337.netlify.app/.netlify/functions/twikoo',
+    el: '#comment', 
+    path: location.pathname, 
+    lang: 'zh-CN', 
+})
+</script>
+</head>
+<body>
+<script>
+function parseurl(url)
+{
+  if(url.includes("?")){
+      var url_arr = {};
+      var urt1 = url.split('?');
+      var urt2 = urt1[1].split('&');
+      for(var url_s = 0;url_s < urt2.length;url_s++)
+      {
+          url_arr[urt2[url_s].split('=')[0]] = urt2[url_s].split('=')[1];
+      }
+      return url_arr;
+  }
+  else
+  {
+    return 0;
+  }
+}
+function launchdosbox(archive_name,autoexec){
+  var emulator = new Emulator(
+    document.getElementById("dosbox"),
+    null,
+    new DosBoxLoader(
+      DosBoxLoader.emulatorJS("https://hellopgrmm.github.io/dosbox-sync.js"),
+      DosBoxLoader.nativeResolution(640,480),
+      DosBoxLoader.mountZip("c",
+        DosBoxLoader.fetchFile("压缩包文件",`https://hellopgrmm.github.io/simul/${archive_name}.zip`)
+      ),
+      DosBoxLoader.startExe(autoexec) 
+    )
+  );
+  emulator.start({waitAfterDownloading:true});
+}
+try{
+	launchdosbox(parseurl(location.href)["package"],parseurl(location.href)["command"]);
+}catch(e)
+{
+	alert("参数没有正确传，请确保你是从正确渠道点进来的。"+e);
+}
+var recorder = null;
+function screenrec() {
+    var stream = document.getElementById("dosbox").captureStream(30);
+    recorder = RecordRTC(stream,{
+        type:'video',
+        mimeType:'video/mp4'
+    });
+    recorder.startRecording();
+}
+function stoprec() {
+    try{
+        recorder.stopRecording(function() {
+            var blob = recorder.getBlob();
+            var vidurl = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = vidurl;
+            a.download = `录屏${Date.now()}.mp4`;
+            a.click();
+        });
+    }catch(e){
+        alert('发生错误T^T\n'+e);
+    }
+}
+function captures()
+{
+    var clink = document.createElement('a');
+    clink.download = `截图.png`;
+    clink.href = document.getElementById("dosbox").toDataURL('image/png');
+    clink.click();
+}
+</script>
+</body>
+</html>
