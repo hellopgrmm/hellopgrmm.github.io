@@ -86,10 +86,11 @@ input:focus
 <div id="vit86" style="position:absolute;vertical-align: top;height: 98%;width: calc(100% - 262px);border: 1px solid white;top: 0px;left: 250px;right:5px;padding: 5px;overflow:auto;">
 	<div id="welcome">
 	<h1>欢迎来到威86</h1>
-	<p>这是一个能在浏览器上运行的虚拟机，支持运行多种远古/轻量级操作系统。你可以在左侧的菜单栏里选择一个操作系统来体验。</p>
+	<p>这是一个能在浏览器上运行的虚拟机，支持运行多种远古/轻量级操作系统，也可以体验一些经典的DOS游戏。你可以在左侧的菜单栏里选择一个操作系统/游戏来体验。</p>
 	<div class="showsl"><button onclick="document.getElementById('syslist').style.display='block';vit86.hidden=true;">显示虚拟机列表</button></div>
-	<p>本网页基于V86制作而成。V86是一个能在网页上运行的x86虚拟机模拟器，1比1仿真模拟i386硬件配置，能运行一些32位操作系统。不需要安装任何软件，也不需要登录就能使用，大幅度减少资源占用，而且还不占内存，适合怀旧。</p>
+	<p>本网页基于V86和其他模拟器制作而成。V86是一个能在网页上运行的x86虚拟机模拟器，1比1仿真模拟i386硬件配置，能运行一些32位操作系统。不需要安装任何软件，也不需要登录就能使用，大幅度减少资源占用，而且还不占内存，适合怀旧。</p>
 	<p>V86不是伪系统模拟，而是运行操作系统本身（系统执行一条CPU指令，V86逐条翻译、全程模拟运算；系统读写硬盘端口，V86操作内存里的镜像；系统输出图形到VGA显存，V86直接渲染到网页，所有硬件协议、中断、IO全是标准兼容。操作系统拿到的就是一台标准的x86硬件接口，根本就不知道自己其实是在浏览器上跑）。所以你在本网页体验到的所有系统，都是把真实镜像挂在上面的。</p>
+	<p>对了，我还用了其它的模拟器，比如DosBox和Mini VMac，这两者都集成在一个模拟库Emularity里面，感兴趣的来我Github:https://github.com/hellopgrmm/hellopgrmm.github.io/</p>
 	<h1>如果你也想要做这样的项目...</h1>
 	实现V86虚拟机并不困难，下面是一个简单的JavaScript代码，前提是你先要在html中引入v86的js。
 	<pre style="white-space:pre-wrap;">
@@ -195,6 +196,7 @@ twikoo.init({
 			<li style="color:yellow" onclick="location.href='macintosh1/mac607cn.html'">Macintosh System 6.0.7(中文版)</li>
 			<li style="color:yellow" onclick="location.href='macintosh1/emulator_macii.html?disk=71en'">Macintosh System 7.0(英文版)</li>
 			<li style="color:yellow" onclick="location.href='macintosh1/mac71cn.html'">Macintosh System 7.1(中文版)</li>
+			<li style="color:yellow" onclick="location.href='macintosh1/emulator_macii.html?disk=backup71'">Macintosh System 7.1(中文版，备用)</li>
 			</ul>
 		</details>
 		<details>
