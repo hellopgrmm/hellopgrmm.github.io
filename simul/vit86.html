@@ -116,10 +116,11 @@ var emulator = window.emulator = new V86({
   <p>发明V86的人真是个天才[doge]</p>
 	</div>
 	<div id="main86" style="height:100%;width:100%;overflow:auto" hidden>
+		<script src="https://cdn.webrtc-experiment.com/RecordRTC.js"></script>
 		<a href="?target=home" style="text-decoration: none;color:yellow">[返回主页]</a>
 		<p id="v86_prog">请稍后...</p>
 		<p>点击虚拟机屏幕任意处锁定鼠标。</p>
-		<button onclick="emulator.restart()">重启虚拟机</button> <button onclick="screenc.style.height = (window.screen.height-200)+'px';screenc.style.width = 'auto';screen1.requestFullscreen();">全屏</button> <button onclick="captures()">截图</button> <button onclick="if(this.innerHTML=='打开键盘'){init_v86key(1);v86key.hidden=false;this.innerHTML='关闭键盘';}else{v86key.innerHTML='';v86key.hidden=true;this.innerHTML='打开键盘';}">打开键盘</button>
+		<button onclick="emulator.restart()">重启虚拟机</button> <button onclick="screenc.style.height = (window.screen.height-200)+'px';screenc.style.width = 'auto';screen1.requestFullscreen();">全屏</button> <button onclick="captures()">截图</button> <button onclick="if(this.innerHTML == '录屏'){screenrec();this.innerHTML = '停止&下载';}else{stoprec();this.innerHTML = '录屏';}">录屏</button> <button onclick="if(this.innerHTML=='打开键盘'){init_v86key(1);v86key.hidden=false;this.innerHTML='关闭键盘';}else{v86key.innerHTML='';v86key.hidden=true;this.innerHTML='打开键盘';}">打开键盘</button>
 		<p>虚拟机屏幕太大？调整宽度：<input type="range" value=700 max=1024 min=100 oninput="screenc.style.height = this.value+'px';screenc.style.width='auto';scpx.innerHTML = this.value"/> <a id="scpx">700</a>像素 更改虚拟机字体（纯文本模式）<select id="vmff" oninput="screenf.style.fontFamily = vmff.value"><option value="vgados" select>经典DOS字体</option><option value="monospace">Monospace</option><option value="ui-monospace,Consolas">Consolas</option><option value="Ubuntu">Ubuntu字体</option><option value="Arial">Arial</option></select></p>
 		<div style='touch-action:none' id="screen1">
     		<div style="white-space:pre;font:16px vgados,monospace;line-height:16px;" id="screenf"></div>
@@ -413,6 +414,29 @@ screenc.addEventListener('click', () => {
                               screenc.webkitRequestPointerLock;
   screenc.requestPointerLock();
 });
+var recorder = null;
+function screenrec() {
+    var stream = document.getElementById("screenc").captureStream(30);
+    recorder = RecordRTC(stream,{
+        type:'video',
+        mimeType:'video/mp4'
+    });
+    recorder.startRecording();
+}
+function stoprec() {
+    try{
+        recorder.stopRecording(function() {
+            var blob = recorder.getBlob();
+            var vidurl = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = vidurl;
+            a.download = `虚拟机屏幕录制${Date.now()}.mp4`;
+            a.click();
+        });
+    }catch(e){
+        alert('发生错误T^T\n'+e);
+    }
+}
 </script>
 </body>
 </html>
