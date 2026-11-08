@@ -1,0 +1,106 @@
+<meta charset='utf-8'>
+<title>SAM</title>
+<style>
+body{
+    font-family:sans-serif,monospace;
+}
+button
+{
+    background: linear-gradient(white,#ccc,white);
+    border-radius: 5px;
+    box-shadow: 0px 0px 1px 1px gray;
+    border-width: 0px;
+    font-family: sans-serif,monospace;
+    font-size: 14px;
+    height:35px;
+    min-width: 100px;
+}
+textarea{
+    font-family: sans-serif,monospace;
+    font-size:16px;
+    outline:none;
+    border-radius: 0px;
+}
+button:hover
+{
+    background: #ccc;
+}
+button:active
+{
+    background: gray;
+}
+</style>
+<a href="https://hellopgrmm.github.io">返回主页</a>
+<h1>SAM</h1>
+<p>SAM全称Software Automatic Mouth，是一个早期语音合成软件，最初运行在Commodore 64计算机上。该软件靠共振峰技术实时计算合成，不是拼接提前录制好的声音，效果机械粗糙，并且仅限英文字母。
+SAM 由 Mark Barton 开发，1982 年由 Don't Ask Software 公司发布（该公司后更名为 SoftVoice, Inc.‌‌‌）原始版本用汇编语言编写，仅需约 10KB 机器码即可运行，是当时软件工程的杰出代表。‌‌‌</p>
+<p>本网页提供一个SAM的在线语音合成服务，输入文字即可。</p>
+<script src="sam.js"></script>
+<script>
+function PlayWebkit(context, audiobuffer)
+{
+    var source = context.createBufferSource();
+    var soundBuffer = context.createBuffer(1, audiobuffer.length, 22050);
+    var buffer = soundBuffer.getChannelData(0);
+    for(var i=0; i<audiobuffer.length; i++) buffer[i] = audiobuffer[i];
+    source.buffer = soundBuffer;
+    source.connect(context.destination);
+    source.start(0);    
+}
+
+function PlayMozilla(context, audiobuffer)
+{
+    var written = context.mozWriteAudio(audiobuffer);
+    var diff = audiobuffer.length - written;
+    if (diff <= 0) return;
+    var buffer = new Float32Array(diff);
+    for(var i = 0; i<diff; i++) buffer[i] = audiobuffer[i+written];
+    window.setTimeout(function(){PlayMozilla(context, buffer)}, 500);
+}
+
+
+function PlayBuffer(audiobuffer)
+{
+    if (typeof AudioContext !== "undefined") 
+    {
+           PlayWebkit(new AudioContext(), audiobuffer);
+    } else 
+    if (typeof webkitAudioContext !== "undefined") 
+    {
+        PlayWebkit(new webkitAudioContext(), audiobuffer);
+    } else if (typeof Audio !== "undefined")
+    {
+        var context = new Audio();
+        context.mozSetup(1, 22050);
+        PlayMozilla(context, audiobuffer);
+    }
+}
+
+function Speak(text)
+{
+    //alert(text);
+try{
+    var input = text;
+    while (input.length < 256) input += " ";
+    var ptr = allocate(intArrayFromString(input), 'i8', ALLOC_STACK);
+    _TextToPhonemes(ptr);
+    //alert(Pointer_stringify(ptr));
+    _SetInput(ptr);
+    _Code39771();
+
+    var bufferlength = Math.floor(_GetBufferLength()/50);
+    var bufferptr = _GetBuffer();
+
+    audiobuffer = new Float32Array(bufferlength);
+
+    for(var i=0; i<bufferlength; i++)
+        audiobuffer[i] = ((getValue(bufferptr+i, 'i8')&0xFF)-128)/256;
+    PlayBuffer(audiobuffer);}catch(e){alert(e)}
+}
+</script>
+<form>
+    <textarea style='width:80%;height:50%;font-family:ui-monospace,monospace,Consolas,sans-serif;' placeholder='输入文字' type="text" name="samspeaker">Hello everyone,
+my name is SAM.
+Type anything here, have fun!</textarea>
+    <p><button type="button" name="Text 1" onclick="Speak(this.form.samspeaker.value)">生成</button></p>
+</form>
